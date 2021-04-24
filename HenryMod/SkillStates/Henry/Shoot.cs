@@ -21,7 +21,7 @@ namespace HenryMod.SkillStates
         private string muzzleString;
         private BullseyeSearch search;
         private TeamIndex team;
-        public Vector3 direction;
+        
 
         public override void OnEnter()
         {
@@ -32,6 +32,7 @@ namespace HenryMod.SkillStates
             this.muzzleString = "Muzzle";
             this.search = new BullseyeSearch();
             this.team = base.GetTeam();
+            
 
             base.PlayAnimation("LeftArm, Override", "ShootGun", "ShootGun.playbackRate", 1.8f);
         }

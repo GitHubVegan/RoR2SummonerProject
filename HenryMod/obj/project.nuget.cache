@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "/aUs46d89m7i7HjheAYRrCvGK4om/IAw6L87atkmQnU9/drfn8rF+PjdVYBUiZWk6KbY644a0rydWd1BwmqJ3g==",
+  "dgSpecHash": "kyazEETicAdMz2+NpwiMQa5HQJjuG0SHM1/zEdED4nfsV0h4qMGIKdEH8pYQW5HLmQQx2wUNvsZyu5p6qvgpZg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\nico_\\source\\repos\\HenryTutorial\\HenryMod\\HenryMod.csproj",
+  "projectFilePath": "C:\\Users\\nico_\\Source\\Repos\\RoR2SummonerProject\\HenryMod\\HenryMod.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\nico_\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\nico_\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"

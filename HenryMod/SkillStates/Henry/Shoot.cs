@@ -51,30 +51,37 @@ namespace HenryMod.SkillStates
                 if (base.isAuthority)
                 {
                     Ray aimRay = base.GetAimRay();
+                    this.search.filterByDistinctEntity = true;
                     this.search.searchOrigin = base.characterBody.corePosition;
+                    this.search.filterByLoS = true;
+                    this.search.minDistanceFilter = 0f;
+                    this.search.minAngleFilter = 0f;
+                    this.search.maxAngleFilter = 3f;
                     this.search.searchDirection = aimRay.direction;
-                    this.search.maxAngleFilter = 1.5f;
-                    this.search.sortMode = BullseyeSearch.SortMode.Angle;
+                    this.search.sortMode = BullseyeSearch.SortMode.DistanceAndAngle;
                     this.search.RefreshCandidates();
+                    Debug.Log($"AimRay is : {aimRay}");
                     foreach (HurtBox hurtBox in this.search.GetResults())
-
+                    { 
                         if (!(hurtBox == null))
                         {
                             HealthComponent healthComponent2 = hurtBox.healthComponent;
                             if (healthComponent2.body.teamComponent.teamIndex != this.team)
                             {
+                                float d = 4f;
                                 CharacterMaster characterMaster = new MasterSummon
                                 {
                                     masterPrefab = MasterCatalog.FindMasterPrefab("WispMaster"),
-                                    position = healthComponent2.transform.position,
-                                    rotation = healthComponent2.transform.rotation,
-                                    //summonerBodyObject = base.characterBody.gameObject,
+                                    position = healthComponent2.transform.position + Vector3.up * d,
+                                    rotation = base.characterBody.transform.rotation,
+                                    summonerBodyObject = healthComponent2.gameObject,
                                     ignoreTeamMemberLimit = false,
                                     teamIndexOverride = new TeamIndex?(TeamIndex.Player)
                                 }.Perform();
                                 characterMaster.GetBody().baseMaxHealth = 1f;
                                 characterMaster.GetBody().levelMaxHealth = 0f;
                                 characterMaster.gameObject.AddComponent<MasterSuicideOnTimer>().lifeTimer = 5f;
+                            }
                             }
 
                         }

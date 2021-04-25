@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\nico_\\Source\\Repos\\RoR2SummonerProject\\HenryMod\\HenryMod.csproj": {}
+    "C:\\Users\\nico_\\source\\repos\\RoR2SummonerProject\\HenryMod\\HenryMod.csproj": {}
   },
   "projects": {
-    "C:\\Users\\nico_\\Source\\Repos\\RoR2SummonerProject\\HenryMod\\HenryMod.csproj": {
+    "C:\\Users\\nico_\\source\\repos\\RoR2SummonerProject\\HenryMod\\HenryMod.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\nico_\\Source\\Repos\\RoR2SummonerProject\\HenryMod\\HenryMod.csproj",
+        "projectUniqueName": "C:\\Users\\nico_\\source\\repos\\RoR2SummonerProject\\HenryMod\\HenryMod.csproj",
         "projectName": "HenryMod",
-        "projectPath": "C:\\Users\\nico_\\Source\\Repos\\RoR2SummonerProject\\HenryMod\\HenryMod.csproj",
+        "projectPath": "C:\\Users\\nico_\\source\\repos\\RoR2SummonerProject\\HenryMod\\HenryMod.csproj",
         "packagesPath": "C:\\Users\\nico_\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\nico_\\Source\\Repos\\RoR2SummonerProject\\HenryMod\\obj\\",
+        "outputPath": "C:\\Users\\nico_\\source\\repos\\RoR2SummonerProject\\HenryMod\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\nico_\\AppData\\Roaming\\NuGet\\NuGet.Config",

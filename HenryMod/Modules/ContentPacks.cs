@@ -1,4 +1,14 @@
-﻿using RoR2.ContentManagement;
+﻿using RoR2.Skills;
+using RoR2;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using UnityEngine;
+using MonoMod.Cil;
+using Mono.Cecil.Cil;
+using System.Reflection;
+using RoR2.ContentManagement;
+using System.Collections;
 
 namespace HenryMod.Modules
 {
@@ -6,6 +16,7 @@ namespace HenryMod.Modules
     {
         internal ContentPack contentPack = new ContentPack();
         public string identifier => HenryPlugin.MODUID;
+        public static List<GameObject> masterPrefabs = new List<GameObject>();
 
         public void Initialize()
         {

@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\HenryMod",
+    "\\HenryMod\\SkillStates",
+    "\\HenryMod\\SkillStates\\Henry"
   ],
+  "SelectedNode": "\\HenryMod.sln",
   "PreviewInSolutionExplorer": false
 }

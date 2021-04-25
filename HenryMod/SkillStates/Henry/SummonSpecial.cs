@@ -2,6 +2,9 @@
 using RoR2;
 using UnityEngine;
 using RoR2.CharacterAI;
+using R2API;
+using EntityStates.NullifierMonster;
+
 
 namespace HenryMod.SkillStates
 {
@@ -14,6 +17,10 @@ namespace HenryMod.SkillStates
         public static float recoil = 3f;
         public static float range = 256f;
         public static GameObject tracerEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/Tracers/TracerGoldGat");
+        public static GameObject GreaterSummonBody = CreateBody();
+        public static GameObject GreaterSummonMaster = CreateMaster();
+      
+        private float d = 7;
 
         private float duration;
         private float fireTime;
@@ -51,7 +58,7 @@ namespace HenryMod.SkillStates
                 if (base.isAuthority)
                 {
                     Ray aimRay = base.GetAimRay();
-                    float d = 7;
+                    
 
                     new BulletAttack
                     {
@@ -85,39 +92,82 @@ namespace HenryMod.SkillStates
                         hitEffectPrefab = EntityStates.Commando.CommandoWeapon.FirePistol2.hitEffectPrefab,
                         hitCallback = SummonBigWisp
                     }.Fire();
-
-                    bool SummonBigWisp(ref BulletAttack.BulletHit hitInfo)
-                    {
-                        CharacterMaster characterMaster = new MasterSummon
-                        {
-                            masterPrefab = MasterCatalog.FindMasterPrefab("GreaterWispMaster"),
-                            position = base.characterBody.footPosition + Vector3.up * d,
-                            rotation = base.characterBody.transform.rotation,
-                            summonerBodyObject = base.characterBody.gameObject,
-                            ignoreTeamMemberLimit = false,
-                            teamIndexOverride = new TeamIndex?(TeamIndex.Player)
-                        }.Perform();
-                        characterMaster.gameObject.AddComponent<AIOwnership>();
-                        characterMaster.gameObject.GetComponent<BaseAI>().leader.gameObject = base.characterBody.gameObject;
-                        characterMaster.GetBody().RecalculateStats();
-                        characterMaster.GetBody().AddTimedBuff(RoR2Content.Buffs.Immune, 5f);
-                        characterMaster.gameObject.AddComponent<MasterSuicideOnTimer>().lifeTimer = 5.5f;
-                        characterMaster.inventory.CopyItemsFrom(base.characterBody.inventory);
-                        characterMaster.inventory.ResetItem(RoR2Content.Items.ExtraLife.itemIndex);
-                        return false;
-                    }
-
-
                 }
             }
         }
 
-
-    
+        bool SummonBigWisp(ref BulletAttack.BulletHit hitInfo)
+        {
+            CharacterMaster characterMaster = new MasterSummon
+            {
+                masterPrefab = GreaterSummonMaster,
+                position = hitInfo.point + Vector3.up * d,
+                rotation = base.characterBody.transform.rotation,
+                //summonerBodyObject = base.characterBody.gameObject,
+                ignoreTeamMemberLimit = false,
+                teamIndexOverride = new TeamIndex?(TeamIndex.Player)
+            }.Perform();
+            characterMaster.GetBody().RecalculateStats();
+            characterMaster.inventory.CopyItemsFrom(base.characterBody.inventory);
+            characterMaster.inventory.ResetItem(RoR2Content.Items.ExtraLife.itemIndex);
+            return false;
+        }
 
         public override void OnExit()
         {
             base.OnExit();
+        }
+
+        private static GameObject CreateBody()
+        {
+            GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/GreaterWispBody"), "GreaterSummonBody", true);
+
+            newBody.GetComponent<CharacterBody>().baseAcceleration = 50;
+            //newBody.GetComponent<CharacterDeathBehavior>().deathState = new EntityStates.SerializableEntityStateType(typeof(EntityStates.NullifierMonster.DeathState));
+            //newBody.GetComponent<CharacterDeathBehavior>().deathStateMachine = Resources.Load<GameObject>("prefabs/characterbodies/NullifierBody").GetComponent<CharacterDeathBehavior>().deathStateMachine;
+            //newBody.GetComponent<CharacterDeathBehavior>().idleStateMachine = Resources.Load<GameObject>("prefabs/characterbodies/NullifierBody").GetComponent<CharacterDeathBehavior>().idleStateMachine;
+            Debug.Log(newBody.GetComponent<CharacterDeathBehavior>().deathState);
+            Debug.Log(newBody.GetComponent<CharacterDeathBehavior>().deathStateMachine);
+            Debug.Log(newBody.GetComponent<CharacterDeathBehavior>().idleStateMachine);
+
+            Modules.Prefabs.bodyPrefabs.Add(newBody);
+            return newBody;
+        }
+
+        private static GameObject CreateMaster()
+        {
+            GameObject newMaster = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/charactermasters/GreaterWispMaster"), "GreaterSummonMaster", true);
+            newMaster.GetComponent<CharacterMaster>().bodyPrefab = GreaterSummonBody;
+            foreach (AISkillDriver ai in newMaster.GetComponentsInChildren<AISkillDriver>())
+            {
+                HenryPlugin.DestroyImmediate(ai);
+            }
+
+            newMaster.GetComponent<BaseAI>().fullVision = true;
+
+            AISkillDriver chaseDriver = newMaster.AddComponent<AISkillDriver>();
+            chaseDriver.customName = "MoveToTarget";
+            chaseDriver.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
+            chaseDriver.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
+            chaseDriver.activationRequiresAimConfirmation = false;
+            chaseDriver.activationRequiresTargetLoS = false;
+            chaseDriver.selectionRequiresTargetLoS = false;
+            chaseDriver.maxDistance = 100f;
+            chaseDriver.minDistance = 0f;
+            chaseDriver.requireSkillReady = false;
+            chaseDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
+            chaseDriver.ignoreNodeGraph = true;
+            chaseDriver.moveInputScale = 5f;
+            chaseDriver.driverUpdateTimerOverride = 2.5f;
+            chaseDriver.buttonPressType = AISkillDriver.ButtonPressType.Hold;
+            chaseDriver.minTargetHealthFraction = Mathf.NegativeInfinity;
+            chaseDriver.maxTargetHealthFraction = Mathf.Infinity;
+            chaseDriver.minUserHealthFraction = Mathf.NegativeInfinity;
+            chaseDriver.maxUserHealthFraction = Mathf.Infinity;
+            chaseDriver.skillSlot = SkillSlot.Utility;
+
+            Modules.Prefabs.masterPrefabs.Add(newMaster);
+            return newMaster;
         }
 
         public override void FixedUpdate()

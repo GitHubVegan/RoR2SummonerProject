@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace HenryMod.SkillStates
 {
-    public class ThrowBomb : BaseSkillState
+    public class BombSpecial : BaseSkillState
     {
         public static float damageCoefficient = 16f;
         public static float procCoefficient = 1f;
@@ -20,7 +20,7 @@ namespace HenryMod.SkillStates
         public override void OnEnter()
         {
             base.OnEnter();
-            this.duration = ThrowBomb.baseDuration / this.attackSpeedStat;
+            this.duration = BombSpecial.baseDuration / this.attackSpeedStat;
             this.fireTime = 0.35f * this.duration;
             base.characterBody.SetAimTimer(2f);
             this.animator = base.GetModelAnimator();
@@ -48,12 +48,12 @@ namespace HenryMod.SkillStates
                         aimRay.origin, 
                         Util.QuaternionSafeLookRotation(aimRay.direction), 
                         base.gameObject, 
-                        ThrowBomb.damageCoefficient * this.damageStat, 
+                        BombSpecial.damageCoefficient * this.damageStat, 
                         4000f, 
                         base.RollCrit(), 
                         DamageColorIndex.Default, 
                         null, 
-                        ThrowBomb.throwForce);
+                        BombSpecial.throwForce);
                 }
             }
         }

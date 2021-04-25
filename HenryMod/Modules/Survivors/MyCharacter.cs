@@ -80,6 +80,8 @@ namespace HenryMod.Modules.Survivors
             base.InitializeDoppelganger();
         }
 
+
+
         internal override void InitializeHitboxes()
         {
             ChildLocator childLocator = bodyPrefab.GetComponentInChildren<ChildLocator>();
@@ -152,7 +154,7 @@ namespace HenryMod.Modules.Survivors
                 keywordTokens = new string[] { "KEYWORD_AGILE" }
             });
 
-            Modules.Skills.AddSecondarySkills(bodyPrefab, shootSkillDef);
+            Modules.Skills.AddSecondarySkills(bodyPrefab, summonSkillDef);
             #endregion
 
             #region Utility
@@ -190,7 +192,7 @@ namespace HenryMod.Modules.Survivors
                 skillNameToken = prefix + "_HENRY_BODY_SPECIAL_BOMB_NAME",
                 skillDescriptionToken = prefix + "_HENRY_BODY_SPECIAL_BOMB_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSpecialIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.ThrowBomb)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.BombSpecial)),
                 activationStateMachineName = "Slide",
                 baseMaxStock = 1,
                 baseRechargeInterval = 10f,
@@ -209,6 +211,32 @@ namespace HenryMod.Modules.Survivors
             });
 
             Modules.Skills.AddSpecialSkills(bodyPrefab, bombSkillDef);
+
+            SkillDef summonSpecialSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = prefix + "_HENRY_BODY_SPECIAL_summonSpecial_NAME",
+                skillNameToken = prefix + "_HENRY_BODY_SPECIAL_summonSpecial_NAME",
+                skillDescriptionToken = prefix + "_HENRY_BODY_SPECIAL_summonSpecial_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSpecialIcon"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.SummonSpecial)),
+                activationStateMachineName = "Slide",
+                baseMaxStock = 1,
+                baseRechargeInterval = 60f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = true,
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = false,
+                mustKeyPress = false,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1
+            });
+
+            Modules.Skills.AddSpecialSkills(bodyPrefab, summonSpecialSkillDef);
             #endregion
         }
 

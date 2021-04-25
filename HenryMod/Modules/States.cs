@@ -18,7 +18,7 @@ namespace HenryMod.Modules
 
             entityStates.Add(typeof(Roll));
 
-            entityStates.Add(typeof(ThrowBomb));
+            entityStates.Add(typeof(BombSpecial));
         }
     }
 }

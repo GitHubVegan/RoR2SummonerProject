@@ -1,11 +1,11 @@
 ﻿using EntityStates;
 using RoR2;
 using UnityEngine;
-using R2API;
+using RoR2.CharacterAI;
 
 namespace HenryMod.SkillStates
 {
-    public class Summon : BaseSkillState
+    public class SummonSpecial : BaseSkillState
     {
         public static float damageCoefficient = Modules.StaticValues.gunDamageCoefficient;
         public static float procCoefficient = 1f;
@@ -83,19 +83,22 @@ namespace HenryMod.SkillStates
                         spreadYawScale = 0f,
                         queryTriggerInteraction = QueryTriggerInteraction.UseGlobal,
                         hitEffectPrefab = EntityStates.Commando.CommandoWeapon.FirePistol2.hitEffectPrefab,
-                        hitCallback = SummonWisp
+                        hitCallback = SummonBigWisp
                     }.Fire();
 
-                    bool SummonWisp(ref BulletAttack.BulletHit hitInfo)
+                    bool SummonBigWisp(ref BulletAttack.BulletHit hitInfo)
                     {
                         CharacterMaster characterMaster = new MasterSummon
                         {
-                            masterPrefab = MasterCatalog.FindMasterPrefab("WispMaster"),
-                            position = hitInfo.point + Vector3.up * d,
+                            masterPrefab = MasterCatalog.FindMasterPrefab("GreaterWispMaster"),
+                            position = base.characterBody.footPosition + Vector3.up * d,
                             rotation = base.characterBody.transform.rotation,
+                            summonerBodyObject = base.characterBody.gameObject,
                             ignoreTeamMemberLimit = false,
                             teamIndexOverride = new TeamIndex?(TeamIndex.Player)
                         }.Perform();
+                        characterMaster.gameObject.AddComponent<AIOwnership>();
+                        characterMaster.gameObject.GetComponent<BaseAI>().leader.gameObject = base.characterBody.gameObject;
                         characterMaster.GetBody().RecalculateStats();
                         characterMaster.GetBody().AddTimedBuff(RoR2Content.Buffs.Immune, 5f);
                         characterMaster.gameObject.AddComponent<MasterSuicideOnTimer>().lifeTimer = 5.5f;
@@ -108,10 +111,10 @@ namespace HenryMod.SkillStates
                 }
             }
         }
-                        
-                
-            
-        
+
+
+    
+
         public override void OnExit()
         {
             base.OnExit();

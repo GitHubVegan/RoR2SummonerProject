@@ -5,7 +5,7 @@ using R2API;
 
 namespace HenryMod.SkillStates
 {
-    public class Shoot : BaseSkillState
+    public class Summon : BaseSkillState
     {
         public static float damageCoefficient = Modules.StaticValues.gunDamageCoefficient;
         public static float procCoefficient = 1f;

@@ -126,6 +126,33 @@ namespace HenryMod.Modules.Survivors
             });
 
             Modules.Skills.AddSecondarySkills(bodyPrefab, shootSkillDef);
+
+            SkillDef summonSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = prefix + "_HENRY_BODY_SECONDARY_SUMMON_NAME",
+                skillNameToken = prefix + "_HENRY_BODY_SECONDARY_SUMMON_NAME",
+                skillDescriptionToken = prefix + "_HENRY_BODY_SECONDARY_SUMMON_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSecondaryIcon"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Summon)),
+                activationStateMachineName = "Slide",
+                baseMaxStock = 1,
+                baseRechargeInterval = 1.5f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = true,
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = false,
+                mustKeyPress = false,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+                keywordTokens = new string[] { "KEYWORD_AGILE" }
+            });
+
+            Modules.Skills.AddSecondarySkills(bodyPrefab, shootSkillDef);
             #endregion
 
             #region Utility

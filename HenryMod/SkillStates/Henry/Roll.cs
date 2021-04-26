@@ -2,6 +2,8 @@
 using RoR2;
 using UnityEngine;
 using UnityEngine.Networking;
+using RoR2.CharacterAI;
+
 
 namespace HenryMod.SkillStates
 {
@@ -24,7 +26,7 @@ namespace HenryMod.SkillStates
             base.OnEnter();
             this.animator = base.GetModelAnimator();
 
-            if (base.isAuthority && base.inputBank && base.characterDirection)
+                if (base.isAuthority && base.inputBank && base.characterDirection)
             {
                 this.forwardDirection = ((base.inputBank.moveVector == Vector3.zero) ? base.characterDirection.forward : base.inputBank.moveVector).normalized;
             }

@@ -1,9 +1,9 @@
 ﻿using EntityStates;
-using RoR2;
-using UnityEngine;
-using RoR2.CharacterAI;
 using R2API;
-using EntityStates.NullifierMonster;
+using RoR2;
+using RoR2.CharacterAI;
+using System.Collections.Generic;
+using UnityEngine;
 
 
 namespace HenryMod.SkillStates
@@ -19,8 +19,9 @@ namespace HenryMod.SkillStates
         public static GameObject hitEffectPrefab = Resources.Load<GameObject>("prefabs/effects/impacteffects/ExplosionGreaterWisp");
         public static GameObject GreaterSummonBody = CreateBody();
         public static GameObject GreaterSummonMaster = CreateMaster();
+        private static float d = 7;
+        public static List<CharacterMaster> SummonablesList = new List<CharacterMaster>();
 
-        private float d = 7;
 
         private float duration;
         private float fireTime;
@@ -110,11 +111,14 @@ namespace HenryMod.SkillStates
             characterMaster.GetBody().RecalculateStats();
             characterMaster.inventory.CopyItemsFrom(base.characterBody.inventory);
             characterMaster.inventory.ResetItem(RoR2Content.Items.ExtraLife.itemIndex);
+            characterMaster.gameObject.GetComponent<BaseAI>().leader.gameObject = base.characterBody.gameObject;
+            SummonablesList.Add(characterMaster);
             //characterMaster.GetBody().GetComponent<CharacterDeathBehavior>().deathState = Resources.Load<GameObject>("prefabs/characterbodies/GreaterWispBody").GetComponentInChildren<CharacterDeathBehavior>().deathState;
             //only works if prefab is original GreaterWispBody, NullifierBody for example just makes it disappear
             return false;
+            
         }
-
+        
         public override void OnExit()
         {
             base.OnExit();
@@ -122,9 +126,9 @@ namespace HenryMod.SkillStates
 
         private static GameObject CreateBody()
         {
-            GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/GreaterWispBody"), "GreaterSummonBody", true);
+            GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/CommandoBody"), "GreaterSummonBody", true);
 
-            newBody.GetComponent<CharacterBody>().baseAcceleration = 50;
+            //newBody.GetComponent<CharacterBody>().baseAcceleration = 50;
             //newBody.GetComponent<CharacterDeathBehavior>().deathState = Resources.Load<GameObject>("prefabs/characterbodies/GreaterWispBody").GetComponentInChildren<CharacterDeathBehavior>().deathState;
             //doesn't load above deathstate at all, wisp body just disappears
             //newBody.GetComponent<CharacterDeathBehavior>().deathState = new EntityStates.SerializableEntityStateType(typeof(EntityStates.NullifierMonster.DeathState));
@@ -141,7 +145,7 @@ namespace HenryMod.SkillStates
 
         private static GameObject CreateMaster()
         {
-            GameObject newMaster = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/charactermasters/GreaterWispMaster"), "GreaterSummonMaster", true);
+            GameObject newMaster = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/charactermasters/CommandoMonsterMaster"), "GreaterSummonMaster", true);
             newMaster.GetComponent<CharacterMaster>().bodyPrefab = GreaterSummonBody;
             foreach (AISkillDriver ai in newMaster.GetComponentsInChildren<AISkillDriver>())
             {
@@ -150,26 +154,26 @@ namespace HenryMod.SkillStates
 
             newMaster.GetComponent<BaseAI>().fullVision = true;
 
-            AISkillDriver chaseDriver = newMaster.AddComponent<AISkillDriver>();
-            chaseDriver.customName = "MoveToTarget";
-            chaseDriver.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
-            chaseDriver.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
-            chaseDriver.activationRequiresAimConfirmation = false;
-            chaseDriver.activationRequiresTargetLoS = false;
-            chaseDriver.selectionRequiresTargetLoS = false;
-            chaseDriver.maxDistance = 100f;
-            chaseDriver.minDistance = 0f;
-            chaseDriver.requireSkillReady = false;
-            chaseDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
-            chaseDriver.ignoreNodeGraph = true;
-            chaseDriver.moveInputScale = 5f;
-            chaseDriver.driverUpdateTimerOverride = 2.5f;
-            chaseDriver.buttonPressType = AISkillDriver.ButtonPressType.Hold;
-            chaseDriver.minTargetHealthFraction = Mathf.NegativeInfinity;
-            chaseDriver.maxTargetHealthFraction = Mathf.Infinity;
-            chaseDriver.minUserHealthFraction = Mathf.NegativeInfinity;
-            chaseDriver.maxUserHealthFraction = Mathf.Infinity;
-            chaseDriver.skillSlot = SkillSlot.Primary;
+            AISkillDriver attackDriver = newMaster.AddComponent<AISkillDriver>();
+            attackDriver.customName = "Alive";
+            attackDriver.movementType = AISkillDriver.MovementType.StrafeMovetarget;
+            attackDriver.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
+            attackDriver.activationRequiresAimConfirmation = false;
+            attackDriver.activationRequiresTargetLoS = false;
+            attackDriver.selectionRequiresTargetLoS = false;
+            attackDriver.maxDistance = 100f;
+            attackDriver.minDistance = 0f;
+            attackDriver.requireSkillReady = false;
+            attackDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
+            attackDriver.ignoreNodeGraph = true;
+            attackDriver.moveInputScale = 1f;
+            attackDriver.driverUpdateTimerOverride = 1f;
+            attackDriver.buttonPressType = AISkillDriver.ButtonPressType.Hold;
+            attackDriver.minTargetHealthFraction = Mathf.NegativeInfinity;
+            attackDriver.maxTargetHealthFraction = Mathf.Infinity;
+            attackDriver.minUserHealthFraction = Mathf.NegativeInfinity;
+            attackDriver.maxUserHealthFraction = Mathf.Infinity;
+            attackDriver.skillSlot = SkillSlot.Primary;
 
             Modules.Prefabs.masterPrefabs.Add(newMaster);
             return newMaster;

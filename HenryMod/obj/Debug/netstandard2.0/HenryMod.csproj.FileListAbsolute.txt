@@ -100,3 +100,6 @@ C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\obj\Debug\netstandard2.
 C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\obj\Debug\netstandard2.0\HenryMod.csproj.CopyComplete
 C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\obj\Debug\netstandard2.0\HenryMod.dll
 C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\obj\Debug\netstandard2.0\HenryMod.pdb
+C:\Users\nico_\AppData\Roaming\r2modmanPlus-local\RiskOfRain2\profiles\TEst\BepInEx\plugins\Summonertest\netstandard2.0\HenryMod.deps.json
+C:\Users\nico_\AppData\Roaming\r2modmanPlus-local\RiskOfRain2\profiles\TEst\BepInEx\plugins\Summonertest\netstandard2.0\HenryMod.dll
+C:\Users\nico_\AppData\Roaming\r2modmanPlus-local\RiskOfRain2\profiles\TEst\BepInEx\plugins\Summonertest\netstandard2.0\HenryMod.pdb

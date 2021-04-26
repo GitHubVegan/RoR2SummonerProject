@@ -16,10 +16,10 @@ namespace HenryMod.SkillStates
         public static float force = 800f;
         public static float recoil = 3f;
         public static float range = 256f;
-        public static GameObject tracerEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/Tracers/TracerGoldGat");
+        public static GameObject hitEffectPrefab = Resources.Load<GameObject>("prefabs/effects/impacteffects/ExplosionGreaterWisp");
         public static GameObject GreaterSummonBody = CreateBody();
         public static GameObject GreaterSummonMaster = CreateMaster();
-      
+
         private float d = 7;
 
         private float duration;
@@ -89,7 +89,7 @@ namespace HenryMod.SkillStates
                         spreadPitchScale = 0f,
                         spreadYawScale = 0f,
                         queryTriggerInteraction = QueryTriggerInteraction.UseGlobal,
-                        hitEffectPrefab = EntityStates.Commando.CommandoWeapon.FirePistol2.hitEffectPrefab,
+                        hitEffectPrefab = SummonSpecial.hitEffectPrefab,
                         hitCallback = SummonBigWisp
                     }.Fire();
                 }
@@ -123,9 +123,10 @@ namespace HenryMod.SkillStates
             GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/GreaterWispBody"), "GreaterSummonBody", true);
 
             newBody.GetComponent<CharacterBody>().baseAcceleration = 50;
-            //newBody.GetComponent<CharacterDeathBehavior>().deathState = new EntityStates.SerializableEntityStateType(typeof(EntityStates.NullifierMonster.DeathState));
-            //newBody.GetComponent<CharacterDeathBehavior>().deathStateMachine = Resources.Load<GameObject>("prefabs/characterbodies/NullifierBody").GetComponent<CharacterDeathBehavior>().deathStateMachine;
-            //newBody.GetComponent<CharacterDeathBehavior>().idleStateMachine = Resources.Load<GameObject>("prefabs/characterbodies/NullifierBody").GetComponent<CharacterDeathBehavior>().idleStateMachine;
+            //newBody.GetComponent<CharacterDeathBehavior>().deathState = cdb;
+            //newBody.GetComponent<CharacterDeathBehavior>().deathState = Resources.Load<GameObject>("prefabs/characterbodies/GreaterWispBody").GetComponentInChildren<CharacterDeathBehavior>().deathState;
+            //newBody.GetComponent<CharacterDeathBehavior>().deathStateMachine = Resources.Load<GameObject>("prefabs/characterbodies/GreaterWispBody").GetComponent<CharacterDeathBehavior>().deathStateMachine;
+            //newBody.GetComponent<CharacterDeathBehavior>().idleStateMachine = Resources.Load<GameObject>("prefabs/characterbodies/GreaterWispBody").GetComponent<CharacterDeathBehavior>().idleStateMachine;
             Debug.Log(newBody.GetComponent<CharacterDeathBehavior>().deathState);
             Debug.Log(newBody.GetComponent<CharacterDeathBehavior>().deathStateMachine);
             Debug.Log(newBody.GetComponent<CharacterDeathBehavior>().idleStateMachine);
@@ -164,7 +165,7 @@ namespace HenryMod.SkillStates
             chaseDriver.maxTargetHealthFraction = Mathf.Infinity;
             chaseDriver.minUserHealthFraction = Mathf.NegativeInfinity;
             chaseDriver.maxUserHealthFraction = Mathf.Infinity;
-            chaseDriver.skillSlot = SkillSlot.Utility;
+            chaseDriver.skillSlot = SkillSlot.Primary;
 
             Modules.Prefabs.masterPrefabs.Add(newMaster);
             return newMaster;

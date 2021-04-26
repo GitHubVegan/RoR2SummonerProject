@@ -110,6 +110,8 @@ namespace HenryMod.SkillStates
             characterMaster.GetBody().RecalculateStats();
             characterMaster.inventory.CopyItemsFrom(base.characterBody.inventory);
             characterMaster.inventory.ResetItem(RoR2Content.Items.ExtraLife.itemIndex);
+            //characterMaster.GetBody().GetComponent<CharacterDeathBehavior>().deathState = Resources.Load<GameObject>("prefabs/characterbodies/GreaterWispBody").GetComponentInChildren<CharacterDeathBehavior>().deathState;
+            //only works if prefab is original GreaterWispBody, NullifierBody for example just makes it disappear
             return false;
         }
 
@@ -123,8 +125,10 @@ namespace HenryMod.SkillStates
             GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/GreaterWispBody"), "GreaterSummonBody", true);
 
             newBody.GetComponent<CharacterBody>().baseAcceleration = 50;
-            //newBody.GetComponent<CharacterDeathBehavior>().deathState = cdb;
             //newBody.GetComponent<CharacterDeathBehavior>().deathState = Resources.Load<GameObject>("prefabs/characterbodies/GreaterWispBody").GetComponentInChildren<CharacterDeathBehavior>().deathState;
+            //doesn't load above deathstate at all, wisp body just disappears
+            //newBody.GetComponent<CharacterDeathBehavior>().deathState = new EntityStates.SerializableEntityStateType(typeof(EntityStates.NullifierMonster.DeathState));
+            //same issue
             //newBody.GetComponent<CharacterDeathBehavior>().deathStateMachine = Resources.Load<GameObject>("prefabs/characterbodies/GreaterWispBody").GetComponent<CharacterDeathBehavior>().deathStateMachine;
             //newBody.GetComponent<CharacterDeathBehavior>().idleStateMachine = Resources.Load<GameObject>("prefabs/characterbodies/GreaterWispBody").GetComponent<CharacterDeathBehavior>().idleStateMachine;
             Debug.Log(newBody.GetComponent<CharacterDeathBehavior>().deathState);

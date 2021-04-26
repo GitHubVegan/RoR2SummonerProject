@@ -126,7 +126,7 @@ namespace HenryMod.SkillStates
 
         private static GameObject CreateBody()
         {
-            GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/CommandoBody"), "GreaterSummonBody", true);
+            GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/LunarExploderBody"), "GreaterSummonBody", true);
 
             //newBody.GetComponent<CharacterBody>().baseAcceleration = 50;
             //newBody.GetComponent<CharacterDeathBehavior>().deathState = Resources.Load<GameObject>("prefabs/characterbodies/GreaterWispBody").GetComponentInChildren<CharacterDeathBehavior>().deathState;
@@ -145,7 +145,7 @@ namespace HenryMod.SkillStates
 
         private static GameObject CreateMaster()
         {
-            GameObject newMaster = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/charactermasters/CommandoMonsterMaster"), "GreaterSummonMaster", true);
+            GameObject newMaster = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/charactermasters/LunarExploderMaster"), "GreaterSummonMaster", true);
             newMaster.GetComponent<CharacterMaster>().bodyPrefab = GreaterSummonBody;
             foreach (AISkillDriver ai in newMaster.GetComponentsInChildren<AISkillDriver>())
             {

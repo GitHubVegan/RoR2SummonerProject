@@ -34,18 +34,19 @@ namespace HenryMod.SkillStates
 						ASD.requireSkillReady = false;
 						ASD.aimType = AISkillDriver.AimType.AtCurrentEnemy;
 						ASD.ignoreNodeGraph = true;
-						ASD.moveInputScale = 6f;
+						ASD.moveInputScale = 1f;
 						ASD.driverUpdateTimerOverride = 1f;
 						ASD.buttonPressType = AISkillDriver.ButtonPressType.Hold;
 						ASD.minTargetHealthFraction = Mathf.NegativeInfinity;
 						ASD.maxTargetHealthFraction = Mathf.Infinity;
 						ASD.minUserHealthFraction = Mathf.NegativeInfinity;
 						ASD.maxUserHealthFraction = Mathf.Infinity;
-						ASD.skillSlot = SkillSlot.Special;
+						ASD.skillSlot = SkillSlot.None;
 					}
+					CM.GetBody().baseMoveSpeed = 40f;
+					CM.gameObject.AddComponent<MasterSuicideOnTimer>().lifeTimer = 3f;
 
 
-					
 				}
 
 

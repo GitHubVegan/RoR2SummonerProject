@@ -12,7 +12,7 @@ namespace HenryMod.Modules.Survivors
     {
         internal override string bodyName { get; set; } = "Henry";
 
-        internal override GameObject bodyPrefab { get; set; } = UtilityPhantasm.GreaterSummonBody;
+        internal override GameObject bodyPrefab { get; set; }
         internal override GameObject displayPrefab { get; set; }
 
         internal override float sortPosition { get; set; } = 100f;
@@ -152,7 +152,7 @@ namespace HenryMod.Modules.Survivors
                 stockToConsume = 1
             });
 
-            Modules.Skills.AddSpecialSkills(bodyPrefab, primaryphantasmSkillDefSkillDef);
+            Modules.Skills.AddPrimarySkill(bodyPrefab, primaryphantasmSkillDefSkillDef);
 
             #endregion
 
@@ -370,7 +370,7 @@ namespace HenryMod.Modules.Survivors
                 stockToConsume = 1
             });
 
-            Modules.Skills.AddSpecialSkills(bodyPrefab, utilityphantasmSkillDefSkillDef);
+            Modules.Skills.AddUtilitySkills(bodyPrefab, utilityphantasmSkillDefSkillDef);
 
             #endregion
 

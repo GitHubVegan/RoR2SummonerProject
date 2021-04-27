@@ -19,8 +19,8 @@ namespace HenryMod.SkillStates
         public static float recoil = 3f;
         public static float range = 256f;
         public static GameObject hitEffectPrefab = Resources.Load<GameObject>("prefabs/effects/impacteffects/ExplosionGreaterWisp");
-        public static GameObject GreaterSummonBody = CreateBody();
-        public static GameObject GreaterSummonMaster = CreateMaster();
+        public static GameObject PrimaryPhantasmBody = CreateBody();
+        public static GameObject PrimaryPhantasmMaster = CreateMaster();
 
         private static float d = 7;
         public static List<CharacterMaster> SummonablesList1 = new List<CharacterMaster>();
@@ -94,17 +94,17 @@ namespace HenryMod.SkillStates
                         spreadYawScale = 0f,
                         queryTriggerInteraction = QueryTriggerInteraction.UseGlobal,
                         hitEffectPrefab = PrimaryPhantasm.hitEffectPrefab,
-                        hitCallback = SummonBigWisp
+                        hitCallback = SummonPrimary
                     }.Fire();
                 }
             }
         }
 
-        bool SummonBigWisp(ref BulletAttack.BulletHit hitInfo)
+        bool SummonPrimary(ref BulletAttack.BulletHit hitInfo)
         {
             CharacterMaster characterMaster = new MasterSummon
             {
-                masterPrefab = GreaterSummonMaster,
+                masterPrefab = PrimaryPhantasmMaster,
                 position = hitInfo.point + Vector3.up * d,
                 rotation = base.characterBody.transform.rotation,
                 //summonerBodyObject = base.characterBody.gameObject,
@@ -114,10 +114,10 @@ namespace HenryMod.SkillStates
             characterMaster.GetBody().RecalculateStats();
             characterMaster.inventory.CopyItemsFrom(base.characterBody.inventory);
             characterMaster.inventory.ResetItem(RoR2Content.Items.ExtraLife.itemIndex);
+            characterMaster.inventory.GiveItem(RoR2Content.Items.Ghost.itemIndex);
             characterMaster.gameObject.GetComponent<BaseAI>().leader.gameObject = base.characterBody.gameObject;
             characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().secondary.SetSkillOverride(characterMaster.GetBody(), SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("MindwrackClone")), RoR2.GenericSkill.SkillOverridePriority.Replacement);
             characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().utility.SetSkillOverride(characterMaster.GetBody(), SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("DiversionClone")), RoR2.GenericSkill.SkillOverridePriority.Replacement);
-            characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().special.SetSkillOverride(characterMaster.GetBody(), SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("DistortionClone")), RoR2.GenericSkill.SkillOverridePriority.Replacement);
             SummonablesList1.Add(characterMaster);
             //characterMaster.GetBody().GetComponent<CharacterDeathBehavior>().deathState = Resources.Load<GameObject>("prefabs/characterbodies/GreaterWispBody").GetComponentInChildren<CharacterDeathBehavior>().deathState;
             //only works if prefab is original GreaterWispBody, NullifierBody for example just makes it disappear
@@ -132,7 +132,7 @@ namespace HenryMod.SkillStates
 
         private static GameObject CreateBody()
         {
-            GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/CommandoBody"), "GreaterSummonBody", true);
+            GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/TreebotBody"), "PrimaryPhantasmBody", true);
             
 
             //newBody.GetComponent<CharacterBody>().baseAcceleration = 50;
@@ -152,8 +152,8 @@ namespace HenryMod.SkillStates
 
         private static GameObject CreateMaster()
         {
-            GameObject newMaster = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/charactermasters/CommandoMonsterMaster"), "GreaterSummonMaster", true);
-            newMaster.GetComponent<CharacterMaster>().bodyPrefab = GreaterSummonBody;
+            GameObject newMaster = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/charactermasters/TreebotMonsterMaster"), "PrimaryPhantasmMaster", true);
+            newMaster.GetComponent<CharacterMaster>().bodyPrefab = PrimaryPhantasmBody;
             foreach (AISkillDriver ai in newMaster.GetComponentsInChildren<AISkillDriver>())
             {
                 HenryPlugin.DestroyImmediate(ai);

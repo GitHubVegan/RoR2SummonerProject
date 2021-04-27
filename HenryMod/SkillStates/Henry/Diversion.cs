@@ -8,7 +8,7 @@ using EntityStates.NullifierMonster;
 
 namespace HenryMod.SkillStates
 {
-	internal class Shatter2 : BaseSkillState
+	internal class Diversion : BaseSkillState
 	{
 		public float BaseDuration = 0.5f;
 		private float duration;
@@ -22,39 +22,41 @@ namespace HenryMod.SkillStates
 				{
 					foreach (AISkillDriver ASD in CM.GetComponentsInChildren<AISkillDriver>())
 					{
-
-						ASD.customName = "Alive";
 						ASD.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
 						ASD.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
-						ASD.activationRequiresAimConfirmation = false;
-						ASD.activationRequiresTargetLoS = false;
-						ASD.selectionRequiresTargetLoS = false;
-						ASD.maxDistance = 100f;
-						ASD.minDistance = 0f;
-						ASD.requireSkillReady = false;
-						ASD.aimType = AISkillDriver.AimType.AtCurrentEnemy;
-						ASD.ignoreNodeGraph = true;
-						ASD.moveInputScale = 6f;
-						ASD.driverUpdateTimerOverride = 1f;
-						ASD.buttonPressType = AISkillDriver.ButtonPressType.Hold;
-						ASD.minTargetHealthFraction = Mathf.NegativeInfinity;
-						ASD.maxTargetHealthFraction = Mathf.Infinity;
-						ASD.minUserHealthFraction = Mathf.NegativeInfinity;
-						ASD.maxUserHealthFraction = Mathf.Infinity;
-						ASD.skillSlot = SkillSlot.Secondary;
+
+						bool flag = ASD.customName == "Attack";
+						if (flag)
+						{
+							ASD.maxDistance = 100f;
+							ASD.minDistance = 5f;
+							ASD.driverUpdateTimerOverride = -4f;
+							ASD.skillSlot = SkillSlot.Primary;
+						}
+
+						bool flag2 = ASD.customName == "Shatter";
+						if (flag2)
+						{
+							ASD.maxDistance = 10f;
+							ASD.minDistance = 0f;
+							ASD.skillSlot = SkillSlot.Utility;
+						}
+
 					}
-
-
-	
-
-
+					CM.GetBody().baseMoveSpeed = 40f;
+					CM.GetBody().baseAcceleration = 200f;
 
 
 				}
 
-				SummonSpecial.SummonablesList.Clear();
+
 			}
+			SummonSpecial.SummonablesList.Clear();
+
+
 			Debug.Log(SummonSpecial.SummonablesList);
+
+
 		}
 
 

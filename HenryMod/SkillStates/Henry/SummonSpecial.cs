@@ -1,7 +1,9 @@
 ﻿using EntityStates;
+using HenryMod.Modules;
 using R2API;
 using RoR2;
 using RoR2.CharacterAI;
+using RoR2.Skills;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,6 +21,7 @@ namespace HenryMod.SkillStates
         public static GameObject hitEffectPrefab = Resources.Load<GameObject>("prefabs/effects/impacteffects/ExplosionGreaterWisp");
         public static GameObject GreaterSummonBody = CreateBody();
         public static GameObject GreaterSummonMaster = CreateMaster();
+
         private static float d = 7;
         public static List<CharacterMaster> SummonablesList = new List<CharacterMaster>();
 
@@ -112,6 +115,9 @@ namespace HenryMod.SkillStates
             characterMaster.inventory.CopyItemsFrom(base.characterBody.inventory);
             characterMaster.inventory.ResetItem(RoR2Content.Items.ExtraLife.itemIndex);
             characterMaster.gameObject.GetComponent<BaseAI>().leader.gameObject = base.characterBody.gameObject;
+            characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().secondary.SetSkillOverride(characterMaster.GetBody(), SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("MindwrackClone")), RoR2.GenericSkill.SkillOverridePriority.Replacement);
+            characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().utility.SetSkillOverride(characterMaster.GetBody(), SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("DiversionClone")), RoR2.GenericSkill.SkillOverridePriority.Replacement);
+            characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().special.SetSkillOverride(characterMaster.GetBody(), SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("DistortionClone")), RoR2.GenericSkill.SkillOverridePriority.Replacement);
             SummonablesList.Add(characterMaster);
             //characterMaster.GetBody().GetComponent<CharacterDeathBehavior>().deathState = Resources.Load<GameObject>("prefabs/characterbodies/GreaterWispBody").GetComponentInChildren<CharacterDeathBehavior>().deathState;
             //only works if prefab is original GreaterWispBody, NullifierBody for example just makes it disappear
@@ -126,7 +132,8 @@ namespace HenryMod.SkillStates
 
         private static GameObject CreateBody()
         {
-            GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/LunarExploderBody"), "GreaterSummonBody", true);
+            GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/CommandoBody"), "GreaterSummonBody", true);
+            
 
             //newBody.GetComponent<CharacterBody>().baseAcceleration = 50;
             //newBody.GetComponent<CharacterDeathBehavior>().deathState = Resources.Load<GameObject>("prefabs/characterbodies/GreaterWispBody").GetComponentInChildren<CharacterDeathBehavior>().deathState;
@@ -145,7 +152,7 @@ namespace HenryMod.SkillStates
 
         private static GameObject CreateMaster()
         {
-            GameObject newMaster = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/charactermasters/LunarExploderMaster"), "GreaterSummonMaster", true);
+            GameObject newMaster = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/charactermasters/CommandoMonsterMaster"), "GreaterSummonMaster", true);
             newMaster.GetComponent<CharacterMaster>().bodyPrefab = GreaterSummonBody;
             foreach (AISkillDriver ai in newMaster.GetComponentsInChildren<AISkillDriver>())
             {
@@ -154,8 +161,9 @@ namespace HenryMod.SkillStates
 
             newMaster.GetComponent<BaseAI>().fullVision = true;
 
+
             AISkillDriver attackDriver = newMaster.AddComponent<AISkillDriver>();
-            attackDriver.customName = "Alive";
+            attackDriver.customName = "Attack";
             attackDriver.movementType = AISkillDriver.MovementType.StrafeMovetarget;
             attackDriver.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
             attackDriver.activationRequiresAimConfirmation = false;
@@ -174,6 +182,27 @@ namespace HenryMod.SkillStates
             attackDriver.minUserHealthFraction = Mathf.NegativeInfinity;
             attackDriver.maxUserHealthFraction = Mathf.Infinity;
             attackDriver.skillSlot = SkillSlot.Primary;
+
+            AISkillDriver shatterDriver = newMaster.AddComponent<AISkillDriver>();
+            shatterDriver.customName = "Shatter";
+            shatterDriver.movementType = AISkillDriver.MovementType.StrafeMovetarget;
+            shatterDriver.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
+            shatterDriver.activationRequiresAimConfirmation = false;
+            shatterDriver.activationRequiresTargetLoS = false;
+            shatterDriver.selectionRequiresTargetLoS = false;
+            shatterDriver.maxDistance = 100f;
+            shatterDriver.minDistance = 0f;
+            shatterDriver.requireSkillReady = false;
+            shatterDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
+            shatterDriver.ignoreNodeGraph = true;
+            shatterDriver.moveInputScale = 1f;
+            shatterDriver.driverUpdateTimerOverride = 1f;
+            shatterDriver.buttonPressType = AISkillDriver.ButtonPressType.Hold;
+            shatterDriver.minTargetHealthFraction = Mathf.NegativeInfinity;
+            shatterDriver.maxTargetHealthFraction = Mathf.Infinity;
+            shatterDriver.minUserHealthFraction = Mathf.NegativeInfinity;
+            shatterDriver.maxUserHealthFraction = Mathf.Infinity;
+            shatterDriver.skillSlot = SkillSlot.Primary;
 
             Modules.Prefabs.masterPrefabs.Add(newMaster);
             return newMaster;

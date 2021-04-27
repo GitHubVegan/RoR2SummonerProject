@@ -4,7 +4,7 @@ using UnityEngine;
 using RoR2.CharacterAI;
 using R2API;
 using EntityStates.NullifierMonster;
-
+using RoR2.Skills;
 
 namespace HenryMod.SkillStates
 {
@@ -16,9 +16,9 @@ namespace HenryMod.SkillStates
 		{
 			base.OnEnter();
 			this.duration = this.BaseDuration / this.attackSpeedStat;
-			if (SummonSpecial.SummonablesList.Count > 0)
+			if (PrimaryPhantasm.SummonablesList1.Count > 0)
 			{
-				foreach (CharacterMaster CM in SummonSpecial.SummonablesList)
+				foreach (CharacterMaster CM in PrimaryPhantasm.SummonablesList1)
 				{
 					foreach (AISkillDriver ASD in CM.GetComponentsInChildren<AISkillDriver>())
 					{
@@ -51,10 +51,10 @@ namespace HenryMod.SkillStates
 
 
 			}
-				SummonSpecial.SummonablesList.Clear();
+				PrimaryPhantasm.SummonablesList1.Clear();
 
 		
-			Debug.Log(SummonSpecial.SummonablesList);
+			Debug.Log(PrimaryPhantasm.SummonablesList1);
 
 
 		}
@@ -69,6 +69,10 @@ namespace HenryMod.SkillStates
 		{
 
 			base.OnExit();
+			base.GetComponent<RoR2.SkillLocator>().primary.UnsetSkillOverride(1, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("Mindwrack")), RoR2.GenericSkill.SkillOverridePriority.Replacement);
+			base.GetComponent<RoR2.SkillLocator>().secondary.UnsetSkillOverride(1, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("Diversion")), RoR2.GenericSkill.SkillOverridePriority.Replacement);
+			base.GetComponent<RoR2.SkillLocator>().utility.UnsetSkillOverride(1, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("Distortion")), RoR2.GenericSkill.SkillOverridePriority.Replacement);
+
 		}
 
 		public override void FixedUpdate()

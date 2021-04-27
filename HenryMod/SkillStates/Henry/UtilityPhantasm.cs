@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace HenryMod.SkillStates
 {
-    public class SummonSpecial : BaseSkillState
+    public class UtilityPhantasm : BaseSkillState
     {
         public static float damageCoefficient = Modules.StaticValues.gunDamageCoefficient;
         public static float procCoefficient = 1f;
@@ -23,7 +23,7 @@ namespace HenryMod.SkillStates
         public static GameObject GreaterSummonMaster = CreateMaster();
 
         private static float d = 7;
-        public static List<CharacterMaster> SummonablesList = new List<CharacterMaster>();
+        public static List<CharacterMaster> SummonablesList3 = new List<CharacterMaster>();
 
 
         private float duration;
@@ -93,7 +93,7 @@ namespace HenryMod.SkillStates
                         spreadPitchScale = 0f,
                         spreadYawScale = 0f,
                         queryTriggerInteraction = QueryTriggerInteraction.UseGlobal,
-                        hitEffectPrefab = SummonSpecial.hitEffectPrefab,
+                        hitEffectPrefab = UtilityPhantasm.hitEffectPrefab,
                         hitCallback = SummonBigWisp
                     }.Fire();
                 }
@@ -118,7 +118,7 @@ namespace HenryMod.SkillStates
             characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().secondary.SetSkillOverride(characterMaster.GetBody(), SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("MindwrackClone")), RoR2.GenericSkill.SkillOverridePriority.Replacement);
             characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().utility.SetSkillOverride(characterMaster.GetBody(), SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("DiversionClone")), RoR2.GenericSkill.SkillOverridePriority.Replacement);
             characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().special.SetSkillOverride(characterMaster.GetBody(), SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("DistortionClone")), RoR2.GenericSkill.SkillOverridePriority.Replacement);
-            SummonablesList.Add(characterMaster);
+            SummonablesList3.Add(characterMaster);
             //characterMaster.GetBody().GetComponent<CharacterDeathBehavior>().deathState = Resources.Load<GameObject>("prefabs/characterbodies/GreaterWispBody").GetComponentInChildren<CharacterDeathBehavior>().deathState;
             //only works if prefab is original GreaterWispBody, NullifierBody for example just makes it disappear
             return false;

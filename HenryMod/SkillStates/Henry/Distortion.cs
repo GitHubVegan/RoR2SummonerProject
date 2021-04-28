@@ -10,7 +10,7 @@ namespace HenryMod.SkillStates
 {
 	internal class Distortion : BaseSkillState
 	{
-		public float BaseDuration = 0.5f;
+		public float BaseDuration = 0.0f;
 		private float duration;
 		public override void OnEnter()
 		{
@@ -26,7 +26,7 @@ namespace HenryMod.SkillStates
 					{
 						ASD.maxDistance = Mathf.Infinity;
 						ASD.minDistance = Mathf.NegativeInfinity;
-						ASD.driverUpdateTimerOverride = -5f;
+						ASD.driverUpdateTimerOverride = 1f;
 						ASD.skillSlot = SkillSlot.Special;
 					}
 					CM.GetBody().baseMoveSpeed = 0f;
@@ -56,6 +56,7 @@ namespace HenryMod.SkillStates
 			base.GetComponent<RoR2.SkillLocator>().primary.UnsetSkillOverride(1, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("Mindwrack")), RoR2.GenericSkill.SkillOverridePriority.Replacement);
 			base.GetComponent<RoR2.SkillLocator>().secondary.UnsetSkillOverride(1, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("Diversion")), RoR2.GenericSkill.SkillOverridePriority.Replacement);
 			base.GetComponent<RoR2.SkillLocator>().utility.UnsetSkillOverride(1, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("Distortion")), RoR2.GenericSkill.SkillOverridePriority.Replacement);
+			base.GetComponent<RoR2.SkillLocator>().special.UnsetSkillOverride(1, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("ShatterSkillswapCancel")), RoR2.GenericSkill.SkillOverridePriority.Replacement);
 
 		}
 

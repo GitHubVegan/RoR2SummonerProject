@@ -24,6 +24,7 @@ namespace HenryMod.SkillStates
 
         private static float d = 7;
         public static List<CharacterMaster> SummonablesList1 = new List<CharacterMaster>();
+        public static List<CharacterMaster> KillList1 = new List<CharacterMaster>();
 
 
         private float duration;
@@ -43,7 +44,26 @@ namespace HenryMod.SkillStates
             this.muzzleString = "Muzzle";
             this.search = new BullseyeSearch();
             this.team = base.GetTeam();
-            
+            if (PrimaryPhantasm.SummonablesList1.Count > 2)
+            {
+
+                foreach (CharacterMaster CM in PrimaryPhantasm.SummonablesList1)
+                {
+                    
+                    KillList1.Add(CM);
+                }
+
+                PrimaryPhantasm.KillList1.RemoveRange(1, 2);
+
+                foreach (CharacterMaster CM in PrimaryPhantasm.KillList1)
+                {
+                    CM.gameObject.AddComponent<MasterSuicideOnTimer>().lifeTimer = 0f;
+                }
+                PrimaryPhantasm.KillList1.Clear();
+                PrimaryPhantasm.SummonablesList1.RemoveAt(0);
+
+            }
+
 
             base.PlayAnimation("LeftArm, Override", "ShootGun", "ShootGun.playbackRate", 1.8f);
         }
@@ -116,8 +136,7 @@ namespace HenryMod.SkillStates
             characterMaster.inventory.ResetItem(RoR2Content.Items.ExtraLife.itemIndex);
             characterMaster.inventory.GiveItem(RoR2Content.Items.Ghost.itemIndex);
             characterMaster.gameObject.GetComponent<BaseAI>().leader.gameObject = base.characterBody.gameObject;
-            characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().secondary.SetSkillOverride(characterMaster.GetBody(), SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("MindwrackClone")), RoR2.GenericSkill.SkillOverridePriority.Replacement);
-            characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().utility.SetSkillOverride(characterMaster.GetBody(), SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("DiversionClone")), RoR2.GenericSkill.SkillOverridePriority.Replacement);
+            characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().utility.SetSkillOverride(2, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("MindwrackClone")), RoR2.GenericSkill.SkillOverridePriority.Replacement);
             SummonablesList1.Add(characterMaster);
             //characterMaster.GetBody().GetComponent<CharacterDeathBehavior>().deathState = Resources.Load<GameObject>("prefabs/characterbodies/GreaterWispBody").GetComponentInChildren<CharacterDeathBehavior>().deathState;
             //only works if prefab is original GreaterWispBody, NullifierBody for example just makes it disappear
@@ -132,7 +151,7 @@ namespace HenryMod.SkillStates
 
         private static GameObject CreateBody()
         {
-            GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/TreebotBody"), "PrimaryPhantasmBody", true);
+            GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/CommandoBody"), "PrimaryPhantasmBody", true);
             
 
             //newBody.GetComponent<CharacterBody>().baseAcceleration = 50;
@@ -152,7 +171,7 @@ namespace HenryMod.SkillStates
 
         private static GameObject CreateMaster()
         {
-            GameObject newMaster = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/charactermasters/TreebotMonsterMaster"), "PrimaryPhantasmMaster", true);
+            GameObject newMaster = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/charactermasters/CommandoMonsterMaster"), "PrimaryPhantasmMaster", true);
             newMaster.GetComponent<CharacterMaster>().bodyPrefab = PrimaryPhantasmBody;
             foreach (AISkillDriver ai in newMaster.GetComponentsInChildren<AISkillDriver>())
             {

@@ -12,12 +12,13 @@ namespace HenryMod.SkillStates
 {
     public class ShatterSkillswap : BaseSkillState
     {
+        private float BaseDuration = 0.0f;
         private float duration;
 
         public override void OnEnter()
         {
             base.OnEnter();
-            this.duration = 0f;
+            this.duration = this.BaseDuration / this.attackSpeedStat;
             base.GetComponent<RoR2.SkillLocator>().primary.SetSkillOverride(1, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("Mindwrack")), RoR2.GenericSkill.SkillOverridePriority.Replacement);
             base.GetComponent<RoR2.SkillLocator>().secondary.SetSkillOverride(1, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("Diversion")), RoR2.GenericSkill.SkillOverridePriority.Replacement);
             base.GetComponent<RoR2.SkillLocator>().utility.SetSkillOverride(1, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("Distortion")), RoR2.GenericSkill.SkillOverridePriority.Replacement);

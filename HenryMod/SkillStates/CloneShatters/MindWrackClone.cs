@@ -9,7 +9,7 @@ using EntityStates.JellyfishMonster;
 
 namespace HenryMod.SkillStates
 {
-	public class MindWrackClone : BaseSkillState
+	public class MindwrackClone : BaseSkillState
     {
         public static float baseDuration = 0.5f;
         public static float novaRadius = 24f;
@@ -27,7 +27,7 @@ namespace HenryMod.SkillStates
         {
             base.OnEnter();
             this.stopwatch = 0f;
-            this.duration = MindWrackClone.baseDuration / this.attackSpeedStat;
+            this.duration = MindwrackClone.baseDuration / this.attackSpeedStat;
             Transform modelTransform = base.GetModelTransform();
 
             base.PlayCrossfade("Body", "Nova", "Nova.playbackRate", this.duration, 0.1f);
@@ -37,7 +37,7 @@ namespace HenryMod.SkillStates
             {
                 this.chargeEffect = UnityEngine.Object.Instantiate<GameObject>(EntityStates.JellyfishMonster.JellyNova.chargingEffectPrefab, base.transform.position, base.transform.rotation);
                 this.chargeEffect.transform.parent = base.transform;
-                this.chargeEffect.transform.localScale = Vector3.one * MindWrackClone.novaRadius;
+                this.chargeEffect.transform.localScale = Vector3.one * MindwrackClone.novaRadius;
                 this.chargeEffect.GetComponent<ScaleParticleSystemDuration>().newDuration = this.duration;
             }
 
@@ -100,7 +100,7 @@ namespace HenryMod.SkillStates
                 EffectManager.SpawnEffect(EntityStates.JellyfishMonster.JellyNova.novaEffectPrefab, new EffectData
                 {
                     origin = base.transform.position,
-                    scale = MindWrackClone.novaRadius
+                    scale = MindwrackClone.novaRadius
                 }, true);
             }
 
@@ -110,9 +110,9 @@ namespace HenryMod.SkillStates
                 inflictor = base.gameObject,
                 teamIndex = TeamComponent.GetObjectTeam(base.gameObject),
                 baseDamage = this.damageStat * EntityStates.JellyfishMonster.JellyNova.novaDamageCoefficient,
-                baseForce = MindWrackClone.novaForce,
+                baseForce = MindwrackClone.novaForce,
                 position = base.transform.position,
-                radius = MindWrackClone.novaRadius,
+                radius = MindwrackClone.novaRadius,
                 procCoefficient = 2f,
                 attackerFiltering = AttackerFiltering.NeverHit,
                 damageType = DamageType.Generic

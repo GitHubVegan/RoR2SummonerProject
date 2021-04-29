@@ -83,40 +83,40 @@ namespace HenryMod.SkillStates
 			var buff = base.characterBody.HasBuff(RoR2Content.Buffs.HiddenInvincibility);
 			if (buff)
 			{
-				List<ProjectileController> bullets = new List<ProjectileController>();
+				List<ProjectileController> projectiles = new List<ProjectileController>();
 				new RoR2.SphereSearch
 				{
 					radius = 2f,
 					mask = RoR2.LayerIndex.projectile.mask,
 					origin = base.characterBody.corePosition
-				}.RefreshCandidates().FilterCandidatesByProjectileControllers().GetProjectileControllers(bullets);
-				if (bullets.Count > 0)
+				}.RefreshCandidates().FilterCandidatesByProjectileControllers().GetProjectileControllers(projectiles);
+				if (projectiles.Count > 0)
 				{
-					foreach (ProjectileController pc in bullets)
+					foreach (ProjectileController PC in projectiles)
 					{
-						if (pc.owner != gameObject)
+						if (PC.owner != gameObject)
 						{
-							Vector3 aimSpot = pc.owner.transform.position - pc.gameObject.transform.position;
+							Vector3 target = PC.owner.transform.position - PC.gameObject.transform.position;
 
-							pc.owner = gameObject;
+							PC.owner = gameObject;
 
 							FireProjectileInfo info = new FireProjectileInfo()
 							{
-								projectilePrefab = pc.gameObject,
-								position = pc.gameObject.transform.position,
-								rotation = base.characterBody.transform.rotation * Quaternion.FromToRotation(new Vector3(0, 0, 1), aimSpot),
+								projectilePrefab = PC.gameObject,
+								position = PC.gameObject.transform.position,
+								rotation = base.characterBody.transform.rotation * Quaternion.FromToRotation(new Vector3(0, 0, 1), target),
 								owner = base.characterBody.gameObject,
 								damage = base.characterBody.damage * 2f,
-								force = 200f,
+								force = 100f,
 								crit = base.RollCrit(),
 								damageColorIndex = DamageColorIndex.Default,
 								target = null,
-								speedOverride = 120f,
+								speedOverride = 200f,
 								fuseOverride = -1f
 							};
 							ProjectileManager.instance.FireProjectile(info);
-							Destroy(pc.gameObject);
-							bullets.RemoveAt(bullets.Count - 1);
+							Destroy(PC.gameObject);
+							projectiles.RemoveAt(projectiles.Count - 1);
 
 						}
 					}

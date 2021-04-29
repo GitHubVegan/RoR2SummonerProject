@@ -10,7 +10,7 @@ namespace HenryMod.Modules.Survivors
 {
     internal class MyCharacter : SurvivorBase
     {
-        internal override string bodyName { get; set; } = "Henry";
+        internal override string bodyName { get; set; } = "Mesmer";
 
         internal override GameObject bodyPrefab { get; set; }
         internal override GameObject displayPrefab { get; set; }
@@ -24,8 +24,8 @@ namespace HenryMod.Modules.Survivors
         {
             armor = 20f,
             armorGrowth = 0f,
-            bodyName = "HenryBody",
-            bodyNameToken = HenryPlugin.developerPrefix + "_HENRY_BODY_NAME",
+            bodyName = "MesmerBody",
+            bodyNameToken = HenryPlugin.developerPrefix + "_MESMER_BODY_NAME",
             bodyColor = Color.grey,
             characterPortrait = Modules.Assets.LoadCharacterIcon("Henry"),
             crosshair = Modules.Assets.LoadCrosshair("Standard"),
@@ -34,22 +34,17 @@ namespace HenryMod.Modules.Survivors
             healthRegen = 1.5f,
             jumpCount = 1,
             maxHealth = 110f,
-            subtitleNameToken = HenryPlugin.developerPrefix + "_HENRY_BODY_SUBTITLE",
+            subtitleNameToken = HenryPlugin.developerPrefix + "_MESMER_BODY_SUBTITLE",
             podPrefab = Resources.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod")
         };
 
         internal static Material henryMat = Modules.Assets.CreateMaterial("matHenry");
-        internal override int mainRendererIndex { get; set; } = 2;
+        internal override int mainRendererIndex { get; set; } = 1;
 
         internal override CustomRendererInfo[] customRendererInfos { get; set; } = new CustomRendererInfo[] {
                 new CustomRendererInfo
                 {
-                    childName = "SwordModel",
-                    material = henryMat,
-                },
-                new CustomRendererInfo
-                {
-                    childName = "GunModel",
+                    childName = "SpearModel",
                     material = henryMat,
                 },
                 new CustomRendererInfo
@@ -389,17 +384,12 @@ namespace HenryMod.Modules.Survivors
             {
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("meshHenrySword"),
+                    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("Spearmesh"),
                     renderer = defaultRenderers[0].renderer
                 },
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("meshHenryGun"),
-                    renderer = defaultRenderers[1].renderer
-                },
-                new SkinDef.MeshReplacement
-                {
-                    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("meshHenry"),
+                    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("MageMesh"),
                     renderer = defaultRenderers[instance.mainRendererIndex].renderer
                 }
             };
@@ -428,12 +418,12 @@ namespace HenryMod.Modules.Survivors
             {
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("meshHenrySwordAlt"),
+                    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("Spearmesh"),
                     renderer = defaultRenderers[0].renderer
                 },
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("meshHenryAlt"),
+                    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("MageMesh"),
                     renderer = defaultRenderers[instance.mainRendererIndex].renderer
                 }
             };

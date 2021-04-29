@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "D1l0iv8Y50KjhucitR4wCa5pFg+ssIjmi0aeW3afpGy45TrwV7/n7ExQbnH47pTLN9cic3GJP6JgDg9HCqFTBA==",
+  "dgSpecHash": "2zM64MKJYNi4p4O17IN3fXPvHkdRYY6opnb35+g8BdmXyJORfKJ71liUXQzzhnAROthurxnk3OZ17zRFt+fkCg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\nico_\\source\\repos\\RoR2SummonerProject\\HenryMod\\HenryMod.csproj",
+  "projectFilePath": "D:\\Safetybackupz\\risk of rain 2\\modfiles (Anniversary)\\summonermod\\CURRENTBRANCH\\RoR2SummonerProject-main\\HenryMod\\HenryMod.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\nico_\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
-    "C:\\Users\\nico_\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+    "C:\\Users\\Liam Shelton\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\Liam Shelton\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
   ],
   "logs": []
 }

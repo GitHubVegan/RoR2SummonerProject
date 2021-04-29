@@ -101,7 +101,7 @@ namespace HenryMod.Modules.Survivors
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("Mindwrack"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Mindwrack)),
                 activationStateMachineName = "Weapon",
-                baseMaxStock = 1,
+                baseMaxStock = 3,
                 baseRechargeInterval = 2f,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
@@ -113,8 +113,8 @@ namespace HenryMod.Modules.Survivors
                 mustKeyPress = true,
                 cancelSprintingOnActivation = false,
                 rechargeStock = 1,
-                requiredStock = 1,
-                stockToConsume = 1
+                requiredStock = 0,
+                stockToConsume = 0
             });
 
             SkillDef primaryphantasmSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
@@ -181,7 +181,7 @@ namespace HenryMod.Modules.Survivors
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Diversion)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
-                baseRechargeInterval = 1f,
+                baseRechargeInterval = 8f,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
@@ -192,8 +192,8 @@ namespace HenryMod.Modules.Survivors
                 mustKeyPress = true,
                 cancelSprintingOnActivation = false,
                 rechargeStock = 1,
-                requiredStock = 1,
-                stockToConsume = 1
+                requiredStock = 0,
+                stockToConsume = 0
             });
 
             SkillDef diversioncloneSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
@@ -259,7 +259,7 @@ namespace HenryMod.Modules.Survivors
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Distortion)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
-                baseRechargeInterval = 2f,
+                baseRechargeInterval = 12f,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
@@ -270,8 +270,8 @@ namespace HenryMod.Modules.Survivors
                 mustKeyPress = true,
                 cancelSprintingOnActivation = false,
                 rechargeStock = 1,
-                requiredStock = 1,
-                stockToConsume = 1,
+                requiredStock = 0,
+                stockToConsume = 0,
                 keywordTokens = new string[] { "KEYWORD_AGILE" }
             });
 

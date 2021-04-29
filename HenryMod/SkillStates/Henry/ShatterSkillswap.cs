@@ -19,10 +19,10 @@ namespace HenryMod.SkillStates
         {
             base.OnEnter();
             this.duration = this.BaseDuration / this.attackSpeedStat;
-            base.GetComponent<RoR2.SkillLocator>().primary.SetSkillOverride(1, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("Mindwrack")), RoR2.GenericSkill.SkillOverridePriority.Replacement);
-            base.GetComponent<RoR2.SkillLocator>().secondary.SetSkillOverride(1, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("Diversion")), RoR2.GenericSkill.SkillOverridePriority.Replacement);
-            base.GetComponent<RoR2.SkillLocator>().utility.SetSkillOverride(1, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("Distortion")), RoR2.GenericSkill.SkillOverridePriority.Replacement);
-            base.GetComponent<RoR2.SkillLocator>().special.SetSkillOverride(1, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("ShatterSkillswapCancel")), RoR2.GenericSkill.SkillOverridePriority.Replacement);
+            base.GetComponent<RoR2.SkillLocator>().primary.SetSkillOverride(1, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("Mindwrack")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
+            base.GetComponent<RoR2.SkillLocator>().secondary.SetSkillOverride(1, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("Diversion")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
+            base.GetComponent<RoR2.SkillLocator>().utility.SetSkillOverride(1, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("Distortion")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
+            base.GetComponent<RoR2.SkillLocator>().special.SetSkillOverride(1, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("ShatterSkillswapCancel")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
         }
 
 

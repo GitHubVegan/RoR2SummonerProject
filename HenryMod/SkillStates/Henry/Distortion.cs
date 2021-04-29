@@ -38,7 +38,9 @@ namespace HenryMod.SkillStates
 						}
 					}
 					CM.GetBody().baseMoveSpeed = 0f;
+					CM.inventory.GiveItem(RoR2Content.Items.HealthDecay.itemIndex, 10);
 					CM.gameObject.AddComponent<MasterSuicideOnTimer>().lifeTimer = 0f;
+
 
 				}
 			}

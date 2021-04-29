@@ -48,8 +48,7 @@ namespace HenryMod.SkillStates
 					}
 					CM.GetBody().baseMoveSpeed = 25f;
 					CM.GetBody().baseAcceleration = 160f;
-					CM.GetBody().baseRegen = -11f;
-					CM.GetBody().levelRegen = -3.3f;
+					CM.inventory.GiveItem(RoR2Content.Items.HealthDecay.itemIndex, 10);
 
 
 				}

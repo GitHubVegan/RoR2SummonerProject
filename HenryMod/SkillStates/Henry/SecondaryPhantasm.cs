@@ -139,7 +139,7 @@ namespace HenryMod.SkillStates
 
         private static GameObject CreateBody()
         {
-            GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/CommandoBody"), "SecondaryPhantasmBody", true);
+            GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/CaptainBody"), "SecondaryPhantasmBody", true);
             
             Modules.Prefabs.bodyPrefabs.Add(newBody);
             return newBody;
@@ -147,7 +147,7 @@ namespace HenryMod.SkillStates
 
         private static GameObject CreateMaster()
         {
-            GameObject newMaster = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/charactermasters/CommandoMonsterMaster"), "SecondaryPhantasmMaster", true);
+            GameObject newMaster = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/charactermasters/CaptainMonsterMaster"), "SecondaryPhantasmMaster", true);
             newMaster.GetComponent<CharacterMaster>().bodyPrefab = SecondaryPhantasmBody;
             foreach (AISkillDriver ai in newMaster.GetComponentsInChildren<AISkillDriver>())
             {

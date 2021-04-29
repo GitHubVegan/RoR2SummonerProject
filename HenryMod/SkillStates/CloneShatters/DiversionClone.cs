@@ -11,7 +11,7 @@ namespace HenryMod.SkillStates
 {
 	public class DiversionClone : BaseSkillState
     {
-        public static float baseDuration = 0.5f;
+        public static float baseDuration = 0.0f;
         public static float novaRadius = 24f;
         public static float novaForce = 2500f;
 
@@ -29,17 +29,6 @@ namespace HenryMod.SkillStates
             this.stopwatch = 0f;
             this.duration = DiversionClone.baseDuration / this.attackSpeedStat;
             Transform modelTransform = base.GetModelTransform();
-
-            base.PlayCrossfade("Body", "Nova", "Nova.playbackRate", this.duration, 0.1f);
-            this.soundID = Util.PlaySound(EntityStates.JellyfishMonster.JellyNova.chargingSoundString, base.gameObject);
-
-            if (EntityStates.JellyfishMonster.JellyNova.chargingEffectPrefab)
-            {
-                this.chargeEffect = UnityEngine.Object.Instantiate<GameObject>(EntityStates.JellyfishMonster.JellyNova.chargingEffectPrefab, base.transform.position, base.transform.rotation);
-                this.chargeEffect.transform.parent = base.transform;
-                this.chargeEffect.transform.localScale = Vector3.one * DiversionClone.novaRadius;
-                this.chargeEffect.GetComponent<ScaleParticleSystemDuration>().newDuration = this.duration;
-            }
 
             if (modelTransform)
             {

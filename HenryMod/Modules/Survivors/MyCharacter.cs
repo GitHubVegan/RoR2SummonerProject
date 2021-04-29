@@ -97,11 +97,7 @@ namespace HenryMod.Modules.Survivors
         {
             Modules.Skills.CreateSkillFamilies(bodyPrefab);
 
-            string prefix = HenryPlugin.developerPrefix;
-
             #region Primary
-            Modules.Skills.AddPrimarySkill(bodyPrefab, Modules.Skills.CreatePrimarySkillDef(new EntityStates.SerializableEntityStateType(typeof(SkillStates.SlashCombo)), "Weapon", prefix + "_HENRY_BODY_PRIMARY_SLASH_NAME", prefix + "_HENRY_BODY_PRIMARY_SLASH_DESCRIPTION", Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texPrimaryIcon"), true));
-
             SkillDef mindwrackSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "Mindwrack",
@@ -126,9 +122,7 @@ namespace HenryMod.Modules.Survivors
                 stockToConsume = 1
             });
 
-            Modules.Skills.AddPrimarySkill(bodyPrefab, mindwrackSkillDef);
-
-            SkillDef primaryphantasmSkillDefSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            SkillDef primaryphantasmSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "PrimaryPhantasm",
                 skillNameToken = "PrimaryPhantasm",
@@ -152,38 +146,11 @@ namespace HenryMod.Modules.Survivors
                 stockToConsume = 1
             });
 
-            Modules.Skills.AddPrimarySkill(bodyPrefab, primaryphantasmSkillDefSkillDef);
+            Modules.Skills.AddPrimarySkill(bodyPrefab, primaryphantasmSkillDef);
 
             #endregion
 
             #region Secondary
-
-            SkillDef shootSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
-            {
-                skillName = prefix + "_HENRY_BODY_SECONDARY_GUN_NAME",
-                skillNameToken = prefix + "_HENRY_BODY_SECONDARY_GUN_NAME",
-                skillDescriptionToken = prefix + "_HENRY_BODY_SECONDARY_GUN_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSecondaryIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Shoot)),
-                activationStateMachineName = "Slide",
-                baseMaxStock = 1,
-                baseRechargeInterval = 1f,
-                beginSkillCooldownOnSkillEnd = false,
-                canceledFromSprinting = false,
-                forceSprintDuringState = false,
-                fullRestockOnAssign = true,
-                interruptPriority = EntityStates.InterruptPriority.Skill,
-                resetCooldownTimerOnUse = false,
-                isCombatSkill = true,
-                mustKeyPress = true,
-                cancelSprintingOnActivation = false,
-                rechargeStock = 1,
-                requiredStock = 1,
-                stockToConsume = 1,
-                keywordTokens = new string[] { "KEYWORD_AGILE" }
-            });
-
-            Modules.Skills.AddSecondarySkills(bodyPrefab, shootSkillDef);
 
             SkillDef mindwrackCloneSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
@@ -210,8 +177,6 @@ namespace HenryMod.Modules.Survivors
                 keywordTokens = new string[] { "KEYWORD_AGILE" }
             });
 
-            Modules.Skills.AddSecondarySkills(bodyPrefab, mindwrackCloneSkillDef);
-
             SkillDef diversionSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "Diversion",
@@ -236,8 +201,6 @@ namespace HenryMod.Modules.Survivors
                 stockToConsume = 1
             });
 
-            Modules.Skills.AddSecondarySkills(bodyPrefab, diversionSkillDef);
-
             SkillDef diversioncloneSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "DiversionClone",
@@ -261,8 +224,6 @@ namespace HenryMod.Modules.Survivors
                 requiredStock = 1,
                 stockToConsume = 1
             });
-
-            Modules.Skills.AddSecondarySkills(bodyPrefab, diversioncloneSkillDef);
 
             SkillDef secondaryphantasmSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
@@ -293,31 +254,6 @@ namespace HenryMod.Modules.Survivors
             #endregion
 
             #region Utility
-            SkillDef rollSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
-            {
-                skillName = prefix + "_HENRY_BODY_UTILITY_ROLL_NAME",
-                skillNameToken = prefix + "_HENRY_BODY_UTILITY_ROLL_NAME",
-                skillDescriptionToken = prefix + "_HENRY_BODY_UTILITY_ROLL_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texUtilityIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Roll)),
-                activationStateMachineName = "Body",
-                baseMaxStock = 1,
-                baseRechargeInterval = 4f,
-                beginSkillCooldownOnSkillEnd = false,
-                canceledFromSprinting = false,
-                forceSprintDuringState = true,
-                fullRestockOnAssign = true,
-                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
-                resetCooldownTimerOnUse = false,
-                isCombatSkill = false,
-                mustKeyPress = true,
-                cancelSprintingOnActivation = false,
-                rechargeStock = 1,
-                requiredStock = 1,
-                stockToConsume = 1
-            });
-
-            Modules.Skills.AddUtilitySkills(bodyPrefab, rollSkillDef);
 
             SkillDef distortionSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
@@ -343,8 +279,6 @@ namespace HenryMod.Modules.Survivors
                 stockToConsume = 1,
                 keywordTokens = new string[] { "KEYWORD_AGILE" }
             });
-
-            Modules.Skills.AddUtilitySkills(bodyPrefab, distortionSkillDef);
 
             SkillDef utilityphantasmSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
@@ -375,31 +309,6 @@ namespace HenryMod.Modules.Survivors
             #endregion
 
             #region Special
-            SkillDef bombSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
-            {
-                skillName = prefix + "_HENRY_BODY_SPECIAL_BOMB_NAME",
-                skillNameToken = prefix + "_HENRY_BODY_SPECIAL_BOMB_NAME",
-                skillDescriptionToken = prefix + "_HENRY_BODY_SPECIAL_BOMB_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSpecialIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.BombSpecial)),
-                activationStateMachineName = "Slide",
-                baseMaxStock = 1,
-                baseRechargeInterval = 10f,
-                beginSkillCooldownOnSkillEnd = false,
-                canceledFromSprinting = false,
-                forceSprintDuringState = false,
-                fullRestockOnAssign = true,
-                interruptPriority = EntityStates.InterruptPriority.Skill,
-                resetCooldownTimerOnUse = false,
-                isCombatSkill = true,
-                mustKeyPress = true,
-                cancelSprintingOnActivation = true,
-                rechargeStock = 1,
-                requiredStock = 1,
-                stockToConsume = 1
-            });
-
-            Modules.Skills.AddSpecialSkills(bodyPrefab, bombSkillDef);
 
             SkillDef shatterskillswapSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
@@ -450,8 +359,6 @@ namespace HenryMod.Modules.Survivors
                 requiredStock = 1,
                 stockToConsume = 1
             });
-
-            Modules.Skills.AddSpecialSkills(bodyPrefab, shatterskillswapcancelSkillDef);
 
             
             #endregion

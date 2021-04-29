@@ -12,13 +12,16 @@ namespace HenryMod.Modules
         internal static void RegisterStates()
         {
             entityStates.Add(typeof(BaseMeleeAttack));
-            entityStates.Add(typeof(SlashCombo));
-
-            entityStates.Add(typeof(Shoot));
-
-            entityStates.Add(typeof(Roll));
-
-            entityStates.Add(typeof(BombSpecial));
+            entityStates.Add(typeof(PrimaryPhantasm));
+            entityStates.Add(typeof(SecondaryPhantasm));
+            entityStates.Add(typeof(UtilityPhantasm));
+            entityStates.Add(typeof(ShatterSkillswap));
+            entityStates.Add(typeof(ShatterSkillswapCancel));
+            entityStates.Add(typeof(Mindwrack));
+            entityStates.Add(typeof(MindwrackClone));
+            entityStates.Add(typeof(Diversion));
+            entityStates.Add(typeof(DiversionClone));
+            entityStates.Add(typeof(Distortion));
         }
     }
 }

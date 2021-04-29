@@ -12,13 +12,12 @@ namespace HenryMod.SkillStates
 {
     public class PrimaryPhantasm : BaseSkillState
     {
-        public static float damageCoefficient = Modules.StaticValues.gunDamageCoefficient;
-        public static float procCoefficient = 1f;
+        public static float damageCoefficient = 0f;
+        public static float procCoefficient = 0f;
         public static float baseDuration = 0.6f;
-        public static float force = 800f;
-        public static float recoil = 3f;
-        public static float range = 256f;
-        public static GameObject hitEffectPrefab = Resources.Load<GameObject>("prefabs/effects/impacteffects/ExplosionGreaterWisp");
+        public static float force = 0f;
+        public static float recoil = 0f;
+        public static float range = 350f;
         public static GameObject PrimaryPhantasmBody = CreateBody();
         public static GameObject PrimaryPhantasmMaster = CreateMaster();
 
@@ -38,7 +37,7 @@ namespace HenryMod.SkillStates
         public override void OnEnter()
         {
             base.OnEnter();
-            this.duration = Shoot.baseDuration / this.attackSpeedStat;
+            this.duration = baseDuration / this.attackSpeedStat;
             this.fireTime = 0.2f * this.duration;
             base.characterBody.SetAimTimer(2f);
             this.muzzleString = "Muzzle";
@@ -46,7 +45,6 @@ namespace HenryMod.SkillStates
             this.team = base.GetTeam();
             if (PrimaryPhantasm.SummonablesList1.Count > 2)
             {
-
                 foreach (CharacterMaster CM in PrimaryPhantasm.SummonablesList1)
                 {
                     
@@ -61,11 +59,10 @@ namespace HenryMod.SkillStates
                 }
                 PrimaryPhantasm.KillList1.Clear();
                 PrimaryPhantasm.SummonablesList1.RemoveAt(0);
-
             }
 
 
-            base.PlayAnimation("LeftArm, Override", "ShootGun", "ShootGun.playbackRate", 1.8f);
+            base.PlayAnimation("Gesture, Override", "ThrowBomb", "ThrowBomb.playbackRate", 1.8f);
         }
 
 
@@ -77,12 +74,12 @@ namespace HenryMod.SkillStates
 
                 base.characterBody.AddSpreadBloom(0f);
                 EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab, base.gameObject, this.muzzleString, false);
-                Util.PlaySound("HenryShootPistol", base.gameObject);
+                Util.PlaySound("Roll.dodgeSoundString", base.gameObject);
 
                 if (base.isAuthority)
                 {
                     Ray aimRay = base.GetAimRay();
-                    
+
 
                     new BulletAttack
                     {
@@ -90,12 +87,12 @@ namespace HenryMod.SkillStates
                         bulletCount = 1,
                         aimVector = aimRay.direction,
                         origin = aimRay.origin,
-                        damage = Shoot.damageCoefficient * this.damageStat,
+                        damage = damageCoefficient * this.damageStat,
                         damageColorIndex = DamageColorIndex.Default,
                         damageType = DamageType.Generic,
                         falloffModel = BulletAttack.FalloffModel.DefaultBullet,
-                        maxDistance = Shoot.range,
-                        force = Shoot.force,
+                        maxDistance = range,
+                        force = force,
                         hitMask = LayerIndex.CommonMasks.bullet,
                         minSpread = 0f,
                         maxSpread = 0f,
@@ -105,15 +102,15 @@ namespace HenryMod.SkillStates
                         smartCollision = false,
                         procChainMask = default(ProcChainMask),
                         procCoefficient = procCoefficient,
-                        radius = 0.75f,
+                        radius = 0.4f,
                         sniper = false,
                         stopperMask = LayerIndex.CommonMasks.bullet,
                         weapon = null,
-                        tracerEffectPrefab = Shoot.tracerEffectPrefab,
+                        tracerEffectPrefab = null,
                         spreadPitchScale = 0f,
                         spreadYawScale = 0f,
                         queryTriggerInteraction = QueryTriggerInteraction.UseGlobal,
-                        hitEffectPrefab = PrimaryPhantasm.hitEffectPrefab,
+                        hitEffectPrefab = null,
                         hitCallback = SummonPrimary
                     }.Fire();
                 }
@@ -132,14 +129,13 @@ namespace HenryMod.SkillStates
                 teamIndexOverride = new TeamIndex?(TeamIndex.Player)
             }.Perform();
             characterMaster.GetBody().RecalculateStats();
+            characterMaster.GetBody().baseDamage = characterMaster.GetBody().baseDamage * 0.3f;
             characterMaster.inventory.CopyItemsFrom(base.characterBody.inventory);
             characterMaster.inventory.ResetItem(RoR2Content.Items.ExtraLife.itemIndex);
             characterMaster.inventory.GiveItem(RoR2Content.Items.Ghost.itemIndex);
             characterMaster.gameObject.GetComponent<BaseAI>().leader.gameObject = base.characterBody.gameObject;
             characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().utility.SetSkillOverride(2, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("MindwrackClone")), RoR2.GenericSkill.SkillOverridePriority.Replacement);
             SummonablesList1.Add(characterMaster);
-            //characterMaster.GetBody().GetComponent<CharacterDeathBehavior>().deathState = Resources.Load<GameObject>("prefabs/characterbodies/GreaterWispBody").GetComponentInChildren<CharacterDeathBehavior>().deathState;
-            //only works if prefab is original GreaterWispBody, NullifierBody for example just makes it disappear
             return false;
             
         }
@@ -152,19 +148,7 @@ namespace HenryMod.SkillStates
         private static GameObject CreateBody()
         {
             GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/CommandoBody"), "PrimaryPhantasmBody", true);
-            
-
-            //newBody.GetComponent<CharacterBody>().baseAcceleration = 50;
-            //newBody.GetComponent<CharacterDeathBehavior>().deathState = Resources.Load<GameObject>("prefabs/characterbodies/GreaterWispBody").GetComponentInChildren<CharacterDeathBehavior>().deathState;
-            //doesn't load above deathstate at all, wisp body just disappears
-            //newBody.GetComponent<CharacterDeathBehavior>().deathState = new EntityStates.SerializableEntityStateType(typeof(EntityStates.NullifierMonster.DeathState));
-            //same issue
-            //newBody.GetComponent<CharacterDeathBehavior>().deathStateMachine = Resources.Load<GameObject>("prefabs/characterbodies/GreaterWispBody").GetComponent<CharacterDeathBehavior>().deathStateMachine;
-            //newBody.GetComponent<CharacterDeathBehavior>().idleStateMachine = Resources.Load<GameObject>("prefabs/characterbodies/GreaterWispBody").GetComponent<CharacterDeathBehavior>().idleStateMachine;
-            Debug.Log(newBody.GetComponent<CharacterDeathBehavior>().deathState);
-            Debug.Log(newBody.GetComponent<CharacterDeathBehavior>().deathStateMachine);
-            Debug.Log(newBody.GetComponent<CharacterDeathBehavior>().idleStateMachine);
-
+           
             Modules.Prefabs.bodyPrefabs.Add(newBody);
             return newBody;
         }
@@ -194,13 +178,14 @@ namespace HenryMod.SkillStates
             attackDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
             attackDriver.ignoreNodeGraph = true;
             attackDriver.moveInputScale = 1f;
-            attackDriver.driverUpdateTimerOverride = 1f;
+            attackDriver.driverUpdateTimerOverride = 3f;
             attackDriver.buttonPressType = AISkillDriver.ButtonPressType.Hold;
             attackDriver.minTargetHealthFraction = Mathf.NegativeInfinity;
             attackDriver.maxTargetHealthFraction = Mathf.Infinity;
             attackDriver.minUserHealthFraction = Mathf.NegativeInfinity;
             attackDriver.maxUserHealthFraction = Mathf.Infinity;
             attackDriver.skillSlot = SkillSlot.Primary;
+            attackDriver.noRepeat = true;
 
             AISkillDriver shatterDriver = newMaster.AddComponent<AISkillDriver>();
             shatterDriver.customName = "Shatter";
@@ -215,13 +200,14 @@ namespace HenryMod.SkillStates
             shatterDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
             shatterDriver.ignoreNodeGraph = true;
             shatterDriver.moveInputScale = 1f;
-            shatterDriver.driverUpdateTimerOverride = 1f;
+            shatterDriver.driverUpdateTimerOverride = 3f;
             shatterDriver.buttonPressType = AISkillDriver.ButtonPressType.Hold;
             shatterDriver.minTargetHealthFraction = Mathf.NegativeInfinity;
             shatterDriver.maxTargetHealthFraction = Mathf.Infinity;
             shatterDriver.minUserHealthFraction = Mathf.NegativeInfinity;
             shatterDriver.maxUserHealthFraction = Mathf.Infinity;
-            shatterDriver.skillSlot = SkillSlot.Primary;
+            shatterDriver.skillSlot = SkillSlot.None;
+            shatterDriver.noRepeat = true;
 
             Modules.Prefabs.masterPrefabs.Add(newMaster);
             return newMaster;

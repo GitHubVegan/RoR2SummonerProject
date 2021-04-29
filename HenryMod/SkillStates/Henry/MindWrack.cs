@@ -29,10 +29,9 @@ namespace HenryMod.SkillStates
 							ASD.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
 							ASD.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
 							ASD.maxDistance = 100f;
-							ASD.minDistance = 0f;
-							ASD.driverUpdateTimerOverride = 1f;
+							ASD.minDistance = 20f;
+							ASD.driverUpdateTimerOverride = 0.2f;
 							ASD.skillSlot = SkillSlot.None;
-							ASD.noRepeat = true;
 						}
 
 						bool flag2 = ASD.customName == "Shatter";
@@ -42,12 +41,15 @@ namespace HenryMod.SkillStates
 							ASD.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
 							ASD.maxDistance = 20f;
 							ASD.minDistance = 0f;
+							ASD.driverUpdateTimerOverride = 0.2f;
 							ASD.skillSlot = SkillSlot.Utility;
 						}
 						
 					}
-					CM.GetBody().baseMoveSpeed = 20f;
-					CM.GetBody().baseAcceleration = 100f;
+					CM.GetBody().baseMoveSpeed = 25f;
+					CM.GetBody().baseAcceleration = 160f;
+					CM.GetBody().baseRegen = -11f;
+					CM.GetBody().levelRegen = -3.3f;
 
 
 				}

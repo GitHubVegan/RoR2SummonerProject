@@ -1,0 +1,7 @@
+ManifestFileVersion: 0
+CRC: 3069037663
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: mesmerassets
+      Dependencies: {}

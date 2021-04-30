@@ -148,11 +148,47 @@ namespace HenryMod.SkillStates
 
         private static GameObject CreateBody()
         {
-            GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/MercBody"), "PrimaryPhantasmBody", true);
+            //GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/MercBody"), "PrimaryPhantasmBody", true);
 
-            Modules.Prefabs.bodyPrefabs.Add(newBody);
+            //       BodyInfo bodyInfo = new BodyInfo
+            //       {
+            //           armor = 20f,
+            //           armorGrowth = 0f,
+            //           bodyName = "PhantasmSwordBody",
+            //           bodyNameToken = HenryPlugin.developerPrefix + "_PHANTASMSWORD_BODY_NAME",
+            //           bodyColor = Color.grey,
+            //           characterPortrait = Modules.Assets.LoadCharacterIcon("Henry"),
+            //           crosshair = Modules.Assets.LoadCrosshair("Standard"),
+            //           damage = 12f,
+            //          healthGrowth = 33f,
+            //          healthRegen = 1.5f,
+            //           jumpCount = 1,
+            //           maxHealth = 110f,
+            //           subtitleNameToken = HenryPlugin.developerPrefix + "_PHANTASMSWORD_BODY_SUBTITLE",
+            //           podPrefab = Resources.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod"),
+            //           bodyNameToClone = "Merc"
+            //       };
+
+            //        GameObject newBody = Prefabs.CreatePrefab("PrimaryPhantasmBody", "mdlPhantasmSword",bodyInfo);
+            //       //bodyPrefab.GetComponent<EntityStateMachine>().mainStateType = new EntityStates.SerializableEntityStateType(characterMainState);
+
+
+            GameObject newBody = null;
+            foreach (GameObject customCharacterbody in Prefabs.bodyPrefabs)
+            {
+                Debug.Log($"bodyPrefabs contains GameObject {customCharacterbody.name}");
+                if (customCharacterbody.name == "PhantasmSwordBody")
+                {
+                    newBody = customCharacterbody;
+                }
+            }
+
+
+           // Modules.Prefabs.bodyPrefabs.Add(newBody);
             return newBody;
         }
+
+
 
         private static GameObject CreateMaster()
         {
@@ -196,7 +232,7 @@ namespace HenryMod.SkillStates
             shatterDriver.selectionRequiresTargetLoS = false;
             shatterDriver.maxDistance = 70f;
             shatterDriver.minDistance = 6f;
-            shatterDriver.shouldSprint = true;
+            shatterDriver.shouldSprint = false;
             shatterDriver.requireSkillReady = false;
             shatterDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
             shatterDriver.ignoreNodeGraph = true;

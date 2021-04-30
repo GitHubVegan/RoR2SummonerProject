@@ -102,7 +102,7 @@ namespace HenryMod.SkillStates
                         smartCollision = false,
                         procChainMask = default(ProcChainMask),
                         procCoefficient = procCoefficient,
-                        radius = 0.4f,
+                        radius = 0.9f,
                         sniper = false,
                         stopperMask = LayerIndex.CommonMasks.bullet,
                         weapon = null,
@@ -209,7 +209,7 @@ namespace HenryMod.SkillStates
             attackDriver.activationRequiresAimConfirmation = true;
             attackDriver.activationRequiresTargetLoS = false;
             attackDriver.selectionRequiresTargetLoS = false;
-            attackDriver.maxDistance = 8f;
+            attackDriver.maxDistance = 6f;
             attackDriver.minDistance = 0f;
             attackDriver.requireSkillReady = true;
             attackDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;

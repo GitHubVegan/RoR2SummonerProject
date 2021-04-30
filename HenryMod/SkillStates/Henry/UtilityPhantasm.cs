@@ -122,7 +122,7 @@ namespace HenryMod.SkillStates
             characterMaster.inventory.ResetItem(RoR2Content.Items.ExtraLife.itemIndex);
             characterMaster.inventory.GiveItem(RoR2Content.Items.Ghost.itemIndex);
             characterMaster.gameObject.GetComponent<BaseAI>().leader.gameObject = base.characterBody.gameObject;
-            characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().primary.SetSkillOverride(3, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("PhantasmTaunt")), RoR2.GenericSkill.SkillOverridePriority.Default);
+            characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().primary.SetSkillOverride(3, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("PhantasmWard")), RoR2.GenericSkill.SkillOverridePriority.Default);
             SummonablesList3.Add(characterMaster);
             return false;
             
@@ -135,7 +135,7 @@ namespace HenryMod.SkillStates
 
         private static GameObject CreateBody()
         {
-            GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/HuntressBody"), "UtilityPhantasmBody", true);
+            GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/MageBody"), "UtilityPhantasmBody", true);
             
             Debug.Log(newBody.GetComponent<CharacterDeathBehavior>().deathState);
             Debug.Log(newBody.GetComponent<CharacterDeathBehavior>().deathStateMachine);
@@ -147,7 +147,7 @@ namespace HenryMod.SkillStates
 
         private static GameObject CreateMaster()
         {
-            GameObject newMaster = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/charactermasters/HuntressMonsterMaster"), "UtilityPhantasmMaster", true);
+            GameObject newMaster = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/charactermasters/MageMonsterMaster"), "UtilityPhantasmMaster", true);
             newMaster.GetComponent<CharacterMaster>().bodyPrefab = UtilityPhantasmBody;
             foreach (AISkillDriver ai in newMaster.GetComponentsInChildren<AISkillDriver>())
             {
@@ -164,7 +164,7 @@ namespace HenryMod.SkillStates
             attackDriver.activationRequiresAimConfirmation = false;
             attackDriver.activationRequiresTargetLoS = false;
             attackDriver.selectionRequiresTargetLoS = false;
-            attackDriver.maxDistance = 10f;
+            attackDriver.maxDistance = 20f;
             attackDriver.minDistance = 0f;
             attackDriver.requireSkillReady = false;
             attackDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
@@ -186,7 +186,7 @@ namespace HenryMod.SkillStates
             shatterDriver.activationRequiresTargetLoS = false;
             shatterDriver.selectionRequiresTargetLoS = false;
             shatterDriver.maxDistance = 100f;
-            shatterDriver.minDistance = 10f;
+            shatterDriver.minDistance = 20f;
             shatterDriver.requireSkillReady = false;
             shatterDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
             shatterDriver.ignoreNodeGraph = true;

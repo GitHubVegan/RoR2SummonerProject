@@ -263,11 +263,11 @@ namespace HenryMod.Modules.Survivors
                 interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = false,
-                mustKeyPress = true,
+                mustKeyPress = false,
                 cancelSprintingOnActivation = false,
                 rechargeStock = 1,
-                requiredStock = 1,
-                stockToConsume = 1
+                requiredStock = 0,
+                stockToConsume = 0
             });
 
             SkillDef secondaryphantasmSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo

@@ -134,7 +134,8 @@ namespace HenryMod.SkillStates
             characterMaster.inventory.ResetItem(RoR2Content.Items.ExtraLife.itemIndex);
             characterMaster.inventory.GiveItem(RoR2Content.Items.Ghost.itemIndex);
             characterMaster.gameObject.GetComponent<BaseAI>().leader.gameObject = base.characterBody.gameObject;
-            characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().utility.SetSkillOverride(2, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("MindwrackClone")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
+            characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().primary.SetSkillOverride(3, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("PhantasmRapier")), RoR2.GenericSkill.SkillOverridePriority.Default);
+            characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().utility.SetSkillOverride(2, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("MindwrackClone")), RoR2.GenericSkill.SkillOverridePriority.Default);
             SummonablesList1.Add(characterMaster);
             return false;
             
@@ -147,15 +148,15 @@ namespace HenryMod.SkillStates
 
         private static GameObject CreateBody()
         {
-            GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/CommandoBody"), "PrimaryPhantasmBody", true);
-           
+            GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/MercBody"), "PrimaryPhantasmBody", true);
+
             Modules.Prefabs.bodyPrefabs.Add(newBody);
             return newBody;
         }
 
         private static GameObject CreateMaster()
         {
-            GameObject newMaster = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/charactermasters/CommandoMonsterMaster"), "PrimaryPhantasmMaster", true);
+            GameObject newMaster = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/charactermasters/MercMonsterMaster"), "PrimaryPhantasmMaster", true);
             newMaster.GetComponent<CharacterMaster>().bodyPrefab = PrimaryPhantasmBody;
             foreach (AISkillDriver ai in newMaster.GetComponentsInChildren<AISkillDriver>())
             {
@@ -167,47 +168,46 @@ namespace HenryMod.SkillStates
 
             AISkillDriver attackDriver = newMaster.AddComponent<AISkillDriver>();
             attackDriver.customName = "Attack";
-            attackDriver.movementType = AISkillDriver.MovementType.StrafeMovetarget;
+            attackDriver.movementType = AISkillDriver.MovementType.Stop;
             attackDriver.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
-            attackDriver.activationRequiresAimConfirmation = false;
+            attackDriver.activationRequiresAimConfirmation = true;
             attackDriver.activationRequiresTargetLoS = false;
             attackDriver.selectionRequiresTargetLoS = false;
-            attackDriver.maxDistance = 100f;
+            attackDriver.maxDistance = 8f;
             attackDriver.minDistance = 0f;
-            attackDriver.requireSkillReady = false;
+            attackDriver.requireSkillReady = true;
             attackDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
             attackDriver.ignoreNodeGraph = true;
             attackDriver.moveInputScale = 1f;
-            attackDriver.driverUpdateTimerOverride = 3f;
+            attackDriver.driverUpdateTimerOverride = 0.2f;
             attackDriver.buttonPressType = AISkillDriver.ButtonPressType.Hold;
             attackDriver.minTargetHealthFraction = Mathf.NegativeInfinity;
             attackDriver.maxTargetHealthFraction = Mathf.Infinity;
             attackDriver.minUserHealthFraction = Mathf.NegativeInfinity;
             attackDriver.maxUserHealthFraction = Mathf.Infinity;
             attackDriver.skillSlot = SkillSlot.Primary;
-            attackDriver.noRepeat = true;
 
             AISkillDriver shatterDriver = newMaster.AddComponent<AISkillDriver>();
             shatterDriver.customName = "Shatter";
-            shatterDriver.movementType = AISkillDriver.MovementType.StrafeMovetarget;
+            shatterDriver.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
             shatterDriver.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
             shatterDriver.activationRequiresAimConfirmation = false;
             shatterDriver.activationRequiresTargetLoS = false;
             shatterDriver.selectionRequiresTargetLoS = false;
-            shatterDriver.maxDistance = 100f;
-            shatterDriver.minDistance = 0f;
+            shatterDriver.maxDistance = 70f;
+            shatterDriver.minDistance = 6f;
+            shatterDriver.shouldSprint = true;
             shatterDriver.requireSkillReady = false;
             shatterDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
             shatterDriver.ignoreNodeGraph = true;
             shatterDriver.moveInputScale = 1f;
-            shatterDriver.driverUpdateTimerOverride = 3f;
+            shatterDriver.driverUpdateTimerOverride = 0.2f;
             shatterDriver.buttonPressType = AISkillDriver.ButtonPressType.Hold;
             shatterDriver.minTargetHealthFraction = Mathf.NegativeInfinity;
             shatterDriver.maxTargetHealthFraction = Mathf.Infinity;
             shatterDriver.minUserHealthFraction = Mathf.NegativeInfinity;
             shatterDriver.maxUserHealthFraction = Mathf.Infinity;
             shatterDriver.skillSlot = SkillSlot.None;
-            shatterDriver.noRepeat = true;
 
             Modules.Prefabs.masterPrefabs.Add(newMaster);
             return newMaster;

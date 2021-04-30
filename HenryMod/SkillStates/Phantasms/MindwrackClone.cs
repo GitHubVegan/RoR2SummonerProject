@@ -1,0 +1,118 @@
+﻿using EntityStates;
+using RoR2;
+using UnityEngine;
+using RoR2.CharacterAI;
+using R2API;
+using EntityStates.NullifierMonster;
+using EntityStates.JellyfishMonster;
+
+
+namespace HenryMod.SkillStates
+{
+	public class MindwrackClone : BaseSkillState
+    {
+        public static float baseDuration = 0.0f;
+        public static float novaRadius = 12f;
+        public static float novaForce = 2500f;
+
+        private bool hasExploded;
+        private float duration;
+        private float stopwatch;
+
+        private GameObject chargeEffect;
+        private PrintController printController;
+        private uint soundID;
+
+        public override void OnEnter()
+        {
+            base.OnEnter();
+            this.stopwatch = 0f;
+            this.duration = MindwrackClone.baseDuration / this.attackSpeedStat;
+            Transform modelTransform = base.GetModelTransform();
+
+            if (modelTransform)
+            {
+                this.printController = modelTransform.GetComponent<PrintController>();
+                if (this.printController)
+                {
+                    this.printController.enabled = true;
+                    this.printController.printTime = this.duration;
+                }
+            }
+        }
+
+        public override void OnExit()
+        {
+            base.OnExit();
+            AkSoundEngine.StopPlayingID(this.soundID);
+
+            if (this.chargeEffect) EntityState.Destroy(this.chargeEffect);
+            if (this.printController) this.printController.enabled = false;
+        }
+
+        public override void FixedUpdate()
+        {
+            base.FixedUpdate();
+            this.stopwatch += Time.fixedDeltaTime;
+
+            if (this.stopwatch >= this.duration && base.isAuthority && !this.hasExploded)
+            {
+                this.Detonate();
+                return;
+            }
+        }
+
+        private void Detonate()
+        {
+            this.hasExploded = true;
+            Util.PlaySound(EntityStates.JellyfishMonster.JellyNova.novaSoundString, base.gameObject);
+
+            if (base.modelLocator)
+            {
+                if (base.modelLocator.modelBaseTransform)
+                {
+                    EntityState.Destroy(base.modelLocator.modelBaseTransform.gameObject);
+                }
+                if (base.modelLocator.modelTransform)
+                {
+                    EntityState.Destroy(base.modelLocator.modelTransform.gameObject);
+                }
+            }
+
+            if (this.chargeEffect)
+            {
+                EntityState.Destroy(this.chargeEffect);
+            }
+
+            if (EntityStates.JellyfishMonster.JellyNova.novaEffectPrefab)
+            {
+                EffectManager.SpawnEffect(EntityStates.NullifierMonster.DeathState.deathExplosionEffect, new EffectData
+                {
+                    origin = base.transform.position,
+                    scale = MindwrackClone.novaRadius
+                }, true);
+            }
+
+            new BlastAttack
+            {
+                attacker = base.gameObject,
+                inflictor = base.gameObject,
+                teamIndex = TeamComponent.GetObjectTeam(base.gameObject),
+                baseDamage = this.damageStat * EntityStates.JellyfishMonster.JellyNova.novaDamageCoefficient * 2.5f,
+                baseForce = MindwrackClone.novaForce,
+                position = base.transform.position,
+                radius = MindwrackClone.novaRadius,
+                procCoefficient = 1f,
+                attackerFiltering = AttackerFiltering.NeverHit,
+                damageType = DamageType.Generic
+            }.Fire();
+
+            if (base.healthComponent) base.healthComponent.Suicide(null, null, DamageType.Generic);
+        }
+
+        public override InterruptPriority GetMinimumInterruptPriority()
+        {
+            return InterruptPriority.Pain;
+        }
+    }
+}

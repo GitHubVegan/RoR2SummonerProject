@@ -30,7 +30,6 @@ namespace HenryMod.SkillStates
 							ASD.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
 							ASD.maxDistance = 100f;
 							ASD.minDistance = 20f;
-							ASD.driverUpdateTimerOverride = 0.2f;
 							ASD.skillSlot = SkillSlot.None;
 						}
 
@@ -41,7 +40,6 @@ namespace HenryMod.SkillStates
 							ASD.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
 							ASD.maxDistance = 20f;
 							ASD.minDistance = 0f;
-							ASD.driverUpdateTimerOverride = 0.2f;
 							ASD.skillSlot = SkillSlot.Utility;
 						}
 						

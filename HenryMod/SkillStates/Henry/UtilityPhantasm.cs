@@ -18,7 +18,6 @@ namespace HenryMod.SkillStates
         public static float force = 800f;
         public static float recoil = 3f;
         public static float range = 256f;
-        public static GameObject hitEffectPrefab = Resources.Load<GameObject>("prefabs/effects/impacteffects/ExplosionGreaterWisp");
         public static GameObject UtilityPhantasmBody = CreateBody();
         public static GameObject UtilityPhantasmMaster = CreateMaster();
 
@@ -55,7 +54,6 @@ namespace HenryMod.SkillStates
             }
 
 
-            base.PlayAnimation("LeftArm, Override", "ShootGun", "ShootGun.playbackRate", 1.8f);
         }
 
 
@@ -65,9 +63,7 @@ namespace HenryMod.SkillStates
             {
                 this.hasFired = true;
 
-                base.characterBody.AddSpreadBloom(0f);
-                EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab, base.gameObject, this.muzzleString, false);
-                Util.PlaySound("HenryShootPistol", base.gameObject);
+                Util.PlaySound("Roll.dodgeSoundString", base.gameObject);
 
                 if (base.isAuthority)
                 {
@@ -103,7 +99,7 @@ namespace HenryMod.SkillStates
                         spreadPitchScale = 0f,
                         spreadYawScale = 0f,
                         queryTriggerInteraction = QueryTriggerInteraction.UseGlobal,
-                        hitEffectPrefab = UtilityPhantasm.hitEffectPrefab,
+                        hitEffectPrefab = null,
                         hitCallback = SummonUtility
                     }.Fire();
                 }

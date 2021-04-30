@@ -15,7 +15,7 @@ namespace HenryMod.SkillStates
 	internal class Distortion : BaseSkillState
 	{
 		public float BaseDuration = 0.0f;
-		private float duration = 2f;
+		private float duration = 0f;
 
 		public override void OnEnter()
 		{
@@ -80,7 +80,7 @@ namespace HenryMod.SkillStates
 			{
 				this.outer.SetNextStateToMain();
 			}
-			var buff = base.characterBody.HasBuff(RoR2Content.Buffs.HiddenInvincibility);
+			/*var buff = base.characterBody.HasBuff(RoR2Content.Buffs.HiddenInvincibility);
 			if (buff)
 			{
 				List<ProjectileController> projectiles = new List<ProjectileController>();
@@ -122,7 +122,7 @@ namespace HenryMod.SkillStates
 					}
 				}
 
-			}
+			}*/
 		}
 		
 

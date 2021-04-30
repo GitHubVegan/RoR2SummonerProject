@@ -93,7 +93,6 @@ C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.
 C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\MonoMod.RuntimeDetour.xml
 C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\MonoMod.Utils.xml
 C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\R2API.xml
-C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\obj\Debug\netstandard2.0\HenryMod.csprojAssemblyReference.cache
 C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\obj\Debug\netstandard2.0\HenryMod.AssemblyInfoInputs.cache
 C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\obj\Debug\netstandard2.0\HenryMod.AssemblyInfo.cs
 C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\obj\Debug\netstandard2.0\HenryMod.csproj.CoreCompileInputs.cache
@@ -205,3 +204,4 @@ C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\obj\Debug\ne
 C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\obj\Debug\netstandard2.0\HenryMod.csproj.CopyComplete
 C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\obj\Debug\netstandard2.0\HenryMod.dll
 C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\obj\Debug\netstandard2.0\HenryMod.pdb
+C:\Users\nico_\source\repos\RoR2SummonerProject\HenryMod\obj\Debug\netstandard2.0\HenryMod.csprojAssemblyReference.cache

@@ -20,6 +20,7 @@ namespace HenryMod.SkillStates
 			{
 				foreach (CharacterMaster CM in SecondaryPhantasm.SummonablesList2)
 				{
+					CM.GetBody().GetComponent<RoR2.SkillLocator>().utility.SetSkillOverride(3, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("DiversionClone")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
 					foreach (AISkillDriver ASD in CM.GetComponentsInChildren<AISkillDriver>())
 					{
 						

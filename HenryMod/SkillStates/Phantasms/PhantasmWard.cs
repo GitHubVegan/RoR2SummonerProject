@@ -21,6 +21,7 @@ namespace HenryMod.SkillStates
         {
             base.OnEnter();
             this.duration = PhantasmWard.baseDuration;
+            projectiles.Clear();
 
 
         }
@@ -50,8 +51,7 @@ namespace HenryMod.SkillStates
             }.RefreshCandidates().FilterCandidatesByProjectileControllers().GetProjectileControllers(projectiles);
             foreach (ProjectileController PC in projectiles)
             {
-                    PC.gameObject.GetComponent<ProjectileSimple>().SetForwardSpeed(20f);
-
+                    PC.gameObject.GetComponent<ProjectileSimple>().SetForwardSpeed(15f);
             }
         }
 

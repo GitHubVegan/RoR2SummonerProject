@@ -190,7 +190,7 @@ namespace HenryMod.Modules.Survivors
                 interruptPriority = EntityStates.InterruptPriority.Skill,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = false,
-                mustKeyPress = true,
+                mustKeyPress = false,
                 cancelSprintingOnActivation = false,
                 rechargeStock = 1,
                 requiredStock = 1,
@@ -239,7 +239,7 @@ namespace HenryMod.Modules.Survivors
                 interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = false,
-                mustKeyPress = true,
+                mustKeyPress = false,
                 cancelSprintingOnActivation = false,
                 rechargeStock = 1,
                 requiredStock = 1,
@@ -255,7 +255,7 @@ namespace HenryMod.Modules.Survivors
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.PhantasmWard)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
-                baseRechargeInterval = 1f,
+                baseRechargeInterval = 4f,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
@@ -266,8 +266,8 @@ namespace HenryMod.Modules.Survivors
                 mustKeyPress = false,
                 cancelSprintingOnActivation = false,
                 rechargeStock = 1,
-                requiredStock = 0,
-                stockToConsume = 0
+                requiredStock = 1,
+                stockToConsume = 1
             });
 
             SkillDef secondaryphantasmSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo

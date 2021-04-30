@@ -18,7 +18,6 @@ namespace HenryMod.SkillStates
         public static float force = 800f;
         public static float recoil = 3f;
         public static float range = 256f;
-        public static GameObject hitEffectPrefab = Resources.Load<GameObject>("prefabs/effects/impacteffects/ExplosionGreaterWisp");
         public static GameObject SecondaryPhantasmBody = CreateBody();
         public static GameObject SecondaryPhantasmMaster = CreateMaster();
 
@@ -100,7 +99,7 @@ namespace HenryMod.SkillStates
                         spreadPitchScale = 0f,
                         spreadYawScale = 0f,
                         queryTriggerInteraction = QueryTriggerInteraction.UseGlobal,
-                        hitEffectPrefab = SecondaryPhantasm.hitEffectPrefab,
+                        hitEffectPrefab = null,
                         hitCallback = SummonSecondary
                     }.Fire();
                 }
@@ -137,7 +136,7 @@ namespace HenryMod.SkillStates
 
         private static GameObject CreateBody()
         {
-            GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/MageBody"), "SecondaryPhantasmBody", true);
+            GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/HuntressBody"), "SecondaryPhantasmBody", true);
             
             Modules.Prefabs.bodyPrefabs.Add(newBody);
             return newBody;
@@ -145,7 +144,7 @@ namespace HenryMod.SkillStates
 
         private static GameObject CreateMaster()
         {
-            GameObject newMaster = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/charactermasters/MageMonsterMaster"), "SecondaryPhantasmMaster", true);
+            GameObject newMaster = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/charactermasters/HuntressMonsterMaster"), "SecondaryPhantasmMaster", true);
             newMaster.GetComponent<CharacterMaster>().bodyPrefab = SecondaryPhantasmBody;
             foreach (AISkillDriver ai in newMaster.GetComponentsInChildren<AISkillDriver>())
             {

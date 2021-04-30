@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3933906300
+CRC: 606043531
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: e7c28776c839b49bb977cac7cf27b7e7
+    Hash: 5a461cb1ef16dfa1fa6af7987a744c8e
   TypeTreeHash:
     serializedVersion: 2
     Hash: 972103ac939f0471d19a07f535135cc4
@@ -132,6 +132,7 @@ Assets:
 - Assets/HenryAssets/Animations/Idle.anim
 - Assets/HenryAssets/VFX/BombExplosionEffect.prefab
 - Assets/HenryAssets/Animations/Slash2.anim
+- Assets/MesmerAssets/PhantasmSword/Animations/Armature_SimpleStab1.anim
 - Assets/MesmerAssets/Mesh/Spearmesh.mesh
 - Assets/HenryAssets/Mesh/meshYamato.mesh
 - Assets/HenryAssets/VFX/Textures/texDust.png
@@ -145,6 +146,7 @@ Assets:
 - Assets/HenryAssets/Materials/matDante.mat
 - Assets/MesmerAssets/Icons/SecondaryPhantasm.png
 - Assets/HenryAssets/Animations/maskLeftArm.mask
+- Assets/MesmerAssets/PhantasmSword/Animations/maskGesturePhantasmSword.mask
 - Assets/HenryAssets/Mesh/MeshHenryGun.mesh
 - Assets/HenryAssets/Animations/DescendFast.anim
 - Assets/HenryAssets/HenryBazookaRocketGhost.prefab
@@ -226,7 +228,6 @@ Assets:
 - Assets/HenryAssets/Materials/matShotgun.mat
 - Assets/MesmerAssets/Animations/Armature_AimYaw.anim
 - Assets/HenryAssets/Animations/IdleAdditive.anim
-- Assets/MesmerAssets/PhantasmSword/Animations/Armature_SimpleStab1.anim
 - Assets/MesmerAssets/Animations/animMesmerMenu.controller
 - Assets/MesmerAssets/PhantasmSword/Materials/PhantasmSwordPlaceholderMat.mat
 - Assets/HenryAssets/Icons/texBazookaFireIcon.png

@@ -246,13 +246,13 @@ namespace HenryMod.Modules.Survivors
                 stockToConsume = 1
             });
 
-            SkillDef tauntSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            SkillDef wardSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = "PhantasmTaunt",
-                skillNameToken = "PhantasmTaunt",
-                skillDescriptionToken = "PhantasmTaunt",
+                skillName = "PhantasmWard",
+                skillNameToken = "PhantasmWard",
+                skillDescriptionToken = "PhantasmWard",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSecondaryIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.PhantasmTaunt)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.PhantasmWard)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
                 baseRechargeInterval = 1f,

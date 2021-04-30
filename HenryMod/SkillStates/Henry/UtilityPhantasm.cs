@@ -122,6 +122,7 @@ namespace HenryMod.SkillStates
             characterMaster.inventory.ResetItem(RoR2Content.Items.ExtraLife.itemIndex);
             characterMaster.inventory.GiveItem(RoR2Content.Items.Ghost.itemIndex);
             characterMaster.gameObject.GetComponent<BaseAI>().leader.gameObject = base.characterBody.gameObject;
+            characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().primary.SetSkillOverride(3, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("PhantasmTaunt")), RoR2.GenericSkill.SkillOverridePriority.Default);
             SummonablesList3.Add(characterMaster);
             return false;
             
@@ -158,18 +159,18 @@ namespace HenryMod.SkillStates
 
             AISkillDriver attackDriver = newMaster.AddComponent<AISkillDriver>();
             attackDriver.customName = "Attack";
-            attackDriver.movementType = AISkillDriver.MovementType.StrafeMovetarget;
-            attackDriver.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
+            attackDriver.movementType = AISkillDriver.MovementType.Stop;
+            attackDriver.moveTargetType = AISkillDriver.TargetType.CurrentLeader;
             attackDriver.activationRequiresAimConfirmation = false;
             attackDriver.activationRequiresTargetLoS = false;
             attackDriver.selectionRequiresTargetLoS = false;
-            attackDriver.maxDistance = 100f;
+            attackDriver.maxDistance = 10f;
             attackDriver.minDistance = 0f;
             attackDriver.requireSkillReady = false;
             attackDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
             attackDriver.ignoreNodeGraph = true;
             attackDriver.moveInputScale = 1f;
-            attackDriver.driverUpdateTimerOverride = 1f;
+            attackDriver.driverUpdateTimerOverride = 0.2f;
             attackDriver.buttonPressType = AISkillDriver.ButtonPressType.Hold;
             attackDriver.minTargetHealthFraction = Mathf.NegativeInfinity;
             attackDriver.maxTargetHealthFraction = Mathf.Infinity;
@@ -179,18 +180,18 @@ namespace HenryMod.SkillStates
 
             AISkillDriver shatterDriver = newMaster.AddComponent<AISkillDriver>();
             shatterDriver.customName = "Shatter";
-            shatterDriver.movementType = AISkillDriver.MovementType.StrafeMovetarget;
-            shatterDriver.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
+            shatterDriver.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
+            shatterDriver.moveTargetType = AISkillDriver.TargetType.CurrentLeader;
             shatterDriver.activationRequiresAimConfirmation = false;
             shatterDriver.activationRequiresTargetLoS = false;
             shatterDriver.selectionRequiresTargetLoS = false;
             shatterDriver.maxDistance = 100f;
-            shatterDriver.minDistance = 0f;
+            shatterDriver.minDistance = 10f;
             shatterDriver.requireSkillReady = false;
             shatterDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
             shatterDriver.ignoreNodeGraph = true;
             shatterDriver.moveInputScale = 1f;
-            shatterDriver.driverUpdateTimerOverride = 1f;
+            shatterDriver.driverUpdateTimerOverride = 0.2f;
             shatterDriver.buttonPressType = AISkillDriver.ButtonPressType.Hold;
             shatterDriver.minTargetHealthFraction = Mathf.NegativeInfinity;
             shatterDriver.maxTargetHealthFraction = Mathf.Infinity;

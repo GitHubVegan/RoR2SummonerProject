@@ -59,7 +59,7 @@ namespace HenryMod.SkillStates
 		}
 
 
-			
+
 
 		public override void OnExit()
 		{
@@ -94,6 +94,7 @@ namespace HenryMod.SkillStates
 				{
 					foreach (ProjectileController PC in projectiles)
 					{
+						PC.rigidbody.useGravity = true;
 						if (PC.owner != gameObject)
 						{
 							Vector3 target = PC.owner.transform.position - PC.gameObject.transform.position;
@@ -116,20 +117,21 @@ namespace HenryMod.SkillStates
 							};
 							ProjectileManager.instance.FireProjectile(info);
 							Destroy(PC.gameObject);
-							projectiles.RemoveAt(projectiles.Count - 1);
+							projectiles.RemoveAt(projectiles.Count - 1);*/
 
-						}
-					}
-				}
-
-			}*/
 		}
-		
+	
 
-		public override InterruptPriority GetMinimumInterruptPriority()
-		{
-			return InterruptPriority.PrioritySkill;
-		}
+
+
+
+
+
+	public override InterruptPriority GetMinimumInterruptPriority()
+	{
+		return InterruptPriority.PrioritySkill;
 	}
 }
+	}
+
 

@@ -252,7 +252,7 @@ namespace HenryMod.Modules.Survivors
                 skillNameToken = "PhantasmTaunt",
                 skillDescriptionToken = "PhantasmTaunt",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSecondaryIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.PhantasmTaunt)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.PhantasmWard)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
                 baseRechargeInterval = 1f,

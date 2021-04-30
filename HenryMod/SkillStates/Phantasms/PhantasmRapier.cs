@@ -45,7 +45,7 @@ namespace HenryMod.SkillStates
         {
                 Ray aimRay = base.GetAimRay();
                 //base.PlayAnimation("FullBody, Override", "GroundLight1", "GroundLight.playbackRate", this.durationBetweenShots);
-                base.PlayAnimation("Gesture, Override", "RapierStab1", "Slash.playbackRate", this.durationBetweenShots);
+                base.PlayAnimation("FullBody, Override", "RapierStab1", "Slash.playbackRate", this.duration);
                 base.characterBody.AddSpreadBloom(0f);
                 Util.PlaySound(Uppercut.hitSoundString, base.gameObject);
 

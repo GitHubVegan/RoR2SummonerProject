@@ -13,7 +13,7 @@ namespace HenryMod.SkillStates
     {
         public static float baseDuration = 0.1f;
         public static float novaRadius = 18f;
-        public static float novaForce = 2500f;
+        public static float novaForce = 0f;
 
         private bool hasExploded;
         private float duration;

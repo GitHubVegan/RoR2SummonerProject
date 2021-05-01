@@ -12,17 +12,13 @@ namespace HenryMod.SkillStates
 	public class MindwrackClone : BaseSkillState
     {
         public static float baseDuration = 0.1f;
-        public static float novaRadius = 12f;
+        public static float novaRadius = 14f;
         public static float novaForce = 2500f;
         public static float damagecoefficient = 1f;
 
         private bool hasExploded;
         private float duration;
         private float stopwatch;
-
-        private GameObject chargeEffect;
-        private PrintController printController;
-        private uint soundID;
 
         public override void OnEnter()
         {
@@ -59,7 +55,7 @@ namespace HenryMod.SkillStates
                 EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/MageLightningBombExplosion"), new EffectData
                 {
                     origin = base.transform.position,
-                    scale = MindwrackClone.novaRadius
+                    scale = MindwrackClone.novaRadius * 2
                 }, true);
             }
 

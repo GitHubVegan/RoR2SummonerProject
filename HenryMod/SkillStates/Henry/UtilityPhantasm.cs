@@ -38,14 +38,21 @@ namespace HenryMod.SkillStates
                 if (UtilityPhantasm.SummonablesList3.Count > 0)
                 {
 
-                    foreach (CharacterMaster CM in UtilityPhantasm.SummonablesList3)
+                    UtilityPhantasm.SummonablesList3.Reverse();
+                    CharacterMaster result3 = UtilityPhantasm.SummonablesList3.FindLast(delegate (CharacterMaster CM3)
                     {
-                        if (CM.GetBody().healthComponent)
-                        {
-                            CM.gameObject.AddComponent<MasterSuicideOnTimer>().lifeTimer = 0f;
-                        }
+                        return CM3.hasBody == true;
                     }
-                    UtilityPhantasm.SummonablesList3.Clear();
+                        );
+                    if (result3 != null)
+                    {
+                        if (result3.GetBody().healthComponent)
+                        {
+                            result3.gameObject.AddComponent<MasterSuicideOnTimer>().lifeTimer = 0f;
+                        }
+                        UtilityPhantasm.SummonablesList3.Remove(result3);
+                    }
+                    UtilityPhantasm.SummonablesList3.Reverse();
 
                 }
                 this.Fire();

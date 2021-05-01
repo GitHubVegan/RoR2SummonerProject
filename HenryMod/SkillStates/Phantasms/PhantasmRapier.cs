@@ -6,7 +6,8 @@ using RoR2.CharacterAI;
 using RoR2.Skills;
 using System.Collections.Generic;
 using UnityEngine;
-using EntityStates.Merc;
+using EntityStates.BrotherMonster.Weapon;
+
 
 
 namespace HenryMod.SkillStates
@@ -47,9 +48,9 @@ namespace HenryMod.SkillStates
                 //base.PlayAnimation("FullBody, Override", "GroundLight1", "GroundLight.playbackRate", this.durationBetweenShots);
                // base.PlayAnimation("FullBody, Override", "RapierStab1", "RapierStab1.playbackRate", this.duration);
             base.PlayCrossfade("Gesture, Override", "Slash1", "Slash.playbackRate", this.durationBetweenShots, 0.05f);
-                Util.PlaySound(Uppercut.hitSoundString, base.gameObject);
+                Util.PlaySound(FireLunarShards.fireSound, base.gameObject);
 
-                if (base.isAuthority)
+            if (base.isAuthority)
                 {
 
 

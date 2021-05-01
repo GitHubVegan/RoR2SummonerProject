@@ -44,7 +44,7 @@ namespace HenryMod.SkillStates
 				}.RefreshCandidates().FilterCandidatesByProjectileControllers().GetProjectileControllers(projectiles);
 				if (projectiles.Count > 0)
 				{
-					foreach (ProjectileController PC in projectiles)
+					foreach (ProjectileController PC in projectiles.ToArray())
 					{
 						if (PC.owner != gameObject)
 						{

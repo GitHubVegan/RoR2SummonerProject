@@ -14,10 +14,18 @@ namespace HenryMod.SkillStates
 {
 	internal class WardMain : GenericCharacterMain
 	{
+		private GameObject affixHauntedWard;
 
 		public override void OnEnter()
 		{
 			base.OnEnter();
+			this.affixHauntedWard = UnityEngine.Object.Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/NetworkedObjects/AffixHauntedWard"));
+			this.affixHauntedWard.GetComponent<TeamFilter>().teamIndex = TeamIndex.None;
+			this.affixHauntedWard.GetComponent<BuffWard>().Networkradius = 12.5f;
+			this.affixHauntedWard.GetComponent<NetworkedBodyAttachment>().AttachToGameObjectAndSpawn(this.characterBody.gameObject);
+			ParticleSystem.MainModule main = this.affixHauntedWard.gameObject.GetComponent<ParticleSystem>().main;
+			Color color = new Color(0.85f, 0.07f, 1f);
+			main.startColor = color;
 		}
 
 
@@ -35,13 +43,14 @@ namespace HenryMod.SkillStates
 			List<ProjectileController> projectiles2 = new List<ProjectileController>();
 			new RoR2.SphereSearch
 			{
-				radius = 15f,
+				radius = 12.5f,
 				mask = RoR2.LayerIndex.projectile.mask,
 				origin = base.characterBody.transform.position,
 			}.RefreshCandidates().FilterCandidatesByProjectileControllers().GetProjectileControllers(projectiles2);
 			projectiles2.RemoveAll(delegate (ProjectileController P) { return P == null; });
 			if (projectiles2.Count > 0)
 			{
+				projectiles2.RemoveAll(delegate (ProjectileController P) { return P == null; });
 				foreach (ProjectileController PC in projectiles2)
 				{
 					projectiles2.RemoveAll(delegate (ProjectileController P) { return P == null; });

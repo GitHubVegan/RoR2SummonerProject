@@ -228,7 +228,7 @@ namespace HenryMod.SkillStates
             shatterDriver.activationRequiresTargetLoS = false;
             shatterDriver.selectionRequiresTargetLoS = false;
             shatterDriver.maxDistance = 70f;
-            shatterDriver.minDistance = 6f;
+            shatterDriver.minDistance = 8f;
             shatterDriver.shouldSprint = false;
             shatterDriver.requireSkillReady = false;
             shatterDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;

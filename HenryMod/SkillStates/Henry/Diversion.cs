@@ -36,7 +36,7 @@ namespace HenryMod.SkillStates
 								ASD.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
 								ASD.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
 								ASD.maxDistance = 100f;
-								ASD.minDistance = 12f;
+								ASD.minDistance = 10f;
 								ASD.skillSlot = SkillSlot.None;
 							}
 

@@ -36,20 +36,19 @@ namespace HenryMod.SkillStates
             this.duration = 0.2f;
             if (base.isAuthority)
             {
-                PrimaryPhantasm.SummonablesList1.RemoveAll(delegate (CharacterMaster CM1)
+                PrimaryPhantasm.SummonablesList1.RemoveAll(delegate (CharacterMaster C) { return C == null; });
+                if (PrimaryPhantasm.SummonablesList1.Count > 0)
                 {
-                    return !(CM1.GetBody().healthComponent.alive);
+                    PrimaryPhantasm.SummonablesList1.RemoveAll(delegate (CharacterMaster C)
+                {
+                    return !(C.GetBody().healthComponent.alive);
                 });
+                    }
                 if (PrimaryPhantasm.SummonablesList1.Count > 2)
                 {
-                    /*foreach (CharacterMaster CM in PrimaryPhantasm.SummonablesList1)
-                    {
-
-                        KillList1.Add(CM);
-                    }*/
-                    CharacterMaster result = PrimaryPhantasm.SummonablesList1.Find(delegate (CharacterMaster CM1)
+                    CharacterMaster result = PrimaryPhantasm.SummonablesList1.Find(delegate (CharacterMaster C)
                         {
-                            return CM1;
+                            return C;
                         }
                         );
                     if (result != null)
@@ -59,17 +58,6 @@ namespace HenryMod.SkillStates
                     }
                     
                     PrimaryPhantasm.SummonablesList1.RemoveAt(0);
-                    /*PrimaryPhantasm.KillList1.RemoveRange(1, 2);
-
-                    foreach (CharacterMaster CM in PrimaryPhantasm.KillList1)
-                    {
-                        CM.gameObject.AddComponent<MasterSuicideOnTimer>().lifeTimer = 0f;
-                    }
-                    PrimaryPhantasm.KillList1.Clear();
-                    if (PrimaryPhantasm.SummonablesList1.Count > 2)
-                    { 
-                        PrimaryPhantasm.SummonablesList1.RemoveAt(0);
-                    }*/
                 }
                 this.Fire();
             }

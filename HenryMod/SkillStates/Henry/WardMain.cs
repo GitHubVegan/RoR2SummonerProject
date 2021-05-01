@@ -41,17 +41,18 @@ namespace HenryMod.SkillStates
 			}.RefreshCandidates().FilterCandidatesByProjectileControllers().GetProjectileControllers(projectiles2);
 			if(projectiles2.Count > 0)
 			{
-				foreach (ProjectileController PC in projectiles2.ToArray())
+				foreach (ProjectileController PC in projectiles2)
 				{
+					projectiles2.RemoveAll(delegate (ProjectileController P) { return P == null; });
 					if (PC.owner != gameObject)
 					{
 					PC.owner = gameObject;
 					PC.gameObject.GetComponent<ProjectileSimple>().SetForwardSpeed(10f);
 					}
-					projectiles2.RemoveAt(projectiles2.Count - 1);
 
 				}
 			}
+			projectiles2.Clear();
 		}
 		
 

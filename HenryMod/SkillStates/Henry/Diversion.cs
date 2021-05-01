@@ -14,10 +14,13 @@ namespace HenryMod.SkillStates
 		public override void OnEnter()
 		{
 			base.OnEnter();
-			SecondaryPhantasm.SummonablesList2.RemoveAll(delegate (CharacterMaster CM2)
+			if (SecondaryPhantasm.SummonablesList2.Count > 0)
+			{
+				SecondaryPhantasm.SummonablesList2.RemoveAll(delegate (CharacterMaster CM2)
 			{
 				return !(CM2.GetBody().healthComponent.alive);
 			});
+			}
 			if (SecondaryPhantasm.SummonablesList2.Count > 0) 
 				{ 
 				foreach (CharacterMaster CM2 in SecondaryPhantasm.SummonablesList2)
@@ -60,7 +63,7 @@ namespace HenryMod.SkillStates
 
 
 				Debug.Log(SecondaryPhantasm.SummonablesList2);
-				}
+			}
 			
 		}
 

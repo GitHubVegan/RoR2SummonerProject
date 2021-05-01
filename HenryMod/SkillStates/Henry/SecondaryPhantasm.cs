@@ -34,21 +34,24 @@ namespace HenryMod.SkillStates
             this.duration = 0.2f;
             if (base.isAuthority)
             {
-                SecondaryPhantasm.SummonablesList2.RemoveAll(delegate (CharacterMaster CM2)
-                {
-                    return !(CM2.GetBody().healthComponent.alive);
-                });
+                SecondaryPhantasm.SummonablesList2.RemoveAll(delegate (CharacterMaster C) { return C == null; });
                 if (SecondaryPhantasm.SummonablesList2.Count > 0)
                 {
-
-                    CharacterMaster result2 = SecondaryPhantasm.SummonablesList2.Find(delegate (CharacterMaster CM2)
+                    SecondaryPhantasm.SummonablesList2.RemoveAll(delegate (CharacterMaster C)
+                {
+                    return !(C.GetBody().healthComponent.alive);
+                });
+                }
+                if (SecondaryPhantasm.SummonablesList2.Count > 0)
+                {
+                    CharacterMaster result = SecondaryPhantasm.SummonablesList2.Find(delegate (CharacterMaster C)
                     {
-                        return CM2;
+                        return C;
                     }
                         );
-                    if (result2 != null)
+                    if (result != null)
                     {
-                            result2.gameObject.AddComponent<MasterSuicideOnTimer>().lifeTimer = 0f;
+                            result.gameObject.AddComponent<MasterSuicideOnTimer>().lifeTimer = 0f;
                         
                     }
                     SecondaryPhantasm.SummonablesList2.RemoveAt(0);

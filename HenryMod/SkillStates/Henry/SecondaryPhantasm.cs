@@ -37,21 +37,17 @@ namespace HenryMod.SkillStates
                 if (SecondaryPhantasm.SummonablesList2.Count > 0)
                 {
 
-                    SecondaryPhantasm.SummonablesList2.Reverse();
-                    CharacterMaster result2 = SecondaryPhantasm.SummonablesList2.FindLast(delegate (CharacterMaster CM2)
+                    CharacterMaster result2 = SecondaryPhantasm.SummonablesList2.Find(delegate (CharacterMaster CM2)
                     {
                         return CM2.hasBody == true;
                     }
                         );
                     if (result2 != null)
                     {
-                        if (result2.GetBody().healthComponent)
-                        {
                             result2.gameObject.AddComponent<MasterSuicideOnTimer>().lifeTimer = 0f;
-                        }
-                        SecondaryPhantasm.SummonablesList2.Remove(result2);
+                        
                     }
-                    SecondaryPhantasm.SummonablesList2.Reverse();
+                    SecondaryPhantasm.SummonablesList2.RemoveAt(0);
 
 
                 }

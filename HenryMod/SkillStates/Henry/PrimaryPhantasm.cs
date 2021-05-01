@@ -43,21 +43,17 @@ namespace HenryMod.SkillStates
 
                         KillList1.Add(CM);
                     }*/
-                    PrimaryPhantasm.SummonablesList1.Reverse();
-                    CharacterMaster result = PrimaryPhantasm.SummonablesList1.FindLast(delegate (CharacterMaster CM1)
+                    CharacterMaster result = PrimaryPhantasm.SummonablesList1.Find(delegate (CharacterMaster CM1)
                         {
                             return CM1.hasBody == true;
                         }
                         );
                     if (result != null)
                     {
-                        if(result.GetBody().healthComponent)
-                        {
                         result.gameObject.AddComponent<MasterSuicideOnTimer>().lifeTimer = 0f;
-                        }
-                        PrimaryPhantasm.SummonablesList1.Remove(result);
+                        
                     }
-                    PrimaryPhantasm.SummonablesList1.Reverse();
+                    PrimaryPhantasm.SummonablesList1.RemoveAt(0);
                     /*PrimaryPhantasm.KillList1.RemoveRange(1, 2);
 
                     foreach (CharacterMaster CM in PrimaryPhantasm.KillList1)

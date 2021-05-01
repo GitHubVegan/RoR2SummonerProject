@@ -22,39 +22,33 @@ namespace HenryMod.SkillStates
 			base.OnEnter();
 			this.duration = this.BaseDuration;
 
-
-
-			if (UtilityPhantasm.SummonablesList3.Count > 0)
-			{
-				var bufftime = UtilityPhantasm.SummonablesList3.Count * 3f;
-				base.characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, bufftime);
-
-				foreach (CharacterMaster CM in UtilityPhantasm.SummonablesList3)
+				if (UtilityPhantasm.SummonablesList3.Count > 0)
 				{
+					var bufftime = UtilityPhantasm.SummonablesList3.Count * 3f;
+					base.characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, bufftime);
 
-					foreach (AISkillDriver ASD in CM.GetComponentsInChildren<AISkillDriver>())
+					foreach (CharacterMaster CM3 in UtilityPhantasm.SummonablesList3)
 					{
-						{
-							HenryPlugin.DestroyImmediate(ASD);
-						}
-					}
-					CM.GetBody().baseMoveSpeed = 0f;
-					CM.inventory.GiveItem(RoR2Content.Items.HealthDecay.itemIndex, 10);
-					CM.gameObject.AddComponent<MasterSuicideOnTimer>().lifeTimer = 0f;
 
+						foreach (AISkillDriver ASD in CM3.GetComponentsInChildren<AISkillDriver>())
+						{
+							{
+								HenryPlugin.DestroyImmediate(ASD);
+							}
+						}
+						CM3.GetBody().baseMoveSpeed = 0f;
+						CM3.inventory.GiveItem(RoR2Content.Items.HealthDecay.itemIndex, 3);
+						CM3.gameObject.AddComponent<MasterSuicideOnTimer>().lifeTimer = 0f;
+
+
+					}
 
 				}
-			}
+				UtilityPhantasm.SummonablesList3.Clear();
 
 
-
-
-
-
-			UtilityPhantasm.SummonablesList3.Clear();
-
-
-			Debug.Log(UtilityPhantasm.SummonablesList3);
+				Debug.Log(UtilityPhantasm.SummonablesList3);
+			
 
 
 		}
@@ -80,6 +74,7 @@ namespace HenryMod.SkillStates
 			if (flag)
 			{
 				this.outer.SetNextStateToMain();
+				return;
 			}
 			/*var buff = base.characterBody.HasBuff(RoR2Content.Buffs.HiddenInvincibility);
 			if (buff)

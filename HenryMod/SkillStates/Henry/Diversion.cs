@@ -10,56 +10,54 @@ namespace HenryMod.SkillStates
 {
 	internal class Diversion : BaseSkillState
 	{
-		public float BaseDuration = 0.2f;
-		private float duration;
+		private float duration = 0.2f;
 		public override void OnEnter()
 		{
 			base.OnEnter();
-			this.duration = this.BaseDuration;
-			if (base.isAuthority)
-			{
-				foreach (CharacterMaster CM in SecondaryPhantasm.SummonablesList2)
+				if(SecondaryPhantasm.SummonablesList2.Count > 0) 
+				{ 
+				foreach (CharacterMaster CM2 in SecondaryPhantasm.SummonablesList2)
 				{
-					if(CM.GetBody().healthComponent)
+					if(CM2.GetBody().healthComponent)
 					{ 
-					foreach (AISkillDriver ASD in CM.gameObject.GetComponentsInChildren<AISkillDriver>())
-					{
-
-						bool flag = ASD.customName == "Attack";
-						if (flag)
+						foreach (AISkillDriver ASD in CM2.GetComponentsInChildren<AISkillDriver>())
 						{
-							ASD.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
-							ASD.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
-							ASD.maxDistance = 100f;
-							ASD.minDistance = 12f;
-							ASD.skillSlot = SkillSlot.None;
-						}
 
-						bool flag2 = ASD.customName == "Shatter";
-						if (flag2)
-						{
-							ASD.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
-							ASD.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
-							ASD.maxDistance = 12f;
-							ASD.minDistance = 0f;
-							ASD.skillSlot = SkillSlot.Utility;
+							bool flag = ASD.customName == "Attack";
+							if (flag)
+							{
+								ASD.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
+								ASD.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
+								ASD.maxDistance = 100f;
+								ASD.minDistance = 12f;
+								ASD.skillSlot = SkillSlot.None;
+							}
+
+							bool flag2 = ASD.customName == "Shatter";
+							if (flag2)
+							{
+								ASD.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
+								ASD.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
+								ASD.maxDistance = 12f;
+								ASD.minDistance = 0f;
+								ASD.skillSlot = SkillSlot.Utility;
 						}
 
 					}
-					CM.GetBody().baseMoveSpeed = 25f;
-					CM.GetBody().baseAcceleration = 160f;
-					CM.inventory.GiveItem(RoR2Content.Items.HealthDecay.itemIndex, 15);
+
+					CM2.GetBody().baseMoveSpeed = 25f;
+					CM2.GetBody().baseAcceleration = 160f;
+					CM2.inventory.GiveItem(RoR2Content.Items.HealthDecay.itemIndex, 15);
 					}
 
 
 				}
-
 				SecondaryPhantasm.SummonablesList2.Clear();
 
 
-
 				Debug.Log(SecondaryPhantasm.SummonablesList2);
-			}
+				}
+			
 		}
 
 

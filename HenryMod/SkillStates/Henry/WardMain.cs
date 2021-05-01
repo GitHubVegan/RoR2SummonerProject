@@ -14,7 +14,6 @@ namespace HenryMod.SkillStates
 {
 	internal class WardMain : GenericCharacterMain
 	{
-		List<ProjectileController> projectiles = new List<ProjectileController>();
 
 		public override void OnEnter()
 		{
@@ -33,19 +32,23 @@ namespace HenryMod.SkillStates
 		public override void FixedUpdate()
 		{
 			base.FixedUpdate();
+			List<ProjectileController> projectiles2 = new List<ProjectileController>();
 			new RoR2.SphereSearch
 			{
 				radius = 15f,
 				mask = RoR2.LayerIndex.projectile.mask,
 				origin = base.characterBody.transform.position,
-			}.RefreshCandidates().FilterCandidatesByProjectileControllers().GetProjectileControllers(projectiles);
-			bool flag = (projectiles.Count) > 0;
-			if (flag)
+			}.RefreshCandidates().FilterCandidatesByProjectileControllers().GetProjectileControllers(projectiles2);
+			if(projectiles2.Count > 0)
 			{
-				foreach (ProjectileController PC in projectiles.ToArray())
+				foreach (ProjectileController PC in projectiles2.ToArray())
 				{
+					if (PC.owner != gameObject)
+					{
+					PC.owner = gameObject;
 					PC.gameObject.GetComponent<ProjectileSimple>().SetForwardSpeed(10f);
-					projectiles.RemoveAt(projectiles.Count - 1);
+					}
+					projectiles2.RemoveAt(projectiles2.Count - 1);
 
 				}
 			}

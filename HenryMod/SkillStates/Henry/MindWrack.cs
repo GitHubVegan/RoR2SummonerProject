@@ -16,12 +16,16 @@ namespace HenryMod.SkillStates
 		{
 			base.OnEnter();
 			MindwrackClone.damagecoefficient = 1f;
+			PrimaryPhantasm.SummonablesList1.RemoveAll(delegate (CharacterMaster CM1)
+			{
+				return !(CM1.GetBody().healthComponent.alive);
+			});
 			if (PrimaryPhantasm.SummonablesList1.Count > 0)
 				{
 
 					foreach (CharacterMaster CM in PrimaryPhantasm.SummonablesList1)
 					{
-						if (CM.GetBody().healthComponent)
+						if (CM.GetBody().healthComponent.alive == true)
 						{
 							MindwrackClone.damagecoefficient += 0.5f;
 							foreach (AISkillDriver ASD in CM.GetComponentsInChildren<AISkillDriver>())

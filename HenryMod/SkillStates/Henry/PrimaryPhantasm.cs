@@ -36,6 +36,10 @@ namespace HenryMod.SkillStates
             this.duration = 0.2f;
             if (base.isAuthority)
             {
+                PrimaryPhantasm.SummonablesList1.RemoveAll(delegate (CharacterMaster CM1)
+                {
+                    return !(CM1.GetBody().healthComponent.alive);
+                });
                 if (PrimaryPhantasm.SummonablesList1.Count > 2)
                 {
                     /*foreach (CharacterMaster CM in PrimaryPhantasm.SummonablesList1)
@@ -45,7 +49,7 @@ namespace HenryMod.SkillStates
                     }*/
                     CharacterMaster result = PrimaryPhantasm.SummonablesList1.Find(delegate (CharacterMaster CM1)
                         {
-                            return CM1.hasBody == true;
+                            return CM1;
                         }
                         );
                     if (result != null)
@@ -53,6 +57,7 @@ namespace HenryMod.SkillStates
                         result.gameObject.AddComponent<MasterSuicideOnTimer>().lifeTimer = 0f;
                         
                     }
+                    
                     PrimaryPhantasm.SummonablesList1.RemoveAt(0);
                     /*PrimaryPhantasm.KillList1.RemoveRange(1, 2);
 

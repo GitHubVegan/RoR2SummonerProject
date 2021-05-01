@@ -14,11 +14,15 @@ namespace HenryMod.SkillStates
 		public override void OnEnter()
 		{
 			base.OnEnter();
-				if(SecondaryPhantasm.SummonablesList2.Count > 0) 
+			SecondaryPhantasm.SummonablesList2.RemoveAll(delegate (CharacterMaster CM2)
+			{
+				return !(CM2.GetBody().healthComponent.alive);
+			});
+			if (SecondaryPhantasm.SummonablesList2.Count > 0) 
 				{ 
 				foreach (CharacterMaster CM2 in SecondaryPhantasm.SummonablesList2)
 				{
-					if(CM2.GetBody().healthComponent)
+					if(CM2.GetBody().healthComponent.alive == true)
 					{ 
 						foreach (AISkillDriver ASD in CM2.GetComponentsInChildren<AISkillDriver>())
 						{

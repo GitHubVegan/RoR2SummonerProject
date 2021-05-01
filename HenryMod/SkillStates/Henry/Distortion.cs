@@ -21,8 +21,12 @@ namespace HenryMod.SkillStates
 		{
 			base.OnEnter();
 			this.duration = this.BaseDuration;
+			UtilityPhantasm.SummonablesList3.RemoveAll(delegate (CharacterMaster CM3)
+			{
+				return !(CM3.GetBody().healthComponent.alive);
+			});
 
-				if (UtilityPhantasm.SummonablesList3.Count > 0)
+			if (UtilityPhantasm.SummonablesList3.Count > 0)
 				{
 					var bufftime = UtilityPhantasm.SummonablesList3.Count * 3f;
 					base.characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, bufftime);

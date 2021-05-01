@@ -10,17 +10,30 @@ namespace HenryMod.SkillStates
 {
 	internal class Mindwrack : BaseSkillState
 	{
-		public float BaseDuration = 0.0f;
+		public float BaseDuration = 0.1f;
 		private float duration;
 		public override void OnEnter()
 		{
 			base.OnEnter();
-			this.duration = this.BaseDuration / this.attackSpeedStat;
-			if (PrimaryPhantasm.SummonablesList1.Count > 0)
+			this.duration = this.BaseDuration;
+			if (base.isAuthority)
 			{
+				if (PrimaryPhantasm.SummonablesList1.Count == 1)
+				{
+					MindwrackClone.damagecoefficient = 1f;
+					if (PrimaryPhantasm.SummonablesList1.Count == 2)
+					{
+						MindwrackClone.damagecoefficient = 1.5f;
+						if (PrimaryPhantasm.SummonablesList1.Count > 2)
+						{
+							MindwrackClone.damagecoefficient = 2f;
+						}
+					}
+				}
+
 				foreach (CharacterMaster CM in PrimaryPhantasm.SummonablesList1)
 				{
-					foreach (AISkillDriver ASD in CM.GetComponentsInChildren<AISkillDriver>())
+					foreach (AISkillDriver ASD in CM.gameObject.GetComponentsInChildren<AISkillDriver>())
 					{
 
 						bool flag = ASD.customName == "Attack";
@@ -29,7 +42,7 @@ namespace HenryMod.SkillStates
 							ASD.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
 							ASD.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
 							ASD.maxDistance = 100f;
-							ASD.minDistance = 20f;
+							ASD.minDistance = 8f;
 							ASD.skillSlot = SkillSlot.None;
 						}
 
@@ -38,28 +51,31 @@ namespace HenryMod.SkillStates
 						{
 							ASD.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
 							ASD.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
-							ASD.maxDistance = 20f;
+							ASD.maxDistance = 12f;
 							ASD.minDistance = 0f;
 							ASD.skillSlot = SkillSlot.Utility;
 						}
-						
+
 					}
 					CM.GetBody().baseMoveSpeed = 25f;
 					CM.GetBody().baseAcceleration = 160f;
-					CM.inventory.GiveItem(RoR2Content.Items.HealthDecay.itemIndex, 10);
+					CM.inventory.GiveItem(RoR2Content.Items.HealthDecay.itemIndex, 15);
 
 
 				}
 
-
-			}
 				PrimaryPhantasm.SummonablesList1.Clear();
 
-		
-			Debug.Log(PrimaryPhantasm.SummonablesList1);
 
 
+
+
+				Debug.Log(PrimaryPhantasm.SummonablesList1);
+			}
 		}
+
+
+		
 			
 	
 

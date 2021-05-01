@@ -90,7 +90,7 @@ namespace HenryMod.Modules.Survivors
             Modules.Prefabs.SetupHitbox(model, hitboxTransform, "Sword");
         }
 
-        internal override void InitializeSkills()
+        /*internal override void InitializeSkills()
         {
             Modules.Skills.CreateSkillFamilies(bodyPrefab);
 
@@ -246,30 +246,6 @@ namespace HenryMod.Modules.Survivors
                 stockToConsume = 1
             });
 
-            SkillDef tauntSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
-            {
-                skillName = "PhantasmTaunt",
-                skillNameToken = "PhantasmTaunt",
-                skillDescriptionToken = "PhantasmTaunt",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSecondaryIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.PhantasmWard)),
-                activationStateMachineName = "Weapon",
-                baseMaxStock = 1,
-                baseRechargeInterval = 1f,
-                beginSkillCooldownOnSkillEnd = false,
-                canceledFromSprinting = false,
-                forceSprintDuringState = false,
-                fullRestockOnAssign = true,
-                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
-                resetCooldownTimerOnUse = false,
-                isCombatSkill = false,
-                mustKeyPress = true,
-                cancelSprintingOnActivation = false,
-                rechargeStock = 1,
-                requiredStock = 1,
-                stockToConsume = 1
-            });
-
             SkillDef secondaryphantasmSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "SecondaryPhantasm",
@@ -407,7 +383,7 @@ namespace HenryMod.Modules.Survivors
 
 
             #endregion
-        }
+        }*/
 
         internal override void InitializeSkins()
         {

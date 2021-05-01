@@ -14,18 +14,19 @@ namespace HenryMod.SkillStates
 {
 	internal class Distortion : BaseSkillState
 	{
-		public float BaseDuration = 0.0f;
-		private float duration = 0f;
+		public float BaseDuration = 0.1f;
+		private float duration;
 
 		public override void OnEnter()
 		{
 			base.OnEnter();
+			this.duration = this.BaseDuration;
 
 
 
 			if (UtilityPhantasm.SummonablesList3.Count > 0)
 			{
-				var bufftime = UtilityPhantasm.SummonablesList3.Count * 2f;
+				var bufftime = UtilityPhantasm.SummonablesList3.Count * 3f;
 				base.characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, bufftime);
 
 				foreach (CharacterMaster CM in UtilityPhantasm.SummonablesList3)
@@ -94,7 +95,6 @@ namespace HenryMod.SkillStates
 				{
 					foreach (ProjectileController PC in projectiles)
 					{
-						PC.rigidbody.useGravity = true;
 						if (PC.owner != gameObject)
 						{
 							Vector3 target = PC.owner.transform.position - PC.gameObject.transform.position;

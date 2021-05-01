@@ -10,28 +10,26 @@ namespace HenryMod.SkillStates
 {
 	internal class Diversion : BaseSkillState
 	{
-		public float BaseDuration = 0.0f;
+		public float BaseDuration = 0.1f;
 		private float duration;
 		public override void OnEnter()
 		{
 			base.OnEnter();
-			this.duration = this.BaseDuration / this.attackSpeedStat;
-			if (SecondaryPhantasm.SummonablesList2.Count > 0)
+			this.duration = this.BaseDuration;
+			if (base.isAuthority)
 			{
 				foreach (CharacterMaster CM in SecondaryPhantasm.SummonablesList2)
 				{
-					CM.GetBody().GetComponent<RoR2.SkillLocator>().utility.SetSkillOverride(3, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("DiversionClone")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
-					foreach (AISkillDriver ASD in CM.GetComponentsInChildren<AISkillDriver>())
+					foreach (AISkillDriver ASD in CM.gameObject.GetComponentsInChildren<AISkillDriver>())
 					{
-						
+
 						bool flag = ASD.customName == "Attack";
 						if (flag)
 						{
 							ASD.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
 							ASD.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
 							ASD.maxDistance = 100f;
-							ASD.minDistance = 20f;
-							ASD.driverUpdateTimerOverride = 0.2f;
+							ASD.minDistance = 12f;
 							ASD.skillSlot = SkillSlot.None;
 						}
 
@@ -40,29 +38,29 @@ namespace HenryMod.SkillStates
 						{
 							ASD.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
 							ASD.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
-							ASD.maxDistance = 20f;
+							ASD.maxDistance = 12f;
 							ASD.minDistance = 0f;
-							ASD.driverUpdateTimerOverride = 0.2f;
 							ASD.skillSlot = SkillSlot.Utility;
 						}
 
 					}
 					CM.GetBody().baseMoveSpeed = 25f;
 					CM.GetBody().baseAcceleration = 160f;
-					CM.inventory.GiveItem(RoR2Content.Items.HealthDecay.itemIndex, 10);
+					CM.inventory.GiveItem(RoR2Content.Items.HealthDecay.itemIndex, 15);
 
 
 				}
 
+				SecondaryPhantasm.SummonablesList2.Clear();
 
+
+
+				Debug.Log(SecondaryPhantasm.SummonablesList2);
 			}
-			SecondaryPhantasm.SummonablesList2.Clear();
-
-
-			Debug.Log(SecondaryPhantasm.SummonablesList2);
-
-
 		}
+
+
+		
 
 
 

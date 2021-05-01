@@ -14,10 +14,9 @@ namespace HenryMod.SkillStates
     {
         public static float damageCoefficient = 0f;
         public static float procCoefficient = 0f;
-        public static float baseDuration = 0.6f;
         public static float force = 0f;
         public static float recoil = 0f;
-        public static float range = 350f;
+        public static float range = 250f;
         public static GameObject PrimaryPhantasmBody = CreateBody();
         public static GameObject PrimaryPhantasmMaster = CreateMaster();
 
@@ -27,42 +26,49 @@ namespace HenryMod.SkillStates
 
 
         private float duration;
-        private float fireTime;
         private bool hasFired;
-        private string muzzleString;
-        private BullseyeSearch search;
-        private TeamIndex team;
+
 
 
         public override void OnEnter()
         {
             base.OnEnter();
-            this.duration = baseDuration / this.attackSpeedStat;
-            this.fireTime = 0.2f * this.duration;
-            base.characterBody.SetAimTimer(2f);
-            this.muzzleString = "Muzzle";
-            this.search = new BullseyeSearch();
-            this.team = base.GetTeam();
-            if (PrimaryPhantasm.SummonablesList1.Count > 2)
+            this.duration = 0.2f;
+            if (base.isAuthority)
             {
-                foreach (CharacterMaster CM in PrimaryPhantasm.SummonablesList1)
+                if (PrimaryPhantasm.SummonablesList1.Count > 2)
                 {
-                    
-                    KillList1.Add(CM);
-                }
+                    /*foreach (CharacterMaster CM in PrimaryPhantasm.SummonablesList1)
+                    {
 
-                PrimaryPhantasm.KillList1.RemoveRange(1, 2);
+                        KillList1.Add(CM);
+                    }*/
+                    PrimaryPhantasm.SummonablesList1.Reverse();
+                    CharacterMaster result = PrimaryPhantasm.SummonablesList1.FindLast(delegate (CharacterMaster CM1)
+                        {
+                            return CM1.hasBody == true;
+                        }
+                        );
+                    if (result != null)
+                    {
+                        result.gameObject.AddComponent<MasterSuicideOnTimer>().lifeTimer = 0f;
+                        PrimaryPhantasm.SummonablesList1.Remove(result);
+                    }
+                    PrimaryPhantasm.SummonablesList1.Reverse();
+                    /*PrimaryPhantasm.KillList1.RemoveRange(1, 2);
 
-                foreach (CharacterMaster CM in PrimaryPhantasm.KillList1)
-                {
-                    CM.gameObject.AddComponent<MasterSuicideOnTimer>().lifeTimer = 0f;
+                    foreach (CharacterMaster CM in PrimaryPhantasm.KillList1)
+                    {
+                        CM.gameObject.AddComponent<MasterSuicideOnTimer>().lifeTimer = 0f;
+                    }
+                    PrimaryPhantasm.KillList1.Clear();
+                    if (PrimaryPhantasm.SummonablesList1.Count > 2)
+                    { 
+                        PrimaryPhantasm.SummonablesList1.RemoveAt(0);
+                    }*/
                 }
-                PrimaryPhantasm.KillList1.Clear();
-                PrimaryPhantasm.SummonablesList1.RemoveAt(0);
+                this.Fire();
             }
-
-
-            base.PlayAnimation("Gesture, Override", "ThrowBomb", "ThrowBomb.playbackRate", 1.8f);
         }
 
 
@@ -71,9 +77,6 @@ namespace HenryMod.SkillStates
             if (!this.hasFired)
             {
                 this.hasFired = true;
-
-                base.characterBody.AddSpreadBloom(0f);
-                EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab, base.gameObject, this.muzzleString, false);
                 Util.PlaySound("Roll.dodgeSoundString", base.gameObject);
 
                 if (base.isAuthority)
@@ -98,7 +101,7 @@ namespace HenryMod.SkillStates
                         maxSpread = 0f,
                         isCrit = base.RollCrit(),
                         owner = base.gameObject,
-                        muzzleName = muzzleString,
+                        muzzleName = null,
                         smartCollision = false,
                         procChainMask = default(ProcChainMask),
                         procCoefficient = procCoefficient,
@@ -130,12 +133,14 @@ namespace HenryMod.SkillStates
             }.Perform();
             characterMaster.GetBody().RecalculateStats();
             characterMaster.GetBody().baseDamage = characterMaster.GetBody().baseDamage * 0.3f;
+            characterMaster.GetBody().levelDamage = characterMaster.GetBody().levelDamage * 0.3f;
             characterMaster.inventory.CopyItemsFrom(base.characterBody.inventory);
             characterMaster.inventory.ResetItem(RoR2Content.Items.ExtraLife.itemIndex);
             characterMaster.inventory.GiveItem(RoR2Content.Items.Ghost.itemIndex);
+            characterMaster.inventory.GiveItem(RoR2Content.Items.HealthDecay.itemIndex, 15);
             characterMaster.gameObject.GetComponent<BaseAI>().leader.gameObject = base.characterBody.gameObject;
-            characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().primary.SetSkillOverride(3, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("PhantasmRapier")), RoR2.GenericSkill.SkillOverridePriority.Default);
-            characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().utility.SetSkillOverride(2, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("MindwrackClone")), RoR2.GenericSkill.SkillOverridePriority.Default);
+            characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().primary.SetSkillOverride(2, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("PhantasmRapier")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
+            characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().utility.SetSkillOverride(2, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("MindwrackClone")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
             SummonablesList1.Add(characterMaster);
             return false;
             
@@ -209,7 +214,7 @@ namespace HenryMod.SkillStates
             attackDriver.activationRequiresAimConfirmation = true;
             attackDriver.activationRequiresTargetLoS = false;
             attackDriver.selectionRequiresTargetLoS = false;
-            attackDriver.maxDistance = 6f;
+            attackDriver.maxDistance = 8f;
             attackDriver.minDistance = 0f;
             attackDriver.requireSkillReady = true;
             attackDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
@@ -252,11 +257,6 @@ namespace HenryMod.SkillStates
         public override void FixedUpdate()
         {
             base.FixedUpdate();
-
-            if (base.fixedAge >= this.fireTime)
-            {
-                this.Fire();
-            }
 
             if (base.fixedAge >= this.duration && base.isAuthority)
             {

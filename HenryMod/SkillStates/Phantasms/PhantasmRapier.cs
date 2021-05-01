@@ -28,7 +28,7 @@ namespace HenryMod.SkillStates
         private float durationBetweenShots;
         public static float totalDuration = 1f;
         public float stopwatchBetweenShots;
-
+        public GameObject hitEffectPrefab = Resources.Load<GameObject>("prefabs/effects/impacteffects/LunarWispMinigunImpactHit");
 
         public override void OnEnter()
         {
@@ -46,8 +46,7 @@ namespace HenryMod.SkillStates
                 Ray aimRay = base.GetAimRay();
                 //base.PlayAnimation("FullBody, Override", "GroundLight1", "GroundLight.playbackRate", this.durationBetweenShots);
                // base.PlayAnimation("FullBody, Override", "RapierStab1", "RapierStab1.playbackRate", this.duration);
-            base.PlayCrossfade("Gesture, Override", "Slash1", "Slash.playbackRate", this.duration, 0.05f);
-            base.characterBody.AddSpreadBloom(0f);
+            base.PlayCrossfade("Gesture, Override", "Slash1", "Slash.playbackRate", this.durationBetweenShots, 0.05f);
                 Util.PlaySound(Uppercut.hitSoundString, base.gameObject);
 
                 if (base.isAuthority)
@@ -67,9 +66,9 @@ namespace HenryMod.SkillStates
                     force = PhantasmRapier.force,
                     tracerEffectPrefab = null,
                     muzzleName = null,
-                    hitEffectPrefab = null,
+                    hitEffectPrefab = hitEffectPrefab,
                     isCrit = Util.CheckRoll(this.critStat, base.characterBody.master),
-                    radius = 1f,
+                    radius = 1.5f,
                     smartCollision = true,
                     damageType = DamageType.Generic
                 }.Fire();

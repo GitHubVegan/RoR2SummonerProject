@@ -11,9 +11,10 @@ namespace HenryMod.SkillStates
 {
 	public class MindwrackClone : BaseSkillState
     {
-        public static float baseDuration = 0.0f;
+        public static float baseDuration = 0.1f;
         public static float novaRadius = 12f;
         public static float novaForce = 2500f;
+        public static float damagecoefficient = 1f;
 
         private bool hasExploded;
         private float duration;
@@ -28,26 +29,12 @@ namespace HenryMod.SkillStates
             base.OnEnter();
             this.stopwatch = 0f;
             this.duration = MindwrackClone.baseDuration / this.attackSpeedStat;
-            Transform modelTransform = base.GetModelTransform();
-
-            if (modelTransform)
-            {
-                this.printController = modelTransform.GetComponent<PrintController>();
-                if (this.printController)
-                {
-                    this.printController.enabled = true;
-                    this.printController.printTime = this.duration;
-                }
-            }
         }
 
         public override void OnExit()
         {
             base.OnExit();
-            AkSoundEngine.StopPlayingID(this.soundID);
 
-            if (this.chargeEffect) EntityState.Destroy(this.chargeEffect);
-            if (this.printController) this.printController.enabled = false;
         }
 
         public override void FixedUpdate()
@@ -67,26 +54,9 @@ namespace HenryMod.SkillStates
             this.hasExploded = true;
             Util.PlaySound(EntityStates.JellyfishMonster.JellyNova.novaSoundString, base.gameObject);
 
-            if (base.modelLocator)
-            {
-                if (base.modelLocator.modelBaseTransform)
-                {
-                    EntityState.Destroy(base.modelLocator.modelBaseTransform.gameObject);
-                }
-                if (base.modelLocator.modelTransform)
-                {
-                    EntityState.Destroy(base.modelLocator.modelTransform.gameObject);
-                }
-            }
-
-            if (this.chargeEffect)
-            {
-                EntityState.Destroy(this.chargeEffect);
-            }
-
             if (EntityStates.JellyfishMonster.JellyNova.novaEffectPrefab)
             {
-                EffectManager.SpawnEffect(EntityStates.NullifierMonster.DeathState.deathExplosionEffect, new EffectData
+                EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/MageLightningBombExplosion"), new EffectData
                 {
                     origin = base.transform.position,
                     scale = MindwrackClone.novaRadius
@@ -98,7 +68,7 @@ namespace HenryMod.SkillStates
                 attacker = base.gameObject,
                 inflictor = base.gameObject,
                 teamIndex = TeamComponent.GetObjectTeam(base.gameObject),
-                baseDamage = this.damageStat * EntityStates.JellyfishMonster.JellyNova.novaDamageCoefficient * 2.5f,
+                baseDamage = this.damageStat * EntityStates.JellyfishMonster.JellyNova.novaDamageCoefficient * MindwrackClone.damagecoefficient * 1.5f,
                 baseForce = MindwrackClone.novaForce,
                 position = base.transform.position,
                 radius = MindwrackClone.novaRadius,

@@ -39,15 +39,21 @@ namespace HenryMod.SkillStates
 				mask = RoR2.LayerIndex.projectile.mask,
 				origin = base.characterBody.transform.position,
 			}.RefreshCandidates().FilterCandidatesByProjectileControllers().GetProjectileControllers(projectiles2);
-			if(projectiles2.Count > 0)
+			projectiles2.RemoveAll(delegate (ProjectileController P) { return P == null; });
+			if (projectiles2.Count > 0)
 			{
 				foreach (ProjectileController PC in projectiles2)
 				{
 					projectiles2.RemoveAll(delegate (ProjectileController P) { return P == null; });
 					if (PC.owner != gameObject)
 					{
-					PC.owner = gameObject;
-					PC.gameObject.GetComponent<ProjectileSimple>().SetForwardSpeed(10f);
+						EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/FeatherEffect"), new EffectData
+						{
+							origin = PC.transform.position,
+							scale = 1f
+						}, true);
+						PC.owner = gameObject;
+					PC.gameObject.GetComponent<ProjectileSimple>().SetForwardSpeed(8f);
 					}
 
 				}

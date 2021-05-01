@@ -6,7 +6,8 @@ using RoR2.CharacterAI;
 using RoR2.Skills;
 using System.Collections.Generic;
 using UnityEngine;
-using EntityStates.BrotherMonster.Weapon;
+using EntityStates.Assassin.Weapon;
+
 
 
 
@@ -48,7 +49,7 @@ namespace HenryMod.SkillStates
                 //base.PlayAnimation("FullBody, Override", "GroundLight1", "GroundLight.playbackRate", this.durationBetweenShots);
                // base.PlayAnimation("FullBody, Override", "RapierStab1", "RapierStab1.playbackRate", this.duration);
             base.PlayCrossfade("Gesture, Override", "Slash1", "Slash.playbackRate", this.durationBetweenShots, 0.05f);
-                Util.PlaySound(FireLunarShards.fireSound, base.gameObject);
+            Util.PlaySound(SlashCombo.attackString, base.gameObject);
 
             if (base.isAuthority)
                 {
@@ -88,12 +89,12 @@ namespace HenryMod.SkillStates
         public override void FixedUpdate()
         {
             base.FixedUpdate();
-            this.stopwatchBetweenShots += Time.fixedDeltaTime;
+            /*this.stopwatchBetweenShots += Time.fixedDeltaTime;
             if (this.stopwatchBetweenShots >= this.durationBetweenShots && this.totalBulletsFired < this.bulletCount)
             {
                 this.stopwatchBetweenShots -= this.durationBetweenShots;
                 this.FireBullet();
-            }
+            }*/
             if (base.fixedAge >= this.duration && this.totalBulletsFired == this.bulletCount && base.isAuthority)
             {
                 this.outer.SetNextStateToMain();

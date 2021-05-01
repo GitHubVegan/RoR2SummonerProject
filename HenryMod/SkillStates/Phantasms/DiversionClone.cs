@@ -50,10 +50,10 @@ namespace HenryMod.SkillStates
 
             if (EntityStates.JellyfishMonster.JellyNova.novaEffectPrefab)
             {
-                EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/NullifierDeathExplosion"), new EffectData
+                EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/TimeCrystalDeath"), new EffectData
                 {
                     origin = base.transform.position,
-                    scale = DiversionClone.novaRadius
+                    scale = DiversionClone.novaRadius * 1.5f
                 }, true);
             }
 

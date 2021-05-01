@@ -64,7 +64,7 @@ namespace HenryMod.SkillStates
                 attacker = base.gameObject,
                 inflictor = base.gameObject,
                 teamIndex = TeamComponent.GetObjectTeam(base.gameObject),
-                baseDamage = this.damageStat * EntityStates.JellyfishMonster.JellyNova.novaDamageCoefficient * MindwrackClone.damagecoefficient * 1.5f,
+                baseDamage = this.damageStat * 10f * MindwrackClone.damagecoefficient,
                 baseForce = MindwrackClone.novaForce,
                 position = base.transform.position,
                 radius = MindwrackClone.novaRadius,

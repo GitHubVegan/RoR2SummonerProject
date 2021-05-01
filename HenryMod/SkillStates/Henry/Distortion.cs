@@ -14,7 +14,7 @@ namespace HenryMod.SkillStates
 {
 	internal class Distortion : BaseSkillState
 	{
-		public float BaseDuration = 0.1f;
+		public float BaseDuration = 0.2f;
 		private float duration;
 
 		public override void OnEnter()

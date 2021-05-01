@@ -51,7 +51,10 @@ namespace HenryMod.SkillStates
                         );
                     if (result != null)
                     {
+                        if(result.GetBody().healthComponent)
+                        {
                         result.gameObject.AddComponent<MasterSuicideOnTimer>().lifeTimer = 0f;
+                        }
                         PrimaryPhantasm.SummonablesList1.Remove(result);
                     }
                     PrimaryPhantasm.SummonablesList1.Reverse();

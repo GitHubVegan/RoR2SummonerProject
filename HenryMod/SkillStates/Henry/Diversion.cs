@@ -10,7 +10,7 @@ namespace HenryMod.SkillStates
 {
 	internal class Diversion : BaseSkillState
 	{
-		public float BaseDuration = 0.1f;
+		public float BaseDuration = 0.2f;
 		private float duration;
 		public override void OnEnter()
 		{
@@ -20,6 +20,8 @@ namespace HenryMod.SkillStates
 			{
 				foreach (CharacterMaster CM in SecondaryPhantasm.SummonablesList2)
 				{
+					if(CM.GetBody().healthComponent)
+					{ 
 					foreach (AISkillDriver ASD in CM.gameObject.GetComponentsInChildren<AISkillDriver>())
 					{
 
@@ -47,6 +49,7 @@ namespace HenryMod.SkillStates
 					CM.GetBody().baseMoveSpeed = 25f;
 					CM.GetBody().baseAcceleration = 160f;
 					CM.inventory.GiveItem(RoR2Content.Items.HealthDecay.itemIndex, 15);
+					}
 
 
 				}

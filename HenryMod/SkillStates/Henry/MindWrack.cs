@@ -10,7 +10,7 @@ namespace HenryMod.SkillStates
 {
 	internal class Mindwrack : BaseSkillState
 	{
-		public float BaseDuration = 0.1f;
+		public float BaseDuration = 0.2f;
 		private float duration;
 		public override void OnEnter()
 		{
@@ -18,48 +18,44 @@ namespace HenryMod.SkillStates
 			this.duration = this.BaseDuration;
 			if (base.isAuthority)
 			{
-				if (PrimaryPhantasm.SummonablesList1.Count == 1)
-				{
-					MindwrackClone.damagecoefficient = 1f;
-					if (PrimaryPhantasm.SummonablesList1.Count == 2)
-					{
-						MindwrackClone.damagecoefficient = 1.5f;
-						if (PrimaryPhantasm.SummonablesList1.Count > 2)
-						{
-							MindwrackClone.damagecoefficient = 2f;
-						}
-					}
-				}
+
+				MindwrackClone.damagecoefficient = 1f;
 
 				foreach (CharacterMaster CM in PrimaryPhantasm.SummonablesList1)
 				{
-					foreach (AISkillDriver ASD in CM.gameObject.GetComponentsInChildren<AISkillDriver>())
+					if (CM.GetBody().healthComponent)
 					{
-
-						bool flag = ASD.customName == "Attack";
-						if (flag)
+						MindwrackClone.damagecoefficient += 0.5f;
+						foreach (AISkillDriver ASD in CM.gameObject.GetComponentsInChildren<AISkillDriver>())
 						{
-							ASD.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
-							ASD.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
-							ASD.maxDistance = 100f;
-							ASD.minDistance = 8f;
-							ASD.skillSlot = SkillSlot.None;
+
+							bool flag = ASD.customName == "Attack";
+							if (flag)
+							{
+								ASD.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
+								ASD.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
+								ASD.maxDistance = 100f;
+								ASD.minDistance = 8f;
+								ASD.skillSlot = SkillSlot.None;
+							}
+
+							bool flag2 = ASD.customName == "Shatter";
+							if (flag2)
+							{
+								ASD.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
+								ASD.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
+								ASD.maxDistance = 12f;
+								ASD.minDistance = 0f;
+								ASD.skillSlot = SkillSlot.Utility;
+							}
+
 						}
 
-						bool flag2 = ASD.customName == "Shatter";
-						if (flag2)
-						{
-							ASD.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
-							ASD.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
-							ASD.maxDistance = 12f;
-							ASD.minDistance = 0f;
-							ASD.skillSlot = SkillSlot.Utility;
-						}
-
+						CM.GetBody().baseMoveSpeed = 25f;
+						CM.GetBody().baseAcceleration = 160f;
+						CM.inventory.GiveItem(RoR2Content.Items.HealthDecay.itemIndex, 15);
 					}
-					CM.GetBody().baseMoveSpeed = 25f;
-					CM.GetBody().baseAcceleration = 160f;
-					CM.inventory.GiveItem(RoR2Content.Items.HealthDecay.itemIndex, 15);
+
 
 
 				}

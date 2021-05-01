@@ -39,7 +39,10 @@ namespace HenryMod.SkillStates
 
                     foreach (CharacterMaster CM in SecondaryPhantasm.SummonablesList2)
                     {
-                        CM.gameObject.AddComponent<MasterSuicideOnTimer>().lifeTimer = 0f;
+                        if (CM.GetBody().healthComponent)
+                        {
+                            CM.gameObject.AddComponent<MasterSuicideOnTimer>().lifeTimer = 0f;
+                        }
                     }
                     if (PrimaryPhantasm.SummonablesList1.Count > 0)
                     {

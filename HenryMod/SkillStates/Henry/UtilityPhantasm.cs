@@ -40,7 +40,10 @@ namespace HenryMod.SkillStates
 
                     foreach (CharacterMaster CM in UtilityPhantasm.SummonablesList3)
                     {
-                        CM.gameObject.AddComponent<MasterSuicideOnTimer>().lifeTimer = 0f;
+                        if (CM.GetBody().healthComponent)
+                        {
+                            CM.gameObject.AddComponent<MasterSuicideOnTimer>().lifeTimer = 0f;
+                        }
                     }
                     UtilityPhantasm.SummonablesList3.Clear();
 

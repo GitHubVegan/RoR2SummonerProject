@@ -74,11 +74,47 @@ namespace HenryMod.SkillStates
 					}
 				}
 
-            }
-            else
-            {
+			}
+			if (!buff)
+			{
 				UnityEngine.Object.Destroy(Distortion.affixHauntedWard);
 				Distortion.affixHauntedWard = null;
+			}
+
+			SecondaryPhantasm.SummonablesList2.RemoveAll(delegate (CharacterMaster C) { return C == null; });
+			if (SecondaryPhantasm.SummonablesList2.Count > 0)
+			{
+				SecondaryPhantasm.SummonablesList2.RemoveAll(delegate (CharacterMaster C)
+				{
+					return !(C.GetBody().healthComponent.alive);
+				});
+			}
+			if (SecondaryPhantasm.SummonablesList2.Count > 0)
+			{
+				base.GetComponent<RoR2.SkillLocator>().secondary.SetSkillOverride(1, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("SecondaryPhantasmTarget")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
+
+			}
+			if (SecondaryPhantasm.SummonablesList2.Count <1 )
+            {
+				base.GetComponent<RoR2.SkillLocator>().secondary.UnsetSkillOverride(1, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("SecondaryPhantasmTarget")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
+			}
+
+			PrimaryPhantasm.SummonablesList1.RemoveAll(delegate (CharacterMaster C) { return C == null; });
+			if (PrimaryPhantasm.SummonablesList1.Count > 0)
+			{
+				PrimaryPhantasm.SummonablesList1.RemoveAll(delegate (CharacterMaster C)
+				{
+					return !(C.GetBody().healthComponent.alive);
+				});
+			}
+			if (PrimaryPhantasm.SummonablesList1.Count > 2)
+			{
+				base.GetComponent<RoR2.SkillLocator>().primary.SetSkillOverride(1, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("PrimaryPhantasmTarget")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
+
+			}
+			if (PrimaryPhantasm.SummonablesList1.Count <= 2)
+			{
+				base.GetComponent<RoR2.SkillLocator>().primary.UnsetSkillOverride(1, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("PrimaryPhantasmTarget")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
 			}
 		}
 		

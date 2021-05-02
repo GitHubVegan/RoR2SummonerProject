@@ -131,6 +131,22 @@ namespace HenryMod.SkillStates
             characterMaster.gameObject.GetComponent<BaseAI>().leader.gameObject = base.characterBody.gameObject;
             characterMaster.GetBody().isPlayerControlled = false;
             SummonablesList3.Add(characterMaster);
+            if (hitInfo.entityObject != null && hitInfo.hitHurtBox != null)
+            {
+                UtilityPhantasm.SummonablesList3.RemoveAll(delegate (CharacterMaster C) { return C == null; });
+                if (UtilityPhantasm.SummonablesList3.Count > 0)
+                {
+                    UtilityPhantasm.SummonablesList3.RemoveAll(delegate (CharacterMaster C)
+                    {
+                        return !(C.GetBody().healthComponent.alive);
+                    });
+                }
+                if (UtilityPhantasm.SummonablesList3.Count > 0)
+                    foreach (CharacterMaster cm in UtilityPhantasm.SummonablesList3)
+                    {
+                        cm.gameObject.GetComponent<BaseAI>().leader.gameObject = hitInfo.entityObject;
+                    }
+            }
             return false;
             
         }
@@ -172,7 +188,7 @@ namespace HenryMod.SkillStates
             attackDriver.activationRequiresAimConfirmation = false;
             attackDriver.activationRequiresTargetLoS = false;
             attackDriver.selectionRequiresTargetLoS = false;
-            attackDriver.maxDistance = 20f;
+            attackDriver.maxDistance = 16f;
             attackDriver.minDistance = 0f;
             attackDriver.requireSkillReady = false;
             attackDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
@@ -194,7 +210,7 @@ namespace HenryMod.SkillStates
             shatterDriver.activationRequiresTargetLoS = false;
             shatterDriver.selectionRequiresTargetLoS = false;
             shatterDriver.maxDistance = 100f;
-            shatterDriver.minDistance = 20f;
+            shatterDriver.minDistance = 16f;
             shatterDriver.requireSkillReady = false;
             shatterDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
             shatterDriver.ignoreNodeGraph = true;

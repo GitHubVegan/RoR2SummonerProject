@@ -119,6 +119,30 @@ namespace HenryMod.Modules.Survivors
                 stockToConsume = 0
             });
 
+            SkillDef primarytargetSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "PrimaryPhantasmTarget",
+                skillNameToken = "PrimaryPhantasmTarget",
+                skillDescriptionToken = "PrimaryPhantasmTarget",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("Mindwrack"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.PrimaryPhantasmTarget)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 3,
+                baseRechargeInterval = 2.5f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = false,
+                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = false,
+                mustKeyPress = true,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 0,
+                stockToConsume = 0
+            });
+
             SkillDef rapierSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "PhantasmRapier",
@@ -195,6 +219,30 @@ namespace HenryMod.Modules.Survivors
                 rechargeStock = 1,
                 requiredStock = 1,
                 stockToConsume = 1
+            });
+
+            SkillDef secondarytargetSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "SecondaryPhantasmTarget",
+                skillNameToken = "SecondaryPhantasmTarget",
+                skillDescriptionToken = "SecondaryPhantasmTarget",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("Mindwrack"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.SecondaryPhantasmTarget)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 12f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = false,
+                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = false,
+                mustKeyPress = true,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 0,
+                stockToConsume = 0
             });
 
             SkillDef diversionSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
@@ -298,6 +346,30 @@ namespace HenryMod.Modules.Survivors
                 requiredStock = 0,
                 stockToConsume = 0,
                 keywordTokens = new string[] { "KEYWORD_AGILE" }
+            });
+
+            SkillDef utilitytargetSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "UtilityPhantasmTarget",
+                skillNameToken = "UtilityPhantasmTarget",
+                skillDescriptionToken = "UtilityPhantasmTarget",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("Mindwrack"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.UtilityPhantasmTarget)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 12f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = false,
+                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = false,
+                mustKeyPress = true,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 0,
+                stockToConsume = 0
             });
 
             SkillDef utilityphantasmSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo

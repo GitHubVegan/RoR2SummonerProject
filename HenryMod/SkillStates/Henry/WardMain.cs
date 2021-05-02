@@ -21,7 +21,7 @@ namespace HenryMod.SkillStates
 			base.OnEnter();
 			this.affixHauntedWard = UnityEngine.Object.Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/NetworkedObjects/AffixHauntedWard"));
 			this.affixHauntedWard.GetComponent<TeamFilter>().teamIndex = TeamIndex.None;
-			this.affixHauntedWard.GetComponent<BuffWard>().Networkradius = 12.5f;
+			this.affixHauntedWard.GetComponent<BuffWard>().Networkradius = 10f;
 			this.affixHauntedWard.GetComponent<NetworkedBodyAttachment>().AttachToGameObjectAndSpawn(this.characterBody.gameObject);
 
 			//setting the color didn't work with this, trying something else in the future
@@ -47,7 +47,7 @@ namespace HenryMod.SkillStates
 			List<ProjectileController> projectiles2 = new List<ProjectileController>();
 			new RoR2.SphereSearch
 			{
-				radius = 12.5f,
+				radius = 10f,
 				mask = RoR2.LayerIndex.projectile.mask,
 				origin = base.characterBody.transform.position,
 			}.RefreshCandidates().FilterCandidatesByProjectileControllers().GetProjectileControllers(projectiles2);

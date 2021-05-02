@@ -135,6 +135,22 @@ namespace HenryMod.SkillStates
             characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().utility.SetSkillOverride(2, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("MindwrackClone")), RoR2.GenericSkill.SkillOverridePriority.Default);
             characterMaster.GetBody().isPlayerControlled = false;
             SummonablesList1.Add(characterMaster);
+            if (hitInfo.entityObject != null && hitInfo.hitHurtBox != null && hitInfo.hitHurtBox.teamIndex != TeamIndex.Player)
+            {
+                PrimaryPhantasm.SummonablesList1.RemoveAll(delegate (CharacterMaster C) { return C == null; });
+                if (PrimaryPhantasm.SummonablesList1.Count > 0)
+                {
+                    PrimaryPhantasm.SummonablesList1.RemoveAll(delegate (CharacterMaster C)
+                    {
+                        return !(C.GetBody().healthComponent.alive);
+                    });
+                }
+                if (PrimaryPhantasm.SummonablesList1.Count > 0)
+                    foreach (CharacterMaster cm in SummonablesList1)
+                    {
+                        cm.gameObject.GetComponent<BaseAI>().currentEnemy.gameObject = hitInfo.entityObject;
+                    }
+            }
             return false;
             
         }

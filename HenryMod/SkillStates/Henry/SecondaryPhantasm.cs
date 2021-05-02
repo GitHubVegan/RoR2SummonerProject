@@ -134,6 +134,22 @@ namespace HenryMod.SkillStates
             characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().utility.SetSkillOverride(4, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("DiversionClone")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
             characterMaster.GetBody().isPlayerControlled = false;
             SummonablesList2.Add(characterMaster);
+            if (hitInfo.entityObject != null && hitInfo.hitHurtBox != null)
+            {
+                SecondaryPhantasm.SummonablesList2.RemoveAll(delegate (CharacterMaster C) { return C == null; });
+                if (SecondaryPhantasm.SummonablesList2.Count > 0)
+                {
+                    SecondaryPhantasm.SummonablesList2.RemoveAll(delegate (CharacterMaster C)
+                    {
+                        return !(C.GetBody().healthComponent.alive);
+                    });
+                }
+                if (SecondaryPhantasm.SummonablesList2.Count > 0)
+                    foreach (CharacterMaster cm in SecondaryPhantasm.SummonablesList2)
+                    {
+                        cm.gameObject.GetComponent<BaseAI>().leader.gameObject = hitInfo.entityObject;
+                    }
+            }
             return false;
             
         }

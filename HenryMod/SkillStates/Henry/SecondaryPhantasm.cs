@@ -129,8 +129,8 @@ namespace HenryMod.SkillStates
             characterMaster.inventory.ResetItem(RoR2Content.Items.ExtraLife.itemIndex);
             characterMaster.inventory.GiveItem(RoR2Content.Items.Ghost.itemIndex);
             characterMaster.inventory.GiveItem(RoR2Content.Items.HealthDecay.itemIndex, 24);
-            characterMaster.inventory.GiveItem(RoR2Content.Items.LunarSecondaryReplacement.itemIndex);
             characterMaster.gameObject.GetComponent<BaseAI>().leader.gameObject = base.characterBody.gameObject;
+            characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().primary.SetSkillOverride(4, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("PhantasmGround")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
             characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().utility.SetSkillOverride(4, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("DiversionClone")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
             characterMaster.GetBody().isPlayerControlled = false;
             SummonablesList2.Add(characterMaster);
@@ -171,7 +171,7 @@ namespace HenryMod.SkillStates
 
         private static GameObject CreateBody()
         {
-            GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/HuntressBody"), "SecondaryPhantasmBody", true);
+            GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/WispBody"), "SecondaryPhantasmBody", true);
             
             Modules.Prefabs.bodyPrefabs.Add(newBody);
             return newBody;
@@ -179,7 +179,7 @@ namespace HenryMod.SkillStates
 
         private static GameObject CreateMaster()
         {
-            GameObject newMaster = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/charactermasters/HuntressMonsterMaster"), "SecondaryPhantasmMaster", true);
+            GameObject newMaster = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/charactermasters/WispMaster"), "SecondaryPhantasmMaster", true);
             newMaster.GetComponent<CharacterMaster>().bodyPrefab = SecondaryPhantasmBody;
             foreach (AISkillDriver ai in newMaster.GetComponentsInChildren<AISkillDriver>())
             {
@@ -191,12 +191,12 @@ namespace HenryMod.SkillStates
 
             AISkillDriver attackDriver = newMaster.AddComponent<AISkillDriver>();
             attackDriver.customName = "Attack";
-            attackDriver.movementType = AISkillDriver.MovementType.Stop;
+            attackDriver.movementType = AISkillDriver.MovementType.StrafeMovetarget;
             attackDriver.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
             attackDriver.activationRequiresAimConfirmation = true;
             attackDriver.activationRequiresTargetLoS = false;
             attackDriver.selectionRequiresTargetLoS = false;
-            attackDriver.maxDistance = 40f;
+            attackDriver.maxDistance = 10f;
             attackDriver.minDistance = 0f;
             attackDriver.requireSkillReady = true;
             attackDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
@@ -208,8 +208,7 @@ namespace HenryMod.SkillStates
             attackDriver.maxTargetHealthFraction = Mathf.Infinity;
             attackDriver.minUserHealthFraction = Mathf.NegativeInfinity;
             attackDriver.maxUserHealthFraction = Mathf.Infinity;
-            attackDriver.skillSlot = SkillSlot.Secondary;
-            attackDriver.noRepeat = true;
+            attackDriver.skillSlot = SkillSlot.Primary;
 
             AISkillDriver shatterDriver = newMaster.AddComponent<AISkillDriver>();
             shatterDriver.customName = "Shatter";
@@ -219,7 +218,7 @@ namespace HenryMod.SkillStates
             shatterDriver.activationRequiresTargetLoS = false;
             shatterDriver.selectionRequiresTargetLoS = false;
             shatterDriver.maxDistance = 70f;
-            shatterDriver.minDistance = 30f;
+            shatterDriver.minDistance = 10f;
             shatterDriver.shouldSprint = true;
             shatterDriver.requireSkillReady = false;
             shatterDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;

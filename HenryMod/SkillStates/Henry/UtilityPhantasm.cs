@@ -174,10 +174,6 @@ namespace HenryMod.SkillStates
             GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/MageBody"), "UtilityPhantasmBody", true);
             newBody.GetComponentInChildren<EntityStateMachine>().mainStateType = new SerializableEntityStateType(typeof(WardMain));
 
-            Debug.Log(newBody.GetComponent<CharacterDeathBehavior>().deathState);
-            Debug.Log(newBody.GetComponent<CharacterDeathBehavior>().deathStateMachine);
-            Debug.Log(newBody.GetComponent<CharacterDeathBehavior>().idleStateMachine);
-
             Modules.Prefabs.bodyPrefabs.Add(newBody);
             return newBody;
         }

@@ -167,6 +167,30 @@ namespace HenryMod.Modules.Survivors
                 stockToConsume = 1,
             });
 
+            SkillDef groundSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "PhantasmGround",
+                skillNameToken = "PhantasmGround",
+                skillDescriptionToken = "PhantasmGround",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSecondaryIcon"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.PhantasmGround)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 2f,
+                beginSkillCooldownOnSkillEnd = true,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = false,
+                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = false,
+                mustKeyPress = false,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+            });
+
             SkillDef primaryphantasmSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "PrimaryPhantasm",

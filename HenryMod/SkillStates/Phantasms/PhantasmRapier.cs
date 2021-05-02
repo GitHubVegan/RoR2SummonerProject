@@ -89,12 +89,12 @@ namespace HenryMod.SkillStates
         public override void FixedUpdate()
         {
             base.FixedUpdate();
-            /*this.stopwatchBetweenShots += Time.fixedDeltaTime;
+            this.stopwatchBetweenShots += Time.fixedDeltaTime;
             if (this.stopwatchBetweenShots >= this.durationBetweenShots && this.totalBulletsFired < this.bulletCount)
             {
                 this.stopwatchBetweenShots -= this.durationBetweenShots;
                 this.FireBullet();
-            }*/
+            }
             if (base.fixedAge >= this.duration && this.totalBulletsFired == this.bulletCount && base.isAuthority)
             {
                 this.outer.SetNextStateToMain();

@@ -74,6 +74,11 @@ namespace HenryMod.SkillStates
 					}
 				}
 
+            }
+            else
+            {
+				UnityEngine.Object.Destroy(Distortion.affixHauntedWard);
+				Distortion.affixHauntedWard = null;
 			}
 		}
 		

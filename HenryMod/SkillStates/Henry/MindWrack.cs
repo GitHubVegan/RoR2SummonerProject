@@ -42,6 +42,7 @@ namespace HenryMod.SkillStates
 									ASD.maxDistance = 100f;
 									ASD.minDistance = 8f;
 									ASD.skillSlot = SkillSlot.None;
+									ASD.noRepeat = true;
 								}
 
 								bool flag2 = ASD.customName == "Shatter";

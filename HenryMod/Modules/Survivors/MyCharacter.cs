@@ -193,9 +193,8 @@ namespace HenryMod.Modules.Survivors
                 mustKeyPress = false,
                 cancelSprintingOnActivation = false,
                 rechargeStock = 1,
-                requiredStock = 0,
-                stockToConsume = 0,
-                keywordTokens = new string[] { "KEYWORD_AGILE" }
+                requiredStock = 1,
+                stockToConsume = 1
             });
 
             SkillDef diversionSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
@@ -242,8 +241,8 @@ namespace HenryMod.Modules.Survivors
                 mustKeyPress = false,
                 cancelSprintingOnActivation = false,
                 rechargeStock = 1,
-                requiredStock = 0,
-                stockToConsume = 0
+                requiredStock = 1,
+                stockToConsume = 1
             });
 
             SkillDef secondaryphantasmSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo

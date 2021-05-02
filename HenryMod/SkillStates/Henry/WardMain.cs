@@ -23,18 +23,22 @@ namespace HenryMod.SkillStates
 			this.affixHauntedWard.GetComponent<TeamFilter>().teamIndex = TeamIndex.None;
 			this.affixHauntedWard.GetComponent<BuffWard>().Networkradius = 12.5f;
 			this.affixHauntedWard.GetComponent<NetworkedBodyAttachment>().AttachToGameObjectAndSpawn(this.characterBody.gameObject);
-			ParticleSystem.MainModule main = this.affixHauntedWard.gameObject.GetComponent<ParticleSystem>().main;
-			Color color = new Color(0.85f, 0.07f, 1f);
-			main.startColor = color;
+
+			//setting the color didn't work with this, trying something else in the future
+
+			//ParticleSystem.MainModule main = this.affixHauntedWard.gameObject.GetComponent<ParticleSystem>().main;
+			//Color color = new Color(0.85f, 0.07f, 1f);
+			//main.startColor = color;
 		}
 
 
-			
+
 
 		public override void OnExit()
 		{
-
 			base.OnExit();
+			UnityEngine.Object.Destroy(this.affixHauntedWard);
+			this.affixHauntedWard = null;
 		}
 
 		public override void FixedUpdate()

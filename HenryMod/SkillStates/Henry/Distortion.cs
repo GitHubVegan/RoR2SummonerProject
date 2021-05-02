@@ -16,6 +16,7 @@ namespace HenryMod.SkillStates
 	{
 		public float BaseDuration = 0.2f;
 		private float duration;
+		public static GameObject affixHauntedWard;
 
 		public override void OnEnter()
 		{
@@ -32,8 +33,12 @@ namespace HenryMod.SkillStates
 				{
 					var bufftime = UtilityPhantasm.SummonablesList3.Count * 3f;
 					base.characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, bufftime);
+				Distortion.affixHauntedWard = UnityEngine.Object.Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/NetworkedObjects/AffixHauntedWard"));
+				Distortion.affixHauntedWard.GetComponent<TeamFilter>().teamIndex = TeamIndex.None;
+				Distortion.affixHauntedWard.GetComponent<BuffWard>().Networkradius = 2f;
+				Distortion.affixHauntedWard.GetComponent<NetworkedBodyAttachment>().AttachToGameObjectAndSpawn(this.characterBody.gameObject);
 
-					foreach (CharacterMaster CM3 in UtilityPhantasm.SummonablesList3)
+				foreach (CharacterMaster CM3 in UtilityPhantasm.SummonablesList3)
 					{
 
 						foreach (AISkillDriver ASD in CM3.GetComponentsInChildren<AISkillDriver>())

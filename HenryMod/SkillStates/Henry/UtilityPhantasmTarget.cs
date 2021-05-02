@@ -70,7 +70,7 @@ namespace HenryMod.SkillStates
                         smartCollision = false,
                         procChainMask = default(ProcChainMask),
                         procCoefficient = procCoefficient,
-                        radius = 0.9f,
+                        radius = 1f,
                         sniper = false,
                         stopperMask = LayerIndex.CommonMasks.bullet,
                         weapon = null,
@@ -102,17 +102,19 @@ namespace HenryMod.SkillStates
                     foreach (CharacterMaster cm in UtilityPhantasm.SummonablesList3)
                     {
                         cm.gameObject.GetComponent<BaseAI>().leader.gameObject = hitInfo.entityObject;
-                        foreach (AISkillDriver ai in cm.gameObject.GetComponentsInChildren<AISkillDriver>())
+                        /*foreach (AISkillDriver ai in cm.GetComponentsInChildren<AISkillDriver>())
                         {
-                            if (ai.customName == "Attack")
+                            bool flag = ai.customName == "Attack";
+                            if (flag)
                             {
                                 ai.minDistance = 1f;
                             }
-                            if (ai.customName == "Shatter")
+                            bool flag2 = ai.customName == "Shatter";
+                            if (flag2)
                             {
                                 ai.maxDistance = 1f;
                             }
-                        }
+                        }*/
                     }
                 }
                 else
@@ -120,17 +122,19 @@ namespace HenryMod.SkillStates
                     foreach (CharacterMaster cm in UtilityPhantasm.SummonablesList3)
                     {
                         cm.gameObject.GetComponent<BaseAI>().leader.gameObject = base.characterBody.gameObject;
-                        foreach (AISkillDriver ai in cm.gameObject.GetComponentsInChildren<AISkillDriver>())
+                        /*foreach (AISkillDriver ai in cm.GetComponentsInChildren<AISkillDriver>())
                         {
-                            if (ai.customName == "Attack")
+                            bool flag = ai.customName == "Attack";
+                            if (flag)
                             {
                                 ai.maxDistance = 15f;
                             }
-                            if (ai.customName == "Shatter")
+                            bool flag2 = ai.customName == "Shatter";
+                            if (flag2)
                             {
                                 ai.minDistance = 15f;
                             }
-                        }
+                        }*/
                     }
                 }
             }

@@ -145,17 +145,19 @@ namespace HenryMod.SkillStates
                     foreach (CharacterMaster cm in UtilityPhantasm.SummonablesList3)
                     {
                         cm.gameObject.GetComponent<BaseAI>().leader.gameObject = hitInfo.entityObject;
-                        foreach(AISkillDriver ai in cm.gameObject.GetComponentsInChildren<AISkillDriver>())
+                        /*foreach(AISkillDriver ai in cm.GetComponentsInChildren<AISkillDriver>())
                         {
-                            if (ai.customName == "Attack")
+                            bool flag = ai.customName == "Attack";
+                               if(flag)
                             {
                                 ai.maxDistance = 2f;
                             }
-                            if (ai.customName == "Shatter")
+                            bool flag2 = ai.customName == "Shatter";
+                            if (flag2)
                             {
                                 ai.minDistance = 2f;
                             }
-                        }
+                        }*/ //doesn't work, no clue why
                     }
             }
             return false;

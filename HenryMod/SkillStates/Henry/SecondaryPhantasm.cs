@@ -193,7 +193,7 @@ namespace HenryMod.SkillStates
             attackDriver.customName = "Attack";
             attackDriver.movementType = AISkillDriver.MovementType.Stop;
             attackDriver.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
-            attackDriver.activationRequiresAimConfirmation = false;
+            attackDriver.activationRequiresAimConfirmation = true;
             attackDriver.activationRequiresTargetLoS = false;
             attackDriver.selectionRequiresTargetLoS = false;
             attackDriver.maxDistance = 40f;

@@ -97,9 +97,9 @@ namespace HenryMod.SkillStates
                         smartCollision = false,
                         procChainMask = default(ProcChainMask),
                         procCoefficient = procCoefficient,
-                        radius = 0.9f,
+                        radius = 1f,
                         sniper = false,
-                        stopperMask = LayerIndex.CommonMasks.bullet,
+                        stopperMask = LayerIndex.enemyBody.mask,
                         weapon = null,
                         tracerEffectPrefab = null,
                         spreadPitchScale = 0f,
@@ -135,21 +135,32 @@ namespace HenryMod.SkillStates
             characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().utility.SetSkillOverride(2, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("MindwrackClone")), RoR2.GenericSkill.SkillOverridePriority.Default);
             characterMaster.GetBody().isPlayerControlled = false;
             SummonablesList1.Add(characterMaster);
-            if (hitInfo.entityObject != null && hitInfo.hitHurtBox != null && hitInfo.hitHurtBox.teamIndex != TeamIndex.Player)
+            PrimaryPhantasm.SummonablesList1.RemoveAll(delegate (CharacterMaster C) { return C == null; });
+            if (PrimaryPhantasm.SummonablesList1.Count > 0)
             {
-                PrimaryPhantasm.SummonablesList1.RemoveAll(delegate (CharacterMaster C) { return C == null; });
-                if (PrimaryPhantasm.SummonablesList1.Count > 0)
+                PrimaryPhantasm.SummonablesList1.RemoveAll(delegate (CharacterMaster C)
                 {
-                    PrimaryPhantasm.SummonablesList1.RemoveAll(delegate (CharacterMaster C)
-                    {
-                        return !(C.GetBody().healthComponent.alive);
-                    });
-                }
-                if (PrimaryPhantasm.SummonablesList1.Count > 0)
-                    foreach (CharacterMaster cm in SummonablesList1)
+                    return !(C.GetBody().healthComponent.alive);
+                });
+            }
+            if (PrimaryPhantasm.SummonablesList1.Count > 0)
+            {
+                bool flag = (hitInfo.entityObject != null && hitInfo.hitHurtBox != null && hitInfo.hitHurtBox.teamIndex != TeamIndex.Player);
+                if(flag)
+                {
+
+                    foreach (CharacterMaster cm in PrimaryPhantasm.SummonablesList1)
                     {
                         cm.gameObject.GetComponent<BaseAI>().currentEnemy.gameObject = hitInfo.entityObject;
                     }
+                }
+                /*if(!flag)
+                {
+                    foreach (CharacterMaster cm in PrimaryPhantasm.SummonablesList1)
+                    {
+                        cm.gameObject.GetComponentInChildren<AISkillDriver>().moveTargetType = AISkillDriver.TargetType.CurrentLeader;
+                    }
+                }*/
             }
             return false;
             

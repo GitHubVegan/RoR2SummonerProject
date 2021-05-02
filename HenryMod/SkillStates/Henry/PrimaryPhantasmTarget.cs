@@ -87,21 +87,31 @@ namespace HenryMod.SkillStates
 
         bool SummonPrimary(ref BulletAttack.BulletHit hitInfo)
         {
-            if (hitInfo.entityObject != null && hitInfo.hitHurtBox != null && hitInfo.hitHurtBox.teamIndex != TeamIndex.Player)
+            PrimaryPhantasm.SummonablesList1.RemoveAll(delegate (CharacterMaster C) { return C == null; });
+            if (PrimaryPhantasm.SummonablesList1.Count > 0)
             {
-                PrimaryPhantasm.SummonablesList1.RemoveAll(delegate (CharacterMaster C) { return C == null; });
-                if (PrimaryPhantasm.SummonablesList1.Count > 0)
+                PrimaryPhantasm.SummonablesList1.RemoveAll(delegate (CharacterMaster C)
                 {
-                    PrimaryPhantasm.SummonablesList1.RemoveAll(delegate (CharacterMaster C)
-                    {
-                        return !(C.GetBody().healthComponent.alive);
-                    });
-                }
-                if (PrimaryPhantasm.SummonablesList1.Count > 0)
+                    return !(C.GetBody().healthComponent.alive);
+                });
+            }
+            if (PrimaryPhantasm.SummonablesList1.Count > 0)
+            {
+                if (hitInfo.entityObject != null && hitInfo.hitHurtBox != null && hitInfo.hitHurtBox.teamIndex != TeamIndex.Player)
+                {
+
                     foreach (CharacterMaster cm in PrimaryPhantasm.SummonablesList1)
                     {
                         cm.gameObject.GetComponent<BaseAI>().currentEnemy.gameObject = hitInfo.entityObject;
                     }
+                }
+                /*else
+                {
+                    foreach (CharacterMaster cm in PrimaryPhantasm.SummonablesList1)
+                    {
+                        cm.gameObject.GetComponentInChildren<AISkillDriver>().moveTargetType = AISkillDriver.TargetType.CurrentLeader;
+                    }
+                }*/
             }
             return false;
             

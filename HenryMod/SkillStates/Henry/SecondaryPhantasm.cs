@@ -134,21 +134,31 @@ namespace HenryMod.SkillStates
             characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().utility.SetSkillOverride(4, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("DiversionClone")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
             characterMaster.GetBody().isPlayerControlled = false;
             SummonablesList2.Add(characterMaster);
-            if (hitInfo.entityObject != null && hitInfo.hitHurtBox != null)
+            SecondaryPhantasm.SummonablesList2.RemoveAll(delegate (CharacterMaster C) { return C == null; });
+            if (SecondaryPhantasm.SummonablesList2.Count > 0)
             {
-                SecondaryPhantasm.SummonablesList2.RemoveAll(delegate (CharacterMaster C) { return C == null; });
-                if (SecondaryPhantasm.SummonablesList2.Count > 0)
+                SecondaryPhantasm.SummonablesList2.RemoveAll(delegate (CharacterMaster C)
                 {
-                    SecondaryPhantasm.SummonablesList2.RemoveAll(delegate (CharacterMaster C)
-                    {
-                        return !(C.GetBody().healthComponent.alive);
-                    });
-                }
-                if (SecondaryPhantasm.SummonablesList2.Count > 0)
+                    return !(C.GetBody().healthComponent.alive);
+                });
+            }
+            if (SecondaryPhantasm.SummonablesList2.Count > 0)
+            {
+                if (hitInfo.entityObject != null && hitInfo.hitHurtBox != null && hitInfo.hitHurtBox.teamIndex != TeamIndex.Player)
+                {
+
                     foreach (CharacterMaster cm in SecondaryPhantasm.SummonablesList2)
                     {
-                        cm.gameObject.GetComponent<BaseAI>().leader.gameObject = hitInfo.entityObject;
+                        cm.gameObject.GetComponent<BaseAI>().currentEnemy.gameObject = hitInfo.entityObject;
                     }
+                }
+                /*else
+                {
+                    foreach (CharacterMaster cm in SecondaryPhantasm.SummonablesList2)
+                    {
+                        cm.gameObject.GetComponentInChildren<AISkillDriver>().moveTargetType = AISkillDriver.TargetType.CurrentLeader;
+                    }
+                }*/
             }
             return false;
             

@@ -87,22 +87,54 @@ namespace HenryMod.SkillStates
 
         bool SummonPrimary(ref BulletAttack.BulletHit hitInfo)
         {
-            if (hitInfo.entityObject != null && hitInfo.hitHurtBox != null)
+            UtilityPhantasm.SummonablesList3.RemoveAll(delegate (CharacterMaster C) { return C == null; });
+            if (UtilityPhantasm.SummonablesList3.Count > 0)
             {
-                UtilityPhantasm.SummonablesList3.RemoveAll(delegate (CharacterMaster C) { return C == null; });
-                if (UtilityPhantasm.SummonablesList3.Count > 0)
+                UtilityPhantasm.SummonablesList3.RemoveAll(delegate (CharacterMaster C)
                 {
-                    UtilityPhantasm.SummonablesList3.RemoveAll(delegate (CharacterMaster C)
-                    {
-                        return !(C.GetBody().healthComponent.alive);
-                    });
-                }
-                if (UtilityPhantasm.SummonablesList3.Count > 0)
+                    return !(C.GetBody().healthComponent.alive);
+                });
+            }
+            if (UtilityPhantasm.SummonablesList3.Count > 0)
+            {
+                if (hitInfo.entityObject != null && hitInfo.hitHurtBox != null)
+                {
                     foreach (CharacterMaster cm in UtilityPhantasm.SummonablesList3)
                     {
                         cm.gameObject.GetComponent<BaseAI>().leader.gameObject = hitInfo.entityObject;
+                        foreach (AISkillDriver ai in cm.gameObject.GetComponentsInChildren<AISkillDriver>())
+                        {
+                            if (ai.customName == "Attack")
+                            {
+                                ai.minDistance = 1f;
+                            }
+                            if (ai.customName == "Shatter")
+                            {
+                                ai.maxDistance = 1f;
+                            }
+                        }
                     }
+                }
+                else
+                {
+                    foreach (CharacterMaster cm in UtilityPhantasm.SummonablesList3)
+                    {
+                        cm.gameObject.GetComponent<BaseAI>().leader.gameObject = base.characterBody.gameObject;
+                        foreach (AISkillDriver ai in cm.gameObject.GetComponentsInChildren<AISkillDriver>())
+                        {
+                            if (ai.customName == "Attack")
+                            {
+                                ai.maxDistance = 15f;
+                            }
+                            if (ai.customName == "Shatter")
+                            {
+                                ai.minDistance = 15f;
+                            }
+                        }
+                    }
+                }
             }
+
             return false;
             
         }

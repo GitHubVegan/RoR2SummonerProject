@@ -145,6 +145,17 @@ namespace HenryMod.SkillStates
                     foreach (CharacterMaster cm in UtilityPhantasm.SummonablesList3)
                     {
                         cm.gameObject.GetComponent<BaseAI>().leader.gameObject = hitInfo.entityObject;
+                        foreach(AISkillDriver ai in cm.gameObject.GetComponentsInChildren<AISkillDriver>())
+                        {
+                            if (ai.customName == "Attack")
+                            {
+                                ai.maxDistance = 2f;
+                            }
+                            if (ai.customName == "Shatter")
+                            {
+                                ai.minDistance = 2f;
+                            }
+                        }
                     }
             }
             return false;
@@ -188,7 +199,7 @@ namespace HenryMod.SkillStates
             attackDriver.activationRequiresAimConfirmation = false;
             attackDriver.activationRequiresTargetLoS = false;
             attackDriver.selectionRequiresTargetLoS = false;
-            attackDriver.maxDistance = 16f;
+            attackDriver.maxDistance = 15f;
             attackDriver.minDistance = 0f;
             attackDriver.requireSkillReady = false;
             attackDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
@@ -210,7 +221,7 @@ namespace HenryMod.SkillStates
             shatterDriver.activationRequiresTargetLoS = false;
             shatterDriver.selectionRequiresTargetLoS = false;
             shatterDriver.maxDistance = 100f;
-            shatterDriver.minDistance = 16f;
+            shatterDriver.minDistance = 15f;
             shatterDriver.requireSkillReady = false;
             shatterDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
             shatterDriver.ignoreNodeGraph = true;

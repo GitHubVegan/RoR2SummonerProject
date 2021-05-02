@@ -12,13 +12,11 @@ namespace HenryMod.SkillStates
 {
     public class UtilityPhantasm : BaseSkillState
     {
-        public static float damageCoefficient = Modules.StaticValues.gunDamageCoefficient;
-        public static float procCoefficient = 1f;
-        public static float baseDuration = 0.6f;
-        public static float force = 800f;
-        public static float recoil = 3f;
-        public static float range = 256f;
-        public static GameObject hitEffectPrefab = Resources.Load<GameObject>("prefabs/effects/impacteffects/ExplosionGreaterWisp");
+        public static float damageCoefficient = 0f;
+        public static float procCoefficient = 0f;
+        public static float force = 0f;
+        public static float recoil = 0f;
+        public static float range = 250f;
         public static GameObject UtilityPhantasmBody = CreateBody();
         public static GameObject UtilityPhantasmMaster = CreateMaster();
 
@@ -27,35 +25,42 @@ namespace HenryMod.SkillStates
 
 
         private float duration;
-        private float fireTime;
         private bool hasFired;
-        private string muzzleString;
-        private BullseyeSearch search;
-        private TeamIndex team;
+
 
 
         public override void OnEnter()
         {
             base.OnEnter();
-            this.duration = baseDuration / this.attackSpeedStat;
-            this.fireTime = 0.2f * this.duration;
-            base.characterBody.SetAimTimer(2f);
-            this.muzzleString = "Muzzle";
-            this.search = new BullseyeSearch();
-            this.team = base.GetTeam();
-            if (UtilityPhantasm.SummonablesList3.Count > 0)
+            this.duration = 0.2f;
+            if (base.isAuthority)
             {
-
-                foreach (CharacterMaster CM in UtilityPhantasm.SummonablesList3)
+                UtilityPhantasm.SummonablesList3.RemoveAll(delegate (CharacterMaster C) { return C == null; });
+                UtilityPhantasm.SummonablesList3.RemoveAll(delegate (CharacterMaster C)
                 {
-                    CM.gameObject.AddComponent<MasterSuicideOnTimer>().lifeTimer = 0f;
-                }
-                UtilityPhantasm.SummonablesList3.Clear();
+                    return !(C.GetBody().healthComponent.alive);
+                });
+                if (UtilityPhantasm.SummonablesList3.Count > 0)
+                {
 
+                    CharacterMaster result = UtilityPhantasm.SummonablesList3.Find(delegate (CharacterMaster C)
+                    {
+                        return C;
+                    }
+                        );
+                    if (result != null)
+                    {
+                        result.gameObject.AddComponent<MasterSuicideOnTimer>().lifeTimer = 0f;
+
+                    }
+                    UtilityPhantasm.SummonablesList3.RemoveAt(0);
+
+
+                }
+                this.Fire();
             }
 
 
-            base.PlayAnimation("LeftArm, Override", "ShootGun", "ShootGun.playbackRate", 1.8f);
         }
 
 
@@ -65,9 +70,7 @@ namespace HenryMod.SkillStates
             {
                 this.hasFired = true;
 
-                base.characterBody.AddSpreadBloom(0f);
-                EffectManager.SimpleMuzzleFlash(EntityStates.Commando.CommandoWeapon.FirePistol2.muzzleEffectPrefab, base.gameObject, this.muzzleString, false);
-                Util.PlaySound("HenryShootPistol", base.gameObject);
+                Util.PlaySound("Roll.dodgeSoundString", base.gameObject);
 
                 if (base.isAuthority)
                 {
@@ -91,7 +94,7 @@ namespace HenryMod.SkillStates
                         maxSpread = 0f,
                         isCrit = base.RollCrit(),
                         owner = base.gameObject,
-                        muzzleName = muzzleString,
+                        muzzleName = null,
                         smartCollision = false,
                         procChainMask = default(ProcChainMask),
                         procCoefficient = procCoefficient,
@@ -103,7 +106,7 @@ namespace HenryMod.SkillStates
                         spreadPitchScale = 0f,
                         spreadYawScale = 0f,
                         queryTriggerInteraction = QueryTriggerInteraction.UseGlobal,
-                        hitEffectPrefab = UtilityPhantasm.hitEffectPrefab,
+                        hitEffectPrefab = null,
                         hitCallback = SummonUtility
                     }.Fire();
                 }
@@ -117,8 +120,8 @@ namespace HenryMod.SkillStates
                 masterPrefab = UtilityPhantasmMaster,
                 position = hitInfo.point + Vector3.up * d,
                 rotation = base.characterBody.transform.rotation,
-                //summonerBodyObject = base.characterBody.gameObject,
-                ignoreTeamMemberLimit = false,
+                summonerBodyObject = base.characterBody.gameObject,
+                ignoreTeamMemberLimit = true,
                 teamIndexOverride = new TeamIndex?(TeamIndex.Player)
             }.Perform();
             characterMaster.GetBody().RecalculateStats();
@@ -126,6 +129,7 @@ namespace HenryMod.SkillStates
             characterMaster.inventory.ResetItem(RoR2Content.Items.ExtraLife.itemIndex);
             characterMaster.inventory.GiveItem(RoR2Content.Items.Ghost.itemIndex);
             characterMaster.gameObject.GetComponent<BaseAI>().leader.gameObject = base.characterBody.gameObject;
+            characterMaster.GetBody().isPlayerControlled = false;
             SummonablesList3.Add(characterMaster);
             return false;
             
@@ -138,8 +142,9 @@ namespace HenryMod.SkillStates
 
         private static GameObject CreateBody()
         {
-            GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/HuntressBody"), "UtilityPhantasmBody", true);
-            
+            GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/MageBody"), "UtilityPhantasmBody", true);
+            newBody.GetComponentInChildren<EntityStateMachine>().mainStateType = new SerializableEntityStateType(typeof(WardMain));
+
             Debug.Log(newBody.GetComponent<CharacterDeathBehavior>().deathState);
             Debug.Log(newBody.GetComponent<CharacterDeathBehavior>().deathStateMachine);
             Debug.Log(newBody.GetComponent<CharacterDeathBehavior>().idleStateMachine);
@@ -150,7 +155,7 @@ namespace HenryMod.SkillStates
 
         private static GameObject CreateMaster()
         {
-            GameObject newMaster = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/charactermasters/HuntressMonsterMaster"), "UtilityPhantasmMaster", true);
+            GameObject newMaster = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/charactermasters/MageMonsterMaster"), "UtilityPhantasmMaster", true);
             newMaster.GetComponent<CharacterMaster>().bodyPrefab = UtilityPhantasmBody;
             foreach (AISkillDriver ai in newMaster.GetComponentsInChildren<AISkillDriver>())
             {
@@ -162,45 +167,45 @@ namespace HenryMod.SkillStates
 
             AISkillDriver attackDriver = newMaster.AddComponent<AISkillDriver>();
             attackDriver.customName = "Attack";
-            attackDriver.movementType = AISkillDriver.MovementType.StrafeMovetarget;
-            attackDriver.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
+            attackDriver.movementType = AISkillDriver.MovementType.Stop;
+            attackDriver.moveTargetType = AISkillDriver.TargetType.CurrentLeader;
             attackDriver.activationRequiresAimConfirmation = false;
             attackDriver.activationRequiresTargetLoS = false;
             attackDriver.selectionRequiresTargetLoS = false;
-            attackDriver.maxDistance = 100f;
+            attackDriver.maxDistance = 20f;
             attackDriver.minDistance = 0f;
             attackDriver.requireSkillReady = false;
             attackDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
             attackDriver.ignoreNodeGraph = true;
             attackDriver.moveInputScale = 1f;
-            attackDriver.driverUpdateTimerOverride = 1f;
+            attackDriver.driverUpdateTimerOverride = 0.2f;
             attackDriver.buttonPressType = AISkillDriver.ButtonPressType.Hold;
             attackDriver.minTargetHealthFraction = Mathf.NegativeInfinity;
             attackDriver.maxTargetHealthFraction = Mathf.Infinity;
             attackDriver.minUserHealthFraction = Mathf.NegativeInfinity;
             attackDriver.maxUserHealthFraction = Mathf.Infinity;
-            attackDriver.skillSlot = SkillSlot.Primary;
+            attackDriver.skillSlot = SkillSlot.None;
 
             AISkillDriver shatterDriver = newMaster.AddComponent<AISkillDriver>();
             shatterDriver.customName = "Shatter";
-            shatterDriver.movementType = AISkillDriver.MovementType.StrafeMovetarget;
-            shatterDriver.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
+            shatterDriver.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
+            shatterDriver.moveTargetType = AISkillDriver.TargetType.CurrentLeader;
             shatterDriver.activationRequiresAimConfirmation = false;
             shatterDriver.activationRequiresTargetLoS = false;
             shatterDriver.selectionRequiresTargetLoS = false;
             shatterDriver.maxDistance = 100f;
-            shatterDriver.minDistance = 0f;
+            shatterDriver.minDistance = 20f;
             shatterDriver.requireSkillReady = false;
             shatterDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
             shatterDriver.ignoreNodeGraph = true;
             shatterDriver.moveInputScale = 1f;
-            shatterDriver.driverUpdateTimerOverride = 1f;
+            shatterDriver.driverUpdateTimerOverride = 0.2f;
             shatterDriver.buttonPressType = AISkillDriver.ButtonPressType.Hold;
             shatterDriver.minTargetHealthFraction = Mathf.NegativeInfinity;
             shatterDriver.maxTargetHealthFraction = Mathf.Infinity;
             shatterDriver.minUserHealthFraction = Mathf.NegativeInfinity;
             shatterDriver.maxUserHealthFraction = Mathf.Infinity;
-            shatterDriver.skillSlot = SkillSlot.Primary;
+            shatterDriver.skillSlot = SkillSlot.None;
 
             Modules.Prefabs.masterPrefabs.Add(newMaster);
             return newMaster;
@@ -209,11 +214,6 @@ namespace HenryMod.SkillStates
         public override void FixedUpdate()
         {
             base.FixedUpdate();
-
-            if (base.fixedAge >= this.fireTime)
-            {
-                this.Fire();
-            }
 
             if (base.fixedAge >= this.duration && base.isAuthority)
             {

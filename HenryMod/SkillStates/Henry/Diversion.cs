@@ -10,58 +10,65 @@ namespace HenryMod.SkillStates
 {
 	internal class Diversion : BaseSkillState
 	{
-		public float BaseDuration = 0.0f;
-		private float duration;
+		private float duration = 0.2f;
 		public override void OnEnter()
 		{
 			base.OnEnter();
-			this.duration = this.BaseDuration / this.attackSpeedStat;
 			if (SecondaryPhantasm.SummonablesList2.Count > 0)
 			{
-				foreach (CharacterMaster CM in SecondaryPhantasm.SummonablesList2)
+				SecondaryPhantasm.SummonablesList2.RemoveAll(delegate (CharacterMaster CM2)
+			{
+				return !(CM2.GetBody().healthComponent.alive);
+			});
+			}
+			if (SecondaryPhantasm.SummonablesList2.Count > 0) 
+				{ 
+				foreach (CharacterMaster CM2 in SecondaryPhantasm.SummonablesList2)
 				{
-					foreach (AISkillDriver ASD in CM.GetComponentsInChildren<AISkillDriver>())
-					{
-						
-						bool flag = ASD.customName == "Attack";
-						if (flag)
+					if(CM2.GetBody().healthComponent.alive == true)
+					{ 
+						foreach (AISkillDriver ASD in CM2.GetComponentsInChildren<AISkillDriver>())
 						{
-							ASD.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
-							ASD.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
-							ASD.maxDistance = 100f;
-							ASD.minDistance = 20f;
-							ASD.driverUpdateTimerOverride = 0.2f;
-							ASD.skillSlot = SkillSlot.None;
-						}
 
-						bool flag2 = ASD.customName == "Shatter";
-						if (flag2)
-						{
-							ASD.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
-							ASD.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
-							ASD.maxDistance = 20f;
-							ASD.minDistance = 0f;
-							ASD.driverUpdateTimerOverride = 0.2f;
-							ASD.skillSlot = SkillSlot.Utility;
+							bool flag = ASD.customName == "Attack";
+							if (flag)
+							{
+								ASD.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
+								ASD.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
+								ASD.maxDistance = 100f;
+								ASD.minDistance = 10f;
+								ASD.skillSlot = SkillSlot.None;
+							}
+
+							bool flag2 = ASD.customName == "Shatter";
+							if (flag2)
+							{
+								ASD.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
+								ASD.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
+								ASD.maxDistance = 12f;
+								ASD.minDistance = 0f;
+								ASD.skillSlot = SkillSlot.Utility;
 						}
 
 					}
-					CM.GetBody().baseMoveSpeed = 25f;
-					CM.GetBody().baseAcceleration = 160f;
-					CM.inventory.GiveItem(RoR2Content.Items.HealthDecay.itemIndex, 10);
+
+					CM2.GetBody().baseMoveSpeed = 25f;
+					CM2.GetBody().baseAcceleration = 160f;
+					CM2.inventory.GiveItem(RoR2Content.Items.HealthDecay.itemIndex, 15);
+					}
 
 
 				}
+				SecondaryPhantasm.SummonablesList2.Clear();
 
 
+				Debug.Log(SecondaryPhantasm.SummonablesList2);
 			}
-			SecondaryPhantasm.SummonablesList2.Clear();
-
-
-			Debug.Log(SecondaryPhantasm.SummonablesList2);
-
-
+			
 		}
+
+
+		
 
 
 
@@ -71,10 +78,10 @@ namespace HenryMod.SkillStates
 		{
 
 			base.OnExit();
-			base.GetComponent<RoR2.SkillLocator>().primary.UnsetSkillOverride(1, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("Mindwrack")), RoR2.GenericSkill.SkillOverridePriority.Replacement);
-			base.GetComponent<RoR2.SkillLocator>().secondary.UnsetSkillOverride(1, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("Diversion")), RoR2.GenericSkill.SkillOverridePriority.Replacement);
-			base.GetComponent<RoR2.SkillLocator>().utility.UnsetSkillOverride(1, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("Distortion")), RoR2.GenericSkill.SkillOverridePriority.Replacement);
-			base.GetComponent<RoR2.SkillLocator>().special.UnsetSkillOverride(1, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("ShatterSkillswapCancel")), RoR2.GenericSkill.SkillOverridePriority.Replacement);
+			base.GetComponent<RoR2.SkillLocator>().primary.UnsetSkillOverride(1, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("Mindwrack")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
+			base.GetComponent<RoR2.SkillLocator>().secondary.UnsetSkillOverride(1, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("Diversion")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
+			base.GetComponent<RoR2.SkillLocator>().utility.UnsetSkillOverride(1, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("Distortion")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
+			base.GetComponent<RoR2.SkillLocator>().special.UnsetSkillOverride(1, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("ShatterSkillswapCancel")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
 
 		}
 

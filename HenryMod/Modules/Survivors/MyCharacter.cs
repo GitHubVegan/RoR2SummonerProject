@@ -10,7 +10,9 @@ namespace HenryMod.Modules.Survivors
 {
     internal class MyCharacter : SurvivorBase
     {
-        internal override string bodyName { get; set; } = "Henry";
+        internal override bool registerSurvivor { get; set; } = true;
+
+        internal override string bodyName { get; set; } = "Mesmer";
 
         internal override GameObject bodyPrefab { get; set; }
         internal override GameObject displayPrefab { get; set; }
@@ -24,8 +26,8 @@ namespace HenryMod.Modules.Survivors
         {
             armor = 20f,
             armorGrowth = 0f,
-            bodyName = "HenryBody",
-            bodyNameToken = HenryPlugin.developerPrefix + "_HENRY_BODY_NAME",
+            bodyName = "MesmerBody",
+            bodyNameToken = HenryPlugin.developerPrefix + "_MESMER_BODY_NAME",
             bodyColor = Color.grey,
             characterPortrait = Modules.Assets.LoadCharacterIcon("Henry"),
             crosshair = Modules.Assets.LoadCrosshair("Standard"),
@@ -34,22 +36,17 @@ namespace HenryMod.Modules.Survivors
             healthRegen = 1.5f,
             jumpCount = 1,
             maxHealth = 110f,
-            subtitleNameToken = HenryPlugin.developerPrefix + "_HENRY_BODY_SUBTITLE",
+            subtitleNameToken = HenryPlugin.developerPrefix + "_MESMER_BODY_SUBTITLE",
             podPrefab = Resources.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod")
         };
 
         internal static Material henryMat = Modules.Assets.CreateMaterial("matHenry");
-        internal override int mainRendererIndex { get; set; } = 2;
+        internal override int mainRendererIndex { get; set; } = 1;
 
         internal override CustomRendererInfo[] customRendererInfos { get; set; } = new CustomRendererInfo[] {
                 new CustomRendererInfo
                 {
-                    childName = "SwordModel",
-                    material = henryMat,
-                },
-                new CustomRendererInfo
-                {
-                    childName = "GunModel",
+                    childName = "SpearModel",
                     material = henryMat,
                 },
                 new CustomRendererInfo
@@ -58,7 +55,7 @@ namespace HenryMod.Modules.Survivors
                     material = henryMat
                 }};
 
-        internal override Type characterMainState { get; set; } = typeof(EntityStates.GenericCharacterMain);
+        internal override Type characterMainState { get; set; } = typeof(SkillStates.Maintest);
 
         // item display stuffs
         internal override ItemDisplayRuleSet itemDisplayRuleSet { get; set; }
@@ -103,23 +100,47 @@ namespace HenryMod.Modules.Survivors
                 skillName = "Mindwrack",
                 skillNameToken = "Mindwrack",
                 skillDescriptionToken = "Mindwrack",
-                skillIcon = Resources.Load<Sprite>("textures/achievementicons/texCompleteMainEndingHardIcon.png"),
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("Mindwrack"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Mindwrack)),
-                activationStateMachineName = "Slide",
-                baseMaxStock = 1,
-                baseRechargeInterval = 1f,
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 3,
+                baseRechargeInterval = 2.5f,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
-                fullRestockOnAssign = true,
+                fullRestockOnAssign = false,
                 interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = false,
                 mustKeyPress = true,
                 cancelSprintingOnActivation = false,
                 rechargeStock = 1,
+                requiredStock = 0,
+                stockToConsume = 0
+            });
+
+            SkillDef rapierSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "PhantasmRapier",
+                skillNameToken = "PhantasmRapier",
+                skillDescriptionToken = "PhantasmRapier",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSecondaryIcon"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.PhantasmRapier)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 2f,
+                beginSkillCooldownOnSkillEnd = true,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = false,
+                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = false,
+                mustKeyPress = false,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
                 requiredStock = 1,
-                stockToConsume = 1
+                stockToConsume = 1,
             });
 
             SkillDef primaryphantasmSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
@@ -127,15 +148,15 @@ namespace HenryMod.Modules.Survivors
                 skillName = "PrimaryPhantasm",
                 skillNameToken = "PrimaryPhantasm",
                 skillDescriptionToken = "PrimaryPhantasm",
-                skillIcon = Resources.Load<Sprite>("textures/achievementicons/texFindUniqueNewtStatuesIcon"),
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("SecondaryPhantasm"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.PrimaryPhantasm)),
-                activationStateMachineName = "Slide",
-                baseMaxStock = 1,
-                baseRechargeInterval = 1f,
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 3,
+                baseRechargeInterval = 2.5f,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
-                fullRestockOnAssign = true,
+                fullRestockOnAssign = false,
                 interruptPriority = EntityStates.InterruptPriority.Skill,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = false,
@@ -159,7 +180,7 @@ namespace HenryMod.Modules.Survivors
                 skillDescriptionToken = "MindwrackClone",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSecondaryIcon"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.MindwrackClone)),
-                activationStateMachineName = "Slide",
+                activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
                 baseRechargeInterval = 1f,
                 beginSkillCooldownOnSkillEnd = false,
@@ -169,12 +190,11 @@ namespace HenryMod.Modules.Survivors
                 interruptPriority = EntityStates.InterruptPriority.Skill,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = false,
-                mustKeyPress = true,
+                mustKeyPress = false,
                 cancelSprintingOnActivation = false,
                 rechargeStock = 1,
                 requiredStock = 1,
-                stockToConsume = 1,
-                keywordTokens = new string[] { "KEYWORD_AGILE" }
+                stockToConsume = 1
             });
 
             SkillDef diversionSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
@@ -182,23 +202,23 @@ namespace HenryMod.Modules.Survivors
                 skillName = "Diversion",
                 skillNameToken = "Diversion",
                 skillDescriptionToken = "Diversion",
-                skillIcon = Resources.Load<Sprite>("textures/achievementicons/texCompleteMainEndingHardIcon.png"),
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("Diversion"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Diversion)),
-                activationStateMachineName = "Slide",
+                activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
-                baseRechargeInterval = 1f,
+                baseRechargeInterval = 12f,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
-                fullRestockOnAssign = true,
+                fullRestockOnAssign = false,
                 interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = false,
                 mustKeyPress = true,
                 cancelSprintingOnActivation = false,
                 rechargeStock = 1,
-                requiredStock = 1,
-                stockToConsume = 1
+                requiredStock = 0,
+                stockToConsume = 0
             });
 
             SkillDef diversioncloneSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
@@ -208,7 +228,7 @@ namespace HenryMod.Modules.Survivors
                 skillDescriptionToken = "DiversionClone",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSecondaryIcon"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.DiversionClone)),
-                activationStateMachineName = "Slide",
+                activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
                 baseRechargeInterval = 1f,
                 beginSkillCooldownOnSkillEnd = false,
@@ -218,7 +238,7 @@ namespace HenryMod.Modules.Survivors
                 interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = false,
-                mustKeyPress = true,
+                mustKeyPress = false,
                 cancelSprintingOnActivation = false,
                 rechargeStock = 1,
                 requiredStock = 1,
@@ -230,15 +250,15 @@ namespace HenryMod.Modules.Survivors
                 skillName = "SecondaryPhantasm",
                 skillNameToken = "SecondaryPhantasm",
                 skillDescriptionToken = "SecondaryPhantasm",
-                skillIcon = Resources.Load<Sprite>("textures/achievementicons/texFindUniqueNewtStatuesIcon"),
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("PrimaryPhantasm"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.SecondaryPhantasm)),
-                activationStateMachineName = "Slide",
+                activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
-                baseRechargeInterval = 1f,
+                baseRechargeInterval = 12f,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
-                fullRestockOnAssign = true,
+                fullRestockOnAssign = false,
                 interruptPriority = EntityStates.InterruptPriority.Skill,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = false,
@@ -260,23 +280,23 @@ namespace HenryMod.Modules.Survivors
                 skillName = "Distortion",
                 skillNameToken = "Distortion",
                 skillDescriptionToken = "Distortion",
-                skillIcon = Resources.Load<Sprite>("textures/achievementicons/texCompleteMainEndingHardIcon.png"),
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("Distortion"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Distortion)),
-                activationStateMachineName = "Slide",
+                activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
-                baseRechargeInterval = 1f,
+                baseRechargeInterval = 18f,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
-                fullRestockOnAssign = true,
+                fullRestockOnAssign = false,
                 interruptPriority = EntityStates.InterruptPriority.Skill,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = true,
                 mustKeyPress = true,
                 cancelSprintingOnActivation = false,
                 rechargeStock = 1,
-                requiredStock = 1,
-                stockToConsume = 1,
+                requiredStock = 0,
+                stockToConsume = 0,
                 keywordTokens = new string[] { "KEYWORD_AGILE" }
             });
 
@@ -285,15 +305,15 @@ namespace HenryMod.Modules.Survivors
                 skillName = "UtilityPhantasm",
                 skillNameToken = "UtilityPhantasm",
                 skillDescriptionToken = "UtilityPhantasm",
-                skillIcon = Resources.Load<Sprite>("textures/achievementicons/texFindUniqueNewtStatuesIcon"),
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("UtilityPhantasm"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.UtilityPhantasm)),
-                activationStateMachineName = "Slide",
+                activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
-                baseRechargeInterval = 1f,
+                baseRechargeInterval = 18f,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
-                fullRestockOnAssign = true,
+                fullRestockOnAssign = false,
                 interruptPriority = EntityStates.InterruptPriority.Skill,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = false,
@@ -315,9 +335,9 @@ namespace HenryMod.Modules.Survivors
                 skillName = "ShatterSkillswap",
                 skillNameToken = "ShatterSkillswap",
                 skillDescriptionToken = "ShatterSkillswap",
-                skillIcon = Resources.Load<Sprite>("textures/achievementicons/texCompleteMainEndingHardIcon.png"),
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("ShatterSkillswap"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.ShatterSkillswap)),
-                activationStateMachineName = "Slide",
+                activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
                 baseRechargeInterval = 1f,
                 beginSkillCooldownOnSkillEnd = false,
@@ -341,9 +361,9 @@ namespace HenryMod.Modules.Survivors
                 skillName = "ShatterSkillswapCancel",
                 skillNameToken = "ShatterSkillswapCancel",
                 skillDescriptionToken = "ShatterSkillswapCancel",
-                skillIcon = Resources.Load<Sprite>("textures/achievementicons/texFindUniqueNewtStatuesIcon"),
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("ShatterSkillswapCancel"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.ShatterSkillswapCancel)),
-                activationStateMachineName = "Slide",
+                activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
                 baseRechargeInterval = 1f,
                 beginSkillCooldownOnSkillEnd = false,
@@ -389,17 +409,12 @@ namespace HenryMod.Modules.Survivors
             {
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("meshHenrySword"),
+                    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("Spearmesh"),
                     renderer = defaultRenderers[0].renderer
                 },
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("meshHenryGun"),
-                    renderer = defaultRenderers[1].renderer
-                },
-                new SkinDef.MeshReplacement
-                {
-                    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("meshHenry"),
+                    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("MageMesh"),
                     renderer = defaultRenderers[instance.mainRendererIndex].renderer
                 }
             };
@@ -428,12 +443,12 @@ namespace HenryMod.Modules.Survivors
             {
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("meshHenrySwordAlt"),
+                    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("Spearmesh"),
                     renderer = defaultRenderers[0].renderer
                 },
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("meshHenryAlt"),
+                    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("MageMesh"),
                     renderer = defaultRenderers[instance.mainRendererIndex].renderer
                 }
             };

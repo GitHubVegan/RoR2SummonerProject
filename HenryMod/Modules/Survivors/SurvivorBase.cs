@@ -10,6 +10,8 @@ namespace HenryMod.Modules.Survivors
     {
         internal static SurvivorBase instance;
 
+        internal abstract bool registerSurvivor { get; set; }
+
         internal abstract string bodyName { get; set; }
 
         internal abstract GameObject bodyPrefab { get; set; }
@@ -55,7 +57,11 @@ namespace HenryMod.Modules.Survivors
 
                 displayPrefab = Modules.Prefabs.CreateDisplayPrefab(bodyName + "Display", bodyPrefab, bodyInfo);
 
-                Modules.Prefabs.RegisterNewSurvivor(bodyPrefab, displayPrefab, Color.grey, bodyName.ToUpper(), characterUnlockableDef, sortPosition);
+                //Modules.Prefabs.RegisterNewSurvivor(bodyPrefab, displayPrefab, Color.grey, bodyName.ToUpper(), characterUnlockableDef, sortPosition);
+                if (registerSurvivor == true)
+                {
+                    Modules.Prefabs.RegisterNewSurvivor(bodyPrefab, displayPrefab, Color.grey, bodyName.ToUpper(), characterUnlockableDef, sortPosition);
+                }
 
                 InitializeHitboxes();
                 InitializeSkills();

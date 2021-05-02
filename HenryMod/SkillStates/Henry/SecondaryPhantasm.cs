@@ -120,8 +120,8 @@ namespace HenryMod.SkillStates
                 masterPrefab = SecondaryPhantasmMaster,
                 position = hitInfo.point + Vector3.up * d,
                 rotation = base.characterBody.transform.rotation,
-                //summonerBodyObject = base.characterBody.gameObject,
-                ignoreTeamMemberLimit = false,
+                summonerBodyObject = base.characterBody.gameObject,
+                ignoreTeamMemberLimit = true,
                 teamIndexOverride = new TeamIndex?(TeamIndex.Player)
             }.Perform();
             characterMaster.GetBody().RecalculateStats();
@@ -132,6 +132,7 @@ namespace HenryMod.SkillStates
             characterMaster.inventory.GiveItem(RoR2Content.Items.LunarSecondaryReplacement.itemIndex);
             characterMaster.gameObject.GetComponent<BaseAI>().leader.gameObject = base.characterBody.gameObject;
             characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().utility.SetSkillOverride(4, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("DiversionClone")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
+            characterMaster.GetBody().isPlayerControlled = false;
             SummonablesList2.Add(characterMaster);
             return false;
             

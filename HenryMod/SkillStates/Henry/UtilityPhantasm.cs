@@ -120,8 +120,8 @@ namespace HenryMod.SkillStates
                 masterPrefab = UtilityPhantasmMaster,
                 position = hitInfo.point + Vector3.up * d,
                 rotation = base.characterBody.transform.rotation,
-                //summonerBodyObject = base.characterBody.gameObject,
-                ignoreTeamMemberLimit = false,
+                summonerBodyObject = base.characterBody.gameObject,
+                ignoreTeamMemberLimit = true,
                 teamIndexOverride = new TeamIndex?(TeamIndex.Player)
             }.Perform();
             characterMaster.GetBody().RecalculateStats();
@@ -129,6 +129,7 @@ namespace HenryMod.SkillStates
             characterMaster.inventory.ResetItem(RoR2Content.Items.ExtraLife.itemIndex);
             characterMaster.inventory.GiveItem(RoR2Content.Items.Ghost.itemIndex);
             characterMaster.gameObject.GetComponent<BaseAI>().leader.gameObject = base.characterBody.gameObject;
+            characterMaster.GetBody().isPlayerControlled = false;
             SummonablesList3.Add(characterMaster);
             return false;
             

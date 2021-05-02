@@ -119,8 +119,8 @@ namespace HenryMod.SkillStates
                 masterPrefab = PrimaryPhantasmMaster,
                 position = hitInfo.point + Vector3.up * d,
                 rotation = base.characterBody.transform.rotation,
-                //summonerBodyObject = base.characterBody.gameObject,
-                ignoreTeamMemberLimit = false,
+                summonerBodyObject = base.characterBody.gameObject,
+                ignoreTeamMemberLimit = true,
                 teamIndexOverride = new TeamIndex?(TeamIndex.Player)
             }.Perform();
             characterMaster.GetBody().RecalculateStats();
@@ -133,6 +133,7 @@ namespace HenryMod.SkillStates
             characterMaster.gameObject.GetComponent<BaseAI>().leader.gameObject = base.characterBody.gameObject;
             characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().primary.SetSkillOverride(2, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("PhantasmRapier")), RoR2.GenericSkill.SkillOverridePriority.Default);
             characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().utility.SetSkillOverride(2, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("MindwrackClone")), RoR2.GenericSkill.SkillOverridePriority.Default);
+            characterMaster.GetBody().isPlayerControlled = false;
             SummonablesList1.Add(characterMaster);
             return false;
             

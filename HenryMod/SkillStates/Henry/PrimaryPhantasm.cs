@@ -76,7 +76,7 @@ namespace HenryMod.SkillStates
                 characterMaster.GetBody().baseAcceleration = 100f;
                 characterMaster.inventory.CopyItemsFrom(base.characterBody.inventory);
                 characterMaster.inventory.ResetItem(RoR2Content.Items.ExtraLife.itemIndex);
-                characterMaster.inventory.GiveItem(RoR2Content.Items.Ghost.itemIndex);
+                //characterMaster.inventory.GiveItem(RoR2Content.Items.Ghost.itemIndex);
                 characterMaster.inventory.GiveItem(RoR2Content.Items.HealthDecay.itemIndex, 18);
                 characterMaster.gameObject.GetComponent<BaseAI>().leader.gameObject = base.characterBody.gameObject;
                 characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().primary.SetSkillOverride(2, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("PhantasmRapier")), RoR2.GenericSkill.SkillOverridePriority.Default);

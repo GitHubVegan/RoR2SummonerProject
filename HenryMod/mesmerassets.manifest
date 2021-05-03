@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 606043531
+CRC: 466047423
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 5a461cb1ef16dfa1fa6af7987a744c8e
+    Hash: 896973bf8e84985670356ec16abe0e64
   TypeTreeHash:
     serializedVersion: 2
     Hash: 972103ac939f0471d19a07f535135cc4
@@ -105,6 +105,7 @@ Assets:
 - Assets/HenryAssets/Textures/texBazooka.png
 - Assets/HenryAssets/VFX/Textures/texRipple.png
 - Assets/HenryAssets/VFX/ImpactHenrySlash.prefab
+- Assets/MesmerAssets/Shaders/Hologram.shader
 - Assets/HenryAssets/Animations/Armature_FlightR.anim
 - Assets/HenryAssets/VFX/Mesh/meshSwing.asset
 - Assets/HenryAssets/VFX/HenryBazookaMuzzleFlash.prefab
@@ -161,6 +162,7 @@ Assets:
 - Assets/HenryAssets/Animations/SprintF.anim
 - Assets/HenryAssets/Mesh/meshHenrySwordAlt.mesh
 - Assets/MesmerAssets/PhantasmSword/Textures/SwordPhantasmPlaceholderTex.png
+- Assets/MesmerAssets/Materials/PhantasmHologram2.mat
 - Assets/HenryAssets/Textures/texHenry.png
 - Assets/HenryAssets/Icons/texBazookaOutIcon.png
 - Assets/HenryAssets/Animations/maskAimPitch.mask
@@ -190,6 +192,7 @@ Assets:
 - Assets/HenryAssets/Icons/texHenryIcon.png
 - Assets/HenryAssets/Icons/texUtilityIcon.png
 - Assets/HenryAssets/Animations/Ascend.anim
+- Assets/MesmerAssets/Shaders/banner.png
 - Assets/HenryAssets/VFX/Materials/matPunchEffect.mat
 - Assets/HenryAssets/VFX/Textures/texPunchImpact.png
 - Assets/MesmerAssets/Icons/Diversion.png
@@ -239,6 +242,7 @@ Assets:
 - Assets/HenryAssets/VFX/HenrySwordSwingEffect.prefab
 - Assets/HenryAssets/Animations/Descend.anim
 - Assets/HenryAssets/Textures/texHenryDante.png
+- Assets/MesmerAssets/Materials/PhantasmHologram.mat
 - Assets/HenryAssets/Animations/Armature_FlightB.anim
 - Assets/HenryAssets/Animations/AimPitch.anim
 - Assets/MesmerAssets/Icons/PrimaryPhantasm.png

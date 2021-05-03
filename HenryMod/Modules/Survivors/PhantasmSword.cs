@@ -40,19 +40,20 @@ namespace HenryMod.Modules.Survivors
             podPrefab = Resources.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod")
         };
 
-        internal static Material henryMat = Modules.Assets.CreateMaterial("matHenry");
+        //internal static Material henryMat = Modules.Assets.CreateMaterial("matHenry");
+        internal static Material phantasmMat = Modules.Assets.mainAssetBundle.LoadAsset<Material>("PhantasmHologram");
         internal override int mainRendererIndex { get; set; } = 1;
 
         internal override CustomRendererInfo[] customRendererInfos { get; set; } = new CustomRendererInfo[] {
                 new CustomRendererInfo
                 {
                     childName = "SwordModel",
-                    material = henryMat,
+                    material = phantasmMat,
                 },
                 new CustomRendererInfo
                 {
                     childName = "Model",
-                    material = henryMat
+                    material = phantasmMat
                 }};
 
         internal override Type characterMainState { get; set; } = typeof(EntityStates.GenericCharacterMain); //MAYNOTWORK

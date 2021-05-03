@@ -57,6 +57,24 @@ namespace HenryMod.SkillStates
 
 
                 }
+                CharacterMaster characterMaster = new MasterSummon
+                {
+                    masterPrefab = UtilityPhantasmMaster,
+                    position = base.characterBody.transform.position + Vector3.up * 5,
+                    rotation = base.characterBody.transform.rotation,
+                    summonerBodyObject = base.characterBody.gameObject,
+                    ignoreTeamMemberLimit = true,
+                    teamIndexOverride = new TeamIndex?(TeamIndex.Player)
+                }.Perform();
+                characterMaster.GetBody().RecalculateStats();
+                characterMaster.GetBody().baseMoveSpeed = 10f;
+                characterMaster.GetBody().baseAcceleration = 80f;
+                characterMaster.inventory.CopyItemsFrom(base.characterBody.inventory);
+                characterMaster.inventory.ResetItem(RoR2Content.Items.ExtraLife.itemIndex);
+                characterMaster.inventory.GiveItem(RoR2Content.Items.Ghost.itemIndex);
+                //characterMaster.gameObject.GetComponent<BaseAI>().leader.gameObject = base.characterBody.gameObject;
+                characterMaster.GetBody().isPlayerControlled = false;
+                SummonablesList3.Add(characterMaster);
                 this.Fire();
             }
 
@@ -115,22 +133,6 @@ namespace HenryMod.SkillStates
 
         bool SummonUtility(ref BulletAttack.BulletHit hitInfo)
         {
-            CharacterMaster characterMaster = new MasterSummon
-            {
-                masterPrefab = UtilityPhantasmMaster,
-                position = hitInfo.point + Vector3.up * d,
-                rotation = base.characterBody.transform.rotation,
-                summonerBodyObject = base.characterBody.gameObject,
-                ignoreTeamMemberLimit = true,
-                teamIndexOverride = new TeamIndex?(TeamIndex.Player)
-            }.Perform();
-            characterMaster.GetBody().RecalculateStats();
-            characterMaster.inventory.CopyItemsFrom(base.characterBody.inventory);
-            characterMaster.inventory.ResetItem(RoR2Content.Items.ExtraLife.itemIndex);
-            characterMaster.inventory.GiveItem(RoR2Content.Items.Ghost.itemIndex);
-            //characterMaster.gameObject.GetComponent<BaseAI>().leader.gameObject = base.characterBody.gameObject;
-            characterMaster.GetBody().isPlayerControlled = false;
-            SummonablesList3.Add(characterMaster);
             if (hitInfo.entityObject != null && hitInfo.hitHurtBox != null)
             {
                 UtilityPhantasm.SummonablesList3.RemoveAll(delegate (CharacterMaster C) { return C == null; });
@@ -171,7 +173,7 @@ namespace HenryMod.SkillStates
 
         private static GameObject CreateBody()
         {
-            GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/MageBody"), "UtilityPhantasmBody", true);
+            GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/WispBody"), "UtilityPhantasmBody", true);
             newBody.GetComponentInChildren<EntityStateMachine>().mainStateType = new SerializableEntityStateType(typeof(WardMain));
 
             Modules.Prefabs.bodyPrefabs.Add(newBody);
@@ -180,7 +182,7 @@ namespace HenryMod.SkillStates
 
         private static GameObject CreateMaster()
         {
-            GameObject newMaster = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/charactermasters/MageMonsterMaster"), "UtilityPhantasmMaster", true);
+            GameObject newMaster = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/charactermasters/WispMaster"), "UtilityPhantasmMaster", true);
             newMaster.GetComponent<CharacterMaster>().bodyPrefab = UtilityPhantasmBody;
             foreach (AISkillDriver ai in newMaster.GetComponentsInChildren<AISkillDriver>())
             {

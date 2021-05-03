@@ -12,7 +12,7 @@ namespace HenryMod.SkillStates
 {
     public class ShatterSkillswap : BaseSkillState
     {
-        private float BaseDuration = 0.2f;
+        private float BaseDuration = 0f;
         private float duration;
 
         public override void OnEnter()

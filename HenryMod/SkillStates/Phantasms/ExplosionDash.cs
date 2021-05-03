@@ -30,11 +30,11 @@ namespace HenryMod.SkillStates
             this.stopwatch = 0f;
             this.duration = ExplosionDash.baseDuration;
             Ray aimRay = base.GetAimRay();
-            Vector3 target = base.transform.position - base.gameObject.GetComponent<BaseAI>().currentEnemy.gameObject.transform.position;
-            this.distance1 = Vector3.Distance(base.transform.position, base.gameObject.GetComponent<BaseAI>().currentEnemy.gameObject.transform.position);
+            Vector3 target = base.characterBody.transform.position - base.characterBody.gameObject.GetComponent<BaseAI>().currentEnemy.gameObject.transform.position;
+            this.distance1 = Vector3.Distance(base.characterBody.transform.position, base.characterBody.gameObject.GetComponent<BaseAI>().currentEnemy.gameObject.transform.position);
             if (base.isAuthority)
             {
-                base.characterMotor.velocity = distance1 * aimRay.direction;
+                base.characterMotor.velocity = distance1 * target;
             }
         }
 
@@ -82,12 +82,12 @@ namespace HenryMod.SkillStates
                     }*/
                 }
             }
-            bool flag = base.fixedAge >= this.duration && base.isAuthority;
+            /*bool flag = base.fixedAge >= this.duration && base.isAuthority;
             if (flag)
             {
                 this.Detonate();
                 return;
-            }
+            }*/
         }
 
         private void Detonate()
@@ -109,7 +109,7 @@ namespace HenryMod.SkillStates
                 attacker = base.gameObject,
                 inflictor = base.gameObject,
                 teamIndex = TeamComponent.GetObjectTeam(base.gameObject),
-                baseDamage = this.damageStat * 10f * ExplosionDash.damageCoefficient,
+                baseDamage = this.damageStat * 20f * ExplosionDash.damageCoefficient,
                 baseForce = ExplosionDash.novaForce,
                 position = base.transform.position,
                 radius = ExplosionDash.novaRadius,

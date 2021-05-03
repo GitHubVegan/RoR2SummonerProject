@@ -59,6 +59,29 @@ namespace HenryMod.SkillStates
                     
                     PrimaryPhantasm.SummonablesList1.RemoveAt(0);
                 }
+                CharacterMaster characterMaster = new MasterSummon
+                {
+                    masterPrefab = PrimaryPhantasmMaster,
+                    position = base.characterBody.transform.position + Vector3.forward * 5,
+                    rotation = base.characterBody.transform.rotation,
+                    summonerBodyObject = base.characterBody.gameObject,
+                    ignoreTeamMemberLimit = true,
+                    teamIndexOverride = new TeamIndex?(TeamIndex.Player)
+                }.Perform();
+                characterMaster.GetBody().RecalculateStats();
+                characterMaster.GetBody().baseDamage = characterMaster.GetBody().baseDamage * 0.3f;
+                characterMaster.GetBody().levelDamage = characterMaster.GetBody().levelDamage * 0.3f;
+                characterMaster.GetBody().baseMoveSpeed = 20f;
+                characterMaster.GetBody().baseAcceleration = 100f;
+                characterMaster.inventory.CopyItemsFrom(base.characterBody.inventory);
+                characterMaster.inventory.ResetItem(RoR2Content.Items.ExtraLife.itemIndex);
+                characterMaster.inventory.GiveItem(RoR2Content.Items.Ghost.itemIndex);
+                characterMaster.inventory.GiveItem(RoR2Content.Items.HealthDecay.itemIndex, 18);
+                characterMaster.gameObject.GetComponent<BaseAI>().leader.gameObject = base.characterBody.gameObject;
+                characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().primary.SetSkillOverride(2, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("PhantasmRapier")), RoR2.GenericSkill.SkillOverridePriority.Default);
+                //characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().utility.SetSkillOverride(2, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("MindwrackClone")), RoR2.GenericSkill.SkillOverridePriority.Default);
+                characterMaster.GetBody().isPlayerControlled = false;
+                SummonablesList1.Add(characterMaster);
                 this.Fire();
             }
         }
@@ -114,29 +137,6 @@ namespace HenryMod.SkillStates
 
         bool SummonPrimary(ref BulletAttack.BulletHit hitInfo)
         {
-            CharacterMaster characterMaster = new MasterSummon
-            {
-                masterPrefab = PrimaryPhantasmMaster,
-                position = hitInfo.point + Vector3.up * d,
-                rotation = base.characterBody.transform.rotation,
-                summonerBodyObject = base.characterBody.gameObject,
-                ignoreTeamMemberLimit = true,
-                teamIndexOverride = new TeamIndex?(TeamIndex.Player)
-            }.Perform();
-            characterMaster.GetBody().RecalculateStats();
-            characterMaster.GetBody().baseDamage = characterMaster.GetBody().baseDamage * 0.3f;
-            characterMaster.GetBody().levelDamage = characterMaster.GetBody().levelDamage * 0.3f;
-            characterMaster.GetBody().baseMoveSpeed = 20f;
-            characterMaster.GetBody().baseAcceleration = 100f;
-            characterMaster.inventory.CopyItemsFrom(base.characterBody.inventory);
-            characterMaster.inventory.ResetItem(RoR2Content.Items.ExtraLife.itemIndex);
-            characterMaster.inventory.GiveItem(RoR2Content.Items.Ghost.itemIndex);
-            characterMaster.inventory.GiveItem(RoR2Content.Items.HealthDecay.itemIndex, 14);
-            characterMaster.gameObject.GetComponent<BaseAI>().leader.gameObject = base.characterBody.gameObject;
-            characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().primary.SetSkillOverride(2, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("PhantasmRapier")), RoR2.GenericSkill.SkillOverridePriority.Default);
-            //characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().utility.SetSkillOverride(2, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("MindwrackClone")), RoR2.GenericSkill.SkillOverridePriority.Default);
-            characterMaster.GetBody().isPlayerControlled = false;
-            SummonablesList1.Add(characterMaster);
             PrimaryPhantasm.SummonablesList1.RemoveAll(delegate (CharacterMaster C) { return C == null; });
             if (PrimaryPhantasm.SummonablesList1.Count > 0)
             {
@@ -207,6 +207,7 @@ namespace HenryMod.SkillStates
                 if (customCharacterbody.name == "PhantasmSwordBody")
                 {
                     newBody = customCharacterbody;
+
                 }
             }
 

@@ -29,7 +29,7 @@ namespace HenryMod.SkillStates
         public override void OnEnter()
         {
             base.OnEnter();
-            this.duration = 0.2f;
+            this.duration = 0f;
             if (base.isAuthority)
             {
                 this.Fire();

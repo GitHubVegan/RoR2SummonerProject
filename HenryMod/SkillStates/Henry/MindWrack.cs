@@ -11,7 +11,7 @@ namespace HenryMod.SkillStates
 	internal class Mindwrack : BaseSkillState
 	{
 		
-		private float duration = 0.2f;
+		private float duration = 0f;
 		public override void OnEnter()
 		{
 			base.OnEnter();
@@ -30,39 +30,7 @@ namespace HenryMod.SkillStates
 					{
 						if (CM.GetBody().healthComponent.alive == true)
 						{
-						CM.GetBody().GetComponent<RoR2.SkillLocator>().primary.SetSkillOverride(2, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("ExplosionDash")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
-
-						MindwrackClone.damagecoefficient += 0.5f;
-							foreach (AISkillDriver ASD in CM.GetComponentsInChildren<AISkillDriver>())
-							{
-
-								bool flag = ASD.customName == "Attack";
-								if (flag)
-								{
-									ASD.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
-									ASD.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
-									ASD.maxDistance = 100f;
-									ASD.minDistance = 8f;
-									ASD.skillSlot = SkillSlot.None;
-									ASD.noRepeat = true;
-								}
-
-								bool flag2 = ASD.customName == "Shatter";
-								if (flag2)
-								{
-									ASD.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
-									ASD.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
-									ASD.maxDistance = 8f;
-									ASD.minDistance = 0f;
-									ASD.skillSlot = SkillSlot.Primary;
-								}
-
-							}
-
-							CM.GetBody().baseMoveSpeed = 25f;
-							CM.GetBody().baseAcceleration = 160f;
-							CM.inventory.GiveItem(RoR2Content.Items.HealthDecay.itemIndex, 15);
-
+						CM.GetBody().GetComponent<RoR2.SkillLocator>().primary.SetSkillOverride(2, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("Flurry")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
 						}
 
 

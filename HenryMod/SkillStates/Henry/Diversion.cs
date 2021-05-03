@@ -10,7 +10,7 @@ namespace HenryMod.SkillStates
 {
 	internal class Diversion : BaseSkillState
 	{
-		private float duration = 0.2f;
+		private float duration = 0f;
 		public override void OnEnter()
 		{
 			base.OnEnter();

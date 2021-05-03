@@ -14,7 +14,7 @@ namespace HenryMod.SkillStates
 {
 	internal class Distortion : BaseSkillState
 	{
-		public float BaseDuration = 0.2f;
+		public float BaseDuration = 0f;
 		private float duration;
 		public static GameObject affixHauntedWard;
 

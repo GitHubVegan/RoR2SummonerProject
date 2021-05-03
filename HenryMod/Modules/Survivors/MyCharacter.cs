@@ -167,6 +167,30 @@ namespace HenryMod.Modules.Survivors
                 stockToConsume = 1,
             });
 
+            SkillDef flurryCloneSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "Flurry",
+                skillNameToken = "Flurry",
+                skillDescriptionToken = "Flurry",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSecondaryIcon"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Flurry)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 1f,
+                beginSkillCooldownOnSkillEnd = true,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = false,
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = false,
+                mustKeyPress = false,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1
+            });
+
             SkillDef groundSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "PhantasmGround",
@@ -252,30 +276,6 @@ namespace HenryMod.Modules.Survivors
                 skillDescriptionToken = "MindwrackClone",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSecondaryIcon"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.MindwrackClone)),
-                activationStateMachineName = "Weapon",
-                baseMaxStock = 1,
-                baseRechargeInterval = 1f,
-                beginSkillCooldownOnSkillEnd = false,
-                canceledFromSprinting = false,
-                forceSprintDuringState = false,
-                fullRestockOnAssign = true,
-                interruptPriority = EntityStates.InterruptPriority.Skill,
-                resetCooldownTimerOnUse = false,
-                isCombatSkill = false,
-                mustKeyPress = false,
-                cancelSprintingOnActivation = false,
-                rechargeStock = 1,
-                requiredStock = 1,
-                stockToConsume = 1
-            });
-
-            SkillDef flurryCloneSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
-            {
-                skillName = "Flurry",
-                skillNameToken = "Flurry",
-                skillDescriptionToken = "Flurry",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSecondaryIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Flurry)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
                 baseRechargeInterval = 1f,

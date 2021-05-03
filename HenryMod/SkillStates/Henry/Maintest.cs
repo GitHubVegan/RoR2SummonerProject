@@ -107,7 +107,7 @@ namespace HenryMod.SkillStates
 					return !(C.GetBody().healthComponent.alive);
 				});
 			}
-			if (PrimaryPhantasm.SummonablesList1.Count >= 3)
+			if (PrimaryPhantasm.SummonablesList1.Count >= 3 || base.GetComponent<RoR2.SkillLocator>().primary.stock < 1)
 			{
 				base.GetComponent<RoR2.SkillLocator>().primary.SetSkillOverride(1, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("PrimaryPhantasmTarget")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
 

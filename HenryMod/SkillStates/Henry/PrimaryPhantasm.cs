@@ -34,6 +34,7 @@ namespace HenryMod.SkillStates
         {
             base.OnEnter();
             this.duration = 0.2f;
+            Ray aimRay = base.GetAimRay();
             if (base.isAuthority)
             {
                 PrimaryPhantasm.SummonablesList1.RemoveAll(delegate (CharacterMaster C) { return C == null; });
@@ -62,7 +63,7 @@ namespace HenryMod.SkillStates
                 CharacterMaster characterMaster = new MasterSummon
                 {
                     masterPrefab = PrimaryPhantasmMaster,
-                    position = base.characterBody.transform.position + Vector3.forward * 5,
+                    position = base.characterBody.transform.position + aimRay.direction * 12,
                     rotation = base.characterBody.transform.rotation,
                     summonerBodyObject = base.characterBody.gameObject,
                     ignoreTeamMemberLimit = true,
@@ -97,8 +98,6 @@ namespace HenryMod.SkillStates
                 if (base.isAuthority)
                 {
                     Ray aimRay = base.GetAimRay();
-
-
                     new BulletAttack
                     {
 

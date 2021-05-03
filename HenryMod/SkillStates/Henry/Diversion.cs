@@ -10,10 +10,11 @@ namespace HenryMod.SkillStates
 {
 	internal class Diversion : BaseSkillState
 	{
-		private float duration = 0f;
+		private float duration = 0.1f;
 		public override void OnEnter()
 		{
 			base.OnEnter();
+			SecondaryPhantasm.SummonablesList2.RemoveAll(delegate (CharacterMaster C) { return C == null; });
 			if (SecondaryPhantasm.SummonablesList2.Count > 0)
 			{
 				SecondaryPhantasm.SummonablesList2.RemoveAll(delegate (CharacterMaster CM2)

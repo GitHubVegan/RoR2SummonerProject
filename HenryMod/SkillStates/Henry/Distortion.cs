@@ -14,7 +14,7 @@ namespace HenryMod.SkillStates
 {
 	internal class Distortion : BaseSkillState
 	{
-		public float BaseDuration = 0f;
+		public float BaseDuration = 0.1f;
 		private float duration;
 		public static GameObject affixHauntedWard;
 
@@ -22,6 +22,7 @@ namespace HenryMod.SkillStates
 		{
 			base.OnEnter();
 			this.duration = this.BaseDuration;
+			UtilityPhantasm.SummonablesList3.RemoveAll(delegate (CharacterMaster C) { return C == null; });
 			if (UtilityPhantasm.SummonablesList3.Count > 0)
 			{
 				UtilityPhantasm.SummonablesList3.RemoveAll(delegate (CharacterMaster CM3)
@@ -47,8 +48,8 @@ namespace HenryMod.SkillStates
 								HenryPlugin.DestroyImmediate(ASD);
 							}
 						}
-						CM3.GetBody().baseMoveSpeed = 0f;
-						CM3.inventory.GiveItem(RoR2Content.Items.HealthDecay.itemIndex, 3);
+						//CM3.GetBody().baseMoveSpeed = 0f;
+						//CM3.inventory.GiveItem(RoR2Content.Items.HealthDecay.itemIndex, 3);
 						CM3.gameObject.AddComponent<MasterSuicideOnTimer>().lifeTimer = 0f;
 
 

@@ -15,11 +15,12 @@ namespace HenryMod.SkillStates
 {
     public class Flurry : BaseSkillState
     {
-        public static float damageCoefficient = 5f;
+        public static float damageCoefficient = 4f;
         public static float procCoefficient = 0.4f;
         public static float force = 0f;
         public static float recoil = 0f;
         public static float range = 12.5f;
+        private bool suicide;
 
 
         private float duration;
@@ -84,6 +85,14 @@ namespace HenryMod.SkillStates
         public override void OnExit()
         {
             base.OnExit();
+            if(!suicide)
+            {
+                suicide = true;
+            }
+            if(suicide)
+            {
+                if (base.healthComponent) base.healthComponent.Suicide(null, null, DamageType.Generic);
+            }
         }
 
      

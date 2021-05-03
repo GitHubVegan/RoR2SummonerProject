@@ -11,11 +11,12 @@ namespace HenryMod.SkillStates
 	internal class Mindwrack : BaseSkillState
 	{
 		
-		private float duration = 0f;
+		private float duration = 0.1f;
 		public override void OnEnter()
 		{
 			base.OnEnter();
-			MindwrackClone.damagecoefficient = 1f;
+			Flurry.damageCoefficient = 3f;
+			PrimaryPhantasm.SummonablesList1.RemoveAll(delegate (CharacterMaster C) { return C == null; });
 			if (PrimaryPhantasm.SummonablesList1.Count > 0)
 			{
 				PrimaryPhantasm.SummonablesList1.RemoveAll(delegate (CharacterMaster CM1)
@@ -30,6 +31,7 @@ namespace HenryMod.SkillStates
 					{
 						if (CM.GetBody().healthComponent.alive == true)
 						{
+						Flurry.damageCoefficient += 1f;
 						CM.GetBody().GetComponent<RoR2.SkillLocator>().primary.SetSkillOverride(2, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("Flurry")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
 						}
 

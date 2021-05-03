@@ -30,6 +30,8 @@ namespace HenryMod.SkillStates
         {
             base.OnEnter();
             this.duration = PhantasmGround.totalDuration;
+            base.characterBody.baseMoveSpeed = 6f;
+            base.characterBody.baseAcceleration = 12f;
             this.FireBullet();
         }
 
@@ -62,7 +64,7 @@ namespace HenryMod.SkillStates
                     muzzleName = null,
                     hitEffectPrefab = hitEffectPrefab,
                     isCrit = Util.CheckRoll(this.critStat, base.characterBody.master),
-                    radius = 1.5f,
+                    radius = 3f,
                     smartCollision = true,
                     damageType = DamageType.Generic,
                     hitCallback = grounded

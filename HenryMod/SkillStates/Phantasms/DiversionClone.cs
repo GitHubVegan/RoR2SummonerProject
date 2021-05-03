@@ -70,7 +70,7 @@ namespace HenryMod.SkillStates
                 attackerFiltering = AttackerFiltering.NeverHit,
                 damageType = DamageType.Freeze2s,
             }.Fire();
-
+            
             if (base.healthComponent) base.healthComponent.Suicide(null, null, DamageType.Generic);
         }
 

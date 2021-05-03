@@ -102,27 +102,15 @@ namespace HenryMod.SkillStates
                     foreach (CharacterMaster cm in UtilityPhantasm.SummonablesList3)
                     {
                         cm.gameObject.GetComponent<BaseAI>().leader.gameObject = hitInfo.entityObject;
-                        /*foreach (AISkillDriver ai in cm.GetComponentsInChildren<AISkillDriver>())
-                        {
-                            bool flag = ai.customName == "Attack";
-                            if (flag)
-                            {
-                                ai.minDistance = 1f;
-                            }
-                            bool flag2 = ai.customName == "Shatter";
-                            if (flag2)
-                            {
-                                ai.maxDistance = 1f;
-                            }
-                        }*/
+                        
                     }
                 }
-                else
+                /*else
                 {
                     foreach (CharacterMaster cm in UtilityPhantasm.SummonablesList3)
                     {
                         cm.gameObject.GetComponent<BaseAI>().leader.gameObject = base.characterBody.gameObject;
-                        /*foreach (AISkillDriver ai in cm.GetComponentsInChildren<AISkillDriver>())
+                        foreach (AISkillDriver ai in cm.GetComponentsInChildren<AISkillDriver>())
                         {
                             bool flag = ai.customName == "Attack";
                             if (flag)
@@ -134,9 +122,9 @@ namespace HenryMod.SkillStates
                             {
                                 ai.minDistance = 15f;
                             }
-                        }*/
+                        }
                     }
-                }
+                }*/
             }
 
             return false;

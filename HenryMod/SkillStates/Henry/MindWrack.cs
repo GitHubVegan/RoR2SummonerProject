@@ -10,7 +10,7 @@ namespace HenryMod.SkillStates
 {
 	internal class Mindwrack : BaseSkillState
 	{
-
+		
 		private float duration = 0.2f;
 		public override void OnEnter()
 		{
@@ -30,7 +30,9 @@ namespace HenryMod.SkillStates
 					{
 						if (CM.GetBody().healthComponent.alive == true)
 						{
-							MindwrackClone.damagecoefficient += 0.5f;
+						CM.GetBody().GetComponent<RoR2.SkillLocator>().primary.SetSkillOverride(2, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("ExplosionDash")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
+
+						MindwrackClone.damagecoefficient += 0.5f;
 							foreach (AISkillDriver ASD in CM.GetComponentsInChildren<AISkillDriver>())
 							{
 
@@ -52,7 +54,7 @@ namespace HenryMod.SkillStates
 									ASD.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
 									ASD.maxDistance = 8f;
 									ASD.minDistance = 0f;
-									ASD.skillSlot = SkillSlot.Utility;
+									ASD.skillSlot = SkillSlot.Primary;
 								}
 
 							}

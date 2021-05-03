@@ -128,7 +128,7 @@ namespace HenryMod.SkillStates
             characterMaster.inventory.CopyItemsFrom(base.characterBody.inventory);
             characterMaster.inventory.ResetItem(RoR2Content.Items.ExtraLife.itemIndex);
             characterMaster.inventory.GiveItem(RoR2Content.Items.Ghost.itemIndex);
-            characterMaster.gameObject.GetComponent<BaseAI>().leader.gameObject = base.characterBody.gameObject;
+            //characterMaster.gameObject.GetComponent<BaseAI>().leader.gameObject = base.characterBody.gameObject;
             characterMaster.GetBody().isPlayerControlled = false;
             SummonablesList3.Add(characterMaster);
             if (hitInfo.entityObject != null && hitInfo.hitHurtBox != null)
@@ -192,12 +192,12 @@ namespace HenryMod.SkillStates
 
             AISkillDriver attackDriver = newMaster.AddComponent<AISkillDriver>();
             attackDriver.customName = "Attack";
-            attackDriver.movementType = AISkillDriver.MovementType.Stop;
+            attackDriver.movementType = AISkillDriver.MovementType.StrafeMovetarget;
             attackDriver.moveTargetType = AISkillDriver.TargetType.CurrentLeader;
             attackDriver.activationRequiresAimConfirmation = false;
             attackDriver.activationRequiresTargetLoS = false;
             attackDriver.selectionRequiresTargetLoS = false;
-            attackDriver.maxDistance = 15f;
+            attackDriver.maxDistance = 5f;
             attackDriver.minDistance = 0f;
             attackDriver.requireSkillReady = false;
             attackDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
@@ -219,7 +219,7 @@ namespace HenryMod.SkillStates
             shatterDriver.activationRequiresTargetLoS = false;
             shatterDriver.selectionRequiresTargetLoS = false;
             shatterDriver.maxDistance = 100f;
-            shatterDriver.minDistance = 15f;
+            shatterDriver.minDistance = 5f;
             shatterDriver.requireSkillReady = false;
             shatterDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
             shatterDriver.ignoreNodeGraph = true;

@@ -31,7 +31,7 @@ namespace HenryMod.SkillStates
 			}
 			if (UtilityPhantasm.SummonablesList3.Count > 0)
 				{
-					var bufftime = UtilityPhantasm.SummonablesList3.Count * 3f;
+					var bufftime = UtilityPhantasm.SummonablesList3.Count * 2.25f;
 					base.characterBody.AddTimedBuff(RoR2Content.Buffs.HiddenInvincibility, bufftime);
 				Distortion.affixHauntedWard = UnityEngine.Object.Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/NetworkedObjects/AffixHauntedWard"));
 				Distortion.affixHauntedWard.GetComponent<TeamFilter>().teamIndex = TeamIndex.None;

@@ -25,8 +25,9 @@ namespace HenryMod.SkillStates
 				{ 
 				foreach (CharacterMaster CM2 in SecondaryPhantasm.SummonablesList2)
 				{
-					if(CM2.GetBody().healthComponent.alive == true)
-					{ 
+					if (CM2.GetBody().healthComponent.alive == true)
+					{
+						CM2.GetBody().GetComponent<RoR2.SkillLocator>().primary.SetSkillOverride(4, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("GravityWell")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
 						foreach (AISkillDriver ASD in CM2.GetComponentsInChildren<AISkillDriver>())
 						{
 
@@ -45,9 +46,9 @@ namespace HenryMod.SkillStates
 							{
 								ASD.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
 								ASD.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
-								ASD.maxDistance = 12f;
+								ASD.maxDistance = 10f;
 								ASD.minDistance = 0f;
-								ASD.skillSlot = SkillSlot.Utility;
+								ASD.skillSlot = SkillSlot.Primary;
 						}
 
 					}

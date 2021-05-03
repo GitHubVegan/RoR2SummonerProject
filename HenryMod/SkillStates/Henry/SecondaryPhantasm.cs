@@ -58,6 +58,26 @@ namespace HenryMod.SkillStates
 
 
                 }
+                CharacterMaster characterMaster = new MasterSummon
+                {
+                    masterPrefab = SecondaryPhantasm.SecondaryPhantasmMaster,
+                    position = base.characterBody.transform.position + Vector3.up * 5,
+                    rotation = base.characterBody.transform.rotation,
+                    summonerBodyObject = base.characterBody.gameObject,
+                    ignoreTeamMemberLimit = true,
+                    teamIndexOverride = new TeamIndex?(TeamIndex.Player)
+                }.Perform();
+                characterMaster.GetBody().RecalculateStats();
+                characterMaster.GetBody().baseMoveSpeed = 20f;
+                characterMaster.GetBody().baseAcceleration = 100f;
+                characterMaster.inventory.CopyItemsFrom(base.characterBody.inventory);
+                characterMaster.inventory.ResetItem(RoR2Content.Items.ExtraLife.itemIndex);
+                characterMaster.inventory.GiveItem(RoR2Content.Items.Ghost.itemIndex);
+                characterMaster.inventory.GiveItem(RoR2Content.Items.HealthDecay.itemIndex, 20);
+                characterMaster.gameObject.GetComponent<BaseAI>().leader.gameObject = base.characterBody.gameObject;
+                characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().primary.SetSkillOverride(4, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("PhantasmGround")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
+                characterMaster.GetBody().isPlayerControlled = false;
+                SecondaryPhantasm.SummonablesList2.Add(characterMaster);
                 this.Fire();
             }
 
@@ -115,7 +135,7 @@ namespace HenryMod.SkillStates
 
         bool SummonSecondary(ref BulletAttack.BulletHit hitInfo)
         {
-            CharacterMaster characterMaster = new MasterSummon
+            /*CharacterMaster characterMaster = new MasterSummon
             {
                 masterPrefab = SecondaryPhantasmMaster,
                 position = hitInfo.point + Vector3.up * d,
@@ -133,7 +153,7 @@ namespace HenryMod.SkillStates
             characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().primary.SetSkillOverride(4, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("PhantasmGround")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
             characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().utility.SetSkillOverride(4, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("DiversionClone")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
             characterMaster.GetBody().isPlayerControlled = false;
-            SummonablesList2.Add(characterMaster);
+            SummonablesList2.Add(characterMaster);*/
             SecondaryPhantasm.SummonablesList2.RemoveAll(delegate (CharacterMaster C) { return C == null; });
             if (SecondaryPhantasm.SummonablesList2.Count > 0)
             {

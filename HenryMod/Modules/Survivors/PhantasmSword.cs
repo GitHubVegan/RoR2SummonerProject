@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using HenryMod.SkillStates;
+using EntityStates;
 
 namespace HenryMod.Modules.Survivors
 {
@@ -57,7 +58,7 @@ namespace HenryMod.Modules.Survivors
                 }};
 
         internal override Type characterMainState { get; set; } = typeof(EntityStates.GenericCharacterMain); //MAYNOTWORK
-
+        
         // item display stuffs
         internal override ItemDisplayRuleSet itemDisplayRuleSet { get; set; }
         internal override List<ItemDisplayRuleSet.KeyAssetRuleGroup> itemDisplayRules { get; set; }
@@ -68,6 +69,7 @@ namespace HenryMod.Modules.Survivors
         internal override void InitializeCharacter()
         {
             base.InitializeCharacter();
+            this.bodyPrefab.GetComponent<CharacterDeathBehavior>().deathState = new SerializableEntityStateType(typeof(EntityStates.BrotherMonster.InstantDeathState));
         }
 
         internal override void InitializeUnlockables()

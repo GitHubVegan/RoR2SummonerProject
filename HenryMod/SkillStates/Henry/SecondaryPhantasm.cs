@@ -192,7 +192,6 @@ namespace HenryMod.SkillStates
         private static GameObject CreateBody()
         {
             GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/WispBody"), "SecondaryPhantasmBody", true);
-            
             Modules.Prefabs.bodyPrefabs.Add(newBody);
             return newBody;
         }

@@ -7,9 +7,7 @@ using RoR2.Skills;
 using System.Collections.Generic;
 using UnityEngine;
 using EntityStates.Assassin.Weapon;
-
-
-
+using System.Linq;
 
 namespace HenryMod.SkillStates
 {
@@ -19,7 +17,9 @@ namespace HenryMod.SkillStates
         public static float procCoefficient = 0.4f;
         public static float force = 0f;
         public static float recoil = 0f;
-        public static float range = 12.5f;
+        public static float range = 8f;
+        private List<HurtBox> targetList;
+        public static float maxRadius = 6f;
 
 
         private float duration;
@@ -56,31 +56,62 @@ namespace HenryMod.SkillStates
             if (base.isAuthority)
                 {
 
-
-                new BulletAttack
+                /*HurtBox hurtBox = this.SearchForTarget();
+                if (hurtBox)
                 {
-                    owner = base.gameObject,
-                    weapon = base.gameObject,
-                    origin = aimRay.origin,
-                    aimVector = aimRay.direction,
-                    minSpread = 0f,
-                    maxSpread = 0f,
-                    bulletCount = 1U,
-                    damage = PhantasmRapier.damageCoefficient * this.damageStat,
-                    force = PhantasmRapier.force,
-                    tracerEffectPrefab = null,
-                    muzzleName = null,
-                    hitEffectPrefab = hitEffectPrefab,
-                    isCrit = Util.CheckRoll(this.critStat, base.characterBody.master),
-                    radius = 1.5f,
-                    smartCollision = true,
-                    damageType = DamageType.Generic
-                }.Fire();
-                this.totalBulletsFired++;
+                    bool flag = hurtBox.healthComponent.alive;
+                    if(flag)
+                    {
+                        DamageInfo damageInfo = new DamageInfo();
+                        damageInfo.damage = PhantasmRapier.damageCoefficient * this.damageStat;
+                        damageInfo.attacker = base.gameObject;
+                        damageInfo.procCoefficient = PhantasmRapier.procCoefficient;
+                        damageInfo.position = hurtBox.transform.position;
+                        damageInfo.crit = Util.CheckRoll(this.critStat, base.characterBody.master);
+                        hurtBox.healthComponent.TakeDamage(damageInfo);
+                    }
+                }*/
+                    new BulletAttack
+                    {
+                        owner = base.gameObject,
+                        weapon = base.gameObject,
+                        origin = aimRay.origin,
+                        aimVector = aimRay.direction,
+                        minSpread = 0f,
+                        maxSpread = 0f,
+                        bulletCount = 1U,
+                        damage = PhantasmRapier.damageCoefficient * this.damageStat,
+                        force = 0f,
+                        tracerEffectPrefab = null,
+                        muzzleName = null,
+                        stopperMask = LayerIndex.world.mask,
+                        hitMask = LayerIndex.entityPrecise.mask,
+                        hitEffectPrefab = hitEffectPrefab,
+                        isCrit = Util.CheckRoll(this.critStat, base.characterBody.master),
+                        radius = 2f,
+                        smartCollision = true,
+                        damageType = DamageType.Generic
+                    }.Fire();
+                    this.totalBulletsFired++;
                 }
             }
-        
-        
+        /*private HurtBox SearchForTarget()
+        {
+            Ray aimRay = base.GetAimRay();
+            BullseyeSearch bullseyeSearch = new BullseyeSearch
+            {
+                searchOrigin = base.transform.position,
+                searchDirection = aimRay.direction,
+                maxAngleFilter = 90f,
+                maxDistanceFilter = PhantasmRapier.maxRadius,
+                teamMaskFilter = TeamMask.GetUnprotectedTeams(base.GetTeam()),
+                sortMode = BullseyeSearch.SortMode.Distance
+            };
+            bullseyeSearch.RefreshCandidates();
+            bullseyeSearch.FilterOutGameObject(base.gameObject);
+            return bullseyeSearch.GetResults().FirstOrDefault<HurtBox>();
+        }*/
+
         public override void OnExit()
         {
             base.OnExit();

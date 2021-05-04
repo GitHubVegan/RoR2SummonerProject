@@ -19,7 +19,7 @@ namespace HenryMod.SkillStates
         public static float procCoefficient = 0.4f;
         public static float force = 0f;
         public static float recoil = 0f;
-        public static float range = 12.5f;
+        public static float range = 10f;
         private bool suicide;
 
 
@@ -73,8 +73,10 @@ namespace HenryMod.SkillStates
                     muzzleName = null,
                     hitEffectPrefab = hitEffectPrefab,
                     isCrit = Util.CheckRoll(this.critStat, base.characterBody.master),
-                    radius = 1.5f,
+                    radius = 2f,
                     smartCollision = true,
+                    stopperMask = LayerIndex.world.mask,
+                    hitMask = LayerIndex.entityPrecise.mask,
                     damageType = DamageType.Generic
                 }.Fire();
                 this.totalBulletsFired++;

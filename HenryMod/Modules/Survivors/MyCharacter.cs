@@ -12,7 +12,7 @@ namespace HenryMod.Modules.Survivors
     {
         internal override bool registerSurvivor { get; set; } = true;
 
-        internal override string bodyName { get; set; } = "Mesmer";
+        internal override string bodyName { get; set; } = "Holomancer";
 
         internal override GameObject bodyPrefab { get; set; }
         internal override GameObject displayPrefab { get; set; }
@@ -26,7 +26,7 @@ namespace HenryMod.Modules.Survivors
         {
             armor = 0f,
             armorGrowth = 0f,
-            bodyName = "MesmerBody",
+            bodyName = "HolomancerBody",
             bodyNameToken = HenryPlugin.developerPrefix + "_MESMER_BODY_NAME",
             bodyColor = Color.grey,
             characterPortrait = Modules.Assets.LoadCharacterIcon("Henry"),
@@ -42,7 +42,7 @@ namespace HenryMod.Modules.Survivors
         };
 
         internal static Material henryMat = Modules.Assets.CreateMaterial("matHenry");
-        internal override int mainRendererIndex { get; set; } = 1;
+        internal override int mainRendererIndex { get; set; } = 2;
 
         internal override CustomRendererInfo[] customRendererInfos { get; set; } = new CustomRendererInfo[] {
                 new CustomRendererInfo
@@ -52,7 +52,12 @@ namespace HenryMod.Modules.Survivors
                 },
                 new CustomRendererInfo
                 {
-                    childName = "Model",
+                    childName = "HoloModel",
+                    material = Modules.Assets.mainAssetBundle.LoadAsset<Material>("PhantasmHologram")
+                },
+                new CustomRendererInfo
+                {
+                    childName = "ClothesModel",
                     material = henryMat
                 }};
 
@@ -603,12 +608,19 @@ namespace HenryMod.Modules.Survivors
             {
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("Spearmesh"),
+                    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("Staff"),
                     renderer = defaultRenderers[0].renderer
                 },
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("MageMesh"),
+                    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("HolomancerBody"),
+                    //mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("HolomancerClothes"),
+                    renderer = defaultRenderers[1].renderer
+                },
+                                new SkinDef.MeshReplacement
+                {
+                    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("HolomancerClothes"),
+                    //mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("HolomancerBody"),
                     renderer = defaultRenderers[instance.mainRendererIndex].renderer
                 }
             };
@@ -637,12 +649,19 @@ namespace HenryMod.Modules.Survivors
             {
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("Spearmesh"),
+                    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("Staff"),
                     renderer = defaultRenderers[0].renderer
                 },
                 new SkinDef.MeshReplacement
                 {
-                    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("MageMesh"),
+                    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("HolomancerBody"),
+                    //mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("HolomancerClothes"),
+                    renderer = defaultRenderers[1].renderer
+                },
+                                new SkinDef.MeshReplacement
+                {
+                    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("HolomancerClothes"),
+                    //mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("HolomancerBody"),
                     renderer = defaultRenderers[instance.mainRendererIndex].renderer
                 }
             };

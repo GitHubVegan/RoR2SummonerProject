@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3831560952
+CRC: 4085170418
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: a03de0595fc37609589112702e7188b7
+    Hash: f36ac41e8881897ff9f2a1469b0ff8d2
   TypeTreeHash:
     serializedVersion: 2
     Hash: 972103ac939f0471d19a07f535135cc4
@@ -86,6 +86,7 @@ Assets:
 - Assets/HenryAssets/Icons/texPassiveIcon.png
 - Assets/HenryAssets/VFX/Textures/texFire.tga
 - Assets/HenryAssets/Animations/Jump.anim
+- Assets/MesmerAssets/HolomancerAssets/Animations/Armature_HoloDisplayIdleIn.anim
 - Assets/HenryAssets/Mesh/meshHenryNeo.mesh
 - Assets/HenryAssets/Animations/WalkR.anim
 - Assets/HenryAssets/VFX/HenryDustEffect.prefab
@@ -105,14 +106,19 @@ Assets:
 - Assets/HenryAssets/Textures/texBazooka.png
 - Assets/HenryAssets/VFX/Textures/texRipple.png
 - Assets/HenryAssets/VFX/ImpactHenrySlash.prefab
+- Assets/MesmerAssets/HolomancerAssets/mdlHolomancer.prefab
 - Assets/MesmerAssets/Shaders/Hologram.shader
 - Assets/HenryAssets/Animations/Armature_FlightR.anim
+- Assets/MesmerAssets/HolomancerAssets/Mesh/Staff.mesh
 - Assets/HenryAssets/VFX/Mesh/meshSwing.asset
 - Assets/HenryAssets/VFX/HenryBazookaMuzzleFlash.prefab
 - Assets/HenryAssets/VFX/HenryFistSwingEffect.prefab
 - Assets/MesmerAssets/Animations/Armature_AimPitch.anim
+- Assets/MesmerAssets/HolomancerAssets/Animations/Armature_HoloTpose.anim
 - Assets/HenryAssets/Mesh/meshVergil.mesh
+- Assets/MesmerAssets/HolomancerAssets/Animations/Armature_HoloDisplayIdle.anim
 - Assets/HenryAssets/VFX/Textures/texFistSwing.png
+- Assets/MesmerAssets/Animations/Armature_AimYaw (1).anim
 - Assets/HenryAssets/Animations/LightImpact.anim
 - Assets/HenryAssets/Icons/texHenryAchievement.png
 - Assets/HenryAssets/Animations/WalkB.anim
@@ -125,9 +131,13 @@ Assets:
 - Assets/HenryAssets/Animations/SprintR.anim
 - Assets/HenryAssets/Animations/animHenryMenu.controller
 - Assets/HenryAssets/Icons/texVergilAchievement.png
+- Assets/MesmerAssets/HolomancerAssets/Animations/animHolo.controller
 - Assets/HenryAssets/Textures/texShotgun.png
+- Assets/MesmerAssets/HolomancerAssets/Animations/Armature_HoloRestIdle.anim
 - Assets/HenryAssets/Animations/WalkL.anim
 - Assets/HenryAssets/Animations/maskImpact.mask
+- Assets/MesmerAssets/HolomancerAssets/Animations/Armature_HoloRestIdleIn.anim
+- Assets/MesmerAssets/HolomancerAssets/Animations/Armature_HoloIdle.anim
 - Assets/HenryAssets/Animations/Armature_FlightL.anim
 - Assets/MesmerAssets/PhantasmSword/Animations/animPhantasmSwordMenu.controller
 - Assets/HenryAssets/Animations/Idle.anim
@@ -135,6 +145,7 @@ Assets:
 - Assets/HenryAssets/Animations/Slash2.anim
 - Assets/MesmerAssets/PhantasmSword/Animations/Armature_SimpleStab1.anim
 - Assets/MesmerAssets/Mesh/Spearmesh.mesh
+- Assets/MesmerAssets/Animations/maskAimYawMesmer.mask
 - Assets/HenryAssets/Mesh/meshYamato.mesh
 - Assets/HenryAssets/VFX/Textures/texDust.png
 - Assets/HenryAssets/VFX/Textures/texHitSpark.png
@@ -157,6 +168,7 @@ Assets:
 - Assets/HenryAssets/VFX/Materials/matTrail.mat
 - Assets/HenryAssets/Materials/matHenryJedi.mat
 - Assets/HenryAssets/VFX/Materials/matHitSpark.mat
+- Assets/MesmerAssets/HolomancerAssets/Mesh/HolomancerBody.mesh
 - Assets/HenryAssets/Mesh/meshNeoCoat.mesh
 - Assets/HenryAssets/Animations/ShootGun.anim
 - Assets/HenryAssets/Animations/SprintF.anim
@@ -167,12 +179,14 @@ Assets:
 - Assets/HenryAssets/Icons/texBazookaOutIcon.png
 - Assets/HenryAssets/Animations/maskAimPitch.mask
 - Assets/HenryAssets/Icons/texUziIcon.png
+- Assets/MesmerAssets/HolomancerAssets/Animations/Armature_HoloRunR.anim
 - Assets/MesmerAssets/PhantasmSword/PhantasmSwordDisplay.prefab
 - Assets/HenryAssets/Materials/matHenryNeo.mat
 - Assets/HenryAssets/VFX/Mesh/meshPunchShockwave.mesh
 - Assets/HenryAssets/Materials/matRoy.mat
 - Assets/HenryAssets/Icons/texBazookaIconScepter.png
 - Assets/HenryAssets/Textures/texHenryNeo.png
+- Assets/MesmerAssets/HolomancerAssets/Animations/Armature_HoloRunF.anim
 - Assets/HenryAssets/Icons/texMainSkin.png
 - Assets/MesmerAssets/PhantasmSword/Mesh/Rapier.mesh
 - Assets/HenryAssets/Icons/texBoxingGlovesIcon.png
@@ -196,6 +210,7 @@ Assets:
 - Assets/HenryAssets/VFX/Materials/matPunchEffect.mat
 - Assets/HenryAssets/VFX/Textures/texPunchImpact.png
 - Assets/MesmerAssets/Icons/Diversion.png
+- Assets/MesmerAssets/HolomancerAssets/Mesh/HolomancerClothes.mesh
 - Assets/HenryAssets/mdlHenry.prefab
 - Assets/HenryAssets/Mesh/meshRebellion.mesh
 - Assets/HenryAssets/VFX/Materials/matHitSparkPunch.mat
@@ -223,8 +238,10 @@ Assets:
 - Assets/HenryAssets/VFX/Textures/texLightning.tif
 - Assets/MesmerAssets/MesmerDisplay.prefab
 - Assets/MesmerAssets/Animations/Armature_RestIdle.anim
+- Assets/MesmerAssets/HolomancerAssets/HolomancerDisplay.prefab
 - Assets/HenryAssets/Animations/RestIdleIn.anim
 - Assets/HenryAssets/VFX/Materials/matRipple.mat
+- Assets/MesmerAssets/HolomancerAssets/Animations/animHoloMenu.controller
 - Assets/MesmerAssets/Icons/ShatterSkillswap.png
 - Assets/HenryAssets/Animations/DefaultPose.anim
 - Assets/HenryAssets/Animations/AAACustomRun.anim
@@ -239,13 +256,16 @@ Assets:
 - Assets/HenryAssets/Animations/maskBandana.mask
 - Assets/HenryAssets/Animations/MenuIdle.anim
 - Assets/HenryAssets/Materials/matBazooka.mat
+- Assets/MesmerAssets/Animations/maskAimPitchMesmer.mask
 - Assets/HenryAssets/VFX/HenrySwordSwingEffect.prefab
 - Assets/HenryAssets/Animations/Descend.anim
 - Assets/HenryAssets/Textures/texHenryDante.png
 - Assets/MesmerAssets/Materials/PhantasmHologram.mat
 - Assets/HenryAssets/Animations/Armature_FlightB.anim
 - Assets/HenryAssets/Animations/AimPitch.anim
+- Assets/MesmerAssets/HolomancerAssets/Animations/Armature_HoloRunB.anim
 - Assets/MesmerAssets/Icons/PrimaryPhantasm.png
+- Assets/MesmerAssets/HolomancerAssets/Animations/Armature_HoloIdleIn.anim
 - Assets/MesmerAssets/mdlMesmer.prefab
 - Assets/HenryAssets/VFX/Textures/texSlash.png
 - Assets/HenryAssets/Icons/texSpecialIcon.png

@@ -58,7 +58,7 @@ namespace HenryMod.SkillStates
 								position = PC.gameObject.transform.position,
 								rotation = base.characterBody.transform.rotation * Quaternion.FromToRotation(new Vector3(0, 0, 1), target),
 								owner = base.characterBody.gameObject,
-								damage = base.characterBody.damage * 2f,
+								damage = base.characterBody.damage * 3.5f,
 								force = 100f,
 								crit = base.RollCrit(),
 								damageColorIndex = DamageColorIndex.Default,

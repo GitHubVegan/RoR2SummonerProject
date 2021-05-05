@@ -14,6 +14,6 @@ namespace HenryMod.Modules
 
         internal const float gunDamageCoefficient = 4.2f;
 
-        internal const float bombDamageCoefficient = 16f;
+        internal const float bombDamageCoefficient = 12f;
     }
 }

@@ -27,7 +27,7 @@ namespace HenryMod.Modules.Survivors
             armor = 0f,
             armorGrowth = 0f,
             bodyName = "HolomancerBody",
-            bodyNameToken = HenryPlugin.developerPrefix + "_MESMER_BODY_NAME",
+            bodyNameToken = HolomancerPlugin.developerPrefix + "_HOLOMANCER_BODY_NAME",
             bodyColor = Color.grey,
             characterPortrait = Modules.Assets.LoadCharacterIcon("Henry"),
             crosshair = Modules.Assets.LoadCrosshair("Standard"),
@@ -37,7 +37,7 @@ namespace HenryMod.Modules.Survivors
             moveSpeed = 6,
             jumpCount = 1,
             maxHealth = 90f,
-            subtitleNameToken = HenryPlugin.developerPrefix + "_MESMER_BODY_SUBTITLE",
+            subtitleNameToken = "Holomancer",
             podPrefab = Resources.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod")
         };
 
@@ -223,9 +223,9 @@ namespace HenryMod.Modules.Survivors
 
             SkillDef primaryphantasmSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = "PrimaryPhantasm",
-                skillNameToken = "PrimaryPhantasm",
-                skillDescriptionToken = "PrimaryPhantasm",
+                skillName = HolomancerPlugin.developerPrefix + "_HOLOMANCER_BODY_PRIMARY_HOLO_NAME",
+                skillNameToken = HolomancerPlugin.developerPrefix + "_HOLOMANCER_BODY_PRIMARY_HOLO_NAME",
+                skillDescriptionToken = HolomancerPlugin.developerPrefix + "_HOLOMANCER_BODY_PRIMARY_HOLO_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("SecondaryPhantasm"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.PrimaryPhantasm)),
                 activationStateMachineName = "Weapon",
@@ -421,9 +421,9 @@ namespace HenryMod.Modules.Survivors
 
             SkillDef secondaryphantasmSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = "SecondaryPhantasm",
-                skillNameToken = "SecondaryPhantasm",
-                skillDescriptionToken = "SecondaryPhantasm",
+                skillName = HolomancerPlugin.developerPrefix + "_HOLOMANCER_BODY_SECONDARY_HOLO_NAME",
+                skillNameToken = HolomancerPlugin.developerPrefix + "_HOLOMANCER_BODY_SECONDARY_HOLO_NAME",
+                skillDescriptionToken = HolomancerPlugin.developerPrefix + "_HOLOMANCER_BODY_SECONDARY_HOLO_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("PrimaryPhantasm"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.SecondaryPhantasm)),
                 activationStateMachineName = "Weapon",
@@ -501,9 +501,9 @@ namespace HenryMod.Modules.Survivors
 
             SkillDef utilityphantasmSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = "UtilityPhantasm",
-                skillNameToken = "UtilityPhantasm",
-                skillDescriptionToken = "UtilityPhantasm",
+                skillName = HolomancerPlugin.developerPrefix + "_HOLOMANCER_BODY_UTILITY_HOLO_NAME",
+                skillNameToken = HolomancerPlugin.developerPrefix + "_HOLOMANCER_BODY_UTILITY_HOLO_NAME",
+                skillDescriptionToken = HolomancerPlugin.developerPrefix + "_HOLOMANCER_BODY_UTILITY_HOLO_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("UtilityPhantasm"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.UtilityPhantasm)),
                 activationStateMachineName = "Weapon",
@@ -531,9 +531,9 @@ namespace HenryMod.Modules.Survivors
 
             SkillDef shatterskillswapSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = "ShatterSkillswap",
-                skillNameToken = "ShatterSkillswap",
-                skillDescriptionToken = "ShatterSkillswap",
+                skillName = HolomancerPlugin.developerPrefix + "_HOLOMANCER_BODY_SPECIAL_HOLO_NAME",
+                skillNameToken = HolomancerPlugin.developerPrefix + "_HOLOMANCER_BODY_SPECIAL_HOLO_NAME",
+                skillDescriptionToken = HolomancerPlugin.developerPrefix + "_HOLOMANCER_BODY_SPECIAL_HOLO_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("ShatterSkillswap"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.ShatterSkillswap)),
                 activationStateMachineName = "Weapon",
@@ -598,7 +598,7 @@ namespace HenryMod.Modules.Survivors
             List<SkinDef> skins = new List<SkinDef>();
 
             #region DefaultSkin
-            SkinDef defaultSkin = Modules.Skins.CreateSkinDef(HenryPlugin.developerPrefix + "_HENRY_BODY_DEFAULT_SKIN_NAME",
+            SkinDef defaultSkin = Modules.Skins.CreateSkinDef(HolomancerPlugin.developerPrefix + "_HENRY_BODY_DEFAULT_SKIN_NAME",
                 Assets.mainAssetBundle.LoadAsset<Sprite>("texMainSkin"),
                 defaultRenderers,
                 mainRenderer,
@@ -638,7 +638,7 @@ namespace HenryMod.Modules.Survivors
                 masteryMat
             });
 
-            SkinDef masterySkin = Modules.Skins.CreateSkinDef(HenryPlugin.developerPrefix + "_HENRY_BODY_MASTERY_SKIN_NAME",
+            SkinDef masterySkin = Modules.Skins.CreateSkinDef(HolomancerPlugin.developerPrefix + "_HENRY_BODY_MASTERY_SKIN_NAME",
                 Assets.mainAssetBundle.LoadAsset<Sprite>("texMasteryAchievement"),
                 masteryRendererInfos,
                 mainRenderer,

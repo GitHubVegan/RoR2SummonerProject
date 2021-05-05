@@ -203,7 +203,7 @@ namespace HenryMod.SkillStates
             newMaster.GetComponent<CharacterMaster>().bodyPrefab = SecondaryPhantasmBody;
             foreach (AISkillDriver ai in newMaster.GetComponentsInChildren<AISkillDriver>())
             {
-                HenryPlugin.DestroyImmediate(ai);
+                HolomancerPlugin.DestroyImmediate(ai);
             }
 
             newMaster.GetComponent<BaseAI>().fullVision = true;

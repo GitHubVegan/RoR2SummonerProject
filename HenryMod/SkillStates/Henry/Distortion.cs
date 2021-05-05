@@ -45,7 +45,7 @@ namespace HenryMod.SkillStates
 						foreach (AISkillDriver ASD in CM3.GetComponentsInChildren<AISkillDriver>())
 						{
 							{
-								HenryPlugin.DestroyImmediate(ASD);
+								HolomancerPlugin.DestroyImmediate(ASD);
 							}
 						}
 						//CM3.GetBody().baseMoveSpeed = 0f;

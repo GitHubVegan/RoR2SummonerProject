@@ -16,7 +16,7 @@ namespace HenryMod.Modules
         {
             foreach (GenericSkill obj in targetPrefab.GetComponentsInChildren<GenericSkill>())
             {
-                HenryPlugin.DestroyImmediate(obj);
+                HolomancerPlugin.DestroyImmediate(obj);
             }
 
             SkillLocator skillLocator = targetPrefab.GetComponent<SkillLocator>();

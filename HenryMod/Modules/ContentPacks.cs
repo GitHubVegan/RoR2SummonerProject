@@ -15,7 +15,7 @@ namespace HenryMod.Modules
     internal class ContentPacks : IContentPackProvider
     {
         internal ContentPack contentPack = new ContentPack();
-        public string identifier => HenryPlugin.MODUID;
+        public string identifier => HolomancerPlugin.MODUID;
         public static List<GameObject> masterPrefabs = new List<GameObject>();
 
         public void Initialize()

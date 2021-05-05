@@ -8,23 +8,23 @@ namespace HenryMod.Modules
         internal static void AddTokens()
         {
             #region Henry
-            string prefix = HenryPlugin.developerPrefix + "_HENRY_BODY_";
+            string prefix = HolomancerPlugin.developerPrefix + "_HOLOMANCER_BODY_";
 
-            string desc = "Henry is a skilled fighter who makes use of a wide arsenal of weaponry to take down his foes.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > Sword is a good all-rounder while Boxing Gloves are better for laying a beatdown on more powerful foes." + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > Pistol is a powerful anti air, with its low cooldown and high damage." + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > Roll has a lingering armor buff that helps to use it aggressively." + Environment.NewLine + Environment.NewLine;
-            desc = desc + "< ! > Bomb can be used to wipe crowds with ease." + Environment.NewLine + Environment.NewLine;
+            string desc = "The Holomancer is a summoner who never participates in the fight directly. She instead uses her hard-light holograms to distract and defeat her enemies." + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > Your holograms can be shattered using Overcharge, sacrificing them to unleashing powerful effects. Make sure to pay attention to your cooldowns, so you aren't left defenseless." + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > Fencers deals heavy single target damage and can be shattered to deal an even heavier burst of damage." + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > Swarm can take out smaller flying enemies on its own or it can be shattered to drop them to the ground for your Fencers" + Environment.NewLine + Environment.NewLine;
+            desc = desc + "< ! > Drone is a powerful defensive tool that slows incoming projectiles while weakening enemies and strenghtening allies. In a pinch, it can be shattered for temporary invulnerability." + Environment.NewLine + Environment.NewLine;
 
             string outro = "..and so she left, even though she was never really there.";
-            string outroFailure = "..and so her hologram vanished, replaced without a delay.";
+            string outroFailure = "..and so her hologram vanished, replaced without a second thought.";
 
-            LanguageAPI.Add(prefix + "NAME", "Henry");
+            LanguageAPI.Add(prefix + "NAME", "Holomancer");
             LanguageAPI.Add(prefix + "DESCRIPTION", desc);
-            LanguageAPI.Add(prefix + "SUBTITLE", "The Chosen One");
-            LanguageAPI.Add(prefix + "LORE", "sample lore");
+            LanguageAPI.Add(prefix + "SUBTITLE", "Holomancer");
+            LanguageAPI.Add(prefix + "LORE", "she makes holograms and stuff idk it's an alpha");
             LanguageAPI.Add(prefix + "OUTRO_FLAVOR", outro);
-            LanguageAPI.Add(prefix + "OUTRO_FAILURE", outroFailure);
+            LanguageAPI.Add(prefix + "OUTRO_FAILURE", outroFailure);  
 
             #region Skins
             LanguageAPI.Add(prefix + "DEFAULT_SKIN_NAME", "Default");
@@ -32,28 +32,28 @@ namespace HenryMod.Modules
             #endregion
 
             #region Passive
-            LanguageAPI.Add(prefix + "PASSIVE_NAME", "Henry passive");
+            LanguageAPI.Add(prefix + "PASSIVE_NAME", "nothing yet");
             LanguageAPI.Add(prefix + "PASSIVE_DESCRIPTION", "Sample text.");
             #endregion
 
             #region Primary
-            LanguageAPI.Add(prefix + "PRIMARY_SLASH_NAME", "Sword");
-            LanguageAPI.Add(prefix + "PRIMARY_SLASH_DESCRIPTION", Helpers.agilePrefix + $"Swing forward for <style=cIsDamage>{100f * StaticValues.swordDamageCoefficient}% damage</style>.");
+            LanguageAPI.Add(prefix + "PRIMARY_HOLO_NAME", "Fencer");
+            LanguageAPI.Add(prefix + "PRIMARY_HOLO_DESCRIPTION", $"Summon up to three holographic fencers to fight for you. They attack at a rapid pace, dealing heavy single target damage. While alive, ability can be reactivated to have the fencers target a specific enemy. Reactivate to target an enemy.");
             #endregion
 
             #region Secondary
-            LanguageAPI.Add(prefix + "SECONDARY_GUN_NAME", "Handgun");
-            LanguageAPI.Add(prefix + "SECONDARY_GUN_DESCRIPTION", Helpers.agilePrefix + $"Fire a handgun for <style=cIsDamage>{100f * StaticValues.gunDamageCoefficient}% damage</style>.");
+            LanguageAPI.Add(prefix + "SECONDARY_HOLO_NAME", "Swarm");
+            LanguageAPI.Add(prefix + "SECONDARY_HOLO_DESCRIPTION", $"Summon up to one swarm of holographic insects (model tbi, placeholder is a wisp). It deals damage to and distracts all enemies within it. Reactivate to target an enemy.");
             #endregion
 
             #region Utility
-            LanguageAPI.Add(prefix + "UTILITY_ROLL_NAME", "Roll");
-            LanguageAPI.Add(prefix + "UTILITY_ROLL_DESCRIPTION", "Roll a short distance, gaining <style=cIsUtility>300 armor</style>. <style=cIsUtility>You cannot be hit during the roll.</style>");
+            LanguageAPI.Add(prefix + "UTILITY_HOLO_NAME", "Drone");
+            LanguageAPI.Add(prefix + "UTILITY_HOLO_DESCRIPTION", "Summon up to one holographic drone. The drone hovers around you and projects a field of energy around it. The energy field cripples enemies, gives armor to allies and slows all projectiles that enter it. Reactivate to target an ally or an enemy.");
             #endregion
 
             #region Special
-            LanguageAPI.Add(prefix + "SPECIAL_BOMB_NAME", "Bomb");
-            LanguageAPI.Add(prefix + "SPECIAL_BOMB_DESCRIPTION", $"Throw a bomb for <style=cIsDamage>{100f * StaticValues.bombDamageCoefficient}% damage</style>.");
+            LanguageAPI.Add(prefix + "SPECIAL_HOLO_NAME", "Overcharge");
+            LanguageAPI.Add(prefix + "SPECIAL_HOLO_DESCRIPTION", $"Gain access to Shatter skills, which allow you to sacrifice your holograms for powerful effects.");
             #endregion
 
             #region Achievements

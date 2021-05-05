@@ -1,13 +1,13 @@
 ﻿using R2API;
 using System;
 
-namespace HenryMod.Modules
+namespace HolomancerMod.Modules
 {
     internal static class Tokens
     {
         internal static void AddTokens()
         {
-            #region Henry
+            #region Holomancer
             string prefix = HolomancerPlugin.developerPrefix + "_HOLOMANCER_BODY_";
 
             string desc = "The Holomancer is a summoner who never participates in the fight directly. She instead uses her hard-light holograms to distract and defeat her enemies." + Environment.NewLine + Environment.NewLine;
@@ -57,9 +57,9 @@ namespace HenryMod.Modules
             #endregion
 
             #region Achievements
-            LanguageAPI.Add(prefix + "MASTERYUNLOCKABLE_ACHIEVEMENT_NAME", "Henry: Mastery");
-            LanguageAPI.Add(prefix + "MASTERYUNLOCKABLE_ACHIEVEMENT_DESC", "As Henry, beat the game or obliterate on Monsoon.");
-            LanguageAPI.Add(prefix + "MASTERYUNLOCKABLE_UNLOCKABLE_NAME", "Henry: Mastery");
+            LanguageAPI.Add(prefix + "MASTERYUNLOCKABLE_ACHIEVEMENT_NAME", "Holomancer: Mastery");
+            LanguageAPI.Add(prefix + "MASTERYUNLOCKABLE_ACHIEVEMENT_DESC", "As Holomancer, beat the game or obliterate on Monsoon.");
+            LanguageAPI.Add(prefix + "MASTERYUNLOCKABLE_UNLOCKABLE_NAME", "Holomancer: Mastery");
             #endregion
             #endregion
         }

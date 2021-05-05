@@ -4,7 +4,7 @@ using RoR2.Projectile;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace HenryMod.Modules
+namespace HolomancerMod.Modules
 {
     internal static class Projectiles
     {
@@ -25,7 +25,7 @@ namespace HenryMod.Modules
 
         private static void CreateBomb()
         {
-            bombPrefab = CloneProjectilePrefab("CommandoGrenadeProjectile", "HenryBombProjectile");
+            bombPrefab = CloneProjectilePrefab("CommandoGrenadeProjectile", "HolomancerBombProjectile");
 
             ProjectileImpactExplosion bombImpactExplosion = bombPrefab.GetComponent<ProjectileImpactExplosion>();
             InitializeImpactExplosion(bombImpactExplosion);
@@ -34,12 +34,12 @@ namespace HenryMod.Modules
             bombImpactExplosion.destroyOnEnemy = true;
             bombImpactExplosion.lifetime = 12f;
             bombImpactExplosion.impactEffect = Modules.Assets.bombExplosionEffect;
-            //bombImpactExplosion.lifetimeExpiredSound = Modules.Assets.CreateNetworkSoundEventDef("HenryBombExplosion");
+            //bombImpactExplosion.lifetimeExpiredSound = Modules.Assets.CreateNetworkSoundEventDef("HolomancerBombExplosion");
             bombImpactExplosion.timerAfterImpact = true;
             bombImpactExplosion.lifetimeAfterImpact = 0.1f;
 
             ProjectileController bombController = bombPrefab.GetComponent<ProjectileController>();
-            if (Modules.Assets.mainAssetBundle.LoadAsset<GameObject>("HenryBombGhost") != null) bombController.ghostPrefab = CreateGhostPrefab("HenryBombGhost");
+            if (Modules.Assets.mainAssetBundle.LoadAsset<GameObject>("HolomancerBombGhost") != null) bombController.ghostPrefab = CreateGhostPrefab("HolomancerBombGhost");
             bombController.startSound = "";
         }
 

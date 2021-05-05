@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace HenryMod.Modules
+namespace HolomancerMod.Modules
 {
     public class Knockdown : NetworkBehaviour
     {

@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.Networking;
 
-namespace HenryMod.SkillStates
+namespace HolomancerMod.SkillStates
 {
 	internal class SwarmContact : FlyState
 	{

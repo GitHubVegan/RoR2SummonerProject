@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HenryMod.Modules
+namespace HolomancerMod.Modules
 {
     internal static class Skills
     {

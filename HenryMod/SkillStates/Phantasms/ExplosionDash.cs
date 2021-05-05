@@ -8,7 +8,7 @@ using EntityStates.JellyfishMonster;
 using EntityStates.Loader;
 using System.Collections.Generic;
 
-namespace HenryMod.SkillStates
+namespace HolomancerMod.SkillStates
 {
 	public class ExplosionDash : BaseSkillState
     {

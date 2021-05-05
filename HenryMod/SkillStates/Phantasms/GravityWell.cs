@@ -6,9 +6,9 @@ using R2API;
 using EntityStates.NullifierMonster;
 using EntityStates.JellyfishMonster;
 using System.Collections.Generic;
-using HenryMod.Modules;
+using HolomancerMod.Modules;
 
-namespace HenryMod.SkillStates
+namespace HolomancerMod.SkillStates
 {
     public class GravityWell : BaseSkillState
     {

@@ -1,5 +1,5 @@
 ﻿using EntityStates;
-using HenryMod.Modules;
+using HolomancerMod.Modules;
 using R2API;
 using RoR2;
 using RoR2.CharacterAI;
@@ -11,7 +11,7 @@ using EntityStates.Assassin.Weapon;
 
 
 
-namespace HenryMod.SkillStates
+namespace HolomancerMod.SkillStates
 {
     public class Flurry : BaseSkillState
     {

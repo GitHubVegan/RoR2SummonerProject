@@ -6,10 +6,10 @@ using R2API;
 using EntityStates.NullifierMonster;
 using EntityStates.JellyfishMonster;
 using System.Collections.Generic;
-using HenryMod.Modules;
+using HolomancerMod.Modules;
 using RoR2.Skills;
 
-namespace HenryMod.SkillStates
+namespace HolomancerMod.SkillStates
 {
     public class FlurryTest : BaseSkillState
     {

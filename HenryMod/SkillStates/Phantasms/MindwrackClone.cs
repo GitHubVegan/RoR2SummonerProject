@@ -7,7 +7,7 @@ using EntityStates.NullifierMonster;
 using EntityStates.JellyfishMonster;
 
 
-namespace HenryMod.SkillStates
+namespace HolomancerMod.SkillStates
 {
 	public class MindwrackClone : BaseSkillState
     {

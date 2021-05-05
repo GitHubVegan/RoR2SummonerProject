@@ -10,7 +10,7 @@ using System.Reflection;
 using RoR2.ContentManagement;
 using System.Collections;
 
-namespace HenryMod.Modules
+namespace HolomancerMod.Modules
 {
     internal class ContentPacks : IContentPackProvider
     {

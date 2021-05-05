@@ -4,10 +4,10 @@ using RoR2.Skills;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using HenryMod.SkillStates;
+using HolomancerMod.SkillStates;
 using EntityStates;
 
-namespace HenryMod.Modules.Survivors
+namespace HolomancerMod.Modules.Survivors
 {
     internal class PhantasmSword : SurvivorBase
     {
@@ -30,7 +30,7 @@ namespace HenryMod.Modules.Survivors
             bodyName = "PhantasmSwordBody",
             bodyNameToken = HolomancerPlugin.developerPrefix + "_PHANTASMSWORD_BODY_NAME",
             bodyColor = Color.grey,
-            characterPortrait = Modules.Assets.LoadCharacterIcon("Henry"),
+            characterPortrait = Modules.Assets.LoadCharacterIcon("Holomancer"),
             crosshair = Modules.Assets.LoadCrosshair("Standard"),
             damage = 13f,
             healthGrowth = 40f,
@@ -41,7 +41,7 @@ namespace HenryMod.Modules.Survivors
             podPrefab = Resources.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod")
         };
 
-        //internal static Material henryMat = Modules.Assets.CreateMaterial("matHenry");
+        //internal static Material HolomancerMat = Modules.Assets.CreateMaterial("matHolomancer");
         internal static Material phantasmMat = Modules.Assets.mainAssetBundle.LoadAsset<Material>("PhantasmHologram");
         internal override int mainRendererIndex { get; set; } = 1;
 
@@ -403,7 +403,7 @@ namespace HenryMod.Modules.Survivors
             List<SkinDef> skins = new List<SkinDef>();
 
             #region DefaultSkin
-            SkinDef defaultSkin = Modules.Skins.CreateSkinDef(HolomancerPlugin.developerPrefix + "_HENRY_BODY_DEFAULT_SKIN_NAME",
+            SkinDef defaultSkin = Modules.Skins.CreateSkinDef(HolomancerPlugin.developerPrefix + "_Holomancer_BODY_DEFAULT_SKIN_NAME",
                 Assets.mainAssetBundle.LoadAsset<Sprite>("texMainSkin"),
                 defaultRenderers,
                 mainRenderer,
@@ -427,7 +427,7 @@ namespace HenryMod.Modules.Survivors
             #endregion
 
             #region MasterySkin
-            Material masteryMat = Modules.Assets.CreateMaterial("matHenryAlt");
+            Material masteryMat = Modules.Assets.CreateMaterial("matHolomancerAlt");
             CharacterModel.RendererInfo[] masteryRendererInfos = SkinRendererInfos(defaultRenderers, new Material[]
             {
                 masteryMat,
@@ -436,7 +436,7 @@ namespace HenryMod.Modules.Survivors
                 masteryMat
             });
 
-            SkinDef masterySkin = Modules.Skins.CreateSkinDef(HolomancerPlugin.developerPrefix + "_HENRY_BODY_MASTERY_SKIN_NAME",
+            SkinDef masterySkin = Modules.Skins.CreateSkinDef(HolomancerPlugin.developerPrefix + "_Holomancer_BODY_MASTERY_SKIN_NAME",
                 Assets.mainAssetBundle.LoadAsset<Sprite>("texMasteryAchievement"),
                 masteryRendererInfos,
                 mainRenderer,

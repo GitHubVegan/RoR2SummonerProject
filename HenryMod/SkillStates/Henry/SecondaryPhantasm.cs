@@ -193,13 +193,6 @@ namespace HenryMod.SkillStates
         {
             GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/WispBody"), "SecondaryPhantasmBody", true);
             newBody.GetComponentInChildren<EntityStateMachine>().mainStateType = new SerializableEntityStateType(typeof(SwarmContact));
-            GameObject newGhost = newBody.GetComponentInChildren<CharacterModel>().baseRendererInfos;
-            Renderer[] renderers = newBody.GetComponentsInChildren<Renderer>(true);
-            Material newMat = Modules.Assets.mainAssetBundle.LoadAsset<Material>("PhantasmHologram");
-            foreach (Renderer r in renderers)
-            {
-                r.material = newMat;
-            }
             Modules.Prefabs.bodyPrefabs.Add(newBody);
             return newBody;
         }

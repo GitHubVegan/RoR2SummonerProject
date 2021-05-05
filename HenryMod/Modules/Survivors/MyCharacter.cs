@@ -300,7 +300,7 @@ namespace HenryMod.Modules.Survivors
                 skillDescriptionToken = "CannonLaunch",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSecondaryIcon"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.CannonLaunch)),
-                activationStateMachineName = "Weapon",
+                activationStateMachineName = "Body",
                 baseMaxStock = 1,
                 baseRechargeInterval = 1f,
                 beginSkillCooldownOnSkillEnd = false,
@@ -312,12 +312,10 @@ namespace HenryMod.Modules.Survivors
                 isCombatSkill = false,
                 mustKeyPress = false,
                 cancelSprintingOnActivation = false,
-                rechargeStock = 1,
+                rechargeStock = 0,
                 requiredStock = 1,
                 stockToConsume = 1
             });
-
-            Modules.Skills.AddSecondarySkills(bodyPrefab, cannonSkillDef);
 
             SkillDef secondarytargetSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
@@ -454,19 +452,19 @@ namespace HenryMod.Modules.Survivors
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Distortion)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
-                baseRechargeInterval = 14f,
+                baseRechargeInterval = 6f,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
-                fullRestockOnAssign = false,
+                fullRestockOnAssign = true,
                 interruptPriority = EntityStates.InterruptPriority.Skill,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = true,
                 mustKeyPress = true,
                 cancelSprintingOnActivation = false,
                 rechargeStock = 1,
-                requiredStock = 0,
-                stockToConsume = 0,
+                requiredStock = 1,
+                stockToConsume = 1,
                 keywordTokens = new string[] { "KEYWORD_AGILE" }
             });
 
@@ -479,19 +477,20 @@ namespace HenryMod.Modules.Survivors
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.UtilityPhantasmTarget)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
-                baseRechargeInterval = 14f,
+                baseRechargeInterval = 6f,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
-                fullRestockOnAssign = false,
+                fullRestockOnAssign = true,
                 interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = false,
                 mustKeyPress = true,
                 cancelSprintingOnActivation = false,
                 rechargeStock = 1,
-                requiredStock = 0,
-                stockToConsume = 0
+                requiredStock = 1,
+                stockToConsume = 1
+                
             });
 
             SkillDef utilityphantasmSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
@@ -503,7 +502,7 @@ namespace HenryMod.Modules.Survivors
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.UtilityPhantasm)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
-                baseRechargeInterval = 14f,
+                baseRechargeInterval = 6f,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,

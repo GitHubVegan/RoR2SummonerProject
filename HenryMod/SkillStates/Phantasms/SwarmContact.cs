@@ -16,7 +16,7 @@ namespace HenryMod.SkillStates
 	{
 
 		private GameObject affixHauntedWard;
-		public static float damageCoefficient = 0.5f;
+		public static float damageCoefficient = 1f;
 		public static float procCoefficient = 0.3f;
 
 		public override void OnEnter()

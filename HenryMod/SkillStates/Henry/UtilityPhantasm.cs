@@ -173,8 +173,8 @@ namespace HenryMod.SkillStates
 
         private static GameObject CreateBody()
         {
-            GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/ScavBody"), "UtilityPhantasmBody", true);
-            newBody.GetComponentInChildren<EntityStateMachine>().mainStateType = new SerializableEntityStateType(typeof(WardMain));
+            GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/BeetleGuardBody"), "UtilityPhantasmBody", true);
+            //newBody.GetComponentInChildren<EntityStateMachine>().mainStateType = new SerializableEntityStateType(typeof(CooldownWardMain));
 
             Modules.Prefabs.bodyPrefabs.Add(newBody);
             return newBody;
@@ -182,7 +182,7 @@ namespace HenryMod.SkillStates
 
         private static GameObject CreateMaster()
         {
-            GameObject newMaster = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/charactermasters/ScavMaster"), "UtilityPhantasmMaster", true);
+            GameObject newMaster = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/charactermasters/BeetleGuardMaster"), "UtilityPhantasmMaster", true);
             newMaster.GetComponent<CharacterMaster>().bodyPrefab = UtilityPhantasmBody;
             foreach (AISkillDriver ai in newMaster.GetComponentsInChildren<AISkillDriver>())
             {
@@ -202,7 +202,7 @@ namespace HenryMod.SkillStates
             attackDriver.maxDistance = 5f;
             attackDriver.minDistance = 0f;
             attackDriver.requireSkillReady = false;
-            attackDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
+            attackDriver.aimType = AISkillDriver.AimType.MoveDirection;
             attackDriver.ignoreNodeGraph = true;
             attackDriver.moveInputScale = 1f;
             attackDriver.driverUpdateTimerOverride = 0.2f;
@@ -223,7 +223,7 @@ namespace HenryMod.SkillStates
             shatterDriver.maxDistance = 100f;
             shatterDriver.minDistance = 5f;
             shatterDriver.requireSkillReady = false;
-            shatterDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
+            shatterDriver.aimType = AISkillDriver.AimType.MoveDirection;
             shatterDriver.ignoreNodeGraph = true;
             shatterDriver.moveInputScale = 1f;
             shatterDriver.driverUpdateTimerOverride = 0.2f;

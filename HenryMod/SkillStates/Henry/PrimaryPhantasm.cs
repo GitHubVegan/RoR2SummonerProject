@@ -255,7 +255,7 @@ namespace HenryMod.SkillStates
             shatterDriver.activationRequiresAimConfirmation = false;
             shatterDriver.activationRequiresTargetLoS = false;
             shatterDriver.selectionRequiresTargetLoS = false;
-            shatterDriver.maxDistance = 70f;
+            shatterDriver.maxDistance = 100f;
             shatterDriver.minDistance = 6f;
             shatterDriver.shouldSprint = false;
             shatterDriver.requireSkillReady = false;

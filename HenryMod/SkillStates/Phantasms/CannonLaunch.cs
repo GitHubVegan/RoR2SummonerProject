@@ -8,10 +8,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using EntityStates.Assassin.Weapon;
 using System.Linq;
+using EntityStates.BeetleGuardMonster;
 
 namespace HenryMod.SkillStates
 {
-    public class CannonLaunch : BaseSkillState
+    public class CannonLaunch : GroundSlam
     {
         public static float damageCoefficient = 3f;
         public static float procCoefficient = 0.4f;
@@ -42,25 +43,42 @@ namespace HenryMod.SkillStates
         public GameObject hitEffectPrefab = Resources.Load<GameObject>("prefabs/effects/impacteffects/LunarWispMinigunImpactHit");
 
 
-        public override void OnEnter()
+        public override void OnExit()
         {
-            base.OnEnter();
-            this.duration = 1f;
-            if (base.isAuthority)
+            var pos1 = base.transform.position;
+            var pos2 = UtilityPhantasmTarget.point;
+            var diff = pos2 - pos1;
+            var dir = diff.normalized;
+            var dir2 = base.characterBody.transform.rotation * Quaternion.FromToRotation(new Vector3(0, 0, 1), diff);
+            foreach (CharacterMaster cm in PrimaryPhantasm.SummonablesList1)
             {
-                this.Fire();
-            }
-        }
+                cm.gameObject.GetComponent<BaseAI>().leader.gameObject = base.characterBody.gameObject;
 
+                foreach (AISkillDriver ASD in cm.GetComponentsInChildren<AISkillDriver>())
+                {
 
-        private void Fire()
-        {
-            if (!this.hasFired)
-            {
-                this.hasFired = true;
+                    bool flag = ASD.customName == "Attack";
+                    if (flag)
+                    {
+                        ASD.movementType = AISkillDriver.MovementType.Stop;
+                        ASD.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
+                        ASD.maxDistance = 6;
+                        ASD.minDistance = 0f;
+                        ASD.skillSlot = SkillSlot.Primary;
+                    }
 
-                Util.PlaySound("Roll.dodgeSoundString", base.gameObject);
-
+                    bool flag2 = ASD.customName == "Shatter";
+                    if (flag2)
+                    {
+                        ASD.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
+                        ASD.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
+                        ASD.maxDistance = 100f;
+                        ASD.minDistance = 6f;
+                        ASD.skillSlot = SkillSlot.None;
+                    }
+                    cm.GetBody().baseMoveSpeed = 25f;
+                    cm.GetBody().baseAcceleration = 160f;
+                }
                 if (base.isAuthority)
                 {
                     Ray aimRay = base.GetAimRay();
@@ -69,138 +87,66 @@ namespace HenryMod.SkillStates
                     {
                         mask = LayerIndex.entityPrecise.mask,
                         origin = base.transform.position,
-                        radius = GravityWell.novaRadius
+                        radius = 15f
                     }.RefreshCandidates().FilterCandidatesByDistinctHurtBoxEntities()./*FilterCandidatesByHurtBoxTeam(TeamMask.GetEnemyTeams(base.teamComponent.teamIndex)).*/GetHurtBoxes(this.targetList);
+                    targetList.RemoveAll(delegate (HurtBox C) { return C == null; });
+                    if (targetList.Count > 0)
+                    {
+                        targetList.RemoveAll(delegate (HurtBox C)
+                        {
+                            return !(C.healthComponent.alive);
+                        });
+                    }
                     foreach (HurtBox hurtBox in this.targetList)
                     {
+                        /*if(hurtBox.teamIndex == TeamIndex.Player)
+                        {
+                            hurtBox.healthComponent.body.AddTimedBuff(RoR2Content.Buffs.im, 3);
+                        }*/
                         bool flag2 = hurtBox && hurtBox.healthComponent.alive;
                         if (flag2)
                         {
-                            if(hurtBox.gameObject != base.gameObject)
-                            { 
-                            DamageInfo damageInfo = new DamageInfo
+                            if (hurtBox.gameObject != base.gameObject)
                             {
-                                damage = 0,
-                                attacker = base.gameObject,
-                                procCoefficient = 1f,
-                                position = hurtBox.transform.position,
-                                crit = false,
-                                damageType = DamageType.Generic,
-                                force = aimRay.direction * 2000
-
-                            };
-                            hurtBox.healthComponent.TakeDamage(damageInfo);
-                            hurtBox.healthComponent.TakeDamageForce(damageInfo);
-                            /*List<HurtBox> hurtBoxes = new List<HurtBox>();
-                            new RoR2.SphereSearch
-                            {
-                                radius = 10f,
-                                mask = LayerIndex.entityPrecise.mask,
-                                origin = base.characterBody.transform.position,
-                            }.RefreshCandidates().FilterCandidatesByDistinctHurtBoxEntities().GetHurtBoxes(hurtBoxes);
-                            hurtBoxes.RemoveAll(delegate (HurtBox P) { return P == null; });
-                            if (hurtBoxes.Count > 0)
-                            {
-                                hurtBoxes.RemoveAll(delegate (HurtBox P) { return P == null; });
-                                foreach (HurtBox H in hurtBoxes)
+                                if (hurtBox.healthComponent.body.characterMotor)
                                 {
-                                    hurtBoxes.RemoveAll(delegate (HurtBox P) { return P == null; });
-
-                                    if (H)
-                                    {
-                                        bool flag = H.healthComponent.alive;
-                                        if (flag)
-                                        {
-                                            if (H.healthComponent.body)
-                                            {
-                                                if (H.healthComponent.body.characterMotor)
-                                                {
-                                                    this.motor = H.healthComponent.body.characterMotor;
-                                                    this.mass = this.motor.mass;
-                                                }
-                                                else if (H.healthComponent.body.rigidbody)
-                                                {
-                                                    this.rb = H.healthComponent.body.rigidbody;
-                                                    this.mass = this.rb.mass;
-                                                }
-
-                                                this.stopwatch = 0;
-                                                this.lifetime = 5f;
-
-                                                if (this.mass < 50f) this.mass = 50f;
-                                                this.pushForce = 50f * this.mass;
-
-                                                this.info = new DamageInfo
-                                                {
-                                                    attacker = null,
-                                                    inflictor = null,
-                                                    damage = 0,
-                                                    damageColorIndex = DamageColorIndex.Default,
-                                                    damageType = DamageType.Generic,
-                                                    crit = false,
-                                                    dotIndex = DotController.DotIndex.None,
-                                                    force = aimRay.direction * this.pushForce * Time.fixedDeltaTime,
-                                                    position = base.transform.position,
-                                                    procChainMask = default(ProcChainMask),
-                                                    procCoefficient = 0
-                                                };
-
-                                                if (this.motor)
-                                                {
-                                                    this.body.healthComponent.TakeDamageForce(this.info);
-                                                }
-                                                else if (this.rb)
-                                                {
-                                                    this.body.healthComponent.TakeDamageForce(this.info);
-                                                }
-                                            }
-                                        }
-                                    }
+                                    this.motor = hurtBox.healthComponent.body.characterMotor;
+                                    this.mass = this.motor.mass;
                                 }
-                            }*/
-                        }
+                                else if (this.body.rigidbody)
+                                {
+                                    this.rb = hurtBox.healthComponent.body.rigidbody;
+                                    this.mass = this.rb.mass;
+                                }
+
+                                this.stopwatch = 0;
+                                this.lifetime = 5f;
+
+                                if (this.mass < 50f) this.mass = 50f;
+                                this.pushForce = 50f * this.mass;
+                                if(hurtBox.teamIndex == TeamIndex.Player && !hurtBox.healthComponent.isLocalPlayer)
+                                {
+                                    this.mass = 200f;
+                                }
+                                DamageInfo damageInfo = new DamageInfo
+                                {
+                                    damage = 0,
+                                    attacker = base.gameObject,
+                                    procCoefficient = 1f,
+                                    position = hurtBox.transform.position,
+                                    crit = false,
+                                    damageType = DamageType.Generic,
+                                    force = dir * this.pushForce * 0.6f
+
+                                };
+                                hurtBox.healthComponent.TakeDamage(damageInfo);
+                                hurtBox.healthComponent.TakeDamageForce(damageInfo);
+                                //base.characterBody.GetComponent<RoR2.SkillLocator>().primary.UnsetSkillOverride(4, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("CannonLaunch")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
+                            }
                         }
                     }
                 }
             }
-        }
-        /*private HurtBox SearchForTarget()
-        {
-            Ray aimRay = base.GetAimRay();
-            BullseyeSearch bullseyeSearch = new BullseyeSearch
-            {
-                searchOrigin = base.transform.position,
-                searchDirection = aimRay.direction,
-                maxAngleFilter = 90f,
-                maxDistanceFilter = CannonLaunch.maxRadius,
-                teamMaskFilter = TeamMask.GetUnprotectedTeams(base.GetTeam()),
-                sortMode = BullseyeSearch.SortMode.Distance
-            };
-            bullseyeSearch.RefreshCandidates();
-            bullseyeSearch.FilterOutGameObject(base.gameObject);
-            return bullseyeSearch.GetResults().FirstOrDefault<HurtBox>();
-        }*/
-
-        public override void OnExit()
-        {
-            base.OnExit();
-        }
-
-     
-
-        public override void FixedUpdate()
-        {
-            base.FixedUpdate();
-            if (base.fixedAge >= this.duration && base.isAuthority)
-            {
-                this.outer.SetNextStateToMain();
-                return;
-            }
-        }
-
-        public override InterruptPriority GetMinimumInterruptPriority()
-        {
-            return InterruptPriority.PrioritySkill;
         }
     }
 }

@@ -192,6 +192,7 @@ namespace HenryMod.SkillStates
         private static GameObject CreateBody()
         {
             GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/WispBody"), "SecondaryPhantasmBody", true);
+            newBody.GetComponentInChildren<EntityStateMachine>().mainStateType = new SerializableEntityStateType(typeof(SwarmContact));
             Modules.Prefabs.bodyPrefabs.Add(newBody);
             return newBody;
         }
@@ -215,7 +216,7 @@ namespace HenryMod.SkillStates
             attackDriver.activationRequiresAimConfirmation = true;
             attackDriver.activationRequiresTargetLoS = false;
             attackDriver.selectionRequiresTargetLoS = false;
-            attackDriver.maxDistance = 10f;
+            attackDriver.maxDistance = 2f;
             attackDriver.minDistance = 0f;
             attackDriver.requireSkillReady = true;
             attackDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
@@ -227,7 +228,7 @@ namespace HenryMod.SkillStates
             attackDriver.maxTargetHealthFraction = Mathf.Infinity;
             attackDriver.minUserHealthFraction = Mathf.NegativeInfinity;
             attackDriver.maxUserHealthFraction = Mathf.Infinity;
-            attackDriver.skillSlot = SkillSlot.Primary;
+            attackDriver.skillSlot = SkillSlot.None;
 
             AISkillDriver shatterDriver = newMaster.AddComponent<AISkillDriver>();
             shatterDriver.customName = "Shatter";
@@ -237,7 +238,7 @@ namespace HenryMod.SkillStates
             shatterDriver.activationRequiresTargetLoS = false;
             shatterDriver.selectionRequiresTargetLoS = false;
             shatterDriver.maxDistance = 70f;
-            shatterDriver.minDistance = 10f;
+            shatterDriver.minDistance = 2f;
             shatterDriver.shouldSprint = true;
             shatterDriver.requireSkillReady = false;
             shatterDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;

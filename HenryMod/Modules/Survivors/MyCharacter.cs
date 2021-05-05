@@ -293,6 +293,32 @@ namespace HenryMod.Modules.Survivors
                 stockToConsume = 1
             });
 
+            SkillDef cannonSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = "CannonLaunch",
+                skillNameToken = "CannonLaunch",
+                skillDescriptionToken = "CannonLaunch",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSecondaryIcon"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.CannonLaunch)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 1f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = true,
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = false,
+                mustKeyPress = false,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1
+            });
+
+            Modules.Skills.AddSecondarySkills(bodyPrefab, cannonSkillDef);
+
             SkillDef secondarytargetSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "SecondaryPhantasmTarget",

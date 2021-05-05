@@ -52,7 +52,7 @@ namespace HenryMod.SkillStates
 
             if (EntityStates.JellyfishMonster.JellyNova.novaEffectPrefab)
             {
-                EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/NullifierDeathExplosion"), new EffectData
+                EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/JellyfishNova"), new EffectData
                 {
                     origin = base.transform.position,
                     scale = GravityWell.novaRadius
@@ -77,7 +77,7 @@ namespace HenryMod.SkillStates
                         procCoefficient = 1f,
                         position = hurtBox.transform.position,
                         crit = Util.CheckRoll(this.critStat, base.characterBody.master),
-                        damageType = DamageType.Freeze2s
+                        damageType = DamageType.Shock5s
                     };
                     hurtBox.healthComponent.TakeDamage(damageInfo);
                     if (hurtBox.healthComponent.gameObject.GetComponent<CharacterBody>().GetComponent<Knockdown>() == null) hurtBox.healthComponent.gameObject.AddComponent<Knockdown>().body = hurtBox.healthComponent.gameObject.GetComponent<CharacterBody>();

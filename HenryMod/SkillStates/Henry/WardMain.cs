@@ -12,16 +12,17 @@ using UnityEngine.Networking;
 
 namespace HenryMod.SkillStates
 {
-	internal class WardMain : GenericCharacterMain
+	internal class WardMain : FlyState
 	{
 		private GameObject affixHauntedWard;
+		public List<HurtBox> targetList;
 
 		public override void OnEnter()
 		{
 			base.OnEnter();
 			this.affixHauntedWard = UnityEngine.Object.Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/NetworkedObjects/AffixHauntedWard"));
 			this.affixHauntedWard.GetComponent<TeamFilter>().teamIndex = TeamIndex.None;
-			this.affixHauntedWard.GetComponent<BuffWard>().Networkradius = 10f;
+			this.affixHauntedWard.GetComponent<BuffWard>().Networkradius = 7f;
 			this.affixHauntedWard.GetComponent<NetworkedBodyAttachment>().AttachToGameObjectAndSpawn(this.characterBody.gameObject);
 
 			//setting the color didn't work with this, trying something else in the future
@@ -47,7 +48,7 @@ namespace HenryMod.SkillStates
 			List<ProjectileController> projectiles2 = new List<ProjectileController>();
 			new RoR2.SphereSearch
 			{
-				radius = 10f,
+				radius = 7f,
 				mask = RoR2.LayerIndex.projectile.mask,
 				origin = base.characterBody.transform.position,
 			}.RefreshCandidates().FilterCandidatesByProjectileControllers().GetProjectileControllers(projectiles2);
@@ -66,12 +67,39 @@ namespace HenryMod.SkillStates
 							scale = 1f
 						}, true);
 						PC.owner = gameObject;
-					PC.gameObject.GetComponent<ProjectileSimple>().SetForwardSpeed(8f);
+						PC.gameObject.GetComponent<ProjectileSimple>().SetForwardSpeed(14f);
 					}
 
 				}
 			}
 			projectiles2.Clear();
+
+			this.targetList = new List<HurtBox>();
+			new RoR2.SphereSearch
+			{
+				mask = LayerIndex.entityPrecise.mask,
+				origin = base.transform.position,
+				radius = 7f
+			}.RefreshCandidates().FilterCandidatesByDistinctHurtBoxEntities()./*FilterCandidatesByHurtBoxTeam(TeamMask.GetEnemyTeams(base.teamComponent.teamIndex)).*/GetHurtBoxes(this.targetList);
+			targetList.RemoveAll(delegate (HurtBox C) { return C == null; });
+			if (targetList.Count > 0)
+			{
+				targetList.RemoveAll(delegate (HurtBox C)
+				{
+					return !(C.healthComponent.alive);
+				});
+			}
+			foreach (HurtBox hurtBox in this.targetList)
+			{
+				if (hurtBox.teamIndex == TeamIndex.Player)
+				{
+					hurtBox.healthComponent.body.AddTimedBuff(RoR2Content.Buffs.Warbanner, 0.25f);
+				}
+				else
+				{
+					hurtBox.healthComponent.body.AddTimedBuff(RoR2Content.Buffs.Cripple, 0.25f);
+				}
+			}
 		}
 		
 

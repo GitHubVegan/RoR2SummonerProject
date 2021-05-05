@@ -173,8 +173,8 @@ namespace HenryMod.SkillStates
 
         private static GameObject CreateBody()
         {
-            GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/BeetleGuardBody"), "UtilityPhantasmBody", true);
-            //newBody.GetComponentInChildren<EntityStateMachine>().mainStateType = new SerializableEntityStateType(typeof(CooldownWardMain));
+            GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/WispBody"), "UtilityPhantasmBody", true);
+            newBody.GetComponentInChildren<EntityStateMachine>().mainStateType = new SerializableEntityStateType(typeof(WardMain));
 
             Modules.Prefabs.bodyPrefabs.Add(newBody);
             return newBody;
@@ -182,7 +182,7 @@ namespace HenryMod.SkillStates
 
         private static GameObject CreateMaster()
         {
-            GameObject newMaster = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/charactermasters/BeetleGuardMaster"), "UtilityPhantasmMaster", true);
+            GameObject newMaster = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/charactermasters/WispMaster"), "UtilityPhantasmMaster", true);
             newMaster.GetComponent<CharacterMaster>().bodyPrefab = UtilityPhantasmBody;
             foreach (AISkillDriver ai in newMaster.GetComponentsInChildren<AISkillDriver>())
             {
@@ -194,12 +194,12 @@ namespace HenryMod.SkillStates
 
             AISkillDriver attackDriver = newMaster.AddComponent<AISkillDriver>();
             attackDriver.customName = "Attack";
-            attackDriver.movementType = AISkillDriver.MovementType.StrafeMovetarget;
+            attackDriver.movementType = AISkillDriver.MovementType.Stop;
             attackDriver.moveTargetType = AISkillDriver.TargetType.CurrentLeader;
             attackDriver.activationRequiresAimConfirmation = false;
             attackDriver.activationRequiresTargetLoS = false;
             attackDriver.selectionRequiresTargetLoS = false;
-            attackDriver.maxDistance = 5f;
+            attackDriver.maxDistance = 3f;
             attackDriver.minDistance = 0f;
             attackDriver.requireSkillReady = false;
             attackDriver.aimType = AISkillDriver.AimType.MoveDirection;
@@ -221,7 +221,7 @@ namespace HenryMod.SkillStates
             shatterDriver.activationRequiresTargetLoS = false;
             shatterDriver.selectionRequiresTargetLoS = false;
             shatterDriver.maxDistance = 100f;
-            shatterDriver.minDistance = 5f;
+            shatterDriver.minDistance = 3f;
             shatterDriver.requireSkillReady = false;
             shatterDriver.aimType = AISkillDriver.AimType.MoveDirection;
             shatterDriver.ignoreNodeGraph = true;

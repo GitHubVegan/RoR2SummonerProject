@@ -17,8 +17,6 @@ namespace HenryMod.SkillStates
         public static float force = 0f;
         public static float recoil = 0f;
         public static float range = 250f;
-        public static float maxDistance = 100f;
-        public static Vector3 point;
 
         private static float d = 7;
 
@@ -41,117 +39,53 @@ namespace HenryMod.SkillStates
 
         private void Fire()
         {
+            if (!this.hasFired)
+            {
+                this.hasFired = true;
+                Util.PlaySound("Roll.dodgeSoundString", base.gameObject);
 
-            RaycastHit raycastHit;
-            if (base.inputBank.GetAimRaycast(UtilityPhantasmTarget.maxDistance, out raycastHit))
-            {
-                UtilityPhantasmTarget.point = raycastHit.point;
-            }
-            else
-            {
-                UtilityPhantasmTarget.point = base.inputBank.GetAimRay().GetPoint(UtilityPhantasmTarget.maxDistance);
-            }
-
-            base.OnEnter();
-            UtilityPhantasm.SummonablesList3.RemoveAll(delegate (CharacterMaster C) { return C == null; });
-            if (UtilityPhantasm.SummonablesList3.Count > 0)
-            {
-                UtilityPhantasm.SummonablesList3.RemoveAll(delegate (CharacterMaster CM2)
+                if (base.isAuthority)
                 {
-                    return !(CM2.GetBody().healthComponent.alive);
-                });
-            }
-            if (UtilityPhantasm.SummonablesList3.Count > 0)
-            {
+                    Ray aimRay = base.GetAimRay();
 
-                foreach (CharacterMaster CM2 in UtilityPhantasm.SummonablesList3)
-                {
-                    PrimaryPhantasm.SummonablesList1.RemoveAll(delegate (CharacterMaster C) { return C == null; });
-                    if (PrimaryPhantasm.SummonablesList1.Count > 0)
-                    {
-                        PrimaryPhantasm.SummonablesList1.RemoveAll(delegate (CharacterMaster C)
-                        {
-                            return !(C.GetBody().healthComponent.alive);
-                        });
-                    }
-                    if (PrimaryPhantasm.SummonablesList1.Count > 0)
+
+                    new BulletAttack
                     {
 
-
-                        foreach (CharacterMaster cm in PrimaryPhantasm.SummonablesList1)
-                        {
-                            cm.gameObject.GetComponent<BaseAI>().leader.gameObject = CM2.gameObject;
-
-                            foreach (AISkillDriver ASD in cm.GetComponentsInChildren<AISkillDriver>())
-                            {
-
-                                bool flag = ASD.customName == "Attack";
-                                if (flag)
-                                {
-                                    ASD.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
-                                    ASD.moveTargetType = AISkillDriver.TargetType.CurrentLeader;
-                                    ASD.maxDistance = 120f;
-                                    ASD.minDistance = 5f;
-                                    ASD.skillSlot = SkillSlot.None;
-                                }
-
-                                bool flag2 = ASD.customName == "Shatter";
-                                if (flag2)
-                                {
-                                    ASD.movementType = AISkillDriver.MovementType.Stop;
-                                    ASD.moveTargetType = AISkillDriver.TargetType.CurrentLeader;
-                                    ASD.maxDistance = 5f;
-                                    ASD.minDistance = 0f;
-                                    ASD.skillSlot = SkillSlot.None;
-                                }
-                                cm.GetBody().baseMoveSpeed = 25f;
-                                cm.GetBody().baseAcceleration = 160f;
-                                cm.gameObject.GetComponent<BaseAI>().currentEnemy.gameObject = CM2.gameObject;
-                            }
-
-                            if (CM2.GetBody().healthComponent.alive == true)
-                            {
-
-                                CM2.GetBody().GetComponent<RoR2.SkillLocator>().primary.SetSkillOverride(4, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("CannonLaunch")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
-                                if (CM2.GetBody().GetComponent<RoR2.SkillLocator>().primary.stock == 0) CM2.GetBody().GetComponent<RoR2.SkillLocator>().primary.AddOneStock();
-                                foreach (AISkillDriver ASD in CM2.GetComponentsInChildren<AISkillDriver>())
-                                {
-
-                                    bool flag = ASD.customName == "Attack";
-                                    if (flag)
-                                    {
-                                        /*ASD.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
-                                        ASD.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;*/
-                                        ASD.maxDistance = 100f;
-                                        ASD.minDistance = 10f;
-                                        ASD.skillSlot = SkillSlot.None;
-                                    }
-
-                                    bool flag2 = ASD.customName == "Shatter";
-                                    if (flag2)
-                                    {
-                                        /*ASD.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
-                                        ASD.moveTargetType = AISkillDriver.TargetType.CurrentEnemy; */
-                                        ASD.maxDistance = 10f;
-                                        ASD.minDistance = 0f;
-                                        ASD.skillSlot = SkillSlot.Primary;
-                                    }
-
-                                }
-
-                                CM2.GetBody().baseMoveSpeed = 25f;
-                                CM2.GetBody().baseAcceleration = 160f;
-                            }
-
-
-                            Debug.Log(UtilityPhantasm.SummonablesList3);
-                        }
-                    }
+                        bulletCount = 1,
+                        aimVector = aimRay.direction,
+                        origin = aimRay.origin,
+                        damage = damageCoefficient * this.damageStat,
+                        damageColorIndex = DamageColorIndex.Default,
+                        damageType = DamageType.Generic,
+                        falloffModel = BulletAttack.FalloffModel.DefaultBullet,
+                        maxDistance = range,
+                        force = force,
+                        hitMask = LayerIndex.CommonMasks.bullet,
+                        minSpread = 0f,
+                        maxSpread = 0f,
+                        isCrit = base.RollCrit(),
+                        owner = base.gameObject,
+                        muzzleName = null,
+                        smartCollision = false,
+                        procChainMask = default(ProcChainMask),
+                        procCoefficient = procCoefficient,
+                        radius = 1f,
+                        sniper = false,
+                        stopperMask = LayerIndex.CommonMasks.bullet,
+                        weapon = null,
+                        tracerEffectPrefab = null,
+                        spreadPitchScale = 0f,
+                        spreadYawScale = 0f,
+                        queryTriggerInteraction = QueryTriggerInteraction.UseGlobal,
+                        hitEffectPrefab = null,
+                        hitCallback = SummonPrimary
+                    }.Fire();
                 }
             }
-        } 
+        }
 
-        /*bool SummonPrimary(ref BulletAttack.BulletHit hitInfo)
+        bool SummonPrimary(ref BulletAttack.BulletHit hitInfo)
         {
             UtilityPhantasm.SummonablesList3.RemoveAll(delegate (CharacterMaster C) { return C == null; });
             if (UtilityPhantasm.SummonablesList3.Count > 0)
@@ -167,7 +101,7 @@ namespace HenryMod.SkillStates
                 {
                     foreach (CharacterMaster cm in UtilityPhantasm.SummonablesList3)
                     {
-                        cm.gameObject.GetComponent<BaseAI>().currentEnemy.gameObject = hitInfo.entityObject;
+                        cm.gameObject.GetComponent<BaseAI>().leader.gameObject = hitInfo.entityObject;
                         
                     }
                 }
@@ -188,19 +122,122 @@ namespace HenryMod.SkillStates
                             {
                                 ai.minDistance = 15f;
                             }
-                        }
+                        }*/
                     }
                 }
             }
 
             return false;
             
-        }*/
+        }
         
         public override void OnExit()
         {
             base.OnExit();
         }
+
+        //private static GameObject CreateBody()
+        //{
+            //GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/MercBody"), "UtilityPhantasmTargetBody", true);
+
+            //       BodyInfo bodyInfo = new BodyInfo
+            //       {
+            //           armor = 20f,
+            //           armorGrowth = 0f,
+            //           bodyName = "PhantasmSwordBody",
+            //           bodyNameToken = HenryPlugin.developerPrefix + "_PHANTASMSWORD_BODY_NAME",
+            //           bodyColor = Color.grey,
+            //           characterPortrait = Modules.Assets.LoadCharacterIcon("Henry"),
+            //           crosshair = Modules.Assets.LoadCrosshair("Standard"),
+            //           damage = 12f,
+            //          healthGrowth = 33f,
+            //          healthRegen = 1.5f,
+            //           jumpCount = 1,
+            //           maxHealth = 110f,
+            //           subtitleNameToken = HenryPlugin.developerPrefix + "_PHANTASMSWORD_BODY_SUBTITLE",
+            //           podPrefab = Resources.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod"),
+            //           bodyNameToClone = "Merc"
+            //       };
+
+            //        GameObject newBody = Prefabs.CreatePrefab("UtilityPhantasmTargetBody", "mdlPhantasmSword",bodyInfo);
+            //       //bodyPrefab.GetComponent<EntityStateMachine>().mainStateType = new EntityStates.SerializableEntityStateType(characterMainState);
+
+
+         /*   GameObject newBody = null;
+            foreach (GameObject customCharacterbody in Prefabs.bodyPrefabs)
+            {
+                Debug.Log($"bodyPrefabs contains GameObject {customCharacterbody.name}");
+                if (customCharacterbody.name == "PhantasmSwordBody")
+                {
+                    newBody = customCharacterbody;
+                }
+            }
+
+
+           // Modules.Prefabs.bodyPrefabs.Add(newBody);
+            return newBody;
+        }
+
+
+
+        private static GameObject CreateMaster()
+        {
+            GameObject newMaster = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/charactermasters/MercMonsterMaster"), "UtilityPhantasmTargetMaster", true);
+            newMaster.GetComponent<CharacterMaster>().bodyPrefab = UtilityPhantasmTargetBody;
+            foreach (AISkillDriver ai in newMaster.GetComponentsInChildren<AISkillDriver>())
+            {
+                HenryPlugin.DestroyImmediate(ai);
+            }
+
+            newMaster.GetComponent<BaseAI>().fullVision = true;
+
+
+            AISkillDriver attackDriver = newMaster.AddComponent<AISkillDriver>();
+            attackDriver.customName = "Attack";
+            attackDriver.movementType = AISkillDriver.MovementType.Stop;
+            attackDriver.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
+            attackDriver.activationRequiresAimConfirmation = true;
+            attackDriver.activationRequiresTargetLoS = false;
+            attackDriver.selectionRequiresTargetLoS = false;
+            attackDriver.maxDistance = 8f;
+            attackDriver.minDistance = 0f;
+            attackDriver.requireSkillReady = true;
+            attackDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
+            attackDriver.ignoreNodeGraph = true;
+            attackDriver.moveInputScale = 1f;
+            attackDriver.driverUpdateTimerOverride = 0.2f;
+            attackDriver.buttonPressType = AISkillDriver.ButtonPressType.Hold;
+            attackDriver.minTargetHealthFraction = Mathf.NegativeInfinity;
+            attackDriver.maxTargetHealthFraction = Mathf.Infinity;
+            attackDriver.minUserHealthFraction = Mathf.NegativeInfinity;
+            attackDriver.maxUserHealthFraction = Mathf.Infinity;
+            attackDriver.skillSlot = SkillSlot.Primary;
+
+            AISkillDriver shatterDriver = newMaster.AddComponent<AISkillDriver>();
+            shatterDriver.customName = "Shatter";
+            shatterDriver.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
+            shatterDriver.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
+            shatterDriver.activationRequiresAimConfirmation = false;
+            shatterDriver.activationRequiresTargetLoS = false;
+            shatterDriver.selectionRequiresTargetLoS = false;
+            shatterDriver.maxDistance = 70f;
+            shatterDriver.minDistance = 8f;
+            shatterDriver.shouldSprint = false;
+            shatterDriver.requireSkillReady = false;
+            shatterDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
+            shatterDriver.ignoreNodeGraph = true;
+            shatterDriver.moveInputScale = 1f;
+            shatterDriver.driverUpdateTimerOverride = 0.2f;
+            shatterDriver.buttonPressType = AISkillDriver.ButtonPressType.Hold;
+            shatterDriver.minTargetHealthFraction = Mathf.NegativeInfinity;
+            shatterDriver.maxTargetHealthFraction = Mathf.Infinity;
+            shatterDriver.minUserHealthFraction = Mathf.NegativeInfinity;
+            shatterDriver.maxUserHealthFraction = Mathf.Infinity;
+            shatterDriver.skillSlot = SkillSlot.None;
+
+            Modules.Prefabs.masterPrefabs.Add(newMaster);
+            return newMaster;
+        }*/
 
         public override void FixedUpdate()
         {

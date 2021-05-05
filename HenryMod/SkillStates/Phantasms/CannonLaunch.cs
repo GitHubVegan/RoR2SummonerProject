@@ -46,39 +46,50 @@ namespace HenryMod.SkillStates
         public override void OnExit()
         {
             var pos1 = base.transform.position;
-            var pos2 = UtilityPhantasmTarget.point;
+            var pos2 = UtilityPhantasmTargetCannon.point;
             var diff = pos2 - pos1;
             var dir = diff.normalized;
-            var dir2 = base.characterBody.transform.rotation * Quaternion.FromToRotation(new Vector3(0, 0, 1), diff);
-            foreach (CharacterMaster cm in PrimaryPhantasm.SummonablesList1)
+            PrimaryPhantasm.SummonablesList1.RemoveAll(delegate (CharacterMaster C) { return C == null; });
+            if (PrimaryPhantasm.SummonablesList1.Count > 0)
             {
-                cm.gameObject.GetComponent<BaseAI>().leader.gameObject = base.characterBody.gameObject;
-
-                foreach (AISkillDriver ASD in cm.GetComponentsInChildren<AISkillDriver>())
+                PrimaryPhantasm.SummonablesList1.RemoveAll(delegate (CharacterMaster C)
                 {
+                    return !(C.GetBody().healthComponent.alive);
+                });
+            }
+            if (PrimaryPhantasm.SummonablesList1.Count > 0)
+            {
+                foreach (CharacterMaster cm in PrimaryPhantasm.SummonablesList1)
+                {
+                    cm.gameObject.GetComponent<BaseAI>().leader.gameObject = base.gameObject.GetComponent<BaseAI>().leader.gameObject;
 
-                    bool flag = ASD.customName == "Attack";
-                    if (flag)
+                    foreach (AISkillDriver ASD in cm.GetComponentsInChildren<AISkillDriver>())
                     {
-                        ASD.movementType = AISkillDriver.MovementType.Stop;
-                        ASD.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
-                        ASD.maxDistance = 6;
-                        ASD.minDistance = 0f;
-                        ASD.skillSlot = SkillSlot.Primary;
-                    }
 
-                    bool flag2 = ASD.customName == "Shatter";
-                    if (flag2)
-                    {
-                        ASD.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
-                        ASD.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
-                        ASD.maxDistance = 100f;
-                        ASD.minDistance = 6f;
-                        ASD.skillSlot = SkillSlot.None;
+                        bool flag = ASD.customName == "Attack";
+                        if (flag)
+                        {
+                            ASD.movementType = AISkillDriver.MovementType.Stop;
+                            ASD.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
+                            ASD.maxDistance = 6;
+                            ASD.minDistance = 0f;
+                            ASD.skillSlot = SkillSlot.Primary;
+                        }
+
+                        bool flag2 = ASD.customName == "Shatter";
+                        if (flag2)
+                        {
+                            ASD.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
+                            ASD.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
+                            ASD.maxDistance = 100f;
+                            ASD.minDistance = 6f;
+                            ASD.skillSlot = SkillSlot.None;
+                        }
+                        cm.GetBody().baseMoveSpeed = 25f;
+                        cm.GetBody().baseAcceleration = 160f;
                     }
-                    cm.GetBody().baseMoveSpeed = 25f;
-                    cm.GetBody().baseAcceleration = 160f;
                 }
+            }
                 if (base.isAuthority)
                 {
                     Ray aimRay = base.GetAimRay();
@@ -97,51 +108,49 @@ namespace HenryMod.SkillStates
                             return !(C.healthComponent.alive);
                         });
                     }
-                    foreach (HurtBox hurtBox in this.targetList)
+                    if (targetList.Count > 0)
                     {
-                        /*if(hurtBox.teamIndex == TeamIndex.Player)
+                        foreach (HurtBox hurtBox in this.targetList)
                         {
-                            hurtBox.healthComponent.body.AddTimedBuff(RoR2Content.Buffs.im, 3);
-                        }*/
-                        bool flag2 = hurtBox && hurtBox.healthComponent.alive;
-                        if (flag2)
-                        {
-                            if (hurtBox.gameObject != base.gameObject)
+                            /*if(hurtBox.teamIndex == TeamIndex.Player)
                             {
-                                if (hurtBox.healthComponent.body.characterMotor)
+                                hurtBox.healthComponent.body.AddTimedBuff(RoR2Content.Buffs.im, 3);
+                            }*/
+                            bool flag2 = hurtBox && hurtBox.healthComponent.alive;
+                            if (flag2)
+                            {
+                                if (hurtBox.gameObject != base.gameObject)
                                 {
-                                    this.motor = hurtBox.healthComponent.body.characterMotor;
-                                    this.mass = this.motor.mass;
-                                }
-                                else if (this.body.rigidbody)
-                                {
-                                    this.rb = hurtBox.healthComponent.body.rigidbody;
-                                    this.mass = this.rb.mass;
-                                }
+                                    if (hurtBox.healthComponent.body.characterMotor)
+                                    {
+                                        this.motor = hurtBox.healthComponent.body.characterMotor;
+                                        this.mass = this.motor.mass;
+                                    }
+                                    else if (this.body.rigidbody)
+                                    {
+                                        this.rb = hurtBox.healthComponent.body.rigidbody;
+                                        this.mass = this.rb.mass;
+                                    }
 
-                                this.stopwatch = 0;
-                                this.lifetime = 5f;
+                                    this.stopwatch = 0;
+                                    this.lifetime = 5f;
 
-                                if (this.mass < 50f) this.mass = 50f;
-                                this.pushForce = 50f * this.mass;
-                                if(hurtBox.teamIndex == TeamIndex.Player && !hurtBox.healthComponent.isLocalPlayer)
-                                {
-                                    this.mass = 200f;
+                                    if (this.mass < 50f) this.mass = 50f;
+                                    this.pushForce = 50f * this.mass;
+                                    DamageInfo damageInfo = new DamageInfo
+                                    {
+                                        damage = 0,
+                                        attacker = base.gameObject,
+                                        procCoefficient = 1f,
+                                        position = hurtBox.transform.position,
+                                        crit = false,
+                                        damageType = DamageType.Generic,
+                                        force = dir * this.pushForce * 0.7f
+
+                                    };
+                                    hurtBox.healthComponent.TakeDamageForce(damageInfo);
+                                    //base.characterBody.GetComponent<RoR2.SkillLocator>().primary.UnsetSkillOverride(4, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("CannonLaunch")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
                                 }
-                                DamageInfo damageInfo = new DamageInfo
-                                {
-                                    damage = 0,
-                                    attacker = base.gameObject,
-                                    procCoefficient = 1f,
-                                    position = hurtBox.transform.position,
-                                    crit = false,
-                                    damageType = DamageType.Generic,
-                                    force = dir * this.pushForce * 0.6f
-
-                                };
-                                hurtBox.healthComponent.TakeDamage(damageInfo);
-                                hurtBox.healthComponent.TakeDamageForce(damageInfo);
-                                //base.characterBody.GetComponent<RoR2.SkillLocator>().primary.UnsetSkillOverride(4, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("CannonLaunch")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
                             }
                         }
                     }
@@ -149,4 +158,3 @@ namespace HenryMod.SkillStates
             }
         }
     }
-}

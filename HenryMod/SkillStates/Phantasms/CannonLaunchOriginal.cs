@@ -61,7 +61,7 @@ namespace HenryMod.SkillStates
 
                 Util.PlaySound("Roll.dodgeSoundString", base.gameObject);
                 var pos1 = base.transform.position;
-                var pos2 = UtilityPhantasmTarget.point;
+                var pos2 = UtilityPhantasmTargetCannon.point;
                 var diff = pos2 - pos1;
                 var dir = diff.normalized;
                 var dir2 = base.characterBody.transform.rotation * Quaternion.FromToRotation(new Vector3(0, 0, 1), diff);

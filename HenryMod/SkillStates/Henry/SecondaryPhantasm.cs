@@ -72,8 +72,8 @@ namespace HenryMod.SkillStates
                 characterMaster.GetBody().baseAcceleration = 100f;
                 characterMaster.inventory.CopyItemsFrom(base.characterBody.inventory);
                 characterMaster.inventory.ResetItem(RoR2Content.Items.ExtraLife.itemIndex);
-                characterMaster.inventory.GiveItem(RoR2Content.Items.Ghost.itemIndex);
-                characterMaster.inventory.GiveItem(RoR2Content.Items.HealthDecay.itemIndex, 20);
+                //characterMaster.inventory.GiveItem(RoR2Content.Items.Ghost.itemIndex);
+                //characterMaster.inventory.GiveItem(RoR2Content.Items.HealthDecay.itemIndex, 20);
                 characterMaster.gameObject.GetComponent<BaseAI>().leader.gameObject = base.characterBody.gameObject;
                 characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().primary.SetSkillOverride(4, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("PhantasmGround")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
                 characterMaster.GetBody().isPlayerControlled = false;
@@ -193,6 +193,13 @@ namespace HenryMod.SkillStates
         {
             GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/WispBody"), "SecondaryPhantasmBody", true);
             newBody.GetComponentInChildren<EntityStateMachine>().mainStateType = new SerializableEntityStateType(typeof(SwarmContact));
+            GameObject newGhost = newBody.GetComponentInChildren<CharacterModel>().baseRendererInfos;
+            Renderer[] renderers = newBody.GetComponentsInChildren<Renderer>(true);
+            Material newMat = Modules.Assets.mainAssetBundle.LoadAsset<Material>("PhantasmHologram");
+            foreach (Renderer r in renderers)
+            {
+                r.material = newMat;
+            }
             Modules.Prefabs.bodyPrefabs.Add(newBody);
             return newBody;
         }

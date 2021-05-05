@@ -16,8 +16,8 @@ namespace HenryMod.Modules
             desc = desc + "< ! > Roll has a lingering armor buff that helps to use it aggressively." + Environment.NewLine + Environment.NewLine;
             desc = desc + "< ! > Bomb can be used to wipe crowds with ease." + Environment.NewLine + Environment.NewLine;
 
-            string outro = "..and so he left, searching for a new identity.";
-            string outroFailure = "..and so he vanished, forever a blank slate.";
+            string outro = "..and so she left, even though she was never really there.";
+            string outroFailure = "..and so her hologram vanished, replaced without a delay.";
 
             LanguageAPI.Add(prefix + "NAME", "Henry");
             LanguageAPI.Add(prefix + "DESCRIPTION", desc);

@@ -24,18 +24,19 @@ namespace HenryMod.Modules.Survivors
 
         internal override BodyInfo bodyInfo { get; set; } = new BodyInfo
         {
-            armor = 20f,
+            armor = 0f,
             armorGrowth = 0f,
             bodyName = "MesmerBody",
             bodyNameToken = HenryPlugin.developerPrefix + "_MESMER_BODY_NAME",
             bodyColor = Color.grey,
             characterPortrait = Modules.Assets.LoadCharacterIcon("Henry"),
             crosshair = Modules.Assets.LoadCrosshair("Standard"),
-            damage = 12f,
-            healthGrowth = 33f,
-            healthRegen = 1.5f,
+            damage = 13f,
+            healthGrowth = 27f,
+            healthRegen = 0.5f,
+            moveSpeed = 6,
             jumpCount = 1,
-            maxHealth = 110f,
+            maxHealth = 90f,
             subtitleNameToken = HenryPlugin.developerPrefix + "_MESMER_BODY_SUBTITLE",
             podPrefab = Resources.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod")
         };

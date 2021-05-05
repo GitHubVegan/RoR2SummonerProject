@@ -25,18 +25,18 @@ namespace HenryMod.Modules.Survivors
 
         internal override BodyInfo bodyInfo { get; set; } = new BodyInfo
         {
-            armor = 20f,
+            armor = 175f,
             armorGrowth = 0f,
             bodyName = "PhantasmSwordBody",
             bodyNameToken = HenryPlugin.developerPrefix + "_PHANTASMSWORD_BODY_NAME",
             bodyColor = Color.grey,
             characterPortrait = Modules.Assets.LoadCharacterIcon("Henry"),
             crosshair = Modules.Assets.LoadCrosshair("Standard"),
-            damage = 12f,
-            healthGrowth = 33f,
-            healthRegen = 1.5f,
+            damage = 13f,
+            healthGrowth = 40f,
+            healthRegen = 2f,
             jumpCount = 1,
-            maxHealth = 110f,
+            maxHealth = 130f,
             subtitleNameToken = HenryPlugin.developerPrefix + "_PHANTASMSWORD_BODY_SUBTITLE",
             podPrefab = Resources.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod")
         };

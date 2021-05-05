@@ -93,7 +93,7 @@ namespace HenryMod.SkillStates
 			{
 				if (hurtBox.teamIndex == TeamIndex.Player)
 				{
-					hurtBox.healthComponent.body.AddTimedBuff(RoR2Content.Buffs.Warbanner, 0.25f);
+					hurtBox.healthComponent.body.AddTimedBuff(RoR2Content.Buffs.SmallArmorBoost, 0.25f);
 				}
 				else
 				{

@@ -56,7 +56,7 @@ namespace HolomancerMod.SkillStates
 
 					CM2.GetBody().baseMoveSpeed = 25f;
 					CM2.GetBody().baseAcceleration = 160f;
-					CM2.inventory.GiveItem(RoR2Content.Items.HealthDecay.itemIndex, 15);
+					CM2.inventory.GiveItem(RoR2Content.Items.HealthDecay.itemIndex, 10);
 					}
 
 

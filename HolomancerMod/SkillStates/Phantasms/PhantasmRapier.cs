@@ -88,7 +88,7 @@ namespace HolomancerMod.SkillStates
                         hitMask = LayerIndex.entityPrecise.mask,
                         hitEffectPrefab = hitEffectPrefab,
                         isCrit = Util.CheckRoll(this.critStat, base.characterBody.master),
-                        radius = 2f,
+                        radius = 0.8f,
                         smartCollision = true,
                         damageType = DamageType.Generic
                     }.Fire();

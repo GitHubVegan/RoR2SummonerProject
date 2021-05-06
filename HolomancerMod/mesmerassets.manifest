@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2369287841
+CRC: 3291425661
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: d10401593984087f675fcd182dfc30ca
+    Hash: db48dbaf2c42eb4ce91fd2a59feaa068
   TypeTreeHash:
     serializedVersion: 2
     Hash: 972103ac939f0471d19a07f535135cc4
@@ -72,6 +72,7 @@ Assets:
 - Assets/MesmerAssets/Animations/animMesmer.controller
 - Assets/HenryAssets/VFX/Textures/texPunchImpactShadow.png
 - Assets/HenryAssets/Materials/matBazookaRocket.mat
+- Assets/MesmerAssets/Icons/SecondaryTarget.png
 - Assets/HenryAssets/Icons/texPrimaryIcon.png
 - Assets/HenryAssets/VFX/Textures/texHenrySwing2.png
 - Assets/HenryAssets/Icons/texBazookaIcon.png
@@ -116,6 +117,7 @@ Assets:
 - Assets/HenryAssets/VFX/HenryBazookaMuzzleFlash.prefab
 - Assets/HenryAssets/VFX/HenryFistSwingEffect.prefab
 - Assets/MesmerAssets/Animations/Armature_AimPitch.anim
+- Assets/MesmerAssets/Icons/texHolomancerIcon.png
 - Assets/MesmerAssets/HolomancerAssets/Animations/Armature_HoloTpose.anim
 - Assets/HenryAssets/Mesh/meshVergil.mesh
 - Assets/MesmerAssets/HolomancerAssets/Animations/Armature_HoloDisplayIdle.anim
@@ -193,6 +195,7 @@ Assets:
 - Assets/HenryAssets/Icons/texMainSkin.png
 - Assets/MesmerAssets/PhantasmSword/Mesh/Rapier.mesh
 - Assets/HenryAssets/Icons/texBoxingGlovesIcon.png
+- Assets/MesmerAssets/Icons/UtilityTarget.png
 - Assets/HenryAssets/Materials/matVergil.mat
 - Assets/MesmerAssets/Mesh/MageMesh.mesh
 - Assets/HenryAssets/Materials/matHitboxPreview.mat
@@ -269,6 +272,7 @@ Assets:
 - Assets/HenryAssets/Animations/AimPitch.anim
 - Assets/MesmerAssets/HolomancerAssets/Animations/Armature_HoloRunB.anim
 - Assets/MesmerAssets/Icons/PrimaryPhantasm.png
+- Assets/MesmerAssets/Icons/PrimaryTarget.png
 - Assets/MesmerAssets/HolomancerAssets/Animations/Armature_HoloIdleIn.anim
 - Assets/MesmerAssets/mdlMesmer.prefab
 - Assets/HenryAssets/VFX/Textures/texSlash.png

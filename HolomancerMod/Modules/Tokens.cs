@@ -43,7 +43,7 @@ namespace HolomancerMod.Modules
 
             #region Secondary
             LanguageAPI.Add(prefix + "SECONDARY_HOLO_NAME", "Swarm");
-            LanguageAPI.Add(prefix + "SECONDARY_HOLO_DESCRIPTION", $"Summon up to one swarm of holographic insects (model tbi, placeholder is a wisp). It deals damage to and distracts all enemies within it. Can be reactivated to target a specific enemy.");
+            LanguageAPI.Add(prefix + "SECONDARY_HOLO_DESCRIPTION", $"Summon up to one swarm of holographic insects. It deals damage to and distracts all enemies within it. Can be reactivated to target a specific enemy.");
             #endregion
 
             #region Utility

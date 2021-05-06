@@ -70,6 +70,10 @@ namespace HolomancerMod.SkillStates
                 characterMaster.GetBody().RecalculateStats();
                 characterMaster.GetBody().baseMoveSpeed = 20f;
                 characterMaster.GetBody().baseAcceleration = 100f;
+                characterMaster.GetBody().baseArmor = 50f;
+                characterMaster.GetBody().baseMaxHealth = 120f;
+                characterMaster.GetBody().levelMaxHealth = 32f;
+                characterMaster.GetBody().baseRegen = 2f;
                 characterMaster.inventory.CopyItemsFrom(base.characterBody.inventory);
                 characterMaster.inventory.ResetItem(RoR2Content.Items.ExtraLife.itemIndex);
                 //characterMaster.inventory.GiveItem(RoR2Content.Items.Ghost.itemIndex);

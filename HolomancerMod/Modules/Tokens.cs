@@ -43,12 +43,12 @@ namespace HolomancerMod.Modules
 
             #region Secondary
             LanguageAPI.Add(prefix + "SECONDARY_HOLO_NAME", "Swarm");
-            LanguageAPI.Add(prefix + "SECONDARY_HOLO_DESCRIPTION", $"Summon up to one swarm of holographic insects. It deals damage to and distracts all enemies within it. Can be reactivated to target a specific enemy.");
+            LanguageAPI.Add(prefix + "SECONDARY_HOLO_DESCRIPTION", $"Summon up to one holographic eel. It deals damage to and distracts all enemies in close proximity. Can be reactivated to target a specific enemy.");
             #endregion
 
             #region Utility
             LanguageAPI.Add(prefix + "UTILITY_HOLO_NAME", "Drone");
-            LanguageAPI.Add(prefix + "UTILITY_HOLO_DESCRIPTION", "Summon up to one holographic drone. The drone hovers around you and projects a field of energy around it. The energy field cripples enemies, gives armor to allies and slows all projectiles that enter it. Reactivate to target an ally or an enemy.");
+            LanguageAPI.Add(prefix + "UTILITY_HOLO_DESCRIPTION", "Summon up to one holographic drone. The drone hovers around you and projects a field of energy around it. The energy field cripples enemies, gives armor to allies and slows all projectiles that enter it. Reactivate to target an ally or an enemy. Reactiving without a target returns it to you.");
             #endregion
 
             #region Special

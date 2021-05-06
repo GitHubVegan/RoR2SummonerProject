@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "q7HIZjeyy8oVXf+vMa9DKfyB1sfSbLRNJTaTRdKI6GJeNLA770X3Y4giZc78hwbvP16lSdPBj4egfG4WqMqstQ==",
+  "dgSpecHash": "yXh2/XOLSxnHtsxrxoihZRYJ1F76nhaYnoiClwiSNn3ZaU/AVHOCaUEr4bwWFwtUZ8yySAhIkNcIBO5s8vU50w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\nico_\\source\\repos\\RoR2SummonerProjectOldTesting\\HolomancerMod\\HolomancerMod.csproj",
+  "projectFilePath": "C:\\Users\\Liam Shelton\\Documents\\GitHub\\RoR2SummonerProject\\HolomancerMod\\HolomancerMod.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\nico_\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
-    "C:\\Users\\nico_\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+    "C:\\Users\\Liam Shelton\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\Liam Shelton\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
   ],
   "logs": []
 }

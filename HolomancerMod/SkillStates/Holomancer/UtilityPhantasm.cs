@@ -175,7 +175,6 @@ namespace HolomancerMod.SkillStates
         {
             GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/WispBody"), "UtilityPhantasmBody", true);
             newBody.GetComponentInChildren<EntityStateMachine>().mainStateType = new SerializableEntityStateType(typeof(WardMain));
-
             Modules.Prefabs.bodyPrefabs.Add(newBody);
             return newBody;
         }

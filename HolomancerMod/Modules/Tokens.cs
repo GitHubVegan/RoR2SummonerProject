@@ -38,12 +38,12 @@ namespace HolomancerMod.Modules
 
             #region Primary
             LanguageAPI.Add(prefix + "PRIMARY_HOLO_NAME", "Fencer");
-            LanguageAPI.Add(prefix + "PRIMARY_HOLO_DESCRIPTION", $"Summon up to three holographic fencers to fight for you. They attack at a rapid pace, dealing heavy single target damage. While alive, ability can be reactivated to have the fencers target a specific enemy. Reactivate to target an enemy.");
+            LanguageAPI.Add(prefix + "PRIMARY_HOLO_DESCRIPTION", $"Summon up to three holographic fencers to fight for you. They attack at a rapid pace, dealing heavy single target damage. Can be reactivated to target a specific enemy.");
             #endregion
 
             #region Secondary
             LanguageAPI.Add(prefix + "SECONDARY_HOLO_NAME", "Swarm");
-            LanguageAPI.Add(prefix + "SECONDARY_HOLO_DESCRIPTION", $"Summon up to one swarm of holographic insects (model tbi, placeholder is a wisp). It deals damage to and distracts all enemies within it. Reactivate to target an enemy.");
+            LanguageAPI.Add(prefix + "SECONDARY_HOLO_DESCRIPTION", $"Summon up to one swarm of holographic insects (model tbi, placeholder is a wisp). It deals damage to and distracts all enemies within it. Can be reactivated to target a specific enemy.");
             #endregion
 
             #region Utility

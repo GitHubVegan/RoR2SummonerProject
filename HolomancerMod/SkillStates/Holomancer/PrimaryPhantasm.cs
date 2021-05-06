@@ -234,7 +234,7 @@ namespace HolomancerMod.SkillStates
             attackDriver.activationRequiresAimConfirmation = true;
             attackDriver.activationRequiresTargetLoS = false;
             attackDriver.selectionRequiresTargetLoS = false;
-            attackDriver.maxDistance = 6f;
+            attackDriver.maxDistance = 4f;
             attackDriver.minDistance = 0f;
             attackDriver.requireSkillReady = true;
             attackDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
@@ -256,7 +256,7 @@ namespace HolomancerMod.SkillStates
             shatterDriver.activationRequiresTargetLoS = false;
             shatterDriver.selectionRequiresTargetLoS = false;
             shatterDriver.maxDistance = 100f;
-            shatterDriver.minDistance = 6f;
+            shatterDriver.minDistance = 4f;
             shatterDriver.shouldSprint = false;
             shatterDriver.requireSkillReady = false;
             shatterDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;

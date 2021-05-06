@@ -15,19 +15,19 @@ namespace HolomancerMod.SkillStates
 {
     public class Flurry : BaseSkillState
     {
-        public static float damageCoefficient = 4f;
+        public static float damageCoefficient = 3f;
         public static float procCoefficient = 0.4f;
         public static float force = 0f;
         public static float recoil = 0f;
-        public static float range = 10f;
+        public static float range = 8f;
         private bool suicide;
 
 
         private float duration;
         private int bulletCount;
         private int totalBulletsFired;
-        public static int baseBulletCount = 15;
-        public static float baseDurationBetweenShots = 0.06f;
+        public static int baseBulletCount = 14;
+        public static float baseDurationBetweenShots = 0.07f;
         private float durationBetweenShots;
         public static float totalDuration = 1f;
         public float stopwatchBetweenShots;

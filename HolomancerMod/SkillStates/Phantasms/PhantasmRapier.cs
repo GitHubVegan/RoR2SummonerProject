@@ -17,7 +17,7 @@ namespace HolomancerMod.SkillStates
         public static float procCoefficient = 0.4f;
         public static float force = 0f;
         public static float recoil = 0f;
-        public static float range = 8f;
+        public static float range = 6f;
         private List<HurtBox> targetList;
         public static float maxRadius = 6f;
 

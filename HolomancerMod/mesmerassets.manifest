@@ -1,0 +1,279 @@
+ManifestFileVersion: 0
+CRC: 4085170418
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: f36ac41e8881897ff9f2a1469b0ff8d2
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 972103ac939f0471d19a07f535135cc4
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 54
+  Script: {instanceID: 0}
+- Class: 65
+  Script: {instanceID: 0}
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 90
+  Script: {instanceID: 0}
+- Class: 91
+  Script: {instanceID: 0}
+- Class: 95
+  Script: {instanceID: 0}
+- Class: 108
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9a68da65c907acb4eb4dbcd042f172e7, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: fc41cd48bee14034db80323ab44fbd3e, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 261c50d8a80898e4ebf2e8e415ea6766, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 751bd37d2e55f5f448dbb0d97812d9ba, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 135
+  Script: {instanceID: 0}
+- Class: 136
+  Script: {instanceID: 0}
+- Class: 137
+  Script: {instanceID: 0}
+- Class: 144
+  Script: {instanceID: 0}
+- Class: 198
+  Script: {instanceID: 0}
+- Class: 199
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 319
+  Script: {instanceID: 0}
+Assets:
+- Assets/HolomancerAssets/Animations/maskAimBazooka.mask
+- Assets/HolomancerAssets/Icons/texShotgunIcon.png
+- Assets/HolomancerAssets/VFX/Materials/matAnimeShapes.mat
+- Assets/MesmerAssets/Animations/animMesmer.controller
+- Assets/HolomancerAssets/VFX/Textures/texPunchImpactShadow.png
+- Assets/HolomancerAssets/Materials/matBazookaRocket.mat
+- Assets/HolomancerAssets/Icons/texPrimaryIcon.png
+- Assets/HolomancerAssets/VFX/Textures/texHolomancerSwing2.png
+- Assets/HolomancerAssets/Icons/texBazookaIcon.png
+- Assets/HolomancerAssets/Icons/texMasteryAchievement.png
+- Assets/HolomancerAssets/Mesh/meshHolomancer.mesh
+- Assets/HolomancerAssets/HolomancerDisplay.prefab
+- Assets/HolomancerAssets/VFX/Mesh/meshBoxingGlove.mesh
+- Assets/HolomancerAssets/Materials/matHolomancer.mat
+- Assets/HolomancerAssets/VFX/FistBarrageEffect.prefab
+- Assets/HolomancerAssets/Textures/texHolomancerAlt.png
+- Assets/MesmerAssets/Animations/Armature_WalkR.anim
+- Assets/HolomancerAssets/Icons/texPassiveIcon.png
+- Assets/HolomancerAssets/VFX/Textures/texFire.tga
+- Assets/HolomancerAssets/Animations/Jump.anim
+- Assets/MesmerAssets/HolomancerAssets/Animations/Armature_HoloDisplayIdleIn.anim
+- Assets/HolomancerAssets/Mesh/meshHolomancerNeo.mesh
+- Assets/HolomancerAssets/Animations/WalkR.anim
+- Assets/HolomancerAssets/VFX/HolomancerDustEffect.prefab
+- Assets/HolomancerAssets/Animations/SprintL.anim
+- Assets/HolomancerAssets/Materials/matRebellion.mat
+- Assets/HolomancerAssets/VFX/Materials/matSmoke.mat
+- Assets/MesmerAssets/Animations/Armature_WalkL.anim
+- Assets/HolomancerAssets/VFX/Textures/texSwingEffect.png
+- Assets/HolomancerAssets/Textures/texBoxingGlove.png
+- Assets/HolomancerAssets/Animations/maskAimYaw.mask
+- Assets/MesmerAssets/PhantasmSword/Mesh/PhantasmBody.mesh
+- Assets/HolomancerAssets/Icons/texDanteAchievement.png
+- Assets/HolomancerAssets/Icons/texSecondaryIcon.png
+- Assets/HolomancerAssets/Animations/animHolomancer.controller
+- Assets/MesmerAssets/Icons/ShatterSkillswapcancel.png
+- Assets/HolomancerAssets/VFX/Materials/matHolomancerSwing2.mat
+- Assets/HolomancerAssets/Textures/texBazooka.png
+- Assets/HolomancerAssets/VFX/Textures/texRipple.png
+- Assets/HolomancerAssets/VFX/ImpactHolomancerSlash.prefab
+- Assets/MesmerAssets/HolomancerAssets/mdlHolomancer.prefab
+- Assets/MesmerAssets/Shaders/Hologram.shader
+- Assets/HolomancerAssets/Animations/Armature_FlightR.anim
+- Assets/MesmerAssets/HolomancerAssets/Mesh/Staff.mesh
+- Assets/HolomancerAssets/VFX/Mesh/meshSwing.asset
+- Assets/HolomancerAssets/VFX/HolomancerBazookaMuzzleFlash.prefab
+- Assets/HolomancerAssets/VFX/HolomancerFistSwingEffect.prefab
+- Assets/MesmerAssets/Animations/Armature_AimPitch.anim
+- Assets/MesmerAssets/HolomancerAssets/Animations/Armature_HoloTpose.anim
+- Assets/HolomancerAssets/Mesh/meshVergil.mesh
+- Assets/MesmerAssets/HolomancerAssets/Animations/Armature_HoloDisplayIdle.anim
+- Assets/HolomancerAssets/VFX/Textures/texFistSwing.png
+- Assets/MesmerAssets/Animations/Armature_AimYaw (1).anim
+- Assets/HolomancerAssets/Animations/LightImpact.anim
+- Assets/HolomancerAssets/Icons/texHolomancerAchievement.png
+- Assets/HolomancerAssets/Animations/WalkB.anim
+- Assets/MesmerAssets/PhantasmSword/Animations/Armature_SimpleRunF.anim
+- Assets/MesmerAssets/Animations/Armature_IdleIn.anim
+- Assets/HolomancerAssets/Animations/maskGesture.mask
+- Assets/HolomancerAssets/VFX/Materials/matPunchImpact.mat
+- Assets/HolomancerAssets/Mesh/meshHolomancerAlt.mesh
+- Assets/HolomancerAssets/Textures/texHolomancerJedi.png
+- Assets/HolomancerAssets/Animations/SprintR.anim
+- Assets/HolomancerAssets/Animations/animHolomancerMenu.controller
+- Assets/HolomancerAssets/Icons/texVergilAchievement.png
+- Assets/MesmerAssets/HolomancerAssets/Animations/animHolo.controller
+- Assets/HolomancerAssets/Textures/texShotgun.png
+- Assets/MesmerAssets/HolomancerAssets/Animations/Armature_HoloRestIdle.anim
+- Assets/HolomancerAssets/Animations/WalkL.anim
+- Assets/HolomancerAssets/Animations/maskImpact.mask
+- Assets/MesmerAssets/HolomancerAssets/Animations/Armature_HoloRestIdleIn.anim
+- Assets/MesmerAssets/HolomancerAssets/Animations/Armature_HoloIdle.anim
+- Assets/HolomancerAssets/Animations/Armature_FlightL.anim
+- Assets/MesmerAssets/PhantasmSword/Animations/animPhantasmSwordMenu.controller
+- Assets/HolomancerAssets/Animations/Idle.anim
+- Assets/HolomancerAssets/VFX/BombExplosionEffect.prefab
+- Assets/HolomancerAssets/Animations/Slash2.anim
+- Assets/MesmerAssets/PhantasmSword/Animations/Armature_SimpleStab1.anim
+- Assets/MesmerAssets/Mesh/Spearmesh.mesh
+- Assets/MesmerAssets/Animations/maskAimYawMesmer.mask
+- Assets/HolomancerAssets/Mesh/meshYamato.mesh
+- Assets/HolomancerAssets/VFX/Textures/texDust.png
+- Assets/HolomancerAssets/VFX/Textures/texHitSpark.png
+- Assets/MesmerAssets/PhantasmSword/Animations/Armature_SimpleIdle.anim
+- Assets/HolomancerAssets/Materials/matBoxingGlove.mat
+- Assets/HolomancerAssets/Materials/matHolomancerAlt.mat
+- Assets/MesmerAssets/PhantasmSword/Animations/animPhantasmSword.controller
+- Assets/HolomancerAssets/Animations/WalkF.anim
+- Assets/HolomancerAssets/VFX/Materials/matPunchImpactShadow.mat
+- Assets/HolomancerAssets/Materials/matDante.mat
+- Assets/MesmerAssets/Icons/SecondaryPhantasm.png
+- Assets/HolomancerAssets/Animations/maskLeftArm.mask
+- Assets/MesmerAssets/PhantasmSword/Animations/maskGesturePhantasmSword.mask
+- Assets/HolomancerAssets/Mesh/MeshHolomancerGun.mesh
+- Assets/HolomancerAssets/Animations/DescendFast.anim
+- Assets/HolomancerAssets/HolomancerBazookaRocketGhost.prefab
+- Assets/HolomancerAssets/Icons/texScepterSpecialIcon.png
+- Assets/HolomancerAssets/VFX/Materials/matFistSwing.mat
+- Assets/HolomancerAssets/Mesh/meshDante.mesh
+- Assets/HolomancerAssets/VFX/Materials/matTrail.mat
+- Assets/HolomancerAssets/Materials/matHolomancerJedi.mat
+- Assets/HolomancerAssets/VFX/Materials/matHitSpark.mat
+- Assets/MesmerAssets/HolomancerAssets/Mesh/HolomancerBody.mesh
+- Assets/HolomancerAssets/Mesh/meshNeoCoat.mesh
+- Assets/HolomancerAssets/Animations/ShootGun.anim
+- Assets/HolomancerAssets/Animations/SprintF.anim
+- Assets/HolomancerAssets/Mesh/meshHolomancerSwordAlt.mesh
+- Assets/MesmerAssets/PhantasmSword/Textures/SwordPhantasmPlaceholderTex.png
+- Assets/MesmerAssets/Materials/PhantasmHologram2.mat
+- Assets/HolomancerAssets/Textures/texHolomancer.png
+- Assets/HolomancerAssets/Icons/texBazookaOutIcon.png
+- Assets/HolomancerAssets/Animations/maskAimPitch.mask
+- Assets/HolomancerAssets/Icons/texUziIcon.png
+- Assets/MesmerAssets/HolomancerAssets/Animations/Armature_HoloRunR.anim
+- Assets/MesmerAssets/PhantasmSword/PhantasmSwordDisplay.prefab
+- Assets/HolomancerAssets/Materials/matHolomancerNeo.mat
+- Assets/HolomancerAssets/VFX/Mesh/meshPunchShockwave.mesh
+- Assets/HolomancerAssets/Materials/matRoy.mat
+- Assets/HolomancerAssets/Icons/texBazookaIconScepter.png
+- Assets/HolomancerAssets/Textures/texHolomancerNeo.png
+- Assets/MesmerAssets/HolomancerAssets/Animations/Armature_HoloRunF.anim
+- Assets/HolomancerAssets/Icons/texMainSkin.png
+- Assets/MesmerAssets/PhantasmSword/Mesh/Rapier.mesh
+- Assets/HolomancerAssets/Icons/texBoxingGlovesIcon.png
+- Assets/HolomancerAssets/Materials/matVergil.mat
+- Assets/MesmerAssets/Mesh/MageMesh.mesh
+- Assets/HolomancerAssets/Materials/matHitboxPreview.mat
+- Assets/HolomancerAssets/Animations/IdleIn.anim
+- Assets/HolomancerAssets/VFX/Materials/matSwingShadow.mat
+- Assets/MesmerAssets/Icons/UtilityPhantasm.png
+- Assets/HolomancerAssets/Textures/texHolomancerJediEmission.png
+- Assets/MesmerAssets/Icons/Distortion.png
+- Assets/HolomancerAssets/Mesh/meshDanteCoat.mesh
+- Assets/HolomancerAssets/Animations/Armature_FlightIdle.anim
+- Assets/HolomancerAssets/Animations/RestIdle.anim
+- Assets/MesmerAssets/Animations/Armature_Idle.anim
+- Assets/HolomancerAssets/Animations/ThrowBomb.anim
+- Assets/HolomancerAssets/Icons/texHolomancerIcon.png
+- Assets/HolomancerAssets/Icons/texUtilityIcon.png
+- Assets/HolomancerAssets/Animations/Ascend.anim
+- Assets/MesmerAssets/Shaders/banner.png
+- Assets/HolomancerAssets/VFX/Materials/matPunchEffect.mat
+- Assets/HolomancerAssets/VFX/Textures/texPunchImpact.png
+- Assets/MesmerAssets/Icons/Diversion.png
+- Assets/MesmerAssets/HolomancerAssets/Mesh/HolomancerClothes.mesh
+- Assets/HolomancerAssets/mdlHolomancer.prefab
+- Assets/HolomancerAssets/Mesh/meshRebellion.mesh
+- Assets/HolomancerAssets/VFX/Materials/matHitSparkPunch.mat
+- Assets/MesmerAssets/Animations/Armature_RestIdleIn.anim
+- Assets/HolomancerAssets/Animations/Armature_FlightF.anim
+- Assets/MesmerAssets/PhantasmSword/mdlPhantasmSword.prefab
+- Assets/HolomancerAssets/VFX/Materials/matSwingEffect.mat
+- Assets/HolomancerAssets/Mesh/meshHolomancerSword.mesh
+- Assets/HolomancerAssets/VFX/Materials/matEmbers.mat
+- Assets/HolomancerAssets/Animations/AimYaw.anim
+- Assets/MesmerAssets/Animations/Armature_WalkB.anim
+- Assets/HolomancerAssets/HolomancerBombGhost.prefab
+- Assets/HolomancerAssets/Mesh/meshPistol.mesh
+- Assets/HolomancerAssets/Icons/texStingerIcon.png
+- Assets/MesmerAssets/Icons/Mindwrack.png
+- Assets/HolomancerAssets/Textures/texHolomancerVergil.png
+- Assets/HolomancerAssets/Mesh/meshUzi.mesh
+- Assets/HolomancerAssets/Animations/AAACustomIdle.anim
+- Assets/HolomancerAssets/VFX/Materials/matSlash.mat
+- Assets/HolomancerAssets/Icons/texPistolIcon.png
+- Assets/HolomancerAssets/VFX/Materials/matDust.mat
+- Assets/HolomancerAssets/VFX/Textures/texSmoke.png
+- Assets/HolomancerAssets/VFX/Textures/texEmbers.png
+- Assets/HolomancerAssets/Mesh/meshVergilCoat.mesh
+- Assets/HolomancerAssets/VFX/Textures/texLightning.tif
+- Assets/MesmerAssets/MesmerDisplay.prefab
+- Assets/MesmerAssets/Animations/Armature_RestIdle.anim
+- Assets/MesmerAssets/HolomancerAssets/HolomancerDisplay.prefab
+- Assets/HolomancerAssets/Animations/RestIdleIn.anim
+- Assets/HolomancerAssets/VFX/Materials/matRipple.mat
+- Assets/MesmerAssets/HolomancerAssets/Animations/animHoloMenu.controller
+- Assets/MesmerAssets/Icons/ShatterSkillswap.png
+- Assets/HolomancerAssets/Animations/DefaultPose.anim
+- Assets/HolomancerAssets/Animations/AAACustomRun.anim
+- Assets/HolomancerAssets/Materials/matShotgun.mat
+- Assets/MesmerAssets/Animations/Armature_AimYaw.anim
+- Assets/HolomancerAssets/Animations/IdleAdditive.anim
+- Assets/MesmerAssets/Animations/animMesmerMenu.controller
+- Assets/MesmerAssets/PhantasmSword/Materials/PhantasmSwordPlaceholderMat.mat
+- Assets/HolomancerAssets/Icons/texBazookaFireIcon.png
+- Assets/HolomancerAssets/VFX/Materials/matFire.mat
+- Assets/HolomancerAssets/Icons/texGrandMasteryAchievement.png
+- Assets/HolomancerAssets/Animations/maskBandana.mask
+- Assets/HolomancerAssets/Animations/MenuIdle.anim
+- Assets/HolomancerAssets/Materials/matBazooka.mat
+- Assets/MesmerAssets/Animations/maskAimPitchMesmer.mask
+- Assets/HolomancerAssets/VFX/HolomancerSwordSwingEffect.prefab
+- Assets/HolomancerAssets/Animations/Descend.anim
+- Assets/HolomancerAssets/Textures/texHolomancerDante.png
+- Assets/MesmerAssets/Materials/PhantasmHologram.mat
+- Assets/HolomancerAssets/Animations/Armature_FlightB.anim
+- Assets/HolomancerAssets/Animations/AimPitch.anim
+- Assets/MesmerAssets/HolomancerAssets/Animations/Armature_HoloRunB.anim
+- Assets/MesmerAssets/Icons/PrimaryPhantasm.png
+- Assets/MesmerAssets/HolomancerAssets/Animations/Armature_HoloIdleIn.anim
+- Assets/MesmerAssets/mdlMesmer.prefab
+- Assets/HolomancerAssets/VFX/Textures/texSlash.png
+- Assets/HolomancerAssets/Icons/texSpecialIcon.png
+- Assets/HolomancerAssets/Textures/texHolomancerDanteEmission.png
+- Assets/HolomancerAssets/Animations/MenuIdleIn.anim
+- Assets/HolomancerAssets/VFX/ImpactHolomancerPunch.prefab
+- Assets/HolomancerAssets/Animations/Slash1.anim
+- Assets/HolomancerAssets/VFX/HolomancerBazookaExplosionEffect.prefab
+- Assets/MesmerAssets/Animations/Armature_WalkF.anim
+- Assets/HolomancerAssets/Animations/Roll.anim
+Dependencies: []

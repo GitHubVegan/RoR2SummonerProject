@@ -1,0 +1,207 @@
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\bin\Debug\netstandard2.0\HenryMod.deps.json
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\bin\Debug\netstandard2.0\HenryMod.dll
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\bin\Debug\netstandard2.0\HenryMod.pdb
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\bin\Debug\netstandard2.0\0Harmony.dll
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\bin\Debug\netstandard2.0\AncientScepter.dll
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\bin\Debug\netstandard2.0\Assembly-CSharp.dll
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\bin\Debug\netstandard2.0\BepInEx.dll
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\bin\Debug\netstandard2.0\BepInEx.Harmony.dll
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\bin\Debug\netstandard2.0\BepInEx.MonoMod.Loader.dll
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\bin\Debug\netstandard2.0\BepInEx.Preloader.dll
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\bin\Debug\netstandard2.0\Facepunch.Steamworks.dll
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\bin\Debug\netstandard2.0\HGCSharpUtils.dll
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\bin\Debug\netstandard2.0\HGUnityUtils.dll
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\bin\Debug\netstandard2.0\MMHOOK_Assembly-CSharp.dll
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\bin\Debug\netstandard2.0\Mono.Cecil.dll
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\bin\Debug\netstandard2.0\Mono.Cecil.Mdb.dll
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\bin\Debug\netstandard2.0\Mono.Cecil.Pdb.dll
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\bin\Debug\netstandard2.0\Mono.Cecil.Rocks.dll
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\bin\Debug\netstandard2.0\MonoMod.exe
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\bin\Debug\netstandard2.0\MonoMod.RuntimeDetour.dll
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\bin\Debug\netstandard2.0\MonoMod.Utils.dll
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\bin\Debug\netstandard2.0\R2API.dll
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\bin\Debug\netstandard2.0\Unity.Postprocessing.Runtime.dll
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\bin\Debug\netstandard2.0\Unity.TextMeshPro.dll
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\bin\Debug\netstandard2.0\UnityEngine.AnimationModule.dll
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\bin\Debug\netstandard2.0\UnityEngine.AssetBundleModule.dll
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\bin\Debug\netstandard2.0\UnityEngine.CoreModule.dll
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\bin\Debug\netstandard2.0\UnityEngine.dll
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\bin\Debug\netstandard2.0\UnityEngine.Networking.dll
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\bin\Debug\netstandard2.0\UnityEngine.ParticleSystemModule.dll
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\bin\Debug\netstandard2.0\UnityEngine.PhysicsModule.dll
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\bin\Debug\netstandard2.0\UnityEngine.UI.dll
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\bin\Debug\netstandard2.0\UnityEngine.UIModule.dll
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\bin\Debug\netstandard2.0\UnityEngine.UNETModule.dll
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\bin\Debug\netstandard2.0\Wwise.dll
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\bin\Debug\netstandard2.0\Zio.dll
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\bin\Debug\netstandard2.0\0Harmony.xml
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\bin\Debug\netstandard2.0\BepInEx.xml
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\bin\Debug\netstandard2.0\BepInEx.Harmony.xml
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\bin\Debug\netstandard2.0\BepInEx.Preloader.xml
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\bin\Debug\netstandard2.0\MonoMod.xml
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\bin\Debug\netstandard2.0\MonoMod.RuntimeDetour.xml
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\bin\Debug\netstandard2.0\MonoMod.Utils.xml
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\bin\Debug\netstandard2.0\R2API.xml
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\obj\Debug\netstandard2.0\HenryMod.AssemblyInfoInputs.cache
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\obj\Debug\netstandard2.0\HenryMod.AssemblyInfo.cs
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\obj\Debug\netstandard2.0\HenryMod.csproj.CoreCompileInputs.cache
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\obj\Debug\netstandard2.0\HenryMod.csproj.CopyComplete
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\obj\Debug\netstandard2.0\HenryMod.dll
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\obj\Debug\netstandard2.0\HenryMod.pdb
+C:\Users\nico_\Source\Repos\HenryTutorial\HenryMod\obj\Debug\netstandard2.0\HenryMod.csprojAssemblyReference.cache
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\HenryMod.deps.json
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\HenryMod.dll
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\HenryMod.pdb
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\0Harmony.dll
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\AncientScepter.dll
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\Assembly-CSharp.dll
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\BepInEx.dll
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\BepInEx.Harmony.dll
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\BepInEx.MonoMod.Loader.dll
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\BepInEx.Preloader.dll
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\Facepunch.Steamworks.dll
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\HGCSharpUtils.dll
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\HGUnityUtils.dll
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\MMHOOK_Assembly-CSharp.dll
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\Mono.Cecil.dll
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\Mono.Cecil.Mdb.dll
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\Mono.Cecil.Pdb.dll
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\Mono.Cecil.Rocks.dll
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\MonoMod.exe
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\MonoMod.RuntimeDetour.dll
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\MonoMod.Utils.dll
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\R2API.dll
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\Unity.Postprocessing.Runtime.dll
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\Unity.TextMeshPro.dll
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\UnityEngine.AnimationModule.dll
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\UnityEngine.AssetBundleModule.dll
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\UnityEngine.CoreModule.dll
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\UnityEngine.dll
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\UnityEngine.Networking.dll
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\UnityEngine.ParticleSystemModule.dll
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\UnityEngine.PhysicsModule.dll
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\UnityEngine.UI.dll
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\UnityEngine.UIModule.dll
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\UnityEngine.UNETModule.dll
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\Wwise.dll
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\Zio.dll
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\0Harmony.xml
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\BepInEx.xml
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\BepInEx.Harmony.xml
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\BepInEx.Preloader.xml
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\MonoMod.xml
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\MonoMod.RuntimeDetour.xml
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\MonoMod.Utils.xml
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\R2API.xml
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\obj\Debug\netstandard2.0\HenryMod.AssemblyInfoInputs.cache
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\obj\Debug\netstandard2.0\HenryMod.AssemblyInfo.cs
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\obj\Debug\netstandard2.0\HenryMod.csproj.CoreCompileInputs.cache
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\obj\Debug\netstandard2.0\HenryMod.csproj.CopyComplete
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\obj\Debug\netstandard2.0\HenryMod.dll
+C:\Users\nico_\Source\Repos\RoR2SummonerProject\HenryMod\obj\Debug\netstandard2.0\HenryMod.pdb
+C:\Users\nico_\AppData\Roaming\r2modmanPlus-local\RiskOfRain2\profiles\TEst\BepInEx\plugins\Summonertest\netstandard2.0\HenryMod.deps.json
+C:\Users\nico_\AppData\Roaming\r2modmanPlus-local\RiskOfRain2\profiles\TEst\BepInEx\plugins\Summonertest\netstandard2.0\HenryMod.dll
+C:\Users\nico_\AppData\Roaming\r2modmanPlus-local\RiskOfRain2\profiles\TEst\BepInEx\plugins\Summonertest\netstandard2.0\HenryMod.pdb
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\bin\Debug\netstandard2.0\HenryMod.deps.json
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\bin\Debug\netstandard2.0\HenryMod.dll
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\bin\Debug\netstandard2.0\HenryMod.pdb
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\bin\Debug\netstandard2.0\0Harmony.dll
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\bin\Debug\netstandard2.0\AncientScepter.dll
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\bin\Debug\netstandard2.0\Assembly-CSharp.dll
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\bin\Debug\netstandard2.0\BepInEx.dll
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\bin\Debug\netstandard2.0\BepInEx.Harmony.dll
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\bin\Debug\netstandard2.0\BepInEx.MonoMod.Loader.dll
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\bin\Debug\netstandard2.0\BepInEx.Preloader.dll
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\bin\Debug\netstandard2.0\Facepunch.Steamworks.dll
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\bin\Debug\netstandard2.0\HGCSharpUtils.dll
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\bin\Debug\netstandard2.0\HGUnityUtils.dll
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\bin\Debug\netstandard2.0\MMHOOK_Assembly-CSharp.dll
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\bin\Debug\netstandard2.0\Mono.Cecil.dll
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\bin\Debug\netstandard2.0\Mono.Cecil.Mdb.dll
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\bin\Debug\netstandard2.0\Mono.Cecil.Pdb.dll
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\bin\Debug\netstandard2.0\Mono.Cecil.Rocks.dll
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\bin\Debug\netstandard2.0\MonoMod.exe
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\bin\Debug\netstandard2.0\MonoMod.RuntimeDetour.dll
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\bin\Debug\netstandard2.0\MonoMod.Utils.dll
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\bin\Debug\netstandard2.0\R2API.dll
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\bin\Debug\netstandard2.0\Unity.Postprocessing.Runtime.dll
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\bin\Debug\netstandard2.0\Unity.TextMeshPro.dll
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\bin\Debug\netstandard2.0\UnityEngine.AnimationModule.dll
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\bin\Debug\netstandard2.0\UnityEngine.AssetBundleModule.dll
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\bin\Debug\netstandard2.0\UnityEngine.CoreModule.dll
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\bin\Debug\netstandard2.0\UnityEngine.dll
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\bin\Debug\netstandard2.0\UnityEngine.Networking.dll
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\bin\Debug\netstandard2.0\UnityEngine.ParticleSystemModule.dll
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\bin\Debug\netstandard2.0\UnityEngine.PhysicsModule.dll
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\bin\Debug\netstandard2.0\UnityEngine.UI.dll
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\bin\Debug\netstandard2.0\UnityEngine.UIModule.dll
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\bin\Debug\netstandard2.0\UnityEngine.UNETModule.dll
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\bin\Debug\netstandard2.0\Wwise.dll
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\bin\Debug\netstandard2.0\Zio.dll
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\bin\Debug\netstandard2.0\0Harmony.xml
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\bin\Debug\netstandard2.0\BepInEx.xml
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\bin\Debug\netstandard2.0\BepInEx.Harmony.xml
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\bin\Debug\netstandard2.0\BepInEx.Preloader.xml
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\bin\Debug\netstandard2.0\MonoMod.xml
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\bin\Debug\netstandard2.0\MonoMod.RuntimeDetour.xml
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\bin\Debug\netstandard2.0\MonoMod.Utils.xml
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\bin\Debug\netstandard2.0\R2API.xml
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\obj\Debug\netstandard2.0\HenryMod.csprojAssemblyReference.cache
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\obj\Debug\netstandard2.0\HenryMod.AssemblyInfoInputs.cache
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\obj\Debug\netstandard2.0\HenryMod.AssemblyInfo.cs
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\obj\Debug\netstandard2.0\HenryMod.csproj.CoreCompileInputs.cache
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\obj\Debug\netstandard2.0\HenryMod.csproj.CopyComplete
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\obj\Debug\netstandard2.0\HenryMod.dll
+D:\Safetybackupz\risk of rain 2\modfiles (Anniversary)\summonermod\CURRENTBRANCH\RoR2SummonerProject-main\HenryMod\obj\Debug\netstandard2.0\HenryMod.pdb
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\HenryMod.deps.json
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\HenryMod.dll
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\HenryMod.pdb
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\0Harmony.dll
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\AncientScepter.dll
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\Assembly-CSharp.dll
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\BepInEx.dll
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\BepInEx.Harmony.dll
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\BepInEx.MonoMod.Loader.dll
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\BepInEx.Preloader.dll
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\Facepunch.Steamworks.dll
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\HGCSharpUtils.dll
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\HGUnityUtils.dll
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\MMHOOK_Assembly-CSharp.dll
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\Mono.Cecil.dll
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\Mono.Cecil.Mdb.dll
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\Mono.Cecil.Pdb.dll
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\Mono.Cecil.Rocks.dll
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\MonoMod.exe
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\MonoMod.RuntimeDetour.dll
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\MonoMod.Utils.dll
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\R2API.dll
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\Unity.Postprocessing.Runtime.dll
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\Unity.TextMeshPro.dll
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\UnityEngine.AnimationModule.dll
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\UnityEngine.AssetBundleModule.dll
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\UnityEngine.CoreModule.dll
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\UnityEngine.dll
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\UnityEngine.Networking.dll
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\UnityEngine.ParticleSystemModule.dll
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\UnityEngine.PhysicsModule.dll
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\UnityEngine.UI.dll
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\UnityEngine.UIModule.dll
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\UnityEngine.UNETModule.dll
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\Wwise.dll
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\Zio.dll
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\0Harmony.xml
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\BepInEx.xml
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\BepInEx.Harmony.xml
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\BepInEx.Preloader.xml
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\MonoMod.xml
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\MonoMod.RuntimeDetour.xml
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\MonoMod.Utils.xml
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\bin\Debug\netstandard2.0\R2API.xml
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\obj\Debug\netstandard2.0\HenryMod.csprojAssemblyReference.cache
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\obj\Debug\netstandard2.0\HenryMod.AssemblyInfoInputs.cache
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\obj\Debug\netstandard2.0\HenryMod.AssemblyInfo.cs
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\obj\Debug\netstandard2.0\HenryMod.csproj.CoreCompileInputs.cache
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\obj\Debug\netstandard2.0\HenryMod.csproj.CopyComplete
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\obj\Debug\netstandard2.0\HenryMod.dll
+C:\Users\Liam Shelton\Documents\GitHub\RoR2SummonerProject\HenryMod\obj\Debug\netstandard2.0\HenryMod.pdb
+C:\Users\nico_\source\repos\RoR2SummonerProject\HenryMod\obj\Debug\netstandard2.0\HenryMod.csprojAssemblyReference.cache

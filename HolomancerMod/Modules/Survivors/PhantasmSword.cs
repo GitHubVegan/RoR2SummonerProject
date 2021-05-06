@@ -30,7 +30,7 @@ namespace HolomancerMod.Modules.Survivors
             bodyName = "PhantasmSwordBody",
             bodyNameToken = "Fencer",
             bodyColor = Color.grey,
-            characterPortrait = Modules.Assets.LoadCharacterIcon("Holomancer"),
+            characterPortrait = Modules.Assets.LoadCharacterIcon("PhantasmSword"),
             crosshair = Modules.Assets.LoadCrosshair("Standard"),
             damage = 12f,
             healthGrowth = 40f,

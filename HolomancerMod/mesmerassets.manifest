@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3291425661
+CRC: 67105408
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: db48dbaf2c42eb4ce91fd2a59feaa068
+    Hash: 81dbb97da437093e572e1ddc2c660e04
   TypeTreeHash:
     serializedVersion: 2
     Hash: 972103ac939f0471d19a07f535135cc4
@@ -95,6 +95,7 @@ Assets:
 - Assets/HenryAssets/VFX/HenryDustEffect.prefab
 - Assets/HenryAssets/Animations/SprintL.anim
 - Assets/HenryAssets/Materials/matRebellion.mat
+- Assets/MesmerAssets/HolomancerAssets/Mesh/HolomancerBody.mesh
 - Assets/HenryAssets/VFX/Materials/matSmoke.mat
 - Assets/MesmerAssets/Animations/Armature_WalkL.anim
 - Assets/HenryAssets/VFX/Textures/texSwingEffect.png
@@ -110,17 +111,18 @@ Assets:
 - Assets/HenryAssets/VFX/Textures/texRipple.png
 - Assets/HenryAssets/VFX/ImpactHenrySlash.prefab
 - Assets/MesmerAssets/HolomancerAssets/mdlHolomancer.prefab
+- Assets/MesmerAssets/HolomancerAssets/Textures/StaffTexture.png
 - Assets/MesmerAssets/Shaders/Hologram.shader
 - Assets/HenryAssets/Animations/Armature_FlightR.anim
-- Assets/MesmerAssets/HolomancerAssets/Mesh/Staff.mesh
 - Assets/HenryAssets/VFX/Mesh/meshSwing.asset
 - Assets/HenryAssets/VFX/HenryBazookaMuzzleFlash.prefab
 - Assets/HenryAssets/VFX/HenryFistSwingEffect.prefab
 - Assets/MesmerAssets/Animations/Armature_AimPitch.anim
-- Assets/MesmerAssets/Icons/texHolomancerIcon.png
+- Assets/MesmerAssets/Icons/texHolomancerIcon old.png
 - Assets/MesmerAssets/HolomancerAssets/Animations/Armature_HoloTpose.anim
 - Assets/HenryAssets/Mesh/meshVergil.mesh
 - Assets/MesmerAssets/HolomancerAssets/Animations/Armature_HoloDisplayIdle.anim
+- Assets/MesmerAssets/HolomancerAssets/Materials/matHolomancer.mat
 - Assets/HenryAssets/VFX/Textures/texFistSwing.png
 - Assets/MesmerAssets/Animations/Armature_AimYaw (1).anim
 - Assets/HenryAssets/Animations/LightImpact.anim
@@ -150,11 +152,13 @@ Assets:
 - Assets/HenryAssets/Animations/Slash2.anim
 - Assets/MesmerAssets/PhantasmSword/Animations/Armature_SimpleStab1.anim
 - Assets/MesmerAssets/Mesh/Spearmesh.mesh
+- Assets/MesmerAssets/HolomancerAssets/Mesh/HolomancerClothes.mesh
 - Assets/MesmerAssets/Animations/maskAimYawMesmer.mask
 - Assets/HenryAssets/Mesh/meshYamato.mesh
 - Assets/HenryAssets/VFX/Textures/texDust.png
 - Assets/HenryAssets/VFX/Textures/texHitSpark.png
 - Assets/MesmerAssets/PhantasmSword/Animations/Armature_SimpleIdle.anim
+- Assets/MesmerAssets/HolomancerAssets/Mesh/Staff.mesh
 - Assets/HenryAssets/Materials/matBoxingGlove.mat
 - Assets/HenryAssets/Materials/matHenryAlt.mat
 - Assets/MesmerAssets/PhantasmSword/Animations/animPhantasmSword.controller
@@ -173,7 +177,6 @@ Assets:
 - Assets/HenryAssets/VFX/Materials/matTrail.mat
 - Assets/HenryAssets/Materials/matHenryJedi.mat
 - Assets/HenryAssets/VFX/Materials/matHitSpark.mat
-- Assets/MesmerAssets/HolomancerAssets/Mesh/HolomancerBody.mesh
 - Assets/HenryAssets/Mesh/meshNeoCoat.mesh
 - Assets/HenryAssets/Animations/ShootGun.anim
 - Assets/HenryAssets/Animations/SprintF.anim
@@ -216,7 +219,6 @@ Assets:
 - Assets/HenryAssets/VFX/Materials/matPunchEffect.mat
 - Assets/HenryAssets/VFX/Textures/texPunchImpact.png
 - Assets/MesmerAssets/Icons/Diversion.png
-- Assets/MesmerAssets/HolomancerAssets/Mesh/HolomancerClothes.mesh
 - Assets/HenryAssets/mdlHenry.prefab
 - Assets/HenryAssets/Mesh/meshRebellion.mesh
 - Assets/HenryAssets/VFX/Materials/matHitSparkPunch.mat
@@ -231,6 +233,7 @@ Assets:
 - Assets/HenryAssets/HenryBombGhost.prefab
 - Assets/HenryAssets/Mesh/meshPistol.mesh
 - Assets/HenryAssets/Icons/texStingerIcon.png
+- Assets/MesmerAssets/Icons/texHolomancerIcon.png
 - Assets/MesmerAssets/Icons/Mindwrack.png
 - Assets/HenryAssets/Textures/texHenryVergil.png
 - Assets/HenryAssets/Mesh/meshUzi.mesh
@@ -263,6 +266,7 @@ Assets:
 - Assets/HenryAssets/Animations/maskBandana.mask
 - Assets/HenryAssets/Animations/MenuIdle.anim
 - Assets/HenryAssets/Materials/matBazooka.mat
+- Assets/MesmerAssets/Icons/texPhantasmSwordIcon.png
 - Assets/MesmerAssets/Animations/maskAimPitchMesmer.mask
 - Assets/HenryAssets/VFX/HenrySwordSwingEffect.prefab
 - Assets/HenryAssets/Animations/Descend.anim

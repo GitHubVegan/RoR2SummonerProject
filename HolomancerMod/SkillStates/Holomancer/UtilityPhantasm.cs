@@ -219,11 +219,11 @@ namespace HolomancerMod.SkillStates
             shatterDriver.activationRequiresAimConfirmation = false;
             shatterDriver.activationRequiresTargetLoS = false;
             shatterDriver.selectionRequiresTargetLoS = false;
-            shatterDriver.maxDistance = 100f;
+            shatterDriver.maxDistance = Mathf.Infinity;
             shatterDriver.minDistance = 3f;
             shatterDriver.requireSkillReady = false;
             shatterDriver.aimType = AISkillDriver.AimType.MoveDirection;
-            shatterDriver.ignoreNodeGraph = true;
+            shatterDriver.ignoreNodeGraph = false;
             shatterDriver.moveInputScale = 1f;
             shatterDriver.driverUpdateTimerOverride = 0.2f;
             shatterDriver.buttonPressType = AISkillDriver.ButtonPressType.Hold;

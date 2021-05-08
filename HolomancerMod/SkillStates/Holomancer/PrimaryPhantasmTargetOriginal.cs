@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace HolomancerMod.SkillStates
 {
-    public class SecondaryPhantasmTarget : BaseSkillState
+    public class PrimaryPhantasmTargetOriginal : BaseSkillState
     {
         public static float damageCoefficient = 0f;
         public static float procCoefficient = 0f;
@@ -87,36 +87,36 @@ namespace HolomancerMod.SkillStates
 
         bool SummonPrimary(ref BulletAttack.BulletHit hitInfo)
         {
-            SecondaryPhantasm.SummonablesList2.RemoveAll(delegate (CharacterMaster C) { return C == null; });
-            if (SecondaryPhantasm.SummonablesList2.Count > 0)
+            PrimaryPhantasm.SummonablesList1.RemoveAll(delegate (CharacterMaster C) { return C == null; });
+            if (PrimaryPhantasm.SummonablesList1.Count > 0)
             {
-                SecondaryPhantasm.SummonablesList2.RemoveAll(delegate (CharacterMaster C)
+                PrimaryPhantasm.SummonablesList1.RemoveAll(delegate (CharacterMaster C)
                 {
                     return !(C.GetBody().healthComponent.alive);
                 });
             }
-            if (SecondaryPhantasm.SummonablesList2.Count > 0)
+            if (PrimaryPhantasm.SummonablesList1.Count > 0)
             {
-                bool flag = (hitInfo.entityObject != null && hitInfo.hitHurtBox != null);
+                bool flag = (hitInfo.entityObject != null && hitInfo.hitHurtBox != null && hitInfo.hitHurtBox.teamIndex != TeamIndex.Player);
                 if (flag)
                 {
 
-                    foreach (CharacterMaster cm in SecondaryPhantasm.SummonablesList2)
+                    foreach (CharacterMaster cm in PrimaryPhantasm.SummonablesList1)
                     {
                         cm.gameObject.GetComponent<BaseAI>().leader.gameObject = hitInfo.entityObject;
-                        //cm.gameObject.GetComponent<BaseAI>().currentEnemy.gameObject = hitInfo.entityObject;
+
                     }
                 }
                 else
                 {
-                    foreach (CharacterMaster cm in SecondaryPhantasm.SummonablesList2)
+                    foreach (CharacterMaster cm in PrimaryPhantasm.SummonablesList1)
                     {
                         cm.gameObject.GetComponent<BaseAI>().leader.gameObject = base.characterBody.gameObject;
                     }
                 }
                 /*else
                 {
-                    foreach (CharacterMaster cm in SecondaryPhantasm.SummonablesList2)
+                    foreach (CharacterMaster cm in PrimaryPhantasm.SummonablesList1)
                     {
                         cm.gameObject.GetComponentInChildren<AISkillDriver>().moveTargetType = AISkillDriver.TargetType.CurrentLeader;
                     }
@@ -131,9 +131,9 @@ namespace HolomancerMod.SkillStates
             base.OnExit();
         }
 
-        //private static GameObject CreateBody()
-        //{
-            //GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/MercBody"), "SecondaryPhantasmTargetBody", true);
+        /*private static GameObject CreateBody()
+        {
+            //GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/MercBody"), "PrimaryPhantasmTargetOriginalBody", true);
 
             //       BodyInfo bodyInfo = new BodyInfo
             //       {
@@ -154,11 +154,11 @@ namespace HolomancerMod.SkillStates
             //           bodyNameToClone = "Merc"
             //       };
 
-            //        GameObject newBody = Prefabs.CreatePrefab("SecondaryPhantasmTargetBody", "mdlPhantasmSword",bodyInfo);
+            //        GameObject newBody = Prefabs.CreatePrefab("PrimaryPhantasmTargetOriginalBody", "mdlPhantasmSword",bodyInfo);
             //       //bodyPrefab.GetComponent<EntityStateMachine>().mainStateType = new EntityStates.SerializableEntityStateType(characterMainState);
 
 
-         /*   GameObject newBody = null;
+            GameObject newBody = null;
             foreach (GameObject customCharacterbody in Prefabs.bodyPrefabs)
             {
                 Debug.Log($"bodyPrefabs contains GameObject {customCharacterbody.name}");
@@ -177,8 +177,8 @@ namespace HolomancerMod.SkillStates
 
         private static GameObject CreateMaster()
         {
-            GameObject newMaster = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/charactermasters/MercMonsterMaster"), "SecondaryPhantasmTargetMaster", true);
-            newMaster.GetComponent<CharacterMaster>().bodyPrefab = SecondaryPhantasmTargetBody;
+            GameObject newMaster = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/charactermasters/MercMonsterMaster"), "PrimaryPhantasmTargetOriginalMaster", true);
+            newMaster.GetComponent<CharacterMaster>().bodyPrefab = PrimaryPhantasmTargetOriginalBody;
             foreach (AISkillDriver ai in newMaster.GetComponentsInChildren<AISkillDriver>())
             {
                 HolomancerPlugin.DestroyImmediate(ai);

@@ -5,6 +5,7 @@ using RoR2;
 using RoR2.CharacterAI;
 using RoR2.Skills;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -17,6 +18,7 @@ namespace HolomancerMod.SkillStates
         public static float force = 0f;
         public static float recoil = 0f;
         public static float range = 250f;
+        public Vector3 point;
 
         private static float d = 7;
 
@@ -29,63 +31,69 @@ namespace HolomancerMod.SkillStates
         public override void OnEnter()
         {
             base.OnEnter();
-            this.duration = 0.1f;
+            this.duration = 0.2f;
+            Ray aimRay = base.GetAimRay();
             if (base.isAuthority)
             {
                 this.Fire();
             }
+            
         }
 
 
         private void Fire()
         {
-            if (!this.hasFired)
+            RaycastHit raycastHit;
+            if (base.inputBank.GetAimRaycast(100f, out raycastHit))
             {
-                this.hasFired = true;
-                Util.PlaySound("Roll.dodgeSoundString", base.gameObject);
-
-                if (base.isAuthority)
+                this.point = raycastHit.point;
+            }
+            else
+            {
+                this.point = base.inputBank.GetAimRay().GetPoint(100f);
+            }
+            PrimaryPhantasm.SummonablesList1.RemoveAll(delegate (CharacterMaster C) { return C == null; });
+            if (PrimaryPhantasm.SummonablesList1.Count > 0)
+            {
+                PrimaryPhantasm.SummonablesList1.RemoveAll(delegate (CharacterMaster C)
                 {
-                    Ray aimRay = base.GetAimRay();
-
-
-                    new BulletAttack
+                    return !(C.GetBody().healthComponent.alive);
+                });
+            }
+            if (PrimaryPhantasm.SummonablesList1.Count > 0)
+            {
+                HurtBox target = this.SearchForTarget();
+                if (target && target.healthComponent)
+                {
+                     foreach (CharacterMaster cm in PrimaryPhantasm.SummonablesList1)
                     {
-
-                        bulletCount = 1,
-                        aimVector = aimRay.direction,
-                        origin = aimRay.origin,
-                        damage = damageCoefficient * this.damageStat,
-                        damageColorIndex = DamageColorIndex.Default,
-                        damageType = DamageType.Generic,
-                        falloffModel = BulletAttack.FalloffModel.DefaultBullet,
-                        maxDistance = range,
-                        force = force,
-                        hitMask = LayerIndex.CommonMasks.bullet,
-                        minSpread = 0f,
-                        maxSpread = 0f,
-                        isCrit = base.RollCrit(),
-                        owner = base.gameObject,
-                        muzzleName = null,
-                        smartCollision = false,
-                        procChainMask = default(ProcChainMask),
-                        procCoefficient = procCoefficient,
-                        radius = 0.9f,
-                        sniper = false,
-                        stopperMask = LayerIndex.CommonMasks.bullet,
-                        weapon = null,
-                        tracerEffectPrefab = null,
-                        spreadPitchScale = 0f,
-                        spreadYawScale = 0f,
-                        queryTriggerInteraction = QueryTriggerInteraction.UseGlobal,
-                        hitEffectPrefab = null,
-                        hitCallback = SummonPrimary
-                    }.Fire();
+                        cm.gameObject.GetComponent<BaseAI>().currentEnemy.gameObject = target.healthComponent.gameObject;
+                        if (Vector3.Distance(cm.GetBody().transform.position, target.healthComponent.body.transform.position) > (Vector3.Distance(base.characterBody.transform.position, target.healthComponent.body.transform.position)))
+                        {
+                            cm.GetBody().characterMotor.Motor.SetPositionAndRotation(base.characterBody.transform.position + base.GetAimRay().direction * 4, base.characterBody.transform.rotation);
+                            cm.GetBody().baseMoveSpeed = 20f;
+                            cm.GetBody().baseAcceleration = 100f;
+                        }
+                    }
                 }
+
             }
         }
 
-        bool SummonPrimary(ref BulletAttack.BulletHit hitInfo)
+        private HurtBox SearchForTarget()
+        {
+            BullseyeSearch bullseyeSearch = new BullseyeSearch
+            {
+                searchOrigin = this.point,
+                maxDistanceFilter = 15f,
+                teamMaskFilter = TeamMask.GetUnprotectedTeams(this.GetTeam()),
+                sortMode = BullseyeSearch.SortMode.Distance
+            };
+            bullseyeSearch.RefreshCandidates();
+            bullseyeSearch.FilterOutGameObject(this.gameObject);
+            return bullseyeSearch.GetResults().FirstOrDefault<HurtBox>();
+        }
+        /*bool SummonPrimary(ref BulletAttack.BulletHit hitInfo)
         {
             PrimaryPhantasm.SummonablesList1.RemoveAll(delegate (CharacterMaster C) { return C == null; });
             if (PrimaryPhantasm.SummonablesList1.Count > 0)
@@ -97,26 +105,35 @@ namespace HolomancerMod.SkillStates
             }
             if (PrimaryPhantasm.SummonablesList1.Count > 0)
             {
-                if (hitInfo.entityObject != null && hitInfo.hitHurtBox != null && hitInfo.hitHurtBox.teamIndex != TeamIndex.Player)
+               bool flag = (hitInfo.entityObject != null && hitInfo.hitHurtBox != null && hitInfo.hitHurtBox.teamIndex != TeamIndex.Player);
+                if (flag)
                 {
 
                     foreach (CharacterMaster cm in PrimaryPhantasm.SummonablesList1)
                     {
-                        cm.gameObject.GetComponent<BaseAI>().currentEnemy.gameObject = hitInfo.entityObject;
+                        cm.gameObject.GetComponent<BaseAI>().leader.gameObject = hitInfo.entityObject;
+
                     }
                 }
-                /*else
+                else
+                {
+                    foreach (CharacterMaster cm in PrimaryPhantasm.SummonablesList1)
+                    {
+                        cm.gameObject.GetComponent<BaseAI>().leader.gameObject = base.characterBody.gameObject;
+                    }
+                }
+                else
                 {
                     foreach (CharacterMaster cm in PrimaryPhantasm.SummonablesList1)
                     {
                         cm.gameObject.GetComponentInChildren<AISkillDriver>().moveTargetType = AISkillDriver.TargetType.CurrentLeader;
                     }
-                }*/
+                }
             }
             return false;
             
-        }
-        
+        }*/
+
         public override void OnExit()
         {
             base.OnExit();

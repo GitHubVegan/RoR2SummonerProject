@@ -52,7 +52,6 @@ namespace HolomancerMod.SkillStates
                 UtilityPhantasmTargetCannon.point = base.inputBank.GetAimRay().GetPoint(UtilityPhantasmTargetCannon.maxDistance);
             }
 
-            base.OnEnter();
             UtilityPhantasm.SummonablesList3.RemoveAll(delegate (CharacterMaster C) { return C == null; });
             if (UtilityPhantasm.SummonablesList3.Count > 0)
             {

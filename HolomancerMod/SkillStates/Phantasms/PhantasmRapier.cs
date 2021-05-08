@@ -17,7 +17,7 @@ namespace HolomancerMod.SkillStates
         public static float procCoefficient = 0.4f;
         public static float force = 0f;
         public static float recoil = 0f;
-        public static float range = 6f;
+        public static float range = 8f;
         private List<HurtBox> targetList;
         public static float maxRadius = 6f;
 
@@ -31,6 +31,7 @@ namespace HolomancerMod.SkillStates
         public static float totalDuration = 1f;
         public float stopwatchBetweenShots;
         public GameObject hitEffectPrefab = Resources.Load<GameObject>("prefabs/effects/impacteffects/LunarWispMinigunImpactHit");
+
 
         public override void OnEnter()
         {
@@ -47,9 +48,9 @@ namespace HolomancerMod.SkillStates
 
         private void FireBullet()
         {
-                Ray aimRay = base.GetAimRay();
-                //base.PlayAnimation("FullBody, Override", "GroundLight1", "GroundLight.playbackRate", this.durationBetweenShots);
-               // base.PlayAnimation("FullBody, Override", "RapierStab1", "RapierStab1.playbackRate", this.duration);
+            Ray aimRay = base.GetAimRay();
+            //base.PlayAnimation("FullBody, Override", "GroundLight1", "GroundLight.playbackRate", this.durationBetweenShots);
+            // base.PlayAnimation("FullBody, Override", "RapierStab1", "RapierStab1.playbackRate", this.duration);
             base.PlayCrossfade("Gesture, Override", "Slash1", "Slash.playbackRate", this.durationBetweenShots, 0.05f);
             Util.PlaySound(SlashCombo.attackString, base.gameObject);
 
@@ -71,7 +72,7 @@ namespace HolomancerMod.SkillStates
                         hurtBox.healthComponent.TakeDamage(damageInfo);
                     }
                 }*/
-                    new BulletAttack
+                new BulletAttack
                     {
                         owner = base.gameObject,
                         weapon = base.gameObject,
@@ -90,6 +91,7 @@ namespace HolomancerMod.SkillStates
                         isCrit = Util.CheckRoll(this.critStat, base.characterBody.master),
                         radius = 0.8f,
                         smartCollision = true,
+                        maxDistance = range,
                         damageType = DamageType.Generic
                     }.Fire();
                     this.totalBulletsFired++;

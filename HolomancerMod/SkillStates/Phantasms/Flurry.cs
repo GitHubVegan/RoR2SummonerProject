@@ -77,6 +77,7 @@ namespace HolomancerMod.SkillStates
                     smartCollision = true,
                     stopperMask = LayerIndex.world.mask,
                     hitMask = LayerIndex.entityPrecise.mask,
+                    maxDistance = range,
                     damageType = DamageType.Generic
                 }.Fire();
                 this.totalBulletsFired++;

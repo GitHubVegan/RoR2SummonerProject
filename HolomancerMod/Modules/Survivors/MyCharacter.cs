@@ -104,8 +104,8 @@ namespace HolomancerMod.Modules.Survivors
             SkillDef mindwrackSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "Mindwrack",
-                skillNameToken = "Mindwrack",
-                skillDescriptionToken = "Mindwrack",
+                skillNameToken = HolomancerPlugin.developerPrefix + "_HOLOMANCER_BODY_PRIMARY_SHATTER_NAME",
+                skillDescriptionToken = HolomancerPlugin.developerPrefix + "_HOLOMANCER_BODY_PRIMARY_SHATTER_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("Mindwrack"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Mindwrack)),
                 activationStateMachineName = "Weapon",
@@ -128,8 +128,8 @@ namespace HolomancerMod.Modules.Survivors
             SkillDef primarytargetSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "PrimaryPhantasmTarget",
-                skillNameToken = "PrimaryPhantasmTarget",
-                skillDescriptionToken = "PrimaryPhantasmTarget",
+                skillNameToken = HolomancerPlugin.developerPrefix + "_HOLOMANCER_BODY_PRIMARY_TARGET_NAME",
+                skillDescriptionToken = HolomancerPlugin.developerPrefix + "_HOLOMANCER_BODY_PRIMARY_TARGET_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("PrimaryTarget"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.PrimaryPhantasmTarget)),
                 activationStateMachineName = "Weapon",

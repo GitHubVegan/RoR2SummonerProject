@@ -12,12 +12,17 @@ using UnityEngine.Networking;
 
 namespace HolomancerMod.SkillStates
 {
+
 	internal class Maintest : GenericCharacterMain
 	{
+
+		public static GameObject HolomancerBody1;
 
 		public override void OnEnter()
 		{
 			base.OnEnter();
+			HolomancerBody1 = base.characterBody.gameObject;
+
 		}
 
 

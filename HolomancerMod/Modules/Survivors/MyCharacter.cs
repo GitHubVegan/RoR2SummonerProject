@@ -326,8 +326,8 @@ namespace HolomancerMod.Modules.Survivors
             SkillDef secondarytargetSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "SecondaryPhantasmTarget",
-                skillNameToken = "SecondaryPhantasmTarget",
-                skillDescriptionToken = "SecondaryPhantasmTarget",
+                skillNameToken = HolomancerPlugin.developerPrefix + "_HOLOMANCER_BODY_SECONDARY_TARGET_NAME",
+                skillDescriptionToken = HolomancerPlugin.developerPrefix + "_HOLOMANCER_BODY_SECONDARY_TARGET_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("SecondaryTarget"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.SecondaryPhantasmTarget)),
                 activationStateMachineName = "Weapon",
@@ -350,8 +350,8 @@ namespace HolomancerMod.Modules.Survivors
             SkillDef diversionSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "Diversion",
-                skillNameToken = "Diversion",
-                skillDescriptionToken = "Diversion",
+                skillNameToken = HolomancerPlugin.developerPrefix + "_HOLOMANCER_BODY_SECONDARY_SHATTER_NAME",
+                skillDescriptionToken = HolomancerPlugin.developerPrefix + "_HOLOMANCER_BODY_SECONDARY_SHATTER_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("Diversion"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Diversion)),
                 activationStateMachineName = "Weapon",
@@ -452,8 +452,8 @@ namespace HolomancerMod.Modules.Survivors
             SkillDef distortionSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "Distortion",
-                skillNameToken = "Distortion",
-                skillDescriptionToken = "Distortion",
+                skillNameToken = HolomancerPlugin.developerPrefix + "_HOLOMANCER_BODY_UTILITY_SHATTER_NAME",
+                skillDescriptionToken = HolomancerPlugin.developerPrefix + "_HOLOMANCER_BODY_UTILITY_SHATTER_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("Distortion"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Distortion)),
                 activationStateMachineName = "Weapon",
@@ -477,8 +477,8 @@ namespace HolomancerMod.Modules.Survivors
             SkillDef utilitytargetSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "UtilityPhantasmTarget",
-                skillNameToken = "UtilityPhantasmTarget",
-                skillDescriptionToken = "UtilityPhantasmTarget",
+                skillNameToken = HolomancerPlugin.developerPrefix + "_HOLOMANCER_BODY_UTILITY_TARGET_NAME",
+                skillDescriptionToken = HolomancerPlugin.developerPrefix + "_HOLOMANCER_BODY_UTILITY_TARGET_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("UtilityTarget"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.UtilityPhantasmTarget)),
                 activationStateMachineName = "Weapon",
@@ -558,8 +558,8 @@ namespace HolomancerMod.Modules.Survivors
             SkillDef shatterskillswapcancelSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "ShatterSkillswapCancel",
-                skillNameToken = "ShatterSkillswapCancel",
-                skillDescriptionToken = "ShatterSkillswapCancel",
+                skillNameToken = HolomancerPlugin.developerPrefix + "_HOLOMANCER_BODY_SPECIAL_HOLOCANCEL_NAME",
+                skillDescriptionToken = HolomancerPlugin.developerPrefix + "_HOLOMANCER_BODY_SPECIAL_HOLOCANCEL_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("ShatterSkillswapCancel"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.ShatterSkillswapCancel)),
                 activationStateMachineName = "Weapon",

@@ -7,9 +7,7 @@ using RoR2.Skills;
 using System.Collections.Generic;
 using UnityEngine;
 using EntityStates.Assassin.Weapon;
-
-
-
+using System.Linq;
 
 namespace HolomancerMod.SkillStates
 {
@@ -19,7 +17,11 @@ namespace HolomancerMod.SkillStates
         public static float procCoefficient = 0.4f;
         public static float force = 0f;
         public static float recoil = 0f;
-        public static float range = 8f;
+        public static float range = 13f;
+        private List<HurtBox> targetList;
+        public static float maxRadius = 6f;
+        public Vector3 point;
+        private DamageInfo info;
         private bool suicide;
 
 
@@ -33,14 +35,15 @@ namespace HolomancerMod.SkillStates
         public float stopwatchBetweenShots;
         public GameObject hitEffectPrefab = Resources.Load<GameObject>("prefabs/effects/impacteffects/LunarWispMinigunImpactHit");
 
+
         public override void OnEnter()
         {
             base.OnEnter();
             this.duration = Flurry.totalDuration;
             this.durationBetweenShots = Flurry.baseDurationBetweenShots / this.attackSpeedStat;
             this.bulletCount = (int)((float)Flurry.baseBulletCount * this.attackSpeedStat);
-            base.characterBody.baseMoveSpeed = 12f;
-            base.characterBody.baseAcceleration = 120f;
+            base.characterBody.baseMoveSpeed = 7f;
+            base.characterBody.baseAcceleration = 80f;
             this.FireBullet();
         }
 
@@ -48,57 +51,59 @@ namespace HolomancerMod.SkillStates
 
         private void FireBullet()
         {
+            HurtBox hurtBox = this.SearchForTarget();
+            if (hurtBox && hurtBox.healthComponent)
+            {
                 Ray aimRay = base.GetAimRay();
-                //base.PlayAnimation("FullBody, Override", "GroundLight1", "GroundLight.playbackRate", this.durationBetweenShots);
-               // base.PlayAnimation("FullBody, Override", "RapierStab1", "RapierStab1.playbackRate", this.duration);
-            base.PlayCrossfade("Gesture, Override", "Slash1", "Slash.playbackRate", this.durationBetweenShots, 0.05f);
-            Util.PlaySound(SlashCombo.attackString, base.gameObject);
+                base.PlayCrossfade("Gesture, Override", "Slash1", "Slash.playbackRate", this.durationBetweenShots, 0.05f);
+                Util.PlaySound(SlashCombo.attackString, base.gameObject);
 
-            if (base.isAuthority)
+                if (base.isAuthority)
                 {
+                    this.info = new DamageInfo
+                    {
+                        attacker = base.gameObject,
+                        position = hurtBox.healthComponent.transform.position,
+                        damage = Flurry.damageCoefficient * this.damageStat,
+                        crit = Util.CheckRoll(this.critStat, base.characterBody.master),
+                        procCoefficient = Flurry.procCoefficient
 
+                    }; hurtBox.healthComponent.TakeDamage(this.info);
+                    this.totalBulletsFired++;
+                    bool flag = true;
 
-                new BulletAttack
-                {
-                    owner = base.gameObject,
-                    weapon = base.gameObject,
-                    origin = aimRay.origin,
-                    aimVector = aimRay.direction,
-                    minSpread = 0f,
-                    maxSpread = 0f,
-                    bulletCount = 1U,
-                    damage = Flurry.damageCoefficient * this.damageStat,
-                    force = Flurry.force,
-                    tracerEffectPrefab = null,
-                    muzzleName = null,
-                    hitEffectPrefab = hitEffectPrefab,
-                    isCrit = Util.CheckRoll(this.critStat, base.characterBody.master),
-                    radius = 2f,
-                    smartCollision = true,
-                    stopperMask = LayerIndex.world.mask,
-                    hitMask = LayerIndex.entityPrecise.mask,
-                    maxDistance = range,
-                    damageType = DamageType.Generic
-                }.Fire();
-                this.totalBulletsFired++;
                 }
             }
-        
-        
+        }
+
         public override void OnExit()
         {
             base.OnExit();
-            if(!suicide)
+            if (!suicide)
             {
                 suicide = true;
             }
-            if(suicide)
+            if (suicide)
             {
                 if (base.healthComponent) base.healthComponent.Suicide(null, null, DamageType.Generic);
             }
         }
 
-     
+        private HurtBox SearchForTarget()
+        {
+            BullseyeSearch bullseyeSearch = new BullseyeSearch
+            {
+                searchOrigin = base.characterBody.transform.position,
+                maxDistanceFilter = Flurry.range,
+                teamMaskFilter = TeamMask.GetUnprotectedTeams(this.GetTeam()),
+                sortMode = BullseyeSearch.SortMode.DistanceAndAngle
+            };
+            bullseyeSearch.RefreshCandidates();
+            bullseyeSearch.FilterOutGameObject(this.gameObject);
+            return bullseyeSearch.GetResults().FirstOrDefault<HurtBox>();
+
+        }
+
 
         public override void FixedUpdate()
         {

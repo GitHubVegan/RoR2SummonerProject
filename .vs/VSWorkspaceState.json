@@ -1,6 +1,14 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\HolomancerMod",
+    "\\HolomancerMod\\Modules",
+    "\\HolomancerMod\\Modules\\Survivors",
+    "\\HolomancerMod\\SkillStates",
+    "\\HolomancerMod\\SkillStates\\BaseStates",
+    "\\HolomancerMod\\SkillStates\\Holomancer",
+    "\\HolomancerMod\\SkillStates\\Phantasms"
   ],
+  "SelectedNode": "\\HolomancerMod.sln",
   "PreviewInSolutionExplorer": false
 }

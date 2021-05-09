@@ -17,9 +17,11 @@ namespace HolomancerMod.SkillStates
         public static float procCoefficient = 0.4f;
         public static float force = 0f;
         public static float recoil = 0f;
-        public static float range = 8f;
+        public static float range = 10f;
         private List<HurtBox> targetList;
         public static float maxRadius = 6f;
+        public Vector3 point;
+        private DamageInfo info;
 
 
         private float duration;
@@ -36,6 +38,7 @@ namespace HolomancerMod.SkillStates
         public override void OnEnter()
         {
             base.OnEnter();
+            PhantasmRapier.damageCoefficient = 3f;
             this.duration = PhantasmRapier.totalDuration;
             this.durationBetweenShots = PhantasmRapier.baseDurationBetweenShots / this.attackSpeedStat;
             this.bulletCount = (int)((float)PhantasmRapier.baseBulletCount * this.attackSpeedStat);
@@ -48,78 +51,49 @@ namespace HolomancerMod.SkillStates
 
         private void FireBullet()
         {
+            HurtBox hurtBox = this.SearchForTarget();
+            if (hurtBox && hurtBox.healthComponent)
+            {
             Ray aimRay = base.GetAimRay();
-            //base.PlayAnimation("FullBody, Override", "GroundLight1", "GroundLight.playbackRate", this.durationBetweenShots);
-            // base.PlayAnimation("FullBody, Override", "RapierStab1", "RapierStab1.playbackRate", this.duration);
             base.PlayCrossfade("Gesture, Override", "Slash1", "Slash.playbackRate", this.durationBetweenShots, 0.05f);
             Util.PlaySound(SlashCombo.attackString, base.gameObject);
 
             if (base.isAuthority)
-                {
-
-                /*HurtBox hurtBox = this.SearchForTarget();
-                if (hurtBox)
-                {
-                    bool flag = hurtBox.healthComponent.alive;
-                    if(flag)
+            {
+                    this.info = new DamageInfo
                     {
-                        DamageInfo damageInfo = new DamageInfo();
-                        damageInfo.damage = PhantasmRapier.damageCoefficient * this.damageStat;
-                        damageInfo.attacker = base.gameObject;
-                        damageInfo.procCoefficient = PhantasmRapier.procCoefficient;
-                        damageInfo.position = hurtBox.transform.position;
-                        damageInfo.crit = Util.CheckRoll(this.critStat, base.characterBody.master);
-                        hurtBox.healthComponent.TakeDamage(damageInfo);
-                    }
-                }*/
-                new BulletAttack
-                    {
-                        owner = base.gameObject,
-                        weapon = base.gameObject,
-                        origin = aimRay.origin,
-                        aimVector = aimRay.direction,
-                        minSpread = 0f,
-                        maxSpread = 0f,
-                        bulletCount = 1U,
+                        attacker = base.gameObject,
+                        position = hurtBox.healthComponent.transform.position,
                         damage = PhantasmRapier.damageCoefficient * this.damageStat,
-                        force = 0f,
-                        tracerEffectPrefab = null,
-                        muzzleName = null,
-                        stopperMask = LayerIndex.world.mask,
-                        hitMask = LayerIndex.entityPrecise.mask,
-                        hitEffectPrefab = hitEffectPrefab,
-                        isCrit = Util.CheckRoll(this.critStat, base.characterBody.master),
-                        radius = 0.8f,
-                        smartCollision = true,
-                        maxDistance = range,
-                        damageType = DamageType.Generic
-                    }.Fire();
+                        crit = Util.CheckRoll(this.critStat, base.characterBody.master),
+                        procCoefficient = PhantasmRapier.procCoefficient
+
+                    };hurtBox.healthComponent.TakeDamage(this.info);
                     this.totalBulletsFired++;
                 }
             }
-        /*private HurtBox SearchForTarget()
-        {
-            Ray aimRay = base.GetAimRay();
-            BullseyeSearch bullseyeSearch = new BullseyeSearch
-            {
-                searchOrigin = base.transform.position,
-                searchDirection = aimRay.direction,
-                maxAngleFilter = 90f,
-                maxDistanceFilter = PhantasmRapier.maxRadius,
-                teamMaskFilter = TeamMask.GetUnprotectedTeams(base.GetTeam()),
-                sortMode = BullseyeSearch.SortMode.Distance
-            };
-            bullseyeSearch.RefreshCandidates();
-            bullseyeSearch.FilterOutGameObject(base.gameObject);
-            return bullseyeSearch.GetResults().FirstOrDefault<HurtBox>();
-        }*/
+        }
 
         public override void OnExit()
         {
             base.OnExit();
         }
 
-     
+        private HurtBox SearchForTarget()
+        {
+            BullseyeSearch bullseyeSearch = new BullseyeSearch
+            {
+                searchOrigin = base.characterBody.transform.position,
+                maxDistanceFilter = PhantasmRapier.range,
+                teamMaskFilter = TeamMask.GetUnprotectedTeams(this.GetTeam()),
+                sortMode = BullseyeSearch.SortMode.DistanceAndAngle
+            };
+            bullseyeSearch.RefreshCandidates();
+            bullseyeSearch.FilterOutGameObject(this.gameObject);
+            return bullseyeSearch.GetResults().FirstOrDefault<HurtBox>();
+            
+        }
+
 
         public override void FixedUpdate()
         {

@@ -34,6 +34,7 @@ namespace HolomancerMod.SkillStates
 						Flurry.damageCoefficient += 1f;
 						CM.GetBody().baseMoveSpeed = 25f;
 						CM.GetBody().baseAcceleration = 160f;
+						CM.GetBody().attackSpeed = CM.GetBody().attackSpeed * 3;
 						CM.GetBody().GetComponent<RoR2.SkillLocator>().primary.SetSkillOverride(2, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("Flurry")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
 						CM.inventory.GiveItem(RoR2Content.Items.HealthDecay.itemIndex, 15);
 					}

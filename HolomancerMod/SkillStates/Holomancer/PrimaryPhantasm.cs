@@ -114,9 +114,17 @@ namespace HolomancerMod.SkillStates
                         cm.gameObject.GetComponent<BaseAI>().currentEnemy.gameObject = target.healthComponent.gameObject;
                         if (Vector3.Distance(cm.GetBody().transform.position, target.healthComponent.body.transform.position) > (Vector3.Distance(base.characterBody.transform.position, target.healthComponent.body.transform.position)))
                         {
-                            cm.GetBody().characterMotor.Motor.SetPositionAndRotation(base.characterBody.transform.position + base.GetAimRay().direction * 4, base.characterBody.transform.rotation);
                             cm.GetBody().baseMoveSpeed = 20f;
                             cm.GetBody().baseAcceleration = 100f;
+                            cm.GetBody().characterMotor.Motor.SetPositionAndRotation(base.characterBody.transform.position + base.GetAimRay().direction * 4, base.characterBody.transform.rotation);
+                            EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/HuntressBlinkEffect"), new EffectData
+                            {
+                                origin = cm.GetBody().transform.position,
+                                scale = 2f
+                            }, true);
+                            
+
+
                         }
                     }
                 }
@@ -246,9 +254,9 @@ namespace HolomancerMod.SkillStates
             attackDriver.movementType = AISkillDriver.MovementType.Stop;
             attackDriver.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
             attackDriver.activationRequiresAimConfirmation = true;
-            attackDriver.activationRequiresTargetLoS = false;
+            attackDriver.activationRequiresTargetLoS = true;
             attackDriver.selectionRequiresTargetLoS = false;
-            attackDriver.maxDistance = 6f;
+            attackDriver.maxDistance = 10f;
             attackDriver.minDistance = 0f;
             attackDriver.requireSkillReady = true;
             attackDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
@@ -271,7 +279,7 @@ namespace HolomancerMod.SkillStates
             shatterDriver.activationRequiresTargetLoS = false;
             shatterDriver.selectionRequiresTargetLoS = false;
             shatterDriver.maxDistance = 80f;
-            shatterDriver.minDistance = 6f;
+            shatterDriver.minDistance = 5f;
             shatterDriver.shouldSprint = false;
             shatterDriver.requireSkillReady = false;
             shatterDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;

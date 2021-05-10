@@ -116,20 +116,25 @@ namespace HolomancerMod.SkillStates
                         {
                           cm.gameObject.GetComponent<BaseAI>().leader.gameObject = base.gameObject;
                         }
-                            if (Vector3.Distance(cm.GetBody().transform.position, cm.gameObject.GetComponent<BaseAI>().leader.gameObject.transform.position) > 100f)
+                            if (Vector3.Distance(cm.GetBody().transform.position, cm.gameObject.GetComponent<BaseAI>().leader.gameObject.transform.position) > 30f)
                             {
                                 cm.GetBody().baseMoveSpeed = 20f;
                                 cm.GetBody().baseAcceleration = 100f;
-                                cm.GetBody().rigidbody.position = (base.characterBody.transform.position + (cm.GetBody().transform.position - cm.gameObject.GetComponent<BaseAI>().leader.gameObject.transform.position).normalized * 20);
                                 EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/ImpBlinkEffect"), new EffectData
                                 {
                                     origin = cm.GetBody().transform.position,
-                                    scale = 5f
+                                    scale = 3f
                                 }, true);
+                                EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/ImpBlinkEffect"), new EffectData
+                                {
+                                    origin = (cm.GetBody().transform.position + (cm.GetBody().transform.position - cm.gameObject.GetComponent<BaseAI>().leader.gameObject.transform.position).normalized * 15),
+                                    scale = 3f
+                                }, true);
+                                cm.GetBody().rigidbody.position = (cm.GetBody().transform.position + (cm.gameObject.GetComponent<BaseAI>().leader.gameObject.transform.position).normalized * 15 - cm.GetBody().transform.position);
 
 
 
-                            }
+                    }
                     }
             }
                

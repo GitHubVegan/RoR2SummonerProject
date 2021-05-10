@@ -20,15 +20,10 @@ namespace HolomancerMod.SkillStates
         public static float range = 250f;
         public static GameObject PrimaryPhantasmBody = CreateBody();
         public static GameObject PrimaryPhantasmMaster = CreateMaster();
-
-        private static float d = 7;
         public static List<CharacterMaster> SummonablesList1 = new List<CharacterMaster>();
-        public static List<CharacterMaster> KillList1 = new List<CharacterMaster>();
         public Vector3 point;
 
         private float duration;
-        private bool hasFired;
-
 
 
         public override void OnEnter()
@@ -117,7 +112,7 @@ namespace HolomancerMod.SkillStates
                             cm.GetBody().baseMoveSpeed = 20f;
                             cm.GetBody().baseAcceleration = 100f;
                             cm.GetBody().characterMotor.Motor.SetPositionAndRotation(base.characterBody.transform.position + base.GetAimRay().direction * 4, base.characterBody.transform.rotation);
-                            EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/HuntressBlinkEffect"), new EffectData
+                            EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/ImpBlinkEffect"), new EffectData
                             {
                                 origin = cm.GetBody().transform.position,
                                 scale = 2f

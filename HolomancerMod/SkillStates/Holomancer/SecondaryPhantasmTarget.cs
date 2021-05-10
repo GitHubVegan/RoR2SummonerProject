@@ -5,6 +5,7 @@ using RoR2;
 using RoR2.CharacterAI;
 using RoR2.Skills;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -17,19 +18,18 @@ namespace HolomancerMod.SkillStates
         public static float force = 0f;
         public static float recoil = 0f;
         public static float range = 250f;
-
-        private static float d = 7;
+        public Vector3 point;
 
 
         private float duration;
-        private bool hasFired;
 
 
 
         public override void OnEnter()
         {
             base.OnEnter();
-            this.duration = 0.1f;
+            this.duration = 0.2f;
+            Ray aimRay = base.GetAimRay();
             if (base.isAuthority)
             {
                 this.Fire();
@@ -39,54 +39,15 @@ namespace HolomancerMod.SkillStates
 
         private void Fire()
         {
-            if (!this.hasFired)
+            RaycastHit raycastHit;
+            if (base.inputBank.GetAimRaycast(100f, out raycastHit))
             {
-                this.hasFired = true;
-                Util.PlaySound("Roll.dodgeSoundString", base.gameObject);
-
-                if (base.isAuthority)
-                {
-                    Ray aimRay = base.GetAimRay();
-
-
-                    new BulletAttack
-                    {
-
-                        bulletCount = 1,
-                        aimVector = aimRay.direction,
-                        origin = aimRay.origin,
-                        damage = damageCoefficient * this.damageStat,
-                        damageColorIndex = DamageColorIndex.Default,
-                        damageType = DamageType.Generic,
-                        falloffModel = BulletAttack.FalloffModel.DefaultBullet,
-                        maxDistance = range,
-                        force = force,
-                        hitMask = LayerIndex.CommonMasks.bullet,
-                        minSpread = 0f,
-                        maxSpread = 0f,
-                        isCrit = base.RollCrit(),
-                        owner = base.gameObject,
-                        muzzleName = null,
-                        smartCollision = false,
-                        procChainMask = default(ProcChainMask),
-                        procCoefficient = procCoefficient,
-                        radius = 0.9f,
-                        sniper = false,
-                        stopperMask = LayerIndex.CommonMasks.bullet,
-                        weapon = null,
-                        tracerEffectPrefab = null,
-                        spreadPitchScale = 0f,
-                        spreadYawScale = 0f,
-                        queryTriggerInteraction = QueryTriggerInteraction.UseGlobal,
-                        hitEffectPrefab = null,
-                        hitCallback = SummonPrimary
-                    }.Fire();
-                }
+                this.point = raycastHit.point;
             }
-        }
-
-        bool SummonPrimary(ref BulletAttack.BulletHit hitInfo)
-        {
+            else
+            {
+                this.point = base.inputBank.GetAimRay().GetPoint(100f);
+            }
             SecondaryPhantasm.SummonablesList2.RemoveAll(delegate (CharacterMaster C) { return C == null; });
             if (SecondaryPhantasm.SummonablesList2.Count > 0)
             {
@@ -97,142 +58,50 @@ namespace HolomancerMod.SkillStates
             }
             if (SecondaryPhantasm.SummonablesList2.Count > 0)
             {
-                bool flag = (hitInfo.entityObject != null && hitInfo.hitHurtBox != null);
-                if (flag)
+                HurtBox target = this.SearchForTarget();
+                if (target && target.healthComponent)
                 {
+                    foreach (CharacterMaster cm in SecondaryPhantasm.SummonablesList2)
+                    {
+                        cm.gameObject.GetComponent<BaseAI>().currentEnemy.gameObject = target.healthComponent.gameObject;
+                        if (Vector3.Distance(cm.GetBody().transform.position, target.healthComponent.body.transform.position) > (Vector3.Distance(base.characterBody.transform.position, target.healthComponent.body.transform.position)))
+                        {
+                            cm.GetBody().baseMoveSpeed = 20f;
+                            cm.GetBody().baseAcceleration = 100f;
+                            cm.GetBody().rigidbody.position = (base.characterBody.transform.position + base.GetAimRay().direction * 4 + Vector3.up * 5);
+                            EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/ImpBlinkEffect"), new EffectData
+                            {
+                                origin = cm.GetBody().rigidbody.transform.position,
+                                scale = 5f
+                            }, true);
 
-                    foreach (CharacterMaster cm in SecondaryPhantasm.SummonablesList2)
-                    {
-                        cm.gameObject.GetComponent<BaseAI>().leader.gameObject = hitInfo.entityObject;
-                        //cm.gameObject.GetComponent<BaseAI>().currentEnemy.gameObject = hitInfo.entityObject;
+
+
+                        }
                     }
                 }
-                else
-                {
-                    foreach (CharacterMaster cm in SecondaryPhantasm.SummonablesList2)
-                    {
-                        cm.gameObject.GetComponent<BaseAI>().leader.gameObject = base.characterBody.gameObject;
-                    }
-                }
-                /*else
-                {
-                    foreach (CharacterMaster cm in SecondaryPhantasm.SummonablesList2)
-                    {
-                        cm.gameObject.GetComponentInChildren<AISkillDriver>().moveTargetType = AISkillDriver.TargetType.CurrentLeader;
-                    }
-                }*/
+
             }
-            return false;
-            
         }
-        
+
+        private HurtBox SearchForTarget()
+        {
+            BullseyeSearch bullseyeSearch = new BullseyeSearch
+            {
+                searchOrigin = this.point,
+                maxDistanceFilter = 15f,
+                teamMaskFilter = TeamMask.GetUnprotectedTeams(this.GetTeam()),
+                sortMode = BullseyeSearch.SortMode.Distance
+            };
+            bullseyeSearch.RefreshCandidates();
+            bullseyeSearch.FilterOutGameObject(this.gameObject);
+            return bullseyeSearch.GetResults().FirstOrDefault<HurtBox>();
+        }
+
         public override void OnExit()
         {
             base.OnExit();
-        }
-
-        //private static GameObject CreateBody()
-        //{
-            //GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/MercBody"), "SecondaryPhantasmTargetBody", true);
-
-            //       BodyInfo bodyInfo = new BodyInfo
-            //       {
-            //           armor = 20f,
-            //           armorGrowth = 0f,
-            //           bodyName = "PhantasmSwordBody",
-            //           bodyNameToken = HolomancerPlugin.developerPrefix + "_PHANTASMSWORD_BODY_NAME",
-            //           bodyColor = Color.grey,
-            //           characterPortrait = Modules.Assets.LoadCharacterIcon("Holomancer"),
-            //           crosshair = Modules.Assets.LoadCrosshair("Standard"),
-            //           damage = 12f,
-            //          healthGrowth = 33f,
-            //          healthRegen = 1.5f,
-            //           jumpCount = 1,
-            //           maxHealth = 110f,
-            //           subtitleNameToken = HolomancerPlugin.developerPrefix + "_PHANTASMSWORD_BODY_SUBTITLE",
-            //           podPrefab = Resources.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod"),
-            //           bodyNameToClone = "Merc"
-            //       };
-
-            //        GameObject newBody = Prefabs.CreatePrefab("SecondaryPhantasmTargetBody", "mdlPhantasmSword",bodyInfo);
-            //       //bodyPrefab.GetComponent<EntityStateMachine>().mainStateType = new EntityStates.SerializableEntityStateType(characterMainState);
-
-
-         /*   GameObject newBody = null;
-            foreach (GameObject customCharacterbody in Prefabs.bodyPrefabs)
-            {
-                Debug.Log($"bodyPrefabs contains GameObject {customCharacterbody.name}");
-                if (customCharacterbody.name == "PhantasmSwordBody")
-                {
-                    newBody = customCharacterbody;
-                }
-            }
-
-
-           // Modules.Prefabs.bodyPrefabs.Add(newBody);
-            return newBody;
-        }
-
-
-
-        private static GameObject CreateMaster()
-        {
-            GameObject newMaster = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/charactermasters/MercMonsterMaster"), "SecondaryPhantasmTargetMaster", true);
-            newMaster.GetComponent<CharacterMaster>().bodyPrefab = SecondaryPhantasmTargetBody;
-            foreach (AISkillDriver ai in newMaster.GetComponentsInChildren<AISkillDriver>())
-            {
-                HolomancerPlugin.DestroyImmediate(ai);
-            }
-
-            newMaster.GetComponent<BaseAI>().fullVision = true;
-
-
-            AISkillDriver attackDriver = newMaster.AddComponent<AISkillDriver>();
-            attackDriver.customName = "Attack";
-            attackDriver.movementType = AISkillDriver.MovementType.Stop;
-            attackDriver.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
-            attackDriver.activationRequiresAimConfirmation = true;
-            attackDriver.activationRequiresTargetLoS = false;
-            attackDriver.selectionRequiresTargetLoS = false;
-            attackDriver.maxDistance = 8f;
-            attackDriver.minDistance = 0f;
-            attackDriver.requireSkillReady = true;
-            attackDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
-            attackDriver.ignoreNodeGraph = true;
-            attackDriver.moveInputScale = 1f;
-            attackDriver.driverUpdateTimerOverride = 0.2f;
-            attackDriver.buttonPressType = AISkillDriver.ButtonPressType.Hold;
-            attackDriver.minTargetHealthFraction = Mathf.NegativeInfinity;
-            attackDriver.maxTargetHealthFraction = Mathf.Infinity;
-            attackDriver.minUserHealthFraction = Mathf.NegativeInfinity;
-            attackDriver.maxUserHealthFraction = Mathf.Infinity;
-            attackDriver.skillSlot = SkillSlot.Primary;
-
-            AISkillDriver shatterDriver = newMaster.AddComponent<AISkillDriver>();
-            shatterDriver.customName = "Shatter";
-            shatterDriver.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
-            shatterDriver.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
-            shatterDriver.activationRequiresAimConfirmation = false;
-            shatterDriver.activationRequiresTargetLoS = false;
-            shatterDriver.selectionRequiresTargetLoS = false;
-            shatterDriver.maxDistance = 70f;
-            shatterDriver.minDistance = 8f;
-            shatterDriver.shouldSprint = false;
-            shatterDriver.requireSkillReady = false;
-            shatterDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
-            shatterDriver.ignoreNodeGraph = true;
-            shatterDriver.moveInputScale = 1f;
-            shatterDriver.driverUpdateTimerOverride = 0.2f;
-            shatterDriver.buttonPressType = AISkillDriver.ButtonPressType.Hold;
-            shatterDriver.minTargetHealthFraction = Mathf.NegativeInfinity;
-            shatterDriver.maxTargetHealthFraction = Mathf.Infinity;
-            shatterDriver.minUserHealthFraction = Mathf.NegativeInfinity;
-            shatterDriver.maxUserHealthFraction = Mathf.Infinity;
-            shatterDriver.skillSlot = SkillSlot.None;
-
-            Modules.Prefabs.masterPrefabs.Add(newMaster);
-            return newMaster;
-        }*/
+        }   
 
         public override void FixedUpdate()
         {

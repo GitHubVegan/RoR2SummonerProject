@@ -5,6 +5,7 @@ using RoR2;
 using RoR2.CharacterAI;
 using RoR2.Skills;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -19,19 +20,17 @@ namespace HolomancerMod.SkillStates
         public static float range = 250f;
         public static GameObject SecondaryPhantasmBody = CreateBody();
         public static GameObject SecondaryPhantasmMaster = CreateMaster();
-
-        private static float d = 7;
         public static List<CharacterMaster> SummonablesList2 = new List<CharacterMaster>();
-
+        public Vector3 point;
 
         private float duration;
-        private bool hasFired;
 
 
         public override void OnEnter()
         {
             base.OnEnter();
             this.duration = 0.2f;
+            Ray aimRay = base.GetAimRay();
             if (base.isAuthority)
             {
                 SecondaryPhantasm.SummonablesList2.RemoveAll(delegate (CharacterMaster C) { return C == null; });
@@ -90,74 +89,15 @@ namespace HolomancerMod.SkillStates
 
         private void Fire()
         {
-            if (!this.hasFired)
+            RaycastHit raycastHit;
+            if (base.inputBank.GetAimRaycast(100f, out raycastHit))
             {
-                this.hasFired = true;
-
-                Util.PlaySound("Roll.dodgeSoundString", base.gameObject);
-
-                if (base.isAuthority)
-                {
-                    Ray aimRay = base.GetAimRay();
-                    
-
-                    new BulletAttack
-                    {
-
-                        bulletCount = 1,
-                        aimVector = aimRay.direction,
-                        origin = aimRay.origin,
-                        damage = damageCoefficient * this.damageStat,
-                        damageColorIndex = DamageColorIndex.Default,
-                        damageType = DamageType.Generic,
-                        falloffModel = BulletAttack.FalloffModel.DefaultBullet,
-                        maxDistance = range,
-                        force = force,
-                        hitMask = LayerIndex.CommonMasks.bullet,
-                        minSpread = 0f,
-                        maxSpread = 0f,
-                        isCrit = base.RollCrit(),
-                        owner = base.gameObject,
-                        muzzleName = null,
-                        smartCollision = false,
-                        procChainMask = default(ProcChainMask),
-                        procCoefficient = procCoefficient,
-                        radius = 0.75f,
-                        sniper = false,
-                        stopperMask = LayerIndex.CommonMasks.bullet,
-                        weapon = null,
-                        tracerEffectPrefab = null,
-                        spreadPitchScale = 0f,
-                        spreadYawScale = 0f,
-                        queryTriggerInteraction = QueryTriggerInteraction.UseGlobal,
-                        hitEffectPrefab = null,
-                        hitCallback = SummonSecondary
-                    }.Fire();
-                }
+                this.point = raycastHit.point;
             }
-        }
-
-        bool SummonSecondary(ref BulletAttack.BulletHit hitInfo)
-        {
-            /*CharacterMaster characterMaster = new MasterSummon
+            else
             {
-                masterPrefab = SecondaryPhantasmMaster,
-                position = hitInfo.point + Vector3.up * d,
-                rotation = base.characterBody.transform.rotation,
-                summonerBodyObject = base.characterBody.gameObject,
-                ignoreTeamMemberLimit = true,
-                teamIndexOverride = new TeamIndex?(TeamIndex.Player)
-            }.Perform();
-            characterMaster.GetBody().RecalculateStats();
-            characterMaster.inventory.CopyItemsFrom(base.characterBody.inventory);
-            characterMaster.inventory.ResetItem(RoR2Content.Items.ExtraLife.itemIndex);
-            characterMaster.inventory.GiveItem(RoR2Content.Items.Ghost.itemIndex);
-            characterMaster.inventory.GiveItem(RoR2Content.Items.HealthDecay.itemIndex, 24);
-            characterMaster.gameObject.GetComponent<BaseAI>().leader.gameObject = base.characterBody.gameObject;
-            characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().primary.SetSkillOverride(4, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("PhantasmGround")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
-            characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().utility.SetSkillOverride(4, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("DiversionClone")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
-            characterMaster.GetBody().isPlayerControlled = false;
-            SummonablesList2.Add(characterMaster);*/
+                this.point = base.inputBank.GetAimRay().GetPoint(100f);
+            }
             SecondaryPhantasm.SummonablesList2.RemoveAll(delegate (CharacterMaster C) { return C == null; });
             if (SecondaryPhantasm.SummonablesList2.Count > 0)
             {
@@ -168,35 +108,46 @@ namespace HolomancerMod.SkillStates
             }
             if (SecondaryPhantasm.SummonablesList2.Count > 0)
             {
-                bool flag = (hitInfo.entityObject != null && hitInfo.hitHurtBox != null);
-                if (flag)
+                HurtBox target = this.SearchForTarget();
+                if (target && target.healthComponent)
                 {
+                    foreach (CharacterMaster cm in SecondaryPhantasm.SummonablesList2)
+                    {
+                        cm.gameObject.GetComponent<BaseAI>().currentEnemy.gameObject = target.healthComponent.gameObject;
+                        if (Vector3.Distance(cm.GetBody().transform.position, target.healthComponent.body.transform.position) > (Vector3.Distance(base.characterBody.transform.position, target.healthComponent.body.transform.position)))
+                        {
+                            cm.GetBody().baseMoveSpeed = 20f;
+                            cm.GetBody().baseAcceleration = 100f;
+                            cm.GetBody().rigidbody.position = (base.characterBody.transform.position + base.GetAimRay().direction * 4 + Vector3.up * 5);
+                            EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/ImpBlinkEffect"), new EffectData
+                            {
+                                origin = cm.GetBody().rigidbody.transform.position,
+                                scale = 5f
+                            }, true);
 
-                    foreach (CharacterMaster cm in SecondaryPhantasm.SummonablesList2)
-                    {
-                        cm.gameObject.GetComponent<BaseAI>().leader.gameObject = hitInfo.entityObject;
-                        //cm.gameObject.GetComponent<BaseAI>().currentEnemy.gameObject = hitInfo.entityObject;
+
+
+                        }
                     }
                 }
-                else
-                {
-                    foreach (CharacterMaster cm in SecondaryPhantasm.SummonablesList2)
-                    {
-                        cm.gameObject.GetComponent<BaseAI>().leader.gameObject = base.characterBody.gameObject;
-                    }
-                }
-                /*else
-                {
-                    foreach (CharacterMaster cm in SecondaryPhantasm.SummonablesList2)
-                    {
-                        cm.gameObject.GetComponentInChildren<AISkillDriver>().moveTargetType = AISkillDriver.TargetType.CurrentLeader;
-                    }
-                }*/
+
             }
-            return false;
-            
         }
-        
+
+        private HurtBox SearchForTarget()
+        {
+            BullseyeSearch bullseyeSearch = new BullseyeSearch
+            {
+                searchOrigin = this.point,
+                maxDistanceFilter = 15f,
+                teamMaskFilter = TeamMask.GetUnprotectedTeams(this.GetTeam()),
+                sortMode = BullseyeSearch.SortMode.Distance
+            };
+            bullseyeSearch.RefreshCandidates();
+            bullseyeSearch.FilterOutGameObject(this.gameObject);
+            return bullseyeSearch.GetResults().FirstOrDefault<HurtBox>();
+        }
+
         public override void OnExit()
         {
             base.OnExit();
@@ -225,7 +176,7 @@ namespace HolomancerMod.SkillStates
             AISkillDriver attackDriver = newMaster.AddComponent<AISkillDriver>();
             attackDriver.customName = "Attack";
             attackDriver.movementType = AISkillDriver.MovementType.StrafeMovetarget;
-            attackDriver.moveTargetType = AISkillDriver.TargetType.CurrentLeader;
+            attackDriver.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
             attackDriver.activationRequiresAimConfirmation = true;
             attackDriver.activationRequiresTargetLoS = false;
             attackDriver.selectionRequiresTargetLoS = false;
@@ -246,7 +197,7 @@ namespace HolomancerMod.SkillStates
             AISkillDriver shatterDriver = newMaster.AddComponent<AISkillDriver>();
             shatterDriver.customName = "Shatter";
             shatterDriver.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
-            shatterDriver.moveTargetType = AISkillDriver.TargetType.CurrentLeader;
+            shatterDriver.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
             shatterDriver.activationRequiresAimConfirmation = false;
             shatterDriver.activationRequiresTargetLoS = false;
             shatterDriver.selectionRequiresTargetLoS = false;

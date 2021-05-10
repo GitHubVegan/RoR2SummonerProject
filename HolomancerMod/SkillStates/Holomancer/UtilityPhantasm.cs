@@ -5,6 +5,7 @@ using RoR2;
 using RoR2.CharacterAI;
 using RoR2.Skills;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -19,13 +20,12 @@ namespace HolomancerMod.SkillStates
         public static float range = 250f;
         public static GameObject UtilityPhantasmBody = CreateBody();
         public static GameObject UtilityPhantasmMaster = CreateMaster();
+        public Vector3 point;
 
-        private static float d = 7;
         public static List<CharacterMaster> SummonablesList3 = new List<CharacterMaster>();
 
 
         private float duration;
-        private bool hasFired;
 
 
 
@@ -33,6 +33,7 @@ namespace HolomancerMod.SkillStates
         {
             base.OnEnter();
             this.duration = 0.2f;
+            Ray aimRay = base.GetAimRay();
             if (base.isAuthority)
             {
                 UtilityPhantasm.SummonablesList3.RemoveAll(delegate (CharacterMaster C) { return C == null; });
@@ -84,88 +85,74 @@ namespace HolomancerMod.SkillStates
 
         private void Fire()
         {
-            if (!this.hasFired)
+            RaycastHit raycastHit;
+            if (base.inputBank.GetAimRaycast(100f, out raycastHit))
             {
-                this.hasFired = true;
-
-                Util.PlaySound("Roll.dodgeSoundString", base.gameObject);
-
-                if (base.isAuthority)
-                {
-                    Ray aimRay = base.GetAimRay();
-                    
-
-                    new BulletAttack
-                    {
-
-                        bulletCount = 1,
-                        aimVector = aimRay.direction,
-                        origin = aimRay.origin,
-                        damage = damageCoefficient * this.damageStat,
-                        damageColorIndex = DamageColorIndex.Default,
-                        damageType = DamageType.Generic,
-                        falloffModel = BulletAttack.FalloffModel.DefaultBullet,
-                        maxDistance = range,
-                        force = force,
-                        hitMask = LayerIndex.CommonMasks.bullet,
-                        minSpread = 0f,
-                        maxSpread = 0f,
-                        isCrit = base.RollCrit(),
-                        owner = base.gameObject,
-                        muzzleName = null,
-                        smartCollision = false,
-                        procChainMask = default(ProcChainMask),
-                        procCoefficient = procCoefficient,
-                        radius = 0.75f,
-                        sniper = false,
-                        stopperMask = LayerIndex.CommonMasks.bullet,
-                        weapon = null,
-                        tracerEffectPrefab = null,
-                        spreadPitchScale = 0f,
-                        spreadYawScale = 0f,
-                        queryTriggerInteraction = QueryTriggerInteraction.UseGlobal,
-                        hitEffectPrefab = null,
-                        hitCallback = SummonUtility
-                    }.Fire();
-                }
+                this.point = raycastHit.point;
             }
-        }
-
-        bool SummonUtility(ref BulletAttack.BulletHit hitInfo)
-        {
-            if (hitInfo.entityObject != null && hitInfo.hitHurtBox != null)
+            else
             {
-                UtilityPhantasm.SummonablesList3.RemoveAll(delegate (CharacterMaster C) { return C == null; });
-                if (UtilityPhantasm.SummonablesList3.Count > 0)
-                {
-                    UtilityPhantasm.SummonablesList3.RemoveAll(delegate (CharacterMaster C)
-                    {
-                        return !(C.GetBody().healthComponent.alive);
-                    });
-                }
-                if (UtilityPhantasm.SummonablesList3.Count > 0)
+                this.point = base.inputBank.GetAimRay().GetPoint(100f);
+            }
+            UtilityPhantasm.SummonablesList3.RemoveAll(delegate (CharacterMaster C) { return C == null; });
+            if (UtilityPhantasm.SummonablesList3.Count > 0)
+            {
+                UtilityPhantasm.SummonablesList3.RemoveAll(delegate (CharacterMaster C)
+               {
+                   return !(C.GetBody().healthComponent.alive);
+               });
+            }
+            if (UtilityPhantasm.SummonablesList3.Count > 0)
+            {
+                HurtBox target = this.SearchForTarget();
+
                     foreach (CharacterMaster cm in UtilityPhantasm.SummonablesList3)
                     {
-                        cm.gameObject.GetComponent<BaseAI>().leader.gameObject = hitInfo.entityObject;
-                        /*foreach(AISkillDriver ai in cm.GetComponentsInChildren<AISkillDriver>())
+                        if (target && target.healthComponent)
                         {
-                            bool flag = ai.customName == "Attack";
-                               if(flag)
+                            cm.gameObject.GetComponent<BaseAI>().leader.gameObject = target.healthComponent.gameObject;
+                        }
+                        else
+                        {
+                          cm.gameObject.GetComponent<BaseAI>().leader.gameObject = base.gameObject;
+                        }
+                            if (Vector3.Distance(cm.GetBody().transform.position, cm.gameObject.GetComponent<BaseAI>().leader.gameObject.transform.position) > 100f)
                             {
-                                ai.maxDistance = 2f;
+                                cm.GetBody().baseMoveSpeed = 20f;
+                                cm.GetBody().baseAcceleration = 100f;
+                                cm.GetBody().rigidbody.position = (base.characterBody.transform.position + (cm.GetBody().transform.position - cm.gameObject.GetComponent<BaseAI>().leader.gameObject.transform.position).normalized * 20);
+                                EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/ImpBlinkEffect"), new EffectData
+                                {
+                                    origin = cm.GetBody().transform.position,
+                                    scale = 5f
+                                }, true);
+
+
+
                             }
-                            bool flag2 = ai.customName == "Shatter";
-                            if (flag2)
-                            {
-                                ai.minDistance = 2f;
-                            }
-                        }*/ //doesn't work, no clue why
                     }
             }
-            return false;
-            
+               
+                
+
         }
+    
         
+
+        private HurtBox SearchForTarget()
+        {
+            BullseyeSearch bullseyeSearch = new BullseyeSearch
+            {
+                searchOrigin = this.point,
+                maxDistanceFilter = 15f,
+                teamMaskFilter = TeamMask.GetUnprotectedTeams(this.GetTeam()),
+                sortMode = BullseyeSearch.SortMode.Distance
+            };
+            bullseyeSearch.RefreshCandidates();
+            bullseyeSearch.FilterOutGameObject(this.gameObject);
+            return bullseyeSearch.GetResults().FirstOrDefault<HurtBox>();
+        }
+
         public override void OnExit()
         {
             base.OnExit();
@@ -223,7 +210,7 @@ namespace HolomancerMod.SkillStates
             shatterDriver.minDistance = 3f;
             shatterDriver.requireSkillReady = false;
             shatterDriver.aimType = AISkillDriver.AimType.MoveDirection;
-            shatterDriver.ignoreNodeGraph = false;
+            shatterDriver.ignoreNodeGraph = true;
             shatterDriver.moveInputScale = 1f;
             shatterDriver.driverUpdateTimerOverride = 0.2f;
             shatterDriver.buttonPressType = AISkillDriver.ButtonPressType.Hold;

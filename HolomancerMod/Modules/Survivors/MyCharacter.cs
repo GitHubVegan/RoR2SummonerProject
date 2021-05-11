@@ -31,7 +31,7 @@ namespace HolomancerMod.Modules.Survivors
             bodyColor = Color.grey,
             characterPortrait = Modules.Assets.LoadCharacterIcon("Holomancer"),
             crosshair = Modules.Assets.LoadCrosshair("Standard"),
-            damage = 12f,
+            damage = 13f,
             healthGrowth = 25f,
             healthRegen = 0.5f,
             moveSpeed = 6,

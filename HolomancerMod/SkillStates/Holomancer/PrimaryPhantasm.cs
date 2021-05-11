@@ -114,12 +114,12 @@ namespace HolomancerMod.SkillStates
                         {
                             cm.GetBody().baseMoveSpeed = 20f;
                             cm.GetBody().baseAcceleration = 100f;
-                            EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/ImpBlinkEffect"), new EffectData
+                            EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/ArchWispPreDeathEffect"), new EffectData
                             {
                                 origin = cm.GetBody().transform.position,
                                 scale = 1f
                             }, true);
-                            EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/ImpBlinkEffect"), new EffectData
+                            EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/ArchWispPreDeathEffect"), new EffectData
                             {
                                 origin = base.characterBody.transform.position + base.GetAimRay().direction * 4,
                                 scale = 1f

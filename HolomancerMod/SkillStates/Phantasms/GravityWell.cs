@@ -19,7 +19,7 @@ namespace HolomancerMod.SkillStates
         private bool hasExploded;
         private float duration;
         private float stopwatch;
-        private static float damageCoefficient = 10f;
+        private static float damageCoefficient = 6.4f;
 
         public override void OnEnter()
         {

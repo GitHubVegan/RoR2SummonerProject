@@ -122,12 +122,12 @@ namespace HolomancerMod.SkillStates
                         }
                             if (Vector3.Distance(cm.GetBody().transform.position, cm.gameObject.GetComponent<BaseAI>().leader.gameObject.transform.position) > 35f)
                             {
-                                EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/ImpBlinkEffect"), new EffectData
+                                EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/ArchWispPreDeathEffect"), new EffectData
                                 {
                                     origin = cm.GetBody().transform.position,
                                     scale = 1f
                                 }, true);
-                                EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/ImpBlinkEffect"), new EffectData
+                                EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/ArchWispPreDeathEffect"), new EffectData
                                 {
                                     origin = cm.gameObject.GetComponent<BaseAI>().leader.gameObject.transform.position + (cm.GetBody().transform.position - cm.gameObject.GetComponent<BaseAI>().leader.gameObject.transform.position).normalized * 25,
                                     scale = 1f

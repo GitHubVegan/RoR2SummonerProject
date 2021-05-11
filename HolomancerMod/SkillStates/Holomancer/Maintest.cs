@@ -16,12 +16,9 @@ namespace HolomancerMod.SkillStates
 	internal class Maintest : GenericCharacterMain
 	{
 
-		public static GameObject HolomancerBody1;
-
 		public override void OnEnter()
 		{
 			base.OnEnter();
-			HolomancerBody1 = base.characterBody.gameObject;
 
 		}
 
@@ -112,12 +109,12 @@ namespace HolomancerMod.SkillStates
 					return !(C.GetBody().healthComponent.alive);
 				});
 			}
-			if (PrimaryPhantasm.SummonablesList1.Count >= 3 || base.GetComponent<RoR2.SkillLocator>().primary.stock < 1)
+			if (PrimaryPhantasm.SummonablesList1.Count >= 3 || base.GetComponent<RoR2.SkillLocator>().primary.stock <= 0)
 			{
 				base.GetComponent<RoR2.SkillLocator>().primary.SetSkillOverride(1, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("PrimaryPhantasmTarget")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
 
 			}
-			if (PrimaryPhantasm.SummonablesList1.Count <= 2)
+			if (PrimaryPhantasm.SummonablesList1.Count <= 2 && base.GetComponent<RoR2.SkillLocator>().primary.stock >= 1)
 			{
 				base.GetComponent<RoR2.SkillLocator>().primary.UnsetSkillOverride(1, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("PrimaryPhantasmTarget")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
 			}

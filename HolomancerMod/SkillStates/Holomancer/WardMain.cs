@@ -98,18 +98,15 @@ namespace HolomancerMod.SkillStates
 			}
 			foreach (HurtBox hurtBox in this.targetList)
 			{
-				if (hurtBox.teamIndex != TeamIndex.Player)
+				if (hurtBox.teamIndex == TeamIndex.Player)
 				{
-					hurtBox.healthComponent.body.AddTimedBuff(RoR2Content.Buffs.Weak, 0.25f);
-					//hurtBox.healthComponent.body.AddTimedBuff(RoR2Content.Buffs.SmallArmorBoost, 0.25f);
+					;
+					hurtBox.healthComponent.body.AddTimedBuff(RoR2Content.Buffs.SmallArmorBoost, 0.25f);
 				}
                 else
                 {
-					if(stopwatch <= 0f)
-                    {
-						stopwatch = 2f;
-						hurtBox.healthComponent.body.AddTimedBuff(RoR2Content.Buffs.Cloak, 0.5f);
-					}
+					hurtBox.healthComponent.body.AddTimedBuff(RoR2Content.Buffs.Weak, 0.25f);
+					
                 }
 			}
 		}

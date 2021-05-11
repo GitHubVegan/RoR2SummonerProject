@@ -33,14 +33,13 @@ namespace HolomancerMod.SkillStates
             Ray aimRay = base.GetAimRay();
             if (base.isAuthority)
             {
+                SecondaryPhantasm.SummonablesList2.RemoveAll(delegate (CharacterMaster C) { return C == null; });
                 if (SecondaryPhantasm.SummonablesList2.Count > 0)
                 {
-                    SecondaryPhantasm.SummonablesList2.RemoveAll(delegate (CharacterMaster C) { return C == null; });
-                
                     SecondaryPhantasm.SummonablesList2.RemoveAll(delegate (CharacterMaster C)
-                {
-                    return !(C.GetBody().healthComponent.alive);
-                });
+                    {
+                        return !(C.GetBody().healthComponent.alive);
+                    });
                 }
                 if (SecondaryPhantasm.SummonablesList2.Count > 0)
                 {
@@ -51,8 +50,8 @@ namespace HolomancerMod.SkillStates
                         );
                     if (result != null)
                     {
-                            result.gameObject.AddComponent<MasterSuicideOnTimer>().lifeTimer = 0f;
-                        
+                        result.gameObject.AddComponent<MasterSuicideOnTimer>().lifeTimer = 0f;
+
                     }
                     SecondaryPhantasm.SummonablesList2.RemoveAt(0);
 
@@ -60,7 +59,7 @@ namespace HolomancerMod.SkillStates
                 }
                 CharacterMaster characterMaster = new MasterSummon
                 {
-                    masterPrefab = SecondaryPhantasmMaster,
+                    masterPrefab = SecondaryPhantasm.SecondaryPhantasmMaster,
                     position = base.characterBody.transform.position + Vector3.up * 5,
                     rotation = base.characterBody.transform.rotation,
                     summonerBodyObject = base.characterBody.gameObject,
@@ -68,15 +67,16 @@ namespace HolomancerMod.SkillStates
                     teamIndexOverride = new TeamIndex?(TeamIndex.Player)
                 }.Perform();
                 characterMaster.GetBody().RecalculateStats();
-                characterMaster.GetBody().moveSpeed = base.characterBody.moveSpeed + 2f;
-                characterMaster.GetBody().regen = base.characterBody.regen;
-                characterMaster.GetBody().crit = base.characterBody.crit;
-                characterMaster.GetBody().acceleration = base.characterBody.acceleration + 20f;
-                characterMaster.GetBody().damage = base.characterBody.damage;
-                characterMaster.GetBody().attackSpeed = base.characterBody.attackSpeed;
+                characterMaster.GetBody().baseArmor = 30f;
+                characterMaster.GetBody().baseMaxHealth = base.characterBody.baseMaxHealth * 1.3f;
+                characterMaster.GetBody().baseAcceleration = base.characterBody.baseAcceleration + 20f;
+                characterMaster.GetBody().baseDamage = base.characterBody.baseDamage;
+                characterMaster.GetBody().levelDamage = base.characterBody.levelDamage;
+                characterMaster.GetBody().baseRegen = 3f;
                 characterMaster.inventory.CopyItemsFrom(base.characterBody.inventory);
                 characterMaster.inventory.ResetItem(RoR2Content.Items.ExtraLife.itemIndex);
                 characterMaster.gameObject.GetComponent<BaseAI>().leader.gameObject = base.characterBody.gameObject;
+                characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().primary.SetSkillOverride(4, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("PhantasmGround")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
                 characterMaster.GetBody().isPlayerControlled = false;
                 SecondaryPhantasm.SummonablesList2.Add(characterMaster);
                 this.Fire();
@@ -119,15 +119,14 @@ namespace HolomancerMod.SkillStates
                             EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/ImpBlinkEffect"), new EffectData
                             {
                                 origin = cm.GetBody().transform.position,
-                                scale = 0.5f
+                                scale = 3f
                             }, true);
+                            cm.GetBody().rigidbody.position = (base.characterBody.transform.position + base.GetAimRay().direction * 4 + Vector3.up * 5);
                             EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/ImpBlinkEffect"), new EffectData
                             {
                                 origin = base.characterBody.transform.position + base.GetAimRay().direction * 4 + Vector3.up * 5,
-                                scale = 0.5f
+                                scale = 3f
                             }, true);
-                            cm.GetBody().rigidbody.position = (base.characterBody.transform.position + base.GetAimRay().direction * 4 + Vector3.up * 5);
-                            
 
 
 

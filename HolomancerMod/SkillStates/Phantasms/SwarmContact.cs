@@ -17,6 +17,7 @@ namespace HolomancerMod.SkillStates
 
 		public static float damageCoefficient = 0.9f;
 		public static float procCoefficient = 0.3f;
+		private float stopwatch;
 
 		public override void OnEnter()
 		{
@@ -34,6 +35,10 @@ namespace HolomancerMod.SkillStates
 		public override void FixedUpdate()
 		{
 			base.FixedUpdate();
+			stopwatch -= Time.fixedDeltaTime;
+			if(stopwatch <= 0f)
+			{
+				stopwatch = 0.25f;
 			List<HurtBox> hurtBoxes = new List<HurtBox>();
 			new RoR2.SphereSearch
 			{
@@ -48,13 +53,13 @@ namespace HolomancerMod.SkillStates
 				foreach (HurtBox H in hurtBoxes)
 				{
 					hurtBoxes.RemoveAll(delegate (HurtBox P) { return P == null; });
+					hurtBoxes.RemoveAll(delegate (HurtBox P) { return P = this.characterBody.mainHurtBox; });
 
 					if (H)
 					{
-						bool flag = H.healthComponent.alive && !H.healthComponent.body.HasBuff(RoR2Content.Buffs.BeetleJuice);
-						if (flag)
-						{
-							H.healthComponent.body.AddTimedBuff(RoR2Content.Buffs.BeetleJuice, 0.25f);
+						
+						
+							
 							DamageInfo damageInfo = new DamageInfo();
 							damageInfo.damage = SwarmContact.damageCoefficient * this.damageStat * this.attackSpeedStat;
 							damageInfo.attacker = base.gameObject;
@@ -62,12 +67,13 @@ namespace HolomancerMod.SkillStates
 							damageInfo.position = H.transform.position;
 							damageInfo.crit = Util.CheckRoll(this.critStat, base.characterBody.master);
 							H.healthComponent.TakeDamage(damageInfo);
-						}
+						
 					}
 					
 
 
 				}
+			}
 			}
 		}
 		

@@ -66,12 +66,7 @@ namespace HolomancerMod.SkillStates
                     teamIndexOverride = new TeamIndex?(TeamIndex.Player)
                 }.Perform();
                 characterMaster.GetBody().RecalculateStats();
-                characterMaster.GetBody().moveSpeed = base.characterBody.moveSpeed + 2f;
-                characterMaster.GetBody().regen = base.characterBody.regen;
-                characterMaster.GetBody().crit = base.characterBody.crit;
-                characterMaster.GetBody().acceleration = base.characterBody.acceleration + 20f;
-                characterMaster.GetBody().damage = base.characterBody.damage;
-                characterMaster.GetBody().attackSpeed = base.characterBody.attackSpeed;
+                characterMaster.GetBody().levelDamage = base.characterBody.levelDamage;
                 characterMaster.inventory.CopyItemsFrom(base.characterBody.inventory);
                 characterMaster.inventory.ResetItem(RoR2Content.Items.ExtraLife.itemIndex);
                 characterMaster.gameObject.GetComponent<BaseAI>().leader.gameObject = base.characterBody.gameObject;

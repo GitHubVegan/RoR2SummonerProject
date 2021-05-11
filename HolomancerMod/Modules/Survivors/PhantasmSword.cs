@@ -25,7 +25,7 @@ namespace HolomancerMod.Modules.Survivors
 
         internal override BodyInfo bodyInfo { get; set; } = new BodyInfo
         {
-            armor = 175f,
+            armor = 50f,
             armorGrowth = 0f,
             bodyName = "PhantasmSwordBody",
             bodyNameToken = "Fencer",
@@ -33,10 +33,13 @@ namespace HolomancerMod.Modules.Survivors
             characterPortrait = Modules.Assets.LoadCharacterIcon("PhantasmSword"),
             crosshair = Modules.Assets.LoadCrosshair("Standard"),
             damage = 12f,
-            healthGrowth = 40f,
-            healthRegen = 2f,
+            healthGrowth = 25f,
+            healthRegen = 0.5f,
+            moveSpeed = 6,
             jumpCount = 1,
-            maxHealth = 130f,
+            maxHealth = 90f,
+            acceleration = 80f,
+            
             subtitleNameToken = HolomancerPlugin.developerPrefix + "_PHANTASMSWORD_BODY_SUBTITLE",
             podPrefab = Resources.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod")
         };

@@ -67,16 +67,14 @@ namespace HolomancerMod.SkillStates
                     teamIndexOverride = new TeamIndex?(TeamIndex.Player)
                 }.Perform();
                 characterMaster.GetBody().RecalculateStats();
-                characterMaster.GetBody().baseMoveSpeed = 20f;
-                characterMaster.GetBody().baseAcceleration = 100f;
-                characterMaster.GetBody().baseArmor = 50f;
-                characterMaster.GetBody().baseMaxHealth = 120f;
-                characterMaster.GetBody().levelMaxHealth = 32f;
-                characterMaster.GetBody().baseRegen = 2f;
+                characterMaster.GetBody().moveSpeed = base.characterBody.moveSpeed;
+                characterMaster.GetBody().regen = base.characterBody.regen;
+                characterMaster.GetBody().crit = base.characterBody.crit;
+                characterMaster.GetBody().acceleration = base.characterBody.acceleration;
+                characterMaster.GetBody().damage = base.characterBody.damage;
+                characterMaster.GetBody().attackSpeed = base.characterBody.attackSpeed;
                 characterMaster.inventory.CopyItemsFrom(base.characterBody.inventory);
                 characterMaster.inventory.ResetItem(RoR2Content.Items.ExtraLife.itemIndex);
-                //characterMaster.inventory.GiveItem(RoR2Content.Items.Ghost.itemIndex);
-                //characterMaster.inventory.GiveItem(RoR2Content.Items.HealthDecay.itemIndex, 20);
                 characterMaster.gameObject.GetComponent<BaseAI>().leader.gameObject = base.characterBody.gameObject;
                 characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().primary.SetSkillOverride(4, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("PhantasmGround")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
                 characterMaster.GetBody().isPlayerControlled = false;
@@ -121,14 +119,15 @@ namespace HolomancerMod.SkillStates
                             EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/ImpBlinkEffect"), new EffectData
                             {
                                 origin = cm.GetBody().transform.position,
-                                scale = 3f
+                                scale = 1f
                             }, true);
-                            cm.GetBody().rigidbody.position = (base.characterBody.transform.position + base.GetAimRay().direction * 4 + Vector3.up * 5);
                             EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/ImpBlinkEffect"), new EffectData
                             {
                                 origin = base.characterBody.transform.position + base.GetAimRay().direction * 4 + Vector3.up * 5,
-                                scale = 3f
+                                scale = 1f
                             }, true);
+                            cm.GetBody().rigidbody.position = (base.characterBody.transform.position + base.GetAimRay().direction * 4 + Vector3.up * 5);
+                            
 
 
 

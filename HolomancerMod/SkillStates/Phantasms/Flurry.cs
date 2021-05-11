@@ -13,7 +13,7 @@ namespace HolomancerMod.SkillStates
 {
     public class Flurry : BaseSkillState
     {
-        public static float damageCoefficient = 3f;
+        public static float damageCoefficient = 1f;
         public static float procCoefficient = 0.4f;
         public static float force = 0f;
         public static float recoil = 0f;

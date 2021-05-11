@@ -31,12 +31,13 @@ namespace HolomancerMod.Modules.Survivors
             bodyColor = Color.grey,
             characterPortrait = Modules.Assets.LoadCharacterIcon("Holomancer"),
             crosshair = Modules.Assets.LoadCrosshair("Standard"),
-            damage = 13f,
-            healthGrowth = 27f,
+            damage = 12f,
+            healthGrowth = 25f,
             healthRegen = 0.5f,
             moveSpeed = 6,
             jumpCount = 1,
             maxHealth = 90f,
+            acceleration = 80f, 
             subtitleNameToken = "Holomancer",
             podPrefab = Resources.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod")
         };
@@ -242,7 +243,10 @@ namespace HolomancerMod.Modules.Survivors
                 cancelSprintingOnActivation = false,
                 rechargeStock = 1,
                 requiredStock = 1,
-                stockToConsume = 1
+                stockToConsume = 1,
+
+                keywordTokens = new string[] { "KEYWORD_FLURRYSHATTER", "KEYWORD_FENCERCOM" } 
+
             });
 
             SkillDef explosiondashSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
@@ -440,7 +444,9 @@ namespace HolomancerMod.Modules.Survivors
                 cancelSprintingOnActivation = false,
                 rechargeStock = 1,
                 requiredStock = 1,
-                stockToConsume = 1
+                stockToConsume = 1,
+
+                keywordTokens = new string[] { "KEYWORD_SHOCKSHATTER", "KEYWORD_EELCOM" } 
             });
 
             Modules.Skills.AddSecondarySkills(bodyPrefab, secondaryphantasmSkillDef);
@@ -471,7 +477,6 @@ namespace HolomancerMod.Modules.Survivors
                 rechargeStock = 1,
                 requiredStock = 0,
                 stockToConsume = 0,
-                keywordTokens = new string[] { "KEYWORD_AGILE" }
             });
 
             SkillDef utilitytargetSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
@@ -520,7 +525,9 @@ namespace HolomancerMod.Modules.Survivors
                 cancelSprintingOnActivation = false,
                 rechargeStock = 1,
                 requiredStock = 1,
-                stockToConsume = 1
+                stockToConsume = 1,
+
+                keywordTokens = new string[] { "KEYWORD_SHIELDSHATTER", "KEYWORD_DRONECOM", "KEYWORD_WEAKEN" }
             });
 
             Modules.Skills.AddUtilitySkills(bodyPrefab, utilityphantasmSkillDef);
@@ -550,7 +557,9 @@ namespace HolomancerMod.Modules.Survivors
                 cancelSprintingOnActivation = false,
                 rechargeStock = 1,
                 requiredStock = 1,
-                stockToConsume = 1
+                stockToConsume = 1,
+
+                keywordTokens = new string[] { "KEYWORD_FLURRYSHATTER", "KEYWORD_SHOCKSHATTER",  "KEYWORD_SHIELDSHATTER" }
             });
 
             Modules.Skills.AddSpecialSkills(bodyPrefab, shatterskillswapSkillDef);

@@ -68,8 +68,12 @@ namespace HolomancerMod.SkillStates
                     teamIndexOverride = new TeamIndex?(TeamIndex.Player)
                 }.Perform();
                 characterMaster.GetBody().RecalculateStats();
-                characterMaster.GetBody().baseMoveSpeed = 10f;
-                characterMaster.GetBody().baseAcceleration = 80f;
+                characterMaster.GetBody().moveSpeed = 4f;
+                characterMaster.GetBody().regen = base.characterBody.regen;
+                characterMaster.GetBody().crit = base.characterBody.crit;
+                characterMaster.GetBody().acceleration = 100f;
+                characterMaster.GetBody().damage = base.characterBody.damage;
+                characterMaster.GetBody().attackSpeed = base.characterBody.attackSpeed;
                 characterMaster.inventory.CopyItemsFrom(base.characterBody.inventory);
                 characterMaster.inventory.ResetItem(RoR2Content.Items.ExtraLife.itemIndex);
                 characterMaster.inventory.GiveItem(RoR2Content.Items.Ghost.itemIndex);
@@ -116,21 +120,19 @@ namespace HolomancerMod.SkillStates
                         {
                           cm.gameObject.GetComponent<BaseAI>().leader.gameObject = base.gameObject;
                         }
-                            if (Vector3.Distance(cm.GetBody().transform.position, cm.gameObject.GetComponent<BaseAI>().leader.gameObject.transform.position) > 30f)
+                            if (Vector3.Distance(cm.GetBody().transform.position, cm.gameObject.GetComponent<BaseAI>().leader.gameObject.transform.position) > 35f)
                             {
-                                cm.GetBody().baseMoveSpeed = 20f;
-                                cm.GetBody().baseAcceleration = 100f;
                                 EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/ImpBlinkEffect"), new EffectData
                                 {
                                     origin = cm.GetBody().transform.position,
-                                    scale = 3f
+                                    scale = 1f
                                 }, true);
                                 EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/ImpBlinkEffect"), new EffectData
                                 {
-                                    origin = cm.gameObject.GetComponent<BaseAI>().leader.gameObject.transform.position + (cm.GetBody().transform.position - cm.gameObject.GetComponent<BaseAI>().leader.gameObject.transform.position).normalized * 20,
-                                    scale = 3f
+                                    origin = cm.gameObject.GetComponent<BaseAI>().leader.gameObject.transform.position + (cm.GetBody().transform.position - cm.gameObject.GetComponent<BaseAI>().leader.gameObject.transform.position).normalized * 25,
+                                    scale = 1f
                                 }, true);
-                                cm.GetBody().rigidbody.position = cm.gameObject.GetComponent<BaseAI>().leader.gameObject.transform.position + (cm.GetBody().transform.position - cm.gameObject.GetComponent<BaseAI>().leader.gameObject.transform.position).normalized * 20;
+                                cm.GetBody().rigidbody.position = cm.gameObject.GetComponent<BaseAI>().leader.gameObject.transform.position + (cm.GetBody().transform.position - cm.gameObject.GetComponent<BaseAI>().leader.gameObject.transform.position).normalized * 25;
 
 
 

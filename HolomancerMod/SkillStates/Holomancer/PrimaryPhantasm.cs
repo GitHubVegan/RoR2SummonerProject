@@ -66,13 +66,16 @@ namespace HolomancerMod.SkillStates
                     teamIndexOverride = new TeamIndex?(TeamIndex.Player)
                 }.Perform();
                 characterMaster.GetBody().RecalculateStats();
-                characterMaster.GetBody().baseDamage = characterMaster.GetBody().baseDamage * 0.3f;
-                characterMaster.GetBody().levelDamage = characterMaster.GetBody().levelDamage * 0.3f;
+                characterMaster.GetBody().moveSpeed = base.characterBody.moveSpeed + 2f;
+                characterMaster.GetBody().regen = base.characterBody.regen;
+                characterMaster.GetBody().crit = base.characterBody.crit;
+                characterMaster.GetBody().acceleration = base.characterBody.acceleration + 20f;
+                characterMaster.GetBody().damage = base.characterBody.damage;
+                characterMaster.GetBody().attackSpeed = base.characterBody.attackSpeed;
                 characterMaster.inventory.CopyItemsFrom(base.characterBody.inventory);
                 characterMaster.inventory.ResetItem(RoR2Content.Items.ExtraLife.itemIndex);
                 characterMaster.gameObject.GetComponent<BaseAI>().leader.gameObject = base.characterBody.gameObject;
                 characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().primary.SetSkillOverride(2, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("PhantasmRapier")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
-                //characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().utility.SetSkillOverride(2, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("MindwrackClone")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
                 characterMaster.GetBody().isPlayerControlled = false;
                 SummonablesList1.Add(characterMaster);
                 this.Fire();
@@ -114,14 +117,15 @@ namespace HolomancerMod.SkillStates
                             EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/ImpBlinkEffect"), new EffectData
                             {
                                 origin = cm.GetBody().transform.position,
-                                scale = 3f
+                                scale = 1f
                             }, true);
-                            cm.GetBody().characterMotor.Motor.SetPositionAndRotation(base.characterBody.transform.position + base.GetAimRay().direction * 4, base.characterBody.transform.rotation);
                             EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/ImpBlinkEffect"), new EffectData
                             {
                                 origin = base.characterBody.transform.position + base.GetAimRay().direction * 4,
-                                scale = 3f
+                                scale = 1f
                             }, true);
+                            cm.GetBody().characterMotor.Motor.SetPositionAndRotation(base.characterBody.transform.position + base.GetAimRay().direction * 4, base.characterBody.transform.rotation);
+                           
                             
 
 
@@ -131,47 +135,6 @@ namespace HolomancerMod.SkillStates
                 
             }
         }
-
-        /*bool SummonPrimary(ref BulletAttack.BulletHit hitInfo)
-        {
-            PrimaryPhantasm.SummonablesList1.RemoveAll(delegate (CharacterMaster C) { return C == null; });
-            if (PrimaryPhantasm.SummonablesList1.Count > 0)
-            {
-                PrimaryPhantasm.SummonablesList1.RemoveAll(delegate (CharacterMaster C)
-                {
-                    return !(C.GetBody().healthComponent.alive);
-                });
-            }
-            if (PrimaryPhantasm.SummonablesList1.Count > 0)
-            {
-                bool flag = (hitInfo.entityObject != null && hitInfo.hitHurtBox != null && hitInfo.hitHurtBox.teamIndex != TeamIndex.Player);
-                if (flag)
-                {
-
-                    foreach (CharacterMaster cm in PrimaryPhantasm.SummonablesList1)
-                    {
-                        cm.gameObject.GetComponent<BaseAI>().customTarget.gameObject = hitInfo.entityObject;
-
-                    }
-                }
-                else
-                {
-                    foreach (CharacterMaster cm in PrimaryPhantasm.SummonablesList1)
-                    {
-                        cm.gameObject.GetComponent<BaseAI>().customTarget.gameObject = base.characterBody.gameObject;
-                    }
-                }
-                if(!flag)
-                {
-                    foreach (CharacterMaster cm in PrimaryPhantasm.SummonablesList1)
-                    {
-                        cm.gameObject.GetComponentInChildren<AISkillDriver>().moveTargetType = AISkillDriver.TargetType.CurrentLeader;
-                    }
-                }
-            }
-            return false;
-            
-        }*/
 
         private HurtBox SearchForTarget()
         {
@@ -194,29 +157,6 @@ namespace HolomancerMod.SkillStates
 
         private static GameObject CreateBody()
         {
-            //GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/MercBody"), "PrimaryPhantasmBody", true);
-
-            //       BodyInfo bodyInfo = new BodyInfo
-            //       {
-            //           armor = 20f,
-            //           armorGrowth = 0f,
-            //           bodyName = "PhantasmSwordBody",
-            //           bodyNameToken = HolomancerPlugin.developerPrefix + "_PHANTASMSWORD_BODY_NAME",
-            //           bodyColor = Color.grey,
-            //           characterPortrait = Modules.Assets.LoadCharacterIcon("Holomancer"),
-            //           crosshair = Modules.Assets.LoadCrosshair("Standard"),
-            //           damage = 12f,
-            //          healthGrowth = 33f,
-            //          healthRegen = 1.5f,
-            //           jumpCount = 1,
-            //           maxHealth = 110f,
-            //           subtitleNameToken = HolomancerPlugin.developerPrefix + "_PHANTASMSWORD_BODY_SUBTITLE",
-            //           podPrefab = Resources.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod"),
-            //           bodyNameToClone = "Merc"
-            //       };
-
-            //        GameObject newBody = Prefabs.CreatePrefab("PrimaryPhantasmBody", "mdlPhantasmSword",bodyInfo);
-            //       //bodyPrefab.GetComponent<EntityStateMachine>().mainStateType = new EntityStates.SerializableEntityStateType(characterMainState);
 
 
             GameObject newBody = null;
@@ -229,9 +169,6 @@ namespace HolomancerMod.SkillStates
 
                 }
             }
-
-
-           // Modules.Prefabs.bodyPrefabs.Add(newBody);
             return newBody;
         }
 
@@ -296,11 +233,6 @@ namespace HolomancerMod.SkillStates
 
             Modules.Prefabs.masterPrefabs.Add(newMaster);
             return newMaster;
-        }
-
-        private void FindOwner()
-        {
-            
         }
 
         public override void FixedUpdate()

@@ -15,7 +15,7 @@ namespace HolomancerMod.SkillStates
 		public override void OnEnter()
 		{
 			base.OnEnter();
-			Flurry.damageCoefficient = 3f;
+			Flurry.damageCoefficient = 1f;
 			PrimaryPhantasm.SummonablesList1.RemoveAll(delegate (CharacterMaster C) { return C == null; });
 			if (PrimaryPhantasm.SummonablesList1.Count > 0)
 			{
@@ -31,10 +31,9 @@ namespace HolomancerMod.SkillStates
 					{
 						if (CM.GetBody().healthComponent.alive == true)
 						{
-						Flurry.damageCoefficient += 1f;
+						Flurry.damageCoefficient += 0.3f;
 						CM.GetBody().baseMoveSpeed = 25f;
 						CM.GetBody().baseAcceleration = 160f;
-						CM.GetBody().attackSpeed = CM.GetBody().attackSpeed * 3;
 						CM.GetBody().GetComponent<RoR2.SkillLocator>().primary.SetSkillOverride(2, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("Flurry")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
 						CM.inventory.GiveItem(RoR2Content.Items.HealthDecay.itemIndex, 15);
 					}

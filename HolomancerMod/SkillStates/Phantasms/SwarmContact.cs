@@ -15,9 +15,8 @@ namespace HolomancerMod.SkillStates
 	internal class SwarmContact : FlyState
 	{
 
-        public static float damageCoefficient = 0.9f;
+		public static float damageCoefficient = 0.9f;
 		public static float procCoefficient = 0.3f;
-		public static float countdown;
 
 		public override void OnEnter()
 		{
@@ -35,10 +34,6 @@ namespace HolomancerMod.SkillStates
 		public override void FixedUpdate()
 		{
 			base.FixedUpdate();
-			countdown -= Time.fixedDeltaTime;
-			if(countdown <= 0)
-            {
-				countdown = 0.25f;
 			List<HurtBox> hurtBoxes = new List<HurtBox>();
 			new RoR2.SphereSearch
 			{
@@ -56,7 +51,10 @@ namespace HolomancerMod.SkillStates
 
 					if (H)
 					{
-						
+						bool flag = H.healthComponent.alive && !H.healthComponent.body.HasBuff(RoR2Content.Buffs.BeetleJuice);
+						if (flag)
+						{
+							H.healthComponent.body.AddTimedBuff(RoR2Content.Buffs.BeetleJuice, 0.25f);
 							DamageInfo damageInfo = new DamageInfo();
 							damageInfo.damage = SwarmContact.damageCoefficient * this.damageStat * this.attackSpeedStat;
 							damageInfo.attacker = base.gameObject;
@@ -64,14 +62,13 @@ namespace HolomancerMod.SkillStates
 							damageInfo.position = H.transform.position;
 							damageInfo.crit = Util.CheckRoll(this.critStat, base.characterBody.master);
 							H.healthComponent.TakeDamage(damageInfo);
-						
+						}
 					}
 					
 
 
 				}
 			}
-		}
 		}
 		
 

@@ -82,16 +82,16 @@ namespace HolomancerMod.SkillStates
 				UnityEngine.Object.Destroy(Distortion.affixHauntedWard);
 				Distortion.affixHauntedWard = null;
 			}
-
-			SecondaryPhantasm.SummonablesList2.RemoveAll(delegate (CharacterMaster C) { return C == null; });
 			if (SecondaryPhantasm.SummonablesList2.Count > 0)
 			{
-				SecondaryPhantasm.SummonablesList2.RemoveAll(delegate (CharacterMaster C)
+				SecondaryPhantasm.SummonablesList2.RemoveAll(delegate (CharacterMaster C1) { return C1 == null; });
+			
+				SecondaryPhantasm.SummonablesList2.RemoveAll(delegate (CharacterMaster C1)
 				{
-					return !(C.GetBody().healthComponent.alive);
+					return !(C1.GetBody().healthComponent.alive);
 				});
 			}
-			if (SecondaryPhantasm.SummonablesList2.Count >= 1)
+			if (SecondaryPhantasm.SummonablesList2.Count > 0)
 			{
 				base.GetComponent<RoR2.SkillLocator>().secondary.SetSkillOverride(1, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("SecondaryPhantasmTarget")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
 
@@ -101,12 +101,13 @@ namespace HolomancerMod.SkillStates
 				base.GetComponent<RoR2.SkillLocator>().secondary.UnsetSkillOverride(1, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("SecondaryPhantasmTarget")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
 			}
 
-			PrimaryPhantasm.SummonablesList1.RemoveAll(delegate (CharacterMaster C) { return C == null; });
 			if (PrimaryPhantasm.SummonablesList1.Count > 0)
 			{
-				PrimaryPhantasm.SummonablesList1.RemoveAll(delegate (CharacterMaster C)
+				PrimaryPhantasm.SummonablesList1.RemoveAll(delegate (CharacterMaster C2) { return C2 == null; });
+			
+				PrimaryPhantasm.SummonablesList1.RemoveAll(delegate (CharacterMaster C2)
 				{
-					return !(C.GetBody().healthComponent.alive);
+					return !(C2.GetBody().healthComponent.alive);
 				});
 			}
 			if (PrimaryPhantasm.SummonablesList1.Count >= 3 || base.GetComponent<RoR2.SkillLocator>().primary.stock <= 0)
@@ -114,20 +115,21 @@ namespace HolomancerMod.SkillStates
 				base.GetComponent<RoR2.SkillLocator>().primary.SetSkillOverride(1, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("PrimaryPhantasmTarget")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
 
 			}
-			if (PrimaryPhantasm.SummonablesList1.Count <= 2 && base.GetComponent<RoR2.SkillLocator>().primary.stock >= 1)
+			if (PrimaryPhantasm.SummonablesList1.Count <= 2)
 			{
 				base.GetComponent<RoR2.SkillLocator>().primary.UnsetSkillOverride(1, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("PrimaryPhantasmTarget")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
 			}
 
-			UtilityPhantasm.SummonablesList3.RemoveAll(delegate (CharacterMaster C) { return C == null; });
 			if (UtilityPhantasm.SummonablesList3.Count > 0)
 			{
-				UtilityPhantasm.SummonablesList3.RemoveAll(delegate (CharacterMaster C)
+				UtilityPhantasm.SummonablesList3.RemoveAll(delegate (CharacterMaster C3) { return C3 == null; });
+			
+				UtilityPhantasm.SummonablesList3.RemoveAll(delegate (CharacterMaster C3)
 				{
-					return !(C.GetBody().healthComponent.alive);
+					return !(C3.GetBody().healthComponent.alive);
 				});
 			}
-			if (UtilityPhantasm.SummonablesList3.Count >= 1)
+			if (UtilityPhantasm.SummonablesList3.Count > 0)
 			{
 				base.GetComponent<RoR2.SkillLocator>().utility.SetSkillOverride(1, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("UtilityPhantasmTarget")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
 

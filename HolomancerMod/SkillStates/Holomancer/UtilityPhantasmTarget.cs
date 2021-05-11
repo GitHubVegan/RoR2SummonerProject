@@ -71,15 +71,15 @@ namespace HolomancerMod.SkillStates
                     }
                     if (Vector3.Distance(cm.GetBody().transform.position, cm.gameObject.GetComponent<BaseAI>().leader.gameObject.transform.position) > 30f)
                     {
-                        EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/ArchWispPreDeathEffect"), new EffectData
+                        EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/ImpBlinkEffect"), new EffectData
                         {
                             origin = cm.GetBody().transform.position,
-                            scale = 1f
+                            scale = 0.5f
                         }, true);
-                        EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/ArchWispPreDeathEffect"), new EffectData
+                        EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/ImpBlinkEffect"), new EffectData
                         {
                             origin = cm.gameObject.GetComponent<BaseAI>().leader.gameObject.transform.position + (cm.GetBody().transform.position - cm.gameObject.GetComponent<BaseAI>().leader.gameObject.transform.position).normalized * 20,
-                            scale = 1f
+                            scale = 0.5f
                         }, true);
                         cm.GetBody().rigidbody.position = cm.gameObject.GetComponent<BaseAI>().leader.gameObject.transform.position + (cm.GetBody().transform.position - cm.gameObject.GetComponent<BaseAI>().leader.gameObject.transform.position).normalized * 20;
                         
@@ -103,7 +103,6 @@ namespace HolomancerMod.SkillStates
             {
                 searchOrigin = this.point,
                 maxDistanceFilter = 15f,
-                teamMaskFilter = TeamMask.GetUnprotectedTeams(this.GetTeam()),
                 sortMode = BullseyeSearch.SortMode.Distance
             };
             bullseyeSearch.RefreshCandidates();

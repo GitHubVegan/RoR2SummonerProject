@@ -37,12 +37,9 @@ namespace HolomancerMod.SkillStates
         public override void OnEnter()
         {
             base.OnEnter();
-            PhantasmRapier.damageCoefficient = 3f;
             this.duration = PhantasmRapier.totalDuration;
             this.durationBetweenShots = PhantasmRapier.baseDurationBetweenShots / this.attackSpeedStat;
             this.bulletCount = (int)((float)PhantasmRapier.baseBulletCount * this.attackSpeedStat);
-            base.characterBody.baseMoveSpeed = 7f;
-            base.characterBody.baseAcceleration = 80f;
             this.FireBullet();
         }
 

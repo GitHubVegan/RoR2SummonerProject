@@ -48,9 +48,10 @@ namespace HolomancerMod.SkillStates
             {
                 this.point = base.inputBank.GetAimRay().GetPoint(100f);
             }
-            SecondaryPhantasm.SummonablesList2.RemoveAll(delegate (CharacterMaster C) { return C == null; });
             if (SecondaryPhantasm.SummonablesList2.Count > 0)
             {
+                SecondaryPhantasm.SummonablesList2.RemoveAll(delegate (CharacterMaster C) { return C == null; });
+           
                 SecondaryPhantasm.SummonablesList2.RemoveAll(delegate (CharacterMaster C)
                 {
                     return !(C.GetBody().healthComponent.alive);
@@ -66,17 +67,15 @@ namespace HolomancerMod.SkillStates
                         cm.gameObject.GetComponent<BaseAI>().currentEnemy.gameObject = target.healthComponent.gameObject;
                         if (Vector3.Distance(cm.GetBody().transform.position, target.healthComponent.body.transform.position) > (Vector3.Distance(base.characterBody.transform.position, target.healthComponent.body.transform.position)))
                         {
-                            cm.GetBody().baseMoveSpeed = 20f;
-                            cm.GetBody().baseAcceleration = 100f;
-                            EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/ArchWispPreDeathEffect"), new EffectData
+                            EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/ImpBlinkEffect"), new EffectData
                             {
                                 origin = cm.GetBody().transform.position,
-                                scale = 1f
+                                scale = 0.5f
                             }, true);
-                            EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/ArchWispPreDeathEffect"), new EffectData
+                            EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/ImpBlinkEffect"), new EffectData
                             {
                                 origin = base.characterBody.transform.position + base.GetAimRay().direction * 4 + Vector3.up * 5,
-                                scale = 1f
+                                scale = 0.5f
                             }, true);
                             cm.GetBody().rigidbody.position = (base.characterBody.transform.position + base.GetAimRay().direction * 4 + Vector3.up * 5);
                             

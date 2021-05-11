@@ -18,7 +18,6 @@ namespace HolomancerMod.SkillStates
         public static float force = 0f;
         public static float recoil = 0f;
         public static float range = 13f;
-        private List<HurtBox> targetList;
         public static float maxRadius = 6f;
         public Vector3 point;
         private DamageInfo info;

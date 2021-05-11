@@ -50,7 +50,7 @@ namespace HolomancerMod.SkillStates
 
             if (EntityStates.JellyfishMonster.JellyNova.novaEffectPrefab)
             {
-                EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/ArchWispPreDeathEffect"), new EffectData
+                EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/ImpBlinkEffect"), new EffectData
                 {
                     origin = base.transform.position,
                     scale = DiversionClone.novaRadius * 1.5f

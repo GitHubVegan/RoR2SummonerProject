@@ -33,9 +33,10 @@ namespace HolomancerMod.SkillStates
             Ray aimRay = base.GetAimRay();
             if (base.isAuthority)
             {
-                SecondaryPhantasm.SummonablesList2.RemoveAll(delegate (CharacterMaster C) { return C == null; });
                 if (SecondaryPhantasm.SummonablesList2.Count > 0)
                 {
+                    SecondaryPhantasm.SummonablesList2.RemoveAll(delegate (CharacterMaster C) { return C == null; });
+                
                     SecondaryPhantasm.SummonablesList2.RemoveAll(delegate (CharacterMaster C)
                 {
                     return !(C.GetBody().healthComponent.alive);
@@ -59,7 +60,7 @@ namespace HolomancerMod.SkillStates
                 }
                 CharacterMaster characterMaster = new MasterSummon
                 {
-                    masterPrefab = SecondaryPhantasm.SecondaryPhantasmMaster,
+                    masterPrefab = SecondaryPhantasmMaster,
                     position = base.characterBody.transform.position + Vector3.up * 5,
                     rotation = base.characterBody.transform.rotation,
                     summonerBodyObject = base.characterBody.gameObject,
@@ -67,16 +68,15 @@ namespace HolomancerMod.SkillStates
                     teamIndexOverride = new TeamIndex?(TeamIndex.Player)
                 }.Perform();
                 characterMaster.GetBody().RecalculateStats();
-                characterMaster.GetBody().moveSpeed = base.characterBody.moveSpeed;
+                characterMaster.GetBody().moveSpeed = base.characterBody.moveSpeed + 2f;
                 characterMaster.GetBody().regen = base.characterBody.regen;
                 characterMaster.GetBody().crit = base.characterBody.crit;
-                characterMaster.GetBody().acceleration = base.characterBody.acceleration;
+                characterMaster.GetBody().acceleration = base.characterBody.acceleration + 20f;
                 characterMaster.GetBody().damage = base.characterBody.damage;
                 characterMaster.GetBody().attackSpeed = base.characterBody.attackSpeed;
                 characterMaster.inventory.CopyItemsFrom(base.characterBody.inventory);
                 characterMaster.inventory.ResetItem(RoR2Content.Items.ExtraLife.itemIndex);
                 characterMaster.gameObject.GetComponent<BaseAI>().leader.gameObject = base.characterBody.gameObject;
-                characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().primary.SetSkillOverride(4, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("PhantasmGround")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
                 characterMaster.GetBody().isPlayerControlled = false;
                 SecondaryPhantasm.SummonablesList2.Add(characterMaster);
                 this.Fire();
@@ -116,15 +116,15 @@ namespace HolomancerMod.SkillStates
                         {
                             cm.GetBody().baseMoveSpeed = 20f;
                             cm.GetBody().baseAcceleration = 100f;
-                            EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/ArchWispPreDeathEffect"), new EffectData
+                            EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/ImpBlinkEffect"), new EffectData
                             {
                                 origin = cm.GetBody().transform.position,
-                                scale = 1f
+                                scale = 0.5f
                             }, true);
-                            EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/ArchWispPreDeathEffect"), new EffectData
+                            EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/ImpBlinkEffect"), new EffectData
                             {
                                 origin = base.characterBody.transform.position + base.GetAimRay().direction * 4 + Vector3.up * 5,
-                                scale = 1f
+                                scale = 0.5f
                             }, true);
                             cm.GetBody().rigidbody.position = (base.characterBody.transform.position + base.GetAimRay().direction * 4 + Vector3.up * 5);
                             

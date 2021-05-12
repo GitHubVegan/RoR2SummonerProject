@@ -210,7 +210,7 @@ namespace HolomancerMod.SkillStates
             shatterDriver.activationRequiresAimConfirmation = false;
             shatterDriver.activationRequiresTargetLoS = false;
             shatterDriver.selectionRequiresTargetLoS = false;
-            shatterDriver.maxDistance = 80f;
+            shatterDriver.maxDistance = 100f;
             shatterDriver.minDistance = 5f;
             shatterDriver.shouldSprint = false;
             shatterDriver.requireSkillReady = false;

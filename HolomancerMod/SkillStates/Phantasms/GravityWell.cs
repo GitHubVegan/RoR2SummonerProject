@@ -13,7 +13,7 @@ namespace HolomancerMod.SkillStates
     public class GravityWell : BaseSkillState
     {
         public static float baseDuration = 0.1f;
-        public static float novaRadius = 18f;
+        public static float novaRadius = 20f;
         public static float novaForce = 0f;
         private List<HurtBox> targetList;
         private bool hasExploded;

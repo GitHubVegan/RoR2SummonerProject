@@ -15,7 +15,7 @@ namespace HolomancerMod.SkillStates
 	internal class SwarmContact : FlyState
 	{
 
-		public static float damageCoefficient = 0.9f;
+		public static float damageCoefficient = 0.7f;
 		public static float procCoefficient = 0.3f;
 		private float stopwatch;
 
@@ -61,7 +61,7 @@ namespace HolomancerMod.SkillStates
 						
 							
 							DamageInfo damageInfo = new DamageInfo();
-							damageInfo.damage = SwarmContact.damageCoefficient * this.damageStat * this.attackSpeedStat;
+							damageInfo.damage = SwarmContact.damageCoefficient * base.damageStat * base.attackSpeedStat;
 							damageInfo.attacker = base.gameObject;
 							damageInfo.procCoefficient = SwarmContact.procCoefficient;
 							damageInfo.position = H.transform.position;

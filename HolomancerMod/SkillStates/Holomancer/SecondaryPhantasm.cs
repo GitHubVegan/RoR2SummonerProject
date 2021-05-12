@@ -68,11 +68,13 @@ namespace HolomancerMod.SkillStates
                 }.Perform();
                 characterMaster.GetBody().RecalculateStats();
                 characterMaster.GetBody().baseArmor = 30f;
+                characterMaster.GetBody().baseMoveSpeed = 15f;
                 characterMaster.GetBody().baseMaxHealth = base.characterBody.baseMaxHealth * 1.3f;
-                characterMaster.GetBody().baseAcceleration = base.characterBody.baseAcceleration + 20f;
+                characterMaster.GetBody().baseAcceleration = 120f;
                 characterMaster.GetBody().baseDamage = base.characterBody.baseDamage;
                 characterMaster.GetBody().levelDamage = base.characterBody.levelDamage;
                 characterMaster.GetBody().baseRegen = 3f;
+                characterMaster.GetBody().baseAttackSpeed = 1f;
                 characterMaster.inventory.CopyItemsFrom(base.characterBody.inventory);
                 characterMaster.inventory.ResetItem(RoR2Content.Items.ExtraLife.itemIndex);
                 characterMaster.gameObject.GetComponent<BaseAI>().leader.gameObject = base.characterBody.gameObject;
@@ -204,7 +206,7 @@ namespace HolomancerMod.SkillStates
             shatterDriver.activationRequiresAimConfirmation = false;
             shatterDriver.activationRequiresTargetLoS = false;
             shatterDriver.selectionRequiresTargetLoS = false;
-            shatterDriver.maxDistance = 70f;
+            shatterDriver.maxDistance = 100f;
             shatterDriver.minDistance = 2f;
             shatterDriver.shouldSprint = true;
             shatterDriver.requireSkillReady = false;

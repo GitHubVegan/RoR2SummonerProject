@@ -27,8 +27,8 @@ namespace HolomancerMod.SkillStates
         private float duration;
         private int bulletCount;
         private int totalBulletsFired;
-        public static int baseBulletCount = 14;
-        public static float baseDurationBetweenShots = 0.07f;
+        public static int baseBulletCount = 10;
+        public static float baseDurationBetweenShots = 0.1f;
         private float durationBetweenShots;
         public static float totalDuration = 1f;
         public float stopwatchBetweenShots;

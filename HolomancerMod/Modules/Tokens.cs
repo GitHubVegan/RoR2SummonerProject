@@ -58,7 +58,7 @@ namespace HolomancerMod.Modules
 
             #region Secondary
             LanguageAPI.Add(prefix + "SECONDARY_HOLO_NAME", "Eel");
-            LanguageAPI.Add(prefix + "SECONDARY_HOLO_DESCRIPTION", $"Summon up to one holographic eel. It deals <style=cIsDamage>360% damage per second</style> to all enemies near it. Reactivate to <color=#ff8400>Retarget</color>");
+            LanguageAPI.Add(prefix + "SECONDARY_HOLO_DESCRIPTION", $"Summon up to one holographic eel. It deals <style=cIsDamage>280% damage per second</style> to all enemies near it. Reactivate to <color=#ff8400>Retarget</color>");
             LanguageAPI.Add(prefix + "SECONDARY_TARGET_NAME", "Command Eel");
             LanguageAPI.Add(prefix + "SECONDARY_TARGET_DESCRIPTION", $"Command your active eel to attack a <style=cIsUtility>specific enemy under your crosshairs.</style>");
             LanguageAPI.Add(prefix + "SECONDARY_SHATTER_NAME", "Shatter: Shock");

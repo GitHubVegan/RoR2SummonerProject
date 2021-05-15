@@ -27,8 +27,8 @@ namespace HolomancerMod.SkillStates
         private float duration;
         private int bulletCount;
         private int totalBulletsFired;
-        public static int baseBulletCount = 10;
-        public static float baseDurationBetweenShots = 0.1f;
+        public static int baseBulletCount = 12;
+        public static float baseDurationBetweenShots = 0.08f;
         private float durationBetweenShots;
         public static float totalDuration = 1f;
         public float stopwatchBetweenShots;
@@ -68,8 +68,9 @@ namespace HolomancerMod.SkillStates
                         procCoefficient = Flurry.procCoefficient
 
                     }; hurtBox.healthComponent.TakeDamage(this.info);
+                    GlobalEventManager.instance.OnHitEnemy(info, hurtBox.healthComponent.gameObject);
+                    GlobalEventManager.instance.OnHitAll(info, hurtBox.healthComponent.gameObject);
                     this.totalBulletsFired++;
-                    bool flag = true;
 
                 }
             }
@@ -78,14 +79,14 @@ namespace HolomancerMod.SkillStates
         public override void OnExit()
         {
             base.OnExit();
-            if (!suicide)
+            /*if (!suicide)
             {
                 suicide = true;
             }
             if (suicide)
-            {
+            {*/
                 if (base.healthComponent) base.healthComponent.Suicide(null, null, DamageType.Generic);
-            }
+            //}
         }
 
         private HurtBox SearchForTarget()

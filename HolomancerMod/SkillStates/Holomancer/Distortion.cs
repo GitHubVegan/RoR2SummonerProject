@@ -56,7 +56,7 @@ namespace HolomancerMod.SkillStates
 					}
 
 				}
-				UtilityPhantasm.SummonablesList3.Clear();
+				//UtilityPhantasm.SummonablesList3.Clear();
 
 
 				Debug.Log(UtilityPhantasm.SummonablesList3);

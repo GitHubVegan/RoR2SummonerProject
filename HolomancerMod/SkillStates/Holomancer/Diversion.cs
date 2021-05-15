@@ -61,7 +61,7 @@ namespace HolomancerMod.SkillStates
 
 
 				}
-				SecondaryPhantasm.SummonablesList2.Clear();
+				//SecondaryPhantasm.SummonablesList2.Clear();
 
 
 				Debug.Log(SecondaryPhantasm.SummonablesList2);

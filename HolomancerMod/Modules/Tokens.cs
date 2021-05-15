@@ -32,7 +32,7 @@ namespace HolomancerMod.Modules
             #endregion
 
             #region Keywords
-            LanguageAPI.Add("KEYWORD_FLURRYSHATTER", $"<color=#db8aaf><style=cKeywordName>Shatter: Flurry</style></color><style=cSub> Your fencers rush at their current target, gaining <style=cIsUtility>massively increased attack speed and damage</style>. Damage increased for each fencer <style=cIsHealing>alive</style>. They <style=cIsDamage>die</style> after attacking twice.");
+            LanguageAPI.Add("KEYWORD_FLURRYSHATTER", $"<color=#db8aaf><style=cKeywordName>Shatter: Flurry</style></color><style=cSub> Your fencers rush at their current target, gaining <style=cIsUtility>massively increased attack speed and damage</style>. Damage increased for each fencer <style=cIsHealing>alive</style>. They <style=cIsDamage>die</style> after attacking.");
             LanguageAPI.Add("KEYWORD_SHOCKSHATTER", $"<color=#98509f><style=cKeywordName>Shatter: Shock</style><style=cSub>Your eel rushes at its current target, creating a shocking explosion that deals <style=cIsDamage>600% damage</style> and <style=cIsUtility>knocks flying enemies to the ground.</style> The eel <style=cIsDamage>dies</style> after it explodes.");
             LanguageAPI.Add("KEYWORD_SHIELDSHATTER", $"<color=#35bbe2><style=cKeywordName>Shatter: Shield</style></color><style=cSub> <style=cIsDamage>Destroy</style> your drone and gain a shield for <style=cIsUtility>2.5s. The shield reflects projectiles and grants invulnerability.</style>");
             LanguageAPI.Add("KEYWORD_WEAKEN", $"<color=#90a123><style=cKeywordName>Weak</style></color><style=cSub> Reduce the armor of enemies by <style=cIsDamage>30</style> and their attack and movement speed by <style=cIsDamage>40%</style>");
@@ -53,7 +53,7 @@ namespace HolomancerMod.Modules
             LanguageAPI.Add(prefix + "PRIMARY_TARGET_NAME", "Command Fencers");
             LanguageAPI.Add(prefix + "PRIMARY_TARGET_DESCRIPTION", $"Command your active fencers to attack a <style=cIsUtility>specific enemy under your crosshairs.</style>");
             LanguageAPI.Add(prefix + "PRIMARY_SHATTER_NAME", "Shatter: Flurry");
-            LanguageAPI.Add(prefix + "PRIMARY_SHATTER_DESCRIPTION", $"Your fencers rush at their current target, gaining <style=cIsUtility>massively increased attack speed and damage</style>. Damage increased for each fencer <style=cIsHealing>alive</style>. They <style=cIsDamage>die</style> after attacking twice.");
+            LanguageAPI.Add(prefix + "PRIMARY_SHATTER_DESCRIPTION", $"Your fencers rush at their current target, gaining <style=cIsUtility>massively increased attack speed and damage</style>. Damage increased for each fencer <style=cIsHealing>alive</style>. They <style=cIsDamage>die</style> after attacking.");
             #endregion
 
             #region Secondary

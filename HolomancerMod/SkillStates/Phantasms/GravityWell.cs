@@ -13,7 +13,7 @@ namespace HolomancerMod.SkillStates
     public class GravityWell : BaseSkillState
     {
         public static float baseDuration = 0.1f;
-        public static float novaRadius = 20f;
+        public static float novaRadius = 18f;
         public static float novaForce = 0f;
         private List<HurtBox> targetList;
         private bool hasExploded;
@@ -80,6 +80,8 @@ namespace HolomancerMod.SkillStates
                         damageType = DamageType.Shock5s
                     };
                     hurtBox.healthComponent.TakeDamage(damageInfo);
+                    GlobalEventManager.instance.OnHitEnemy(damageInfo, hurtBox.healthComponent.gameObject);
+                    GlobalEventManager.instance.OnHitAll(damageInfo, hurtBox.healthComponent.gameObject);
                     if (hurtBox.healthComponent.gameObject.GetComponent<CharacterBody>().GetComponent<Knockdown>() == null) hurtBox.healthComponent.gameObject.AddComponent<Knockdown>().body = hurtBox.healthComponent.gameObject.GetComponent<CharacterBody>();
                 }
             }

@@ -65,6 +65,8 @@ namespace HolomancerMod.SkillStates
                         procCoefficient = PhantasmRapier.procCoefficient
 
                     };hurtBox.healthComponent.TakeDamage(this.info);
+                    GlobalEventManager.instance.OnHitEnemy(info, hurtBox.healthComponent.gameObject);
+                    GlobalEventManager.instance.OnHitAll(info, hurtBox.healthComponent.gameObject);
                     this.totalBulletsFired++;
                 }
             }

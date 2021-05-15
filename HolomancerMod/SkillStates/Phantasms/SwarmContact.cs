@@ -36,44 +36,37 @@ namespace HolomancerMod.SkillStates
 		{
 			base.FixedUpdate();
 			stopwatch -= Time.fixedDeltaTime;
-			if(stopwatch <= 0f)
+			if (stopwatch <= 0f)
 			{
 				stopwatch = 0.25f;
-			List<HurtBox> hurtBoxes = new List<HurtBox>();
-			new RoR2.SphereSearch
-			{
-				radius = 6f,
-				mask = LayerIndex.entityPrecise.mask,
-				origin = base.characterBody.transform.position,
-			}.RefreshCandidates().FilterCandidatesByHurtBoxTeam(TeamMask.GetEnemyTeams(base.teamComponent.teamIndex)).FilterCandidatesByDistinctHurtBoxEntities().GetHurtBoxes(hurtBoxes);
-			hurtBoxes.RemoveAll(delegate (HurtBox P) { return P == null; });
-			if (hurtBoxes.Count > 0)
-			{
-				hurtBoxes.RemoveAll(delegate (HurtBox P) { return P == null; });
-				foreach (HurtBox H in hurtBoxes)
+				List<HurtBox> hurtBoxes = new List<HurtBox>();
+				new RoR2.SphereSearch
 				{
-					hurtBoxes.RemoveAll(delegate (HurtBox P) { return P == null; });
-					hurtBoxes.RemoveAll(delegate (HurtBox P) { return P = this.characterBody.mainHurtBox; });
-
-					if (H)
+					radius = 6f,
+					mask = LayerIndex.entityPrecise.mask,
+					origin = base.characterBody.transform.position,
+				}.RefreshCandidates().FilterCandidatesByHurtBoxTeam(TeamMask.GetEnemyTeams(base.teamComponent.teamIndex)).FilterCandidatesByDistinctHurtBoxEntities().GetHurtBoxes(hurtBoxes);
+				hurtBoxes.RemoveAll(delegate (HurtBox P) { return P == null; });
+				hurtBoxes.RemoveAll(delegate (HurtBox P) { return !P.healthComponent.alive; });
+				if (hurtBoxes.Count > 0)
+				{
+					foreach (HurtBox H in hurtBoxes)
 					{
-						
-						
-							
-							DamageInfo damageInfo = new DamageInfo();
-							damageInfo.damage = SwarmContact.damageCoefficient * base.damageStat * base.attackSpeedStat;
-							damageInfo.attacker = base.gameObject;
-							damageInfo.procCoefficient = SwarmContact.procCoefficient;
-							damageInfo.position = H.transform.position;
-							damageInfo.crit = Util.CheckRoll(this.critStat, base.characterBody.master);
-							H.healthComponent.TakeDamage(damageInfo);
-						
+						DamageInfo damageInfo = new DamageInfo();
+						damageInfo.damage = SwarmContact.damageCoefficient * base.damageStat * base.attackSpeedStat;
+						damageInfo.attacker = base.gameObject;
+						damageInfo.procCoefficient = SwarmContact.procCoefficient;
+						damageInfo.position = H.transform.position;
+						damageInfo.crit = Util.CheckRoll(this.critStat, base.characterBody.master);
+						H.healthComponent.TakeDamage(damageInfo);
+						GlobalEventManager.instance.OnHitEnemy(damageInfo, H.healthComponent.gameObject);
+						GlobalEventManager.instance.OnHitAll(damageInfo, H.healthComponent.gameObject);
+
+
+
+
 					}
-					
-
-
 				}
-			}
 			}
 		}
 		

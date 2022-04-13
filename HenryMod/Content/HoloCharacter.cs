@@ -20,18 +20,16 @@ namespace HolomancerMod.Modules.Survivors
 
         public override string bodyName => "Holomancer";
 
-        public const string HENRY_PREFIX = "Holo";
-
-        public override string survivorTokenPrefix => HENRY_PREFIX;
+        public override string survivorTokenPrefix => "Holomancer";
 
         public override BodyInfo bodyInfo { get; set; } = new BodyInfo
         {
             armor = 0f,
             armorGrowth = 0f,
             bodyName = "HolomancerBody",
-            bodyNameToken = HolomancerPlugin.developerPrefix + "_HOLOMANCER_BODY_NAME",
+            bodyNameToken = "Holomancer",
             bodyColor = Color.grey,
-            characterPortrait = Modules.Assets.mainAssetBundle.LoadAsset<Texture>("Holomancer"),
+            characterPortrait = Modules.Assets.LoadCharacterIconGeneric("Holomancer"),
             crosshair = Modules.Assets.LoadCrosshair("Standard"),
             damage = 13f,
             healthGrowth = 25f,

@@ -60,8 +60,8 @@ namespace HolomancerMod.Modules.Survivors
             survivorDef.displayPrefab = displayPrefab;
             survivorDef.primaryColor = charColor;
 
-            survivorDef.displayNameToken = tokenPrefix + "NAME";
-            survivorDef.descriptionToken = tokenPrefix + "DESCRIPTION";
+            survivorDef.displayNameToken = tokenPrefix + "";
+            survivorDef.descriptionToken = tokenPrefix + "";
             survivorDef.outroFlavorToken = tokenPrefix + "OUTRO_FLAVOR";
             survivorDef.mainEndingEscapeFailureFlavorToken = tokenPrefix + "OUTRO_FAILURE";
 

@@ -48,32 +48,45 @@ namespace HolomancerMod.SkillStates
             {
                 this.point = base.inputBank.GetAimRay().GetPoint(100f);
             }
-           
+            if (SecondaryPhantasm.SummonablesList2.Count > 0)
+            {
+                SecondaryPhantasm.SummonablesList2.RemoveAll(delegate (CharacterMaster C) { return C == null; });
+
+                SecondaryPhantasm.SummonablesList2.RemoveAll(delegate (CharacterMaster C)
+                {
+                    return !(C.GetBody().healthComponent.alive);
+                });
+            }
+            if (SecondaryPhantasm.SummonablesList2.Count > 0)
+            {
                 HurtBox target = this.SearchForTarget();
                 if (target && target.healthComponent)
                 {
-
-                    string bodyName = target.healthComponent.gameObject.GetComponent<CharacterBody>().master.bodyPrefab.name;
-                    string myBody = base.characterBody.master.bodyPrefab.name;
-                    Vector3 myPos = base.gameObject.transform.position;
-                    Vector3 tarPos = target.healthComponent.gameObject.transform.position;
-                    base.characterBody.characterMotor.Motor.SetPosition(tarPos);
-                    base.characterBody.master.TransformBody(bodyName);
-                    if (target.healthComponent.body.characterMotor)
+                    foreach (CharacterMaster cm in SecondaryPhantasm.SummonablesList2)
                     {
-                        target.healthComponent.body.characterMotor.Motor.SetPosition(myPos);
-                    }
-                    if (target.healthComponent.body.rigidbody)
-                    {
-                        target.healthComponent.body.rigidbody.position = myPos;
-                    }
-                    target.healthComponent.body.master.TransformBody(myBody);
-                    
+                        cm.gameObject.GetComponent<BaseAI>().currentEnemy.gameObject = target.healthComponent.gameObject;
+                        if (Vector3.Distance(cm.GetBody().transform.position, target.healthComponent.body.transform.position) > (Vector3.Distance(base.characterBody.transform.position, target.healthComponent.body.transform.position)))
+                        {
+                            EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/HuntressBlinkEffect"), new EffectData
+                            {
+                                origin = cm.GetBody().transform.position,
+                                scale = 0.5f
+                            }, true);
+                            EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/HuntressBlinkEffect"), new EffectData
+                            {
+                                origin = base.characterBody.transform.position + base.GetAimRay().direction * 4 + Vector3.up * 5,
+                                scale = 0.5f
+                            }, true);
+                            cm.GetBody().rigidbody.position = (base.characterBody.transform.position + base.GetAimRay().direction * 4 + Vector3.up * 5);
 
 
+
+
+                        }
+                    }
                 }
 
-            
+            }
         }
 
         private HurtBox SearchForTarget()
@@ -93,7 +106,7 @@ namespace HolomancerMod.SkillStates
         public override void OnExit()
         {
             base.OnExit();
-        }   
+        }
 
         public override void FixedUpdate()
         {

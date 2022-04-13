@@ -12,9 +12,7 @@ namespace HolomancerMod.Modules.Survivors
     internal class PhantasmSword : SurvivorBase
     {
         public override string bodyName => "PhantasmSword";
-
-        public const string HENRY_PREFIX = "HoloA";
-         public override string survivorTokenPrefix => "HoloA";
+         public override string survivorTokenPrefix => "DONTPICKPLACEHOLDER";
 
         public override BodyInfo bodyInfo { get; set; } = new BodyInfo
         {
@@ -23,7 +21,7 @@ namespace HolomancerMod.Modules.Survivors
             bodyName = "PhantasmSwordBody",
             bodyNameToken = "Fencer",
             bodyColor = Color.grey,
-            characterPortrait = Modules.Assets.mainAssetBundle.LoadAsset<Texture>("PhantasmSword"),
+            characterPortrait = Modules.Assets.LoadCharacterIconGeneric("PhantasmSword"),
             crosshair = Modules.Assets.LoadCrosshair("Standard"),
             damage = 12f,
             healthGrowth = 30f,
@@ -52,7 +50,7 @@ namespace HolomancerMod.Modules.Survivors
                     material = phantasmMat
                 }};
 
-        public override UnlockableDef characterUnlockableDef => null;
+        public override UnlockableDef characterUnlockableDef => new UnlockableDef();
 
         public override Type characterMainState => typeof(EntityStates.GenericCharacterMain);
 

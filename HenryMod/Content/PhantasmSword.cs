@@ -9,15 +9,16 @@ using EntityStates;
 
 namespace HolomancerMod.Modules.Survivors
 {
-    internal class PhantasmSword : SurvivorBase
+    internal class PhantasmSword : CharacterBase
     {
         public override string bodyName => "PhantasmSword";
-         public override string survivorTokenPrefix => "DONTPICKPLACEHOLDER";
+         //public override string survivorTokenPrefix => "DONTPICKPLACEHOLDER";
 
         public override BodyInfo bodyInfo { get; set; } = new BodyInfo
         {
             armor = 50f,
             armorGrowth = 0f,
+            bodyNameToClone = "Commando",
             bodyName = "PhantasmSwordBody",
             bodyNameToken = "Fencer",
             bodyColor = Color.grey,
@@ -50,11 +51,11 @@ namespace HolomancerMod.Modules.Survivors
                     material = phantasmMat
                 }};
 
-        public override UnlockableDef characterUnlockableDef => new UnlockableDef();
+        //public override UnlockableDef characterUnlockableDef => new UnlockableDef();
 
         public override Type characterMainState => typeof(EntityStates.GenericCharacterMain);
 
-        public override ConfigEntry<bool> characterEnabledConfig => null;
+        //public override ConfigEntry<bool> characterEnabledConfig => null;
 
         // item display stuffs
         public override ItemDisplaysBase itemDisplays => null;
@@ -67,10 +68,10 @@ namespace HolomancerMod.Modules.Survivors
             this.bodyPrefab.GetComponent<CharacterDeathBehavior>().deathState = new SerializableEntityStateType(typeof(EntityStates.BrotherMonster.InstantDeathState));
         }
 
-        public override void InitializeUnlockables()
-        {
+        //public override void InitializeUnlockables()
+        //{
             //masterySkinUnlockableDef = Modules.Unlockables.AddUnlockable<Achievements.MasteryAchievement>(true);
-        }
+        //}
 
 
 

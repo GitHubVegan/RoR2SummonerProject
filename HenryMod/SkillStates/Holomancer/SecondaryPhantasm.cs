@@ -65,6 +65,7 @@ namespace HolomancerMod.SkillStates
                     summonerBodyObject = base.characterBody.gameObject,
                     ignoreTeamMemberLimit = true,
                     teamIndexOverride = new TeamIndex?(TeamIndex.Player)
+                    
                 }.Perform();
                 characterMaster.GetBody().RecalculateStats();
                 characterMaster.GetBody().baseArmor = 30f;
@@ -160,9 +161,8 @@ namespace HolomancerMod.SkillStates
 
         private static GameObject CreateBody()
         {
-            GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/WispSoulBody"), "SecondaryPhantasmBody", true);
+            GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/MagmaWormBody"), "SecondaryPhantasmBody", true);
             newBody.GetComponentInChildren<EntityStateMachine>().mainStateType = new SerializableEntityStateType(typeof(SwarmContact));
-            Modules.Content.AddCharacterBodyPrefab(newBody);
             return newBody;
         }
 

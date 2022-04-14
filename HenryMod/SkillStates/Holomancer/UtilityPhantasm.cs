@@ -76,7 +76,7 @@ namespace HolomancerMod.SkillStates
                 characterMaster.GetBody().attackSpeed = base.characterBody.attackSpeed;
                 characterMaster.inventory.CopyItemsFrom(base.characterBody.inventory);
                 characterMaster.inventory.ResetItem(RoR2Content.Items.ExtraLife.itemIndex);
-                characterMaster.inventory.GiveItem(RoR2Content.Items.Ghost.itemIndex);
+                //characterMaster.inventory.GiveItem(RoR2Content.Items.Ghost.itemIndex);
                 characterMaster.gameObject.GetComponent<BaseAI>().leader.gameObject = base.characterBody.gameObject;
                 characterMaster.GetBody().isPlayerControlled = false;
                 SummonablesList3.Add(characterMaster);

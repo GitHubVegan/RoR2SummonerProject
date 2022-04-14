@@ -46,6 +46,7 @@ namespace HolomancerMod.SkillStates
 		public override void FixedUpdate()
 		{
 			base.FixedUpdate();
+			this.characterBody.GetComponentInChildren<CharacterModel>().baseRendererInfos = SkinnedRendererDisplaySetup(this.gameObject);
 			stopwatch -= Time.fixedDeltaTime;
 			List<ProjectileController> projectiles2 = new List<ProjectileController>();
 			new RoR2.SphereSearch
@@ -109,7 +110,26 @@ namespace HolomancerMod.SkillStates
                 }
 			}
 		}
-		
+
+		public static CharacterModel.RendererInfo[] SkinnedRendererDisplaySetup(GameObject obj)
+		{
+			SkinnedMeshRenderer[] meshes = obj.GetComponentsInChildren<SkinnedMeshRenderer>();
+			CharacterModel.RendererInfo[] renderInfos = new CharacterModel.RendererInfo[meshes.Length];
+
+			for (int i = 0; i < meshes.Length; i++)
+			{
+				renderInfos[i] = new CharacterModel.RendererInfo
+				{
+					defaultMaterial = Modules.Assets.mainAssetBundle.LoadAsset<Material>("PhantasmHologram"),
+					renderer = meshes[i],
+					defaultShadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On,
+					ignoreOverlays = false //We allow the mesh to be affected by overlays like OnFire or PredatoryInstinctsCritOverlay.
+				};
+			}
+
+			return renderInfos;
+		}
+
 
 		public override InterruptPriority GetMinimumInterruptPriority()
 		{

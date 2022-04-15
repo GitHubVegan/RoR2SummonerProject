@@ -34,26 +34,16 @@ namespace HolomancerMod.SkillStates
 		public override void FixedUpdate()
 		{
 			base.FixedUpdate();
-			this.characterBody.GetComponentInChildren<CharacterModel>().baseRendererInfos = SkinnedRendererDisplaySetup(this.gameObject);
-		}
-
-		public static CharacterModel.RendererInfo[] SkinnedRendererDisplaySetup(GameObject obj)
-		{
-			SkinnedMeshRenderer[] meshes = obj.GetComponentsInChildren<SkinnedMeshRenderer>();
-			CharacterModel.RendererInfo[] renderInfos = new CharacterModel.RendererInfo[meshes.Length];
-
-			for (int i = 0; i < meshes.Length; i++)
-			{
-				renderInfos[i] = new CharacterModel.RendererInfo
-				{
-					defaultMaterial = Modules.Assets.mainAssetBundle.LoadAsset<Material>("PhantasmHologram"),
-					renderer = meshes[i],
-					defaultShadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On,
-					ignoreOverlays = false //We allow the mesh to be affected by overlays like OnFire or PredatoryInstinctsCritOverlay.
-				};
+			if(this.GetComponent<BaseAI>().currentEnemy.characterBody && this.characterBody.characterMotor)
+            {
+				this.characterBody.characterMotor.Motor.SetPositionAndRotation(this.gameObject.GetComponent<BaseAI>().currentEnemy.gameObject.transform.position, this.characterBody.transform.rotation);
+			}
+			if (this.GetComponent<BaseAI>().currentEnemy.characterBody && this.characterBody.rigidbody && !this.characterBody.characterMotor)
+            {
+				this.characterBody.rigidbody.position = (this.gameObject.GetComponent<BaseAI>().currentEnemy.gameObject.transform.position);
 			}
 
-			return renderInfos;
+
 		}
 
 

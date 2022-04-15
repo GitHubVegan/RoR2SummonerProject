@@ -168,10 +168,10 @@ namespace HolomancerMod.SkillStates
                 renderinfos[i].defaultMaterial = Modules.Assets.mainAssetBundle.LoadAsset<Material>("PhantasmHologram");
             }
             //SkinDef defaultSkin = Modules.Skins.CreateSkinDef("name",
-               // Assets.mainAssetBundle.LoadAsset<Sprite>("texMainSkin"),
-              //  renderinfos,
-              //  mainRenderer,
-              //  newBody);
+            // Assets.mainAssetBundle.LoadAsset<Sprite>("texMainSkin"),
+            //  renderinfos,
+            //  mainRenderer,
+            //  newBody);
             /*for (int i = 0; i < newBody.GetComponentInChildren<CharacterModel>().baseRendererInfos.Length; i++)
             {
                 newBody.GetComponentInChildren<CharacterModel>().baseRendererInfos[i].defaultMaterial = Modules.Assets.mainAssetBundle.LoadAsset<Material>("PhantasmHologram");
@@ -221,6 +221,7 @@ namespace HolomancerMod.SkillStates
                 newBody.GetComponentInChildren<CharacterModel>().UpdateRendererMaterials(renderer, Modules.Assets.mainAssetBundle.LoadAsset<Material>("PhantasmHologram"), rendererInfo.ignoreOverlays);
             }
             newBody.GetComponent<ModelLocator>()*/
+            Modules.Content.AddCharacterBodyPrefab(newBody);
             return newBody;
             
         }

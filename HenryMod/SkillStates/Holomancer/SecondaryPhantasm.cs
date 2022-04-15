@@ -69,9 +69,9 @@ namespace HolomancerMod.SkillStates
                 }.Perform();
                 characterMaster.GetBody().RecalculateStats();
                 characterMaster.GetBody().baseArmor = 30f;
-                characterMaster.GetBody().baseMoveSpeed = 15f;
+                characterMaster.GetBody().baseMoveSpeed = 5f;
                 characterMaster.GetBody().baseMaxHealth = base.characterBody.baseMaxHealth * 1.3f;
-                characterMaster.GetBody().baseAcceleration = 120f;
+                characterMaster.GetBody().baseAcceleration = 180f;
                 characterMaster.GetBody().baseDamage = base.characterBody.baseDamage;
                 characterMaster.GetBody().levelDamage = base.characterBody.levelDamage;
                 characterMaster.GetBody().baseRegen = 3f;
@@ -157,12 +157,64 @@ namespace HolomancerMod.SkillStates
         public override void OnExit()
         {
             base.OnExit();
+            foreach(CharacterMaster cm in SummonablesList2)
+            {
+                cm.GetBody().transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+                cm.GetBody().GetComponent<CharacterMotor>().isFlying = true;
+                cm.GetBody().GetComponent<CharacterMotor>().useGravity = false;
+                cm.GetBody().GetComponent<CharacterMotor>().airControl = 1f;
+                cm.GetBody().GetComponent<CharacterMotor>().mass = 0f;
+                cm.GetBody().GetComponent<WormBodyPositions2>().followDelay = 0.1f;
+                cm.GetBody().GetComponent<WormBodyPositions2>().burrowEffectPrefab = Resources.Load<GameObject>("prefabs/effects/HuntressBlinkEffect");
+                cm.GetBody().GetComponent<WormBodyPositions2>().shouldFireBlastAttackOnImpact = false;
+                cm.GetBody().GetComponent<WormBodyPositions2>().shouldFireMeatballsOnImpact = false;
+                cm.GetBody().GetComponent<WormBodyPositions2>().enableSurfaceTests = true;
+                cm.GetBody().GetComponent<WormBodyPositions2>().undergroundTestYOffset = 2f;
+                cm.GetBody().GetComponent<WormBodyPositionsDriver>().verticalTurnSquashFactor = 200f;
+                cm.GetBody().GetComponent<WormBodyPositionsDriver>().ySpringConstant = 20f;
+                cm.GetBody().GetComponent<WormBodyPositionsDriver>().yDamperConstant = 0f;
+                cm.GetBody().GetComponent<WormBodyPositionsDriver>().turnRateCoefficientAboveGround = 1f;
+                cm.GetBody().GetComponent<WormBodyPositionsDriver>().maxTurnSpeed = 360f;
+                cm.GetBody().GetComponent<WormBodyPositionsDriver>().maxBreachSpeed = 40f;
+                cm.GetBody().GetComponent<WormBodyPositionsDriver>().yShoveVelocityThreshold = 0f;
+                cm.GetBody().GetComponent<WormBodyPositionsDriver>().yShovePositionThreshold = 0f;
+                cm.GetBody().GetComponent<WormBodyPositionsDriver>().yShoveForce = 0f;
+                cm.GetBody().GetComponent<ContactDamage>().damagePerSecondCoefficient = 20f;
+                cm.gameObject.GetComponentInChildren<EntityStateMachine>().mainStateType = new SerializableEntityStateType(typeof(MaterialMain));
+
+                for (int i = 0; i < cm.GetBody().GetComponent<WormBodyPositions2>().segmentLengths.Length; i++)
+                {
+                    cm.GetBody().GetComponent<WormBodyPositions2>().segmentLengths[i] = 1f;
+                }
+                
+
+            }
+            foreach (CharacterMaster cm in SummonablesList2)
+            {
+                CharacterModel.RendererInfo[] renderinfos2 = cm.GetBody().modelLocator.modelTransform.GetComponent<CharacterModel>().baseRendererInfos;
+                for (int i = 0; i < renderinfos2.Length; i++)
+                {
+                    if(renderinfos2[i].renderer.name == "WormMesh")
+                    {
+                        renderinfos2[i].defaultMaterial = Modules.Assets.mainAssetBundle.LoadAsset<Material>("PhantasmHologram");
+                    }
+                    else
+                    {
+                        renderinfos2[i].defaultMaterial.SetColor("_TintColor", Color.red);
+                    }
+                    
+                }
+            }
         }
 
         private static GameObject CreateBody()
         {
-            GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/MagmaWormBody"), "SecondaryPhantasmBody", true);
-            newBody.GetComponentInChildren<EntityStateMachine>().mainStateType = new SerializableEntityStateType(typeof(SwarmContact));
+            GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/ElectricWormBody"), "SecondaryPhantasmBody", true);
+            //wormy.bones = Resources.Load<GameObject>("prefabs/characterbodies/WispBody").GetComponent<WormBodyPositions2>().bones;
+            //wormy.segmentLengths = worm.segmentLengths;
+            //wormy.followDelay = worm.followDelay;
+            newBody.GetComponentInChildren<EntityStateMachine>().mainStateType = new SerializableEntityStateType(typeof(MaterialMain));
+            Modules.Content.AddCharacterBodyPrefab(newBody);
             return newBody;
         }
 
@@ -182,11 +234,11 @@ namespace HolomancerMod.SkillStates
             attackDriver.customName = "Attack";
             attackDriver.movementType = AISkillDriver.MovementType.StrafeMovetarget;
             attackDriver.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
-            attackDriver.activationRequiresAimConfirmation = true;
+            attackDriver.activationRequiresAimConfirmation = false;
             attackDriver.activationRequiresTargetLoS = false;
             attackDriver.selectionRequiresTargetLoS = false;
-            attackDriver.maxDistance = 2f;
-            attackDriver.minDistance = 0f;
+            attackDriver.maxDistance = 1f;
+            attackDriver.minDistance = -1f;
             attackDriver.requireSkillReady = true;
             attackDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
             attackDriver.ignoreNodeGraph = true;
@@ -207,7 +259,7 @@ namespace HolomancerMod.SkillStates
             shatterDriver.activationRequiresTargetLoS = false;
             shatterDriver.selectionRequiresTargetLoS = false;
             shatterDriver.maxDistance = 100f;
-            shatterDriver.minDistance = 2f;
+            shatterDriver.minDistance = 1f;
             shatterDriver.shouldSprint = true;
             shatterDriver.requireSkillReady = false;
             shatterDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;

@@ -78,10 +78,6 @@ namespace HolomancerMod.SkillStates
                                 scale = 0.5f
                             }, true);
                             cm.GetBody().rigidbody.position = (base.characterBody.transform.position + base.GetAimRay().direction * 4 + Vector3.up * 5);
-
-
-
-
                         }
                     }
                 }

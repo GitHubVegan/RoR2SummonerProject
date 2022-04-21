@@ -69,9 +69,9 @@ namespace HolomancerMod.SkillStates
                 }.Perform();
                 characterMaster.GetBody().RecalculateStats();
                 characterMaster.GetBody().baseArmor = 30f;
-                characterMaster.GetBody().baseMoveSpeed = 5f;
-                characterMaster.GetBody().baseMaxHealth = base.characterBody.baseMaxHealth * 1.3f;
-                characterMaster.GetBody().baseAcceleration = 180f;
+                characterMaster.GetBody().baseMoveSpeed = 7f;
+                //characterMaster.GetBody().baseMaxHealth = base.characterBody.baseMaxHealth * 1.3f;
+                characterMaster.GetBody().baseAcceleration = 240f;
                 characterMaster.GetBody().baseDamage = base.characterBody.baseDamage;
                 characterMaster.GetBody().levelDamage = base.characterBody.levelDamage;
                 characterMaster.GetBody().baseRegen = 3f;
@@ -79,7 +79,7 @@ namespace HolomancerMod.SkillStates
                 characterMaster.inventory.CopyItemsFrom(base.characterBody.inventory);
                 characterMaster.inventory.ResetItem(RoR2Content.Items.ExtraLife.itemIndex);
                 characterMaster.gameObject.GetComponent<BaseAI>().leader.gameObject = base.characterBody.gameObject;
-                characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().primary.SetSkillOverride(4, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("PhantasmGround")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
+                //characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().primary.SetSkillOverride(4, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("PhantasmGround")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
                 characterMaster.GetBody().isPlayerControlled = false;
                 SecondaryPhantasm.SummonablesList2.Add(characterMaster);
                 this.Fire();
@@ -159,18 +159,10 @@ namespace HolomancerMod.SkillStates
             base.OnExit();
             foreach(CharacterMaster cm in SummonablesList2)
             {
-                cm.GetBody().transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-                cm.GetBody().GetComponent<CharacterMotor>().isFlying = true;
-                cm.GetBody().GetComponent<CharacterMotor>().useGravity = false;
-                cm.GetBody().GetComponent<CharacterMotor>().airControl = 1f;
-                cm.GetBody().GetComponent<CharacterMotor>().mass = 0f;
-                cm.GetBody().GetComponent<WormBodyPositions2>().followDelay = 0.1f;
-                cm.GetBody().GetComponent<WormBodyPositions2>().burrowEffectPrefab = Resources.Load<GameObject>("prefabs/effects/HuntressBlinkEffect");
-                cm.GetBody().GetComponent<WormBodyPositions2>().shouldFireBlastAttackOnImpact = false;
-                cm.GetBody().GetComponent<WormBodyPositions2>().shouldFireMeatballsOnImpact = false;
+                cm.GetBody().transform.localScale = new Vector3(2f, 2f, 2f);
+                /*
                 cm.GetBody().GetComponent<WormBodyPositions2>().enableSurfaceTests = true;
-                cm.GetBody().GetComponent<WormBodyPositions2>().undergroundTestYOffset = 2f;
-                cm.GetBody().GetComponent<WormBodyPositionsDriver>().verticalTurnSquashFactor = 200f;
+
                 cm.GetBody().GetComponent<WormBodyPositionsDriver>().ySpringConstant = 20f;
                 cm.GetBody().GetComponent<WormBodyPositionsDriver>().yDamperConstant = 0f;
                 cm.GetBody().GetComponent<WormBodyPositionsDriver>().turnRateCoefficientAboveGround = 1f;
@@ -179,14 +171,7 @@ namespace HolomancerMod.SkillStates
                 cm.GetBody().GetComponent<WormBodyPositionsDriver>().yShoveVelocityThreshold = 0f;
                 cm.GetBody().GetComponent<WormBodyPositionsDriver>().yShovePositionThreshold = 0f;
                 cm.GetBody().GetComponent<WormBodyPositionsDriver>().yShoveForce = 0f;
-                cm.GetBody().GetComponent<ContactDamage>().damagePerSecondCoefficient = 20f;
-                cm.gameObject.GetComponentInChildren<EntityStateMachine>().mainStateType = new SerializableEntityStateType(typeof(MaterialMain));
-
-                for (int i = 0; i < cm.GetBody().GetComponent<WormBodyPositions2>().segmentLengths.Length; i++)
-                {
-                    cm.GetBody().GetComponent<WormBodyPositions2>().segmentLengths[i] = 1f;
-                }
-                
+                */
 
             }
             foreach (CharacterMaster cm in SummonablesList2)
@@ -194,14 +179,8 @@ namespace HolomancerMod.SkillStates
                 CharacterModel.RendererInfo[] renderinfos2 = cm.GetBody().modelLocator.modelTransform.GetComponent<CharacterModel>().baseRendererInfos;
                 for (int i = 0; i < renderinfos2.Length; i++)
                 {
-                    if(renderinfos2[i].renderer.name == "WormMesh")
-                    {
                         renderinfos2[i].defaultMaterial = Modules.Assets.mainAssetBundle.LoadAsset<Material>("PhantasmHologram");
-                    }
-                    else
-                    {
                         renderinfos2[i].defaultMaterial.SetColor("_TintColor", Color.red);
-                    }
                     
                 }
             }
@@ -209,7 +188,7 @@ namespace HolomancerMod.SkillStates
 
         private static GameObject CreateBody()
         {
-            GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/ElectricWormBody"), "SecondaryPhantasmBody", true);
+            GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/FlyingVerminBody"), "SecondaryPhantasmBody", true);
             //wormy.bones = Resources.Load<GameObject>("prefabs/characterbodies/WispBody").GetComponent<WormBodyPositions2>().bones;
             //wormy.segmentLengths = worm.segmentLengths;
             //wormy.followDelay = worm.followDelay;
@@ -220,7 +199,7 @@ namespace HolomancerMod.SkillStates
 
         private static GameObject CreateMaster()
         {
-            GameObject newMaster = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/charactermasters/WispMaster"), "SecondaryPhantasmMaster", true);
+            GameObject newMaster = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/charactermasters/FlyingVerminMaster"), "SecondaryPhantasmMaster", true);
             newMaster.GetComponent<CharacterMaster>().bodyPrefab = SecondaryPhantasmBody;
             foreach (AISkillDriver ai in newMaster.GetComponentsInChildren<AISkillDriver>())
             {
@@ -232,13 +211,13 @@ namespace HolomancerMod.SkillStates
 
             AISkillDriver attackDriver = newMaster.AddComponent<AISkillDriver>();
             attackDriver.customName = "Attack";
-            attackDriver.movementType = AISkillDriver.MovementType.StrafeMovetarget;
+            attackDriver.movementType = AISkillDriver.MovementType.Stop;
             attackDriver.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
             attackDriver.activationRequiresAimConfirmation = false;
             attackDriver.activationRequiresTargetLoS = false;
             attackDriver.selectionRequiresTargetLoS = false;
-            attackDriver.maxDistance = 1f;
-            attackDriver.minDistance = -1f;
+            attackDriver.maxDistance = 2f;
+            attackDriver.minDistance = 0f;
             attackDriver.requireSkillReady = true;
             attackDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
             attackDriver.ignoreNodeGraph = true;
@@ -249,7 +228,7 @@ namespace HolomancerMod.SkillStates
             attackDriver.maxTargetHealthFraction = Mathf.Infinity;
             attackDriver.minUserHealthFraction = Mathf.NegativeInfinity;
             attackDriver.maxUserHealthFraction = Mathf.Infinity;
-            attackDriver.skillSlot = SkillSlot.None;
+            attackDriver.skillSlot = SkillSlot.Primary;
 
             AISkillDriver shatterDriver = newMaster.AddComponent<AISkillDriver>();
             shatterDriver.customName = "Shatter";
@@ -271,7 +250,7 @@ namespace HolomancerMod.SkillStates
             shatterDriver.maxTargetHealthFraction = Mathf.Infinity;
             shatterDriver.minUserHealthFraction = Mathf.NegativeInfinity;
             shatterDriver.maxUserHealthFraction = Mathf.Infinity;
-            shatterDriver.skillSlot = SkillSlot.None;
+            shatterDriver.skillSlot = SkillSlot.Primary;
 
             Modules.Content.AddMasterPrefab(newMaster);
             return newMaster;

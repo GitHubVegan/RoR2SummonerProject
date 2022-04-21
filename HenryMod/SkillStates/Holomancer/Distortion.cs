@@ -48,8 +48,6 @@ namespace HolomancerMod.SkillStates
 								HolomancerPlugin.DestroyImmediate(ASD);
 							}
 						}
-						//CM3.GetBody().baseMoveSpeed = 0f;
-						//CM3.inventory.GiveItem(RoR2Content.Items.HealthDecay.itemIndex, 3);
 						CM3.gameObject.AddComponent<MasterSuicideOnTimer>().lifeTimer = 0f;
 
 

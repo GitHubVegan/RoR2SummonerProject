@@ -66,11 +66,12 @@ namespace HolomancerMod.SkillStates
                     teamIndexOverride = new TeamIndex?(TeamIndex.Player)
                 }.Perform();
                 characterMaster.GetBody().RecalculateStats();
+                //characterMaster.GetBody().transform.localScale.Set(3, 3, 3);
                 characterMaster.GetBody().levelDamage = base.characterBody.levelDamage;
                 characterMaster.inventory.CopyItemsFrom(base.characterBody.inventory);
                 characterMaster.inventory.ResetItem(RoR2Content.Items.ExtraLife.itemIndex);
                 characterMaster.gameObject.GetComponent<BaseAI>().leader.gameObject = base.characterBody.gameObject;
-                characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().primary.SetSkillOverride(2, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("PhantasmRapier")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
+                //characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().primary.SetSkillOverride(2, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("PhantasmRapier")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
                 characterMaster.GetBody().isPlayerControlled = false;
                 SummonablesList1.Add(characterMaster);
                 this.Fire();
@@ -161,12 +162,13 @@ namespace HolomancerMod.SkillStates
         private static GameObject CreateBody()
         {
 
-            GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/MercBody"), "PrimaryPhantasmBody", true);
+            GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/CrocoBody"), "PrimaryPhantasmBody", true);
             CharacterModel.RendererInfo[] renderinfos = newBody.GetComponentInChildren<ModelLocator>().modelBaseTransform.gameObject.GetComponentInChildren<CharacterModel>().baseRendererInfos;
             for (int i = 0; i < renderinfos.Length; i++)
             {
                 renderinfos[i].defaultMaterial = Modules.Assets.mainAssetBundle.LoadAsset<Material>("PhantasmHologram");
             }
+            newBody.GetComponent<EntityStateMachine>().initialStateType = new SerializableEntityStateType(typeof( EntityStates.FlyingVermin.SpawnState));
             //SkinDef defaultSkin = Modules.Skins.CreateSkinDef("name",
             // Assets.mainAssetBundle.LoadAsset<Sprite>("texMainSkin"),
             //  renderinfos,
@@ -315,7 +317,7 @@ namespace HolomancerMod.SkillStates
 
         private static GameObject CreateMaster()
         {
-            GameObject newMaster = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/charactermasters/MercMonsterMaster"), "PrimaryPhantasmMaster", true);
+            GameObject newMaster = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/charactermasters/CrocoMonsterMaster"), "PrimaryPhantasmMaster", true);
             //CharacterModel.RendererInfo[] renderinfos = PrimaryPhantasmBody.GetComponentInChildren<CharacterModel>(true).baseRendererInfos;
             //PrimaryPhantasmBody.GetComponentInChildren<CharacterModel>().baseRendererInfos = MaterialSwitchTest(PrimaryPhantasmBody);
             //PrimaryPhantasmBody.GetComponentInChildren<CharacterModel>().UpdateMaterials
@@ -342,7 +344,7 @@ namespace HolomancerMod.SkillStates
             attackDriver.activationRequiresAimConfirmation = true;
             attackDriver.activationRequiresTargetLoS = true;
             attackDriver.selectionRequiresTargetLoS = false;
-            attackDriver.maxDistance = 6.5f;
+            attackDriver.maxDistance = 3f;
             attackDriver.minDistance = 0f;
             attackDriver.requireSkillReady = true;
             attackDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
@@ -365,8 +367,8 @@ namespace HolomancerMod.SkillStates
             shatterDriver.activationRequiresTargetLoS = false;
             shatterDriver.selectionRequiresTargetLoS = false;
             shatterDriver.maxDistance = 100f;
-            shatterDriver.minDistance = 6.5f;
-            shatterDriver.shouldSprint = false;
+            shatterDriver.minDistance = 3f;
+            shatterDriver.shouldSprint = true;
             shatterDriver.requireSkillReady = false;
             shatterDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
             shatterDriver.ignoreNodeGraph = false;

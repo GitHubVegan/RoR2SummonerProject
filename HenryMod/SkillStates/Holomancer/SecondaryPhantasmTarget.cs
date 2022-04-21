@@ -64,7 +64,12 @@ namespace HolomancerMod.SkillStates
                 {
                     foreach (CharacterMaster cm in SecondaryPhantasm.SummonablesList2)
                     {
+                        CharacterBody cb = cm.GetBody();
+                        Vector3 tartar = target.healthComponent.body.transform.position;
+                        cb.GetComponent<KinematicCharacterController.KinematicCharacterMotor>().SetPosition(tartar);
                         cm.gameObject.GetComponent<BaseAI>().currentEnemy.gameObject = target.healthComponent.gameObject;
+                        cb.GetComponent<WormBodyPositionsDriver>().wormBodyPositions.followDelay = 0.02f;
+                        /*cm.gameObject.GetComponent<BaseAI>().currentEnemy.gameObject = target.healthComponent.gameObject;
                         if (Vector3.Distance(cm.GetBody().transform.position, target.healthComponent.body.transform.position) > (Vector3.Distance(base.characterBody.transform.position, target.healthComponent.body.transform.position)))
                         {
                             EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/HuntressBlinkEffect"), new EffectData
@@ -78,7 +83,7 @@ namespace HolomancerMod.SkillStates
                                 scale = 0.5f
                             }, true);
                             cm.GetBody().rigidbody.position = (base.characterBody.transform.position + base.GetAimRay().direction * 4 + Vector3.up * 5);
-                        }
+                        }*/
                     }
                 }
 

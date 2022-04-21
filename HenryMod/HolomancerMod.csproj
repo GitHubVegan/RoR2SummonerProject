@@ -18,10 +18,12 @@
     <None Remove="mesmerassets.manifest" />
     <None Remove="Modules\Characters\Henry.cs~RF6221a098.TMP" />
     <None Remove="myassetbundle" />
+    <None Remove="testbundle1" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="mesmerassets.manifest" />
+    <EmbeddedResource Include="testbundle1" />
   </ItemGroup>
 
 	<ItemGroup>
@@ -54,7 +56,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="if &quot;$(Username)&quot; == &quot;MyPCUsername(don't dox yourself)&quot; copy &quot;$(TargetPath)&quot; &quot;C:\[PATH_TO_MY_R2MODMAN_PROFILE]\BepInEx\plugins&quot;" />
+    <Exec Command="copy &quot;C:\Users\nico_\source\repos\RoR2SummonerProject12 - Copy\HenryMod\bin\Debug\netstandard2.0\HolomancerMod.dll&quot; &quot;C:\Users\nico_\AppData\Roaming\r2modmanPlus-local\RiskOfRain2\profiles\Default\BepInEx\plugins&quot;" />
   </Target>
 
 </Project>

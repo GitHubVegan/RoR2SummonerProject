@@ -34,16 +34,6 @@ namespace HolomancerMod.SkillStates
 		public override void FixedUpdate()
 		{
 			base.FixedUpdate();
-			if(this.GetComponent<BaseAI>().currentEnemy.characterBody && this.characterBody.characterMotor)
-            {
-				this.characterBody.characterMotor.Motor.SetPositionAndRotation(this.gameObject.GetComponent<BaseAI>().currentEnemy.gameObject.transform.position, this.characterBody.transform.rotation);
-			}
-			if (this.GetComponent<BaseAI>().currentEnemy.characterBody && this.characterBody.rigidbody && !this.characterBody.characterMotor)
-            {
-				this.characterBody.rigidbody.position = (this.gameObject.GetComponent<BaseAI>().currentEnemy.gameObject.transform.position);
-			}
-
-
 		}
 
 

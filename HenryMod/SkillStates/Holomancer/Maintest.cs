@@ -77,10 +77,12 @@ namespace HolomancerMod.SkillStates
 				}
 
 			}
-			if (!buff)
+			if (!buff && Distortion.affixHauntedWard != null)
 			{
 				UnityEngine.Object.Destroy(Distortion.affixHauntedWard);
+				UnityEngine.Object.DestroyImmediate(Distortion.affixHauntedWard);
 				Distortion.affixHauntedWard = null;
+				Distortion.affixHauntedWard.active = false;
 			}
 			if (SecondaryPhantasm.SummonablesList2.Count > 0)
 			{

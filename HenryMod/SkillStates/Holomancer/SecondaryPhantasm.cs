@@ -7,7 +7,7 @@ using RoR2.Skills;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-
+using UnityEngine.AddressableAssets;
 
 namespace HolomancerMod.SkillStates
 {
@@ -65,22 +65,27 @@ namespace HolomancerMod.SkillStates
                     summonerBodyObject = base.characterBody.gameObject,
                     ignoreTeamMemberLimit = true,
                     teamIndexOverride = new TeamIndex?(TeamIndex.Player)
+
                 }.Perform();
                 characterMaster.GetBody().RecalculateStats();
                 characterMaster.GetBody().baseArmor = 30f;
-                characterMaster.GetBody().baseMoveSpeed = 15f;
-                characterMaster.GetBody().baseMaxHealth = base.characterBody.baseMaxHealth * 1.3f;
-                characterMaster.GetBody().baseAcceleration = 120f;
+                characterMaster.GetBody().baseMoveSpeed = 7f;
+                //characterMaster.GetBody().baseMaxHealth = base.characterBody.baseMaxHealth * 1.3f;
+                characterMaster.GetBody().baseAcceleration = 240f;
                 characterMaster.GetBody().baseDamage = base.characterBody.baseDamage;
                 characterMaster.GetBody().levelDamage = base.characterBody.levelDamage;
                 characterMaster.GetBody().baseRegen = 3f;
                 characterMaster.GetBody().baseAttackSpeed = 1f;
+                characterMaster.GetBody().characterMotor.mass *= 0.5f;
+                characterMaster.GetBody().sfxLocator.barkSound = "";
+                characterMaster.GetBody().sfxLocator.deathSound = "";
                 characterMaster.inventory.CopyItemsFrom(base.characterBody.inventory);
                 characterMaster.inventory.ResetItem(RoR2Content.Items.ExtraLife.itemIndex);
                 characterMaster.gameObject.GetComponent<BaseAI>().leader.gameObject = base.characterBody.gameObject;
                 characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().primary.SetSkillOverride(4, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("PhantasmGround")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
                 characterMaster.GetBody().isPlayerControlled = false;
                 SecondaryPhantasm.SummonablesList2.Add(characterMaster);
+                
                 this.Fire();
             }
 
@@ -123,12 +128,13 @@ namespace HolomancerMod.SkillStates
                                 origin = cm.GetBody().transform.position,
                                 scale = 3f
                             }, true);
-                            cm.GetBody().rigidbody.position = (base.characterBody.transform.position + base.GetAimRay().direction * 4 + Vector3.up * 5);
                             EffectManager.SpawnEffect(Resources.Load<GameObject>("prefabs/effects/HuntressBlinkEffect"), new EffectData
                             {
                                 origin = base.characterBody.transform.position + base.GetAimRay().direction * 4 + Vector3.up * 5,
                                 scale = 3f
                             }, true);
+                            cm.GetBody().characterMotor.Motor.SetPositionAndRotation(base.characterBody.transform.position + base.GetAimRay().direction * 4 + Vector3.up * 5, base.characterBody.transform.rotation);
+
 
 
 
@@ -155,20 +161,30 @@ namespace HolomancerMod.SkillStates
 
         public override void OnExit()
         {
-            base.OnExit();
+           
         }
 
         private static GameObject CreateBody()
         {
-            GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/WispSoulBody"), "SecondaryPhantasmBody", true);
+            GameObject newBody = null;
+            foreach (GameObject customCharacterbody in ContentPacks.bodyPrefabs)
+            {
+                Debug.Log($"bodyPrefabs contains GameObject {customCharacterbody.name}");
+                if (customCharacterbody.name == "PhantasmEelBody")
+                {
+                    newBody = customCharacterbody;
+
+                }
+            }
             newBody.GetComponentInChildren<EntityStateMachine>().mainStateType = new SerializableEntityStateType(typeof(SwarmContact));
             Modules.Content.AddCharacterBodyPrefab(newBody);
             return newBody;
+
         }
 
         private static GameObject CreateMaster()
         {
-            GameObject newMaster = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/charactermasters/WispMaster"), "SecondaryPhantasmMaster", true);
+            GameObject newMaster = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/charactermasters/FlyingVerminMaster"), "SecondaryPhantasmMaster", true);
             newMaster.GetComponent<CharacterMaster>().bodyPrefab = SecondaryPhantasmBody;
             foreach (AISkillDriver ai in newMaster.GetComponentsInChildren<AISkillDriver>())
             {
@@ -182,10 +198,10 @@ namespace HolomancerMod.SkillStates
             attackDriver.customName = "Attack";
             attackDriver.movementType = AISkillDriver.MovementType.StrafeMovetarget;
             attackDriver.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
-            attackDriver.activationRequiresAimConfirmation = true;
+            attackDriver.activationRequiresAimConfirmation = false;
             attackDriver.activationRequiresTargetLoS = false;
             attackDriver.selectionRequiresTargetLoS = false;
-            attackDriver.maxDistance = 2f;
+            attackDriver.maxDistance = 3f;
             attackDriver.minDistance = 0f;
             attackDriver.requireSkillReady = true;
             attackDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
@@ -207,7 +223,7 @@ namespace HolomancerMod.SkillStates
             shatterDriver.activationRequiresTargetLoS = false;
             shatterDriver.selectionRequiresTargetLoS = false;
             shatterDriver.maxDistance = 100f;
-            shatterDriver.minDistance = 2f;
+            shatterDriver.minDistance = 3f;
             shatterDriver.shouldSprint = true;
             shatterDriver.requireSkillReady = false;
             shatterDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;

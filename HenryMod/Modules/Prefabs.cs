@@ -271,11 +271,23 @@ namespace HolomancerMod.Modules {
         //}
 
         private static void SetupCapsuleCollider(GameObject prefab) {
-            CapsuleCollider capsuleCollider = prefab.GetComponent<CapsuleCollider>();
-            capsuleCollider.center = new Vector3(0f, 0f, 0f);
-            capsuleCollider.radius = 0.5f;
-            capsuleCollider.height = 1.82f;
-            capsuleCollider.direction = 1;
+            if(prefab.GetComponent<CapsuleCollider>())
+            {
+                CapsuleCollider capsuleCollider = prefab.GetComponent<CapsuleCollider>();
+                capsuleCollider.center = new Vector3(0f, 0f, 0f);
+                capsuleCollider.radius = 0.5f;
+                capsuleCollider.height = 1.82f;
+                capsuleCollider.direction = 1;
+            }
+            else
+            {
+                CapsuleCollider capsuleCollider = prefab.AddComponent<CapsuleCollider>();
+                capsuleCollider.center = new Vector3(0f, 0f, 0f);
+                capsuleCollider.radius = 0.5f;
+                capsuleCollider.height = 1.82f;
+                capsuleCollider.direction = 1;
+            }
+            
         }
 
         private static void SetupMainHurtbox(GameObject prefab, GameObject model)

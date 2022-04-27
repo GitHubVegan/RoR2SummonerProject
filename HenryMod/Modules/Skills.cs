@@ -179,6 +179,7 @@ namespace HolomancerMod.Modules
         public bool fullRestockOnAssign = true;
         public bool resetCooldownTimerOnUse;
         public bool mustKeyPress;
+        public bool dontAllowPastMaxStocks;
 
         #region constructors
         public SkillDefInfo() { }

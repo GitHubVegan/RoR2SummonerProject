@@ -1,0 +1,373 @@
+ManifestFileVersion: 0
+CRC: 2587702034
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: d2f4331d24681e8b64a0af3e2aaf5aa2
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 0ff96ee0c2e51cad2def339b55c7c6e6
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 54
+  Script: {instanceID: 0}
+- Class: 65
+  Script: {instanceID: 0}
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 82
+  Script: {instanceID: 0}
+- Class: 90
+  Script: {instanceID: 0}
+- Class: 91
+  Script: {instanceID: 0}
+- Class: 95
+  Script: {instanceID: 0}
+- Class: 108
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9a68da65c907acb4eb4dbcd042f172e7, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: fc41cd48bee14034db80323ab44fbd3e, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 261c50d8a80898e4ebf2e8e415ea6766, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 751bd37d2e55f5f448dbb0d97812d9ba, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: fa47b7602b600164193dcf1b19020b19, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 135
+  Script: {instanceID: 0}
+- Class: 136
+  Script: {instanceID: 0}
+- Class: 137
+  Script: {instanceID: 0}
+- Class: 144
+  Script: {instanceID: 0}
+- Class: 198
+  Script: {instanceID: 0}
+- Class: 199
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 319
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/HenryAssets/Animations/maskAimBazooka.mask
+- Assets/EffectExamples/FireExplosionEffects/Prefabs/DrippingFlames.prefab
+- Assets/HenryAssets/Icons/texShotgunIcon.png
+- Assets/FBX/Mesmer/3 new model and rig/MesmerV 11 separate and test 3.fbx
+- Assets/HenryAssets/VFX/Materials/matAnimeShapes.mat
+- Assets/MesmerAssets/Animations/animMesmer.controller
+- Assets/HenryAssets/VFX/Textures/texPunchImpactShadow.png
+- Assets/HenryAssets/Materials/matBazookaRocket.mat
+- Assets/MesmerAssets/Icons/SecondaryTarget.png
+- Assets/HenryAssets/Icons/texPrimaryIcon.png
+- Assets/EffectExamples/FireExplosionEffects/Textures/SmokePuffNormalSheet.tif
+- Assets/EffectExamples/Misc Effects/Prefabs/DustMotesEffect.prefab
+- Assets/HenryAssets/VFX/Textures/texHenrySwing2.png
+- Assets/HenryAssets/Icons/texBazookaIcon.png
+- Assets/HenryAssets/Icons/texMasteryAchievement.png
+- Assets/HenryAssets/Mesh/meshHenry.mesh
+- Assets/HenryAssets/HenryDisplay.prefab
+- Assets/HenryAssets/VFX/Mesh/meshBoxingGlove.mesh
+- Assets/HenryAssets/Materials/matHenry.mat
+- Assets/HenryAssets/VFX/FistBarrageEffect.prefab
+- Assets/HenryAssets/Textures/texHenryAlt.png
+- Assets/ArchangelAssets/Animations/Armature_RestIdleIn.anim
+- Assets/MesmerAssets/Animations/Armature_WalkR.anim
+- Assets/HenryAssets/Icons/texPassiveIcon.png
+- Assets/HenryAssets/VFX/Textures/texFire.tga
+- Assets/HenryAssets/Animations/Jump.anim
+- Assets/MesmerAssets/HolomancerAssets/Animations/Armature_HoloRunF.anim
+- Assets/MesmerAssets/HolomancerAssets/Animations/Armature_HoloDisplayIdleIn.anim
+- Assets/MesmerAssets/HolomancerAssets/Animations/Armature_HoloDescend.anim
+- Assets/HenryAssets/Mesh/meshHenryNeo.mesh
+- Assets/EffectExamples/FireExplosionEffects/Materials/SmokeLightParticle.mat
+- Assets/HenryAssets/Animations/WalkR.anim
+- Assets/HenryAssets/VFX/HenryDustEffect.prefab
+- Assets/HenryAssets/Animations/SprintL.anim
+- Assets/HenryAssets/Materials/matRebellion.mat
+- Assets/MesmerAssets/HolomancerAssets/Mesh/HolomancerBody.mesh
+- Assets/HenryAssets/VFX/Materials/matSmoke.mat
+- Assets/MesmerAssets/Animations/Armature_WalkL.anim
+- Assets/HenryAssets/VFX/Textures/texSwingEffect.png
+- Assets/HenryAssets/Textures/texBoxingGlove.png
+- Assets/EffectExamples/Misc Effects/Prefabs/ElectricalSparksEffect.prefab
+- Assets/ArchangelAssets/Animations/Armature_Idle.anim
+- Assets/HenryAssets/Animations/maskAimYaw.mask
+- Assets/MesmerAssets/PhantasmSword/Mesh/PhantasmBody.mesh
+- Assets/HenryAssets/Icons/texDanteAchievement.png
+- Assets/HenryAssets/Icons/texSecondaryIcon.png
+- Assets/HenryAssets/Animations/animHenry.controller
+- Assets/MesmerAssets/Icons/ShatterSkillswapcancel.png
+- Assets/HenryAssets/VFX/Materials/matHenrySwing2.mat
+- Assets/HenryAssets/Textures/texBazooka.png
+- Assets/HenryAssets/VFX/Textures/texRipple.png
+- Assets/HenryAssets/VFX/ImpactHenrySlash.prefab
+- Assets/MesmerAssets/HolomancerAssets/mdlHolomancer.prefab
+- Assets/MesmerAssets/HolomancerAssets/Textures/StaffTexture.png
+- Assets/MesmerAssets/Shaders/Hologram.shader
+- Assets/HenryAssets/Animations/Armature_FlightR.anim
+- Assets/Materials/matFloor.mat
+- Assets/EffectExamples/Misc Effects/Prefabs/SparksEffect.prefab
+- Assets/HenryAssets/VFX/Mesh/meshSwing.asset
+- Assets/ArchangelAssets/ArchangelDisplay.prefab
+- Assets/HenryAssets/VFX/HenryBazookaMuzzleFlash.prefab
+- Assets/HenryAssets/VFX/HenryFistSwingEffect.prefab
+- Assets/EffectExamples/FireExplosionEffects/Materials/FlameParticle.mat
+- Assets/MesmerAssets/Animations/Armature_AimPitch.anim
+- Assets/MesmerAssets/Icons/texHolomancerIcon old.png
+- Assets/MesmerAssets/HolomancerAssets/Animations/Armature_HoloTpose.anim
+- Assets/HenryAssets/Mesh/meshVergil.mesh
+- Assets/MesmerAssets/HolomancerAssets/Animations/Armature_HoloDisplayIdle.anim
+- Assets/MesmerAssets/HolomancerAssets/Materials/matHolomancer.mat
+- Assets/HenryAssets/VFX/Textures/texFistSwing.png
+- Assets/MesmerAssets/Animations/Armature_AimYaw (1).anim
+- Assets/ArchangelAssets/Mesh/Spearmesh.mesh
+- Assets/HenryAssets/Animations/LightImpact.anim
+- Assets/HenryAssets/Icons/texHenryAchievement.png
+- Assets/HenryAssets/Animations/WalkB.anim
+- Assets/EffectExamples/FireExplosionEffects/Prefabs/FlamesEffects.prefab
+- Assets/MesmerAssets/PhantasmSword/Animations/Armature_SimpleRunF.anim
+- Assets/MesmerAssets/Animations/Armature_IdleIn.anim
+- Assets/EffectExamples/FireExplosionEffects/Prefabs/FlamesParticleEffect.prefab
+- Assets/EffectExamples/FireExplosionEffects/Materials/IgnitionFlameParticle.mat
+- Assets/EffectExamples/FireExplosionEffects/Materials/SmokeDarkParticle.mat
+- Assets/EffectExamples/FireExplosionEffects/Materials/DebrisParticle.mat
+- Assets/HenryAssets/Animations/maskGesture.mask
+- Assets/Custom/henrycustomstance.fbx
+- Assets/HenryAssets/VFX/Materials/matPunchImpact.mat
+- Assets/HenryAssets/Mesh/meshHenryAlt.mesh
+- Assets/HenryAssets/Textures/texHenryJedi.png
+- Assets/HenryAssets/Animations/SprintR.anim
+- Assets/HenryAssets/Animations/animHenryMenu.controller
+- Assets/HenryAssets/Icons/texVergilAchievement.png
+- Assets/MesmerAssets/HolomancerAssets/Animations/animHolo.controller
+- Assets/MesmerAssets/HolomancerAssets/Animations/Armature_HoloDescendFast.anim
+- Assets/HenryAssets/Textures/texShotgun.png
+- Assets/MesmerAssets/HolomancerAssets/Animations/Armature_HoloRestIdle.anim
+- Assets/EffectExamples/Misc Effects/Materials/SandSwirlsParticle.mat
+- Assets/EffectExamples/FireExplosionEffects/Prefabs/WallFlames.prefab
+- Assets/HenryAssets/Animations/WalkL.anim
+- Assets/HenryAssets/Animations/maskImpact.mask
+- Assets/MesmerAssets/HolomancerAssets/Animations/Armature_HoloRestIdleIn.anim
+- Assets/EffectExamples/FireExplosionEffects/Prefabs/IgnitionFlame.prefab
+- Assets/MesmerAssets/HolomancerAssets/Animations/Armature_HoloIdle.anim
+- Assets/FBX/animHenry.fbx
+- Assets/EffectExamples/FireExplosionEffects/Textures/FlameRoundGreyParticleSheet.tif
+- Assets/HenryAssets/Animations/Armature_FlightL.anim
+- Assets/EffectExamples/FireExplosionEffects/Textures/DebrisParticleSheet.png
+- Assets/MesmerAssets/PhantasmSword/Animations/animPhantasmSwordMenu.controller
+- Assets/HenryAssets/Animations/Idle.anim
+- Assets/HenryAssets/VFX/BombExplosionEffect.prefab
+- Assets/HenryAssets/Animations/Slash2.anim
+- Assets/MesmerAssets/PhantasmSword/Animations/Armature_SimpleStab1.anim
+- Assets/MesmerAssets/Mesh/Spearmesh.mesh
+- Assets/MesmerAssets/HolomancerAssets/Mesh/HolomancerClothes.mesh
+- Assets/MesmerAssets/Animations/maskAimYawMesmer.mask
+- Assets/HenryAssets/Mesh/meshYamato.mesh
+- Assets/HenryAssets/VFX/Textures/texDust.png
+- Assets/FBX/Archangel 9 walk B 1 Test.fbx
+- Assets/HenryAssets/VFX/Textures/texHitSpark.png
+- Assets/MesmerAssets/PhantasmSword/Animations/Armature_SimpleIdle.anim
+- Assets/MesmerAssets/HolomancerAssets/Mesh/Staff.mesh
+- Assets/HenryAssets/Materials/matBoxingGlove.mat
+- Assets/HenryAssets/Materials/matHenryAlt.mat
+- Assets/MesmerAssets/PhantasmSword/Animations/animPhantasmSword.controller
+- Assets/HenryAssets/Animations/WalkF.anim
+- Assets/FBX/HenryMastery.fbx
+- Assets/HenryAssets/VFX/Materials/matPunchImpactShadow.mat
+- Assets/HenryAssets/Materials/matDante.mat
+- Assets/EffectExamples/FireExplosionEffects/Materials/matShockwave.mat
+- Assets/EffectExamples/FireExplosionEffects/Prefabs/PlasmaExplosionEffect.prefab
+- Assets/MesmerAssets/Icons/SecondaryPhantasm.png
+- Assets/HenryAssets/Animations/maskLeftArm.mask
+- Assets/MesmerAssets/PhantasmSword/Animations/maskGesturePhantasmSword.mask
+- Assets/FBX/Mesmer/PhantasmSword/SwordPhantasm7 simple run and stab 2 stretch.fbx
+- Assets/FBX/Mesmer/PhantasmSword/SwordPhantasm7 simple run and stab.fbx
+- Assets/EffectExamples/Misc Effects/Materials/Spark2Particle.mat
+- Assets/HenryAssets/Mesh/MeshHenryGun.mesh
+- Assets/HenryAssets/Animations/DescendFast.anim
+- Assets/HenryAssets/HenryBazookaRocketGhost.prefab
+- Assets/HenryAssets/Icons/texScepterSpecialIcon.png
+- Assets/HenryAssets/VFX/Materials/matFistSwing.mat
+- Assets/HenryAssets/Mesh/meshDante.mesh
+- Assets/HenryAssets/VFX/Materials/matTrail.mat
+- Assets/HenryAssets/Materials/matHenryJedi.mat
+- Assets/HenryAssets/VFX/Materials/matHitSpark.mat
+- Assets/ArchangelAssets/Animations/animArchangel.controller
+- Assets/HenryAssets/Mesh/meshNeoCoat.mesh
+- Assets/HenryAssets/Animations/ShootGun.anim
+- Assets/HenryAssets/Animations/SprintF.anim
+- Assets/HenryAssets/Mesh/meshHenrySwordAlt.mesh
+- Assets/MesmerAssets/PhantasmSword/Textures/SwordPhantasmPlaceholderTex.png
+- Assets/MesmerAssets/Materials/PhantasmHologram2.mat
+- Assets/FBX/Mesmer/1 (neckandhead)/MesmerA 11B yeshead.fbx
+- Assets/HenryAssets/Textures/texHenry.png
+- Assets/FBX/Bomb.fbx
+- Assets/HenryAssets/Icons/texBazookaOutIcon.png
+- Assets/ArchangelAssets/Animations/Armature_WalkF2.anim
+- Assets/HenryAssets/Animations/maskAimPitch.mask
+- Assets/HenryAssets/Icons/texUziIcon.png
+- Assets/MesmerAssets/HolomancerAssets/Animations/Armature_HoloRunR.anim
+- Assets/MesmerAssets/PhantasmSword/PhantasmSwordDisplay.prefab
+- Assets/EffectExamples/FireExplosionEffects/Prefabs/Flames.prefab
+- Assets/MesmerAssets/HolomancerAssets/Animations/Armature_HoloAscend.anim
+- Assets/HenryAssets/Materials/matHenryNeo.mat
+- Assets/HenryAssets/VFX/Mesh/meshPunchShockwave.mesh
+- Assets/HenryAssets/Materials/matRoy.mat
+- Assets/HenryAssets/Icons/texBazookaIconScepter.png
+- Assets/HenryAssets/Textures/texHenryNeo.png
+- Assets/FBX/Mesmer/1 (neckandhead)/MesmerA 9 idle.fbx
+- Assets/HenryAssets/Icons/texMainSkin.png
+- Assets/ArchangelAssets/Mesh/FemInfiltratorBody.mesh
+- Assets/FBX/SwordSwingMesh.fbx
+- Assets/MesmerAssets/PhantasmSword/Mesh/Rapier.mesh
+- Assets/HenryAssets/Icons/texBoxingGlovesIcon.png
+- Assets/MesmerAssets/Icons/UtilityTarget.png
+- Assets/FBX/Mesmer/3 new model and rig/MesmerV 13 ClothesTexture.fbx
+- Assets/HenryAssets/Materials/matVergil.mat
+- Assets/MesmerAssets/Mesh/MageMesh.mesh
+- Assets/EffectExamples/FireExplosionEffects/Prefabs/FlameThrowerEffect.prefab
+- Assets/HenryAssets/Materials/matHitboxPreview.mat
+- Assets/HenryAssets/Animations/IdleIn.anim
+- Assets/HenryAssets/VFX/Materials/matSwingShadow.mat
+- Assets/FBX/Mesmer/3 new model and rig/MesmerV 12 Animations 4 delete and test.fbx
+- Assets/MesmerAssets/Icons/UtilityPhantasm.png
+- Assets/HenryAssets/Textures/texHenryJediEmission.png
+- Assets/MesmerAssets/Icons/Distortion.png
+- Assets/HenryAssets/Mesh/meshDanteCoat.mesh
+- Assets/HenryAssets/Animations/Armature_FlightIdle.anim
+- Assets/HenryAssets/Animations/RestIdle.anim
+- Assets/MesmerAssets/Animations/Armature_Idle.anim
+- Assets/HenryAssets/Animations/ThrowBomb.anim
+- Assets/HenryAssets/Icons/texHenryIcon.png
+- Assets/HenryAssets/Icons/texUtilityIcon.png
+- Assets/HenryAssets/Animations/Ascend.anim
+- Assets/MesmerAssets/Shaders/banner.png
+- Assets/HenryAssets/VFX/Materials/matPunchEffect.mat
+- Assets/HenryAssets/VFX/Textures/texPunchImpact.png
+- Assets/MesmerAssets/Icons/Diversion.png
+- Assets/HenryAssets/mdlHenry.prefab
+- Assets/HenryAssets/Mesh/meshRebellion.mesh
+- Assets/HenryAssets/VFX/Materials/matHitSparkPunch.mat
+- Assets/MesmerAssets/Animations/Armature_RestIdleIn.anim
+- Assets/HenryAssets/Animations/Armature_FlightF.anim
+- Assets/FBX/Mesmer/3 new model and rig/MesmerV 11 separate and test 2 (animz).fbx
+- Assets/MesmerAssets/PhantasmSword/mdlPhantasmSword.prefab
+- Assets/HenryAssets/VFX/Materials/matSwingEffect.mat
+- Assets/EffectExamples/FireExplosionEffects/Materials/PlasmaExplosionParticle.mat
+- Assets/ArchangelAssets/Animations/Armature_WalkR.anim
+- Assets/EffectExamples/FireExplosionEffects/Prefabs/TorchEffect.prefab
+- Assets/ArchangelAssets/mdlArchangel.prefab
+- Assets/EffectExamples/Misc Effects/Materials/SparkParticle.mat
+- Assets/HenryAssets/Mesh/meshHenrySword.mesh
+- Assets/HenryAssets/VFX/Materials/matEmbers.mat
+- Assets/HenryAssets/Animations/AimYaw.anim
+- Assets/EffectExamples/FireExplosionEffects/Materials/EmbersParticle.mat
+- Assets/MesmerAssets/Animations/Armature_WalkB.anim
+- Assets/HenryAssets/HenryBombGhost.prefab
+- Assets/HenryAssets/Mesh/meshPistol.mesh
+- Assets/HenryAssets/Icons/texStingerIcon.png
+- Assets/MesmerAssets/Icons/texHolomancerIcon.png
+- Assets/FBX/animHenryHolstered.fbx
+- Assets/EffectExamples/Misc Effects/Prefabs/SandSwirlsEffect.prefab
+- Assets/MesmerAssets/Icons/Mindwrack.png
+- Assets/HenryAssets/Textures/texHenryVergil.png
+- Assets/EffectExamples/FireExplosionEffects/Materials/PlasmaFireParticle.mat
+- Assets/HenryAssets/Mesh/meshUzi.mesh
+- Assets/Custom/henrycustomrun.fbx
+- Assets/MesmerAssets/HolomancerAssets/Animations/Armature_HoloSprintF.anim
+- Assets/HenryAssets/Animations/AAACustomIdle.anim
+- Assets/HenryAssets/VFX/Materials/matSlash.mat
+- Assets/HenryAssets/Icons/texPistolIcon.png
+- Assets/HenryAssets/VFX/Materials/matDust.mat
+- Assets/HenryAssets/VFX/Textures/texSmoke.png
+- Assets/HenryAssets/VFX/Textures/texEmbers.png
+- Assets/HenryAssets/Mesh/meshVergilCoat.mesh
+- Assets/HenryAssets/VFX/Textures/texLightning.tif
+- Assets/MesmerAssets/MesmerDisplay.prefab
+- Assets/MesmerAssets/Animations/Armature_RestIdle.anim
+- Assets/MesmerAssets/HolomancerAssets/HolomancerDisplay.prefab
+- Assets/HenryAssets/Animations/RestIdleIn.anim
+- Assets/EffectExamples/FireExplosionEffects/Materials/LightningParticle.mat
+- Assets/HenryAssets/VFX/Materials/matRipple.mat
+- Assets/MesmerAssets/HolomancerAssets/Animations/animHoloMenu.controller
+- Assets/MesmerAssets/Icons/ShatterSkillswap.png
+- Assets/HenryAssets/Animations/DefaultPose.anim
+- Assets/ArchangelAssets/Animations/Armature_WalkF.anim
+- Assets/HenryAssets/Animations/AAACustomRun.anim
+- Assets/HenryAssets/Materials/matShotgun.mat
+- Assets/MesmerAssets/Animations/Armature_AimYaw.anim
+- Assets/HenryAssets/Animations/IdleAdditive.anim
+- Assets/EffectExamples/FireExplosionEffects/Prefabs/SmokeEffect.prefab
+- Assets/FBX/Mesmer/2 (justHead)/MesmerA 11 nohead.fbx
+- Assets/MesmerAssets/Animations/animMesmerMenu.controller
+- Assets/MesmerAssets/PhantasmSword/Materials/PhantasmSwordPlaceholderMat.mat
+- Assets/HenryAssets/Icons/texBazookaFireIcon.png
+- Assets/HenryAssets/VFX/Materials/matFire.mat
+- Assets/HenryAssets/Icons/texGrandMasteryAchievement.png
+- Assets/EffectExamples/FireExplosionEffects/Textures/SmokePuff02ParticleSheet.tif
+- Assets/EffectExamples/FireExplosionEffects/Textures/RoundSoftParticle.tif
+- Assets/HenryAssets/Animations/maskBandana.mask
+- Assets/HenryAssets/Animations/MenuIdle.anim
+- Assets/EffectExamples/FireExplosionEffects/Materials/FlameRoundYellowParticle.mat
+- Assets/EffectExamples/FireExplosionEffects/Textures/FlameRoundParticleSheet.tif
+- Assets/HenryAssets/Materials/matBazooka.mat
+- Assets/MesmerAssets/Icons/texPhantasmSwordIcon.png
+- Assets/MesmerAssets/Animations/maskAimPitchMesmer.mask
+- Assets/HenryAssets/VFX/HenrySwordSwingEffect.prefab
+- Assets/EffectExamples/FireExplosionEffects/Textures/SmokePuffParticleSheet.png
+- Assets/HenryAssets/Animations/Descend.anim
+- Assets/HenryAssets/Textures/texHenryDante.png
+- Assets/MesmerAssets/Materials/PhantasmHologram.mat
+- Assets/Custom/henryflight.fbx
+- Assets/ArchangelAssets/Animations/Armature_IdleIn.anim
+- Assets/FBX/Henry.fbx
+- Assets/EffectExamples/FireExplosionEffects/Prefabs/SmallExplosionEffect.prefab
+- Assets/ArchangelAssets/Animations/animArchangelMenu.controller
+- Assets/EffectExamples/Misc Effects/Textures/DustMoteParticle.png
+- Assets/HenryAssets/Animations/Armature_FlightB.anim
+- Assets/EffectExamples/Misc Effects/Textures/SparkParticle.tif
+- Assets/HenryAssets/Animations/AimPitch.anim
+- Assets/MesmerAssets/HolomancerAssets/Animations/Armature_HoloRunB.anim
+- Assets/MesmerAssets/Icons/PrimaryPhantasm.png
+- Assets/EffectExamples/FireExplosionEffects/Textures/FlameParticleSheet.tif
+- Assets/MesmerAssets/Icons/PrimaryTarget.png
+- Assets/MesmerAssets/HolomancerAssets/Animations/Armature_HoloIdleIn.anim
+- Assets/EffectExamples/Misc Effects/Materials/DustMoteParticle.mat
+- Assets/Materials/graves_skin25_muzzle_flash_00.mat
+- Assets/MesmerAssets/mdlMesmer.prefab
+- Assets/HenryAssets/VFX/Textures/texSlash.png
+- Assets/HenryAssets/Icons/texSpecialIcon.png
+- Assets/EffectExamples/FireExplosionEffects/Prefabs/BigExplosionEffect.prefab
+- Assets/HenryAssets/Textures/texHenryDanteEmission.png
+- Assets/HenryAssets/Animations/MenuIdleIn.anim
+- Assets/HenryAssets/VFX/ImpactHenryPunch.prefab
+- Assets/ArchangelAssets/Animations/Armature_RestIdleCheap.anim
+- Assets/EffectExamples/FireExplosionEffects/Prefabs/FlameSmoke.prefab
+- Assets/FBX/Mesmer/1 (neckandhead)/MesmerA 9 idle 1.fbx
+- Assets/HenryAssets/Animations/Slash1.anim
+- Assets/HenryAssets/VFX/HenryBazookaExplosionEffect.prefab
+- Assets/MesmerAssets/Animations/Armature_WalkF.anim
+- Assets/HenryAssets/Animations/Roll.anim
+Dependencies: []

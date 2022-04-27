@@ -12,7 +12,7 @@ using UnityEngine.Networking;
 
 namespace HolomancerMod.SkillStates
 {
-	internal class SwarmContact : FlyState
+	internal class SwarmContact : GenericCharacterMain
 	{
 
 		public static float damageCoefficient = 0.7f;

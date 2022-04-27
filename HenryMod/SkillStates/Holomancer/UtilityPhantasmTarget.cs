@@ -81,7 +81,7 @@ namespace HolomancerMod.SkillStates
                             origin = cm.gameObject.GetComponent<BaseAI>().leader.gameObject.transform.position + (cm.GetBody().transform.position - cm.gameObject.GetComponent<BaseAI>().leader.gameObject.transform.position).normalized * 20,
                             scale = 0.5f
                         }, true);
-                        cm.GetBody().rigidbody.position = cm.gameObject.GetComponent<BaseAI>().leader.gameObject.transform.position + (cm.GetBody().transform.position - cm.gameObject.GetComponent<BaseAI>().leader.gameObject.transform.position).normalized * 20;
+                        cm.GetBody().characterMotor.Motor.SetPosition(cm.gameObject.GetComponent<BaseAI>().leader.gameObject.transform.position + (cm.GetBody().transform.position - cm.gameObject.GetComponent<BaseAI>().leader.gameObject.transform.position).normalized * 20);
                         
 
 

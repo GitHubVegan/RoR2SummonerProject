@@ -77,11 +77,7 @@ namespace HolomancerMod.SkillStates
                                 origin = base.characterBody.transform.position + base.GetAimRay().direction * 4 + Vector3.up * 5,
                                 scale = 0.5f
                             }, true);
-                            cm.GetBody().rigidbody.position = (base.characterBody.transform.position + base.GetAimRay().direction * 4 + Vector3.up * 5);
-
-
-
-
+                            cm.GetBody().characterMotor.Motor.SetPositionAndRotation(base.characterBody.transform.position + base.GetAimRay().direction * 4 + Vector3.up * 5, base.characterBody.transform.rotation);
                         }
                     }
                 }

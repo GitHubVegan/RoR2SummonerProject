@@ -93,12 +93,15 @@ namespace HolomancerMod.SkillStates
 			}
 			if (SecondaryPhantasm.SummonablesList2.Count > 0)
 			{
+				var a = base.GetComponent<RoR2.SkillLocator>().secondary.stock;
 				base.GetComponent<RoR2.SkillLocator>().secondary.SetSkillOverride(1, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("SecondaryPhantasmTarget")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
-
+				base.GetComponent<RoR2.SkillLocator>().secondary.stock = a;
 			}
 			if (SecondaryPhantasm.SummonablesList2.Count <= 0)
             {
+				var a = base.GetComponent<RoR2.SkillLocator>().secondary.stock;
 				base.GetComponent<RoR2.SkillLocator>().secondary.UnsetSkillOverride(1, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("SecondaryPhantasmTarget")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
+				base.GetComponent<RoR2.SkillLocator>().secondary.stock = a;
 			}
 
 			if (PrimaryPhantasm.SummonablesList1.Count > 0)
@@ -112,12 +115,15 @@ namespace HolomancerMod.SkillStates
 			}
 			if (PrimaryPhantasm.SummonablesList1.Count >= 3 || base.GetComponent<RoR2.SkillLocator>().primary.stock <= 0)
 			{
+				var b = base.GetComponent<RoR2.SkillLocator>().primary.stock;
 				base.GetComponent<RoR2.SkillLocator>().primary.SetSkillOverride(1, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("PrimaryPhantasmTarget")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
-
+				base.GetComponent<RoR2.SkillLocator>().primary.stock = b;
 			}
 			if (PrimaryPhantasm.SummonablesList1.Count <= 2)
 			{
+				var b = base.GetComponent<RoR2.SkillLocator>().primary.stock;
 				base.GetComponent<RoR2.SkillLocator>().primary.UnsetSkillOverride(1, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("PrimaryPhantasmTarget")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
+				base.GetComponent<RoR2.SkillLocator>().primary.stock = b;
 			}
 
 			if (UtilityPhantasm.SummonablesList3.Count > 0)
@@ -131,12 +137,15 @@ namespace HolomancerMod.SkillStates
 			}
 			if (UtilityPhantasm.SummonablesList3.Count > 0)
 			{
+				var c = base.GetComponent<RoR2.SkillLocator>().utility.stock;
 				base.GetComponent<RoR2.SkillLocator>().utility.SetSkillOverride(1, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("UtilityPhantasmTarget")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
-
+				base.GetComponent<RoR2.SkillLocator>().utility.stock = c;
 			}
 			if (UtilityPhantasm.SummonablesList3.Count <= 0)
 			{
+				var c = base.GetComponent<RoR2.SkillLocator>().utility.stock;
 				base.GetComponent<RoR2.SkillLocator>().utility.UnsetSkillOverride(1, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("UtilityPhantasmTarget")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
+				base.GetComponent<RoR2.SkillLocator>().utility.stock = c;
 			}
 		}
 		

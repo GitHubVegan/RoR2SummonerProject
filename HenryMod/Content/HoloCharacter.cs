@@ -18,7 +18,7 @@ namespace HolomancerMod.Modules.Survivors
     internal class HoloCharacter : SurvivorBase
     {
 
-        public override string bodyName => "Holomancer";
+        public override string bodyName => "Archangel";
 
         public override string survivorTokenPrefix => "Holomancer";
 
@@ -241,8 +241,10 @@ namespace HolomancerMod.Modules.Survivors
                 rechargeStock = 1,
                 requiredStock = 1,
                 stockToConsume = 1,
+                dontAllowPastMaxStocks = false,
 
-                keywordTokens = new string[] { "KEYWORD_FLURRYSHATTER", "KEYWORD_FENCERCOM" } 
+
+                keywordTokens = new string[] { "KEYWORD_FLURRYSHATTER", "KEYWORD_FENCERCOM" }
 
             });
 
@@ -296,8 +298,8 @@ namespace HolomancerMod.Modules.Survivors
                 mustKeyPress = false,
                 cancelSprintingOnActivation = false,
                 rechargeStock = 1,
-                requiredStock = 1,
-                stockToConsume = 1
+                requiredStock = 0,
+                stockToConsume = 0
             });
 
             SkillDef cannonSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
@@ -345,7 +347,7 @@ namespace HolomancerMod.Modules.Survivors
                 cancelSprintingOnActivation = false,
                 rechargeStock = 1,
                 requiredStock = 0,
-                stockToConsume = 0
+                stockToConsume = 0,
             });
 
             SkillDef diversionSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
@@ -369,7 +371,7 @@ namespace HolomancerMod.Modules.Survivors
                 cancelSprintingOnActivation = false,
                 rechargeStock = 1,
                 requiredStock = 0,
-                stockToConsume = 0
+                stockToConsume = 0,
             });
 
             SkillDef diversioncloneSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
@@ -392,8 +394,8 @@ namespace HolomancerMod.Modules.Survivors
                 mustKeyPress = false,
                 cancelSprintingOnActivation = false,
                 rechargeStock = 1,
-                requiredStock = 1,
-                stockToConsume = 1
+                requiredStock = 0,
+                stockToConsume = 0
             });
 
             SkillDef gravitySkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
@@ -416,8 +418,8 @@ namespace HolomancerMod.Modules.Survivors
                 mustKeyPress = false,
                 cancelSprintingOnActivation = false,
                 rechargeStock = 1,
-                requiredStock = 1,
-                stockToConsume = 1
+                requiredStock = 0,
+                stockToConsume = 0
             });
 
             SkillDef secondaryphantasmSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
@@ -475,6 +477,7 @@ namespace HolomancerMod.Modules.Survivors
                 requiredStock = 0,
                 stockToConsume = 0,
             });
+            
 
             SkillDef utilitytargetSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
@@ -553,8 +556,8 @@ namespace HolomancerMod.Modules.Survivors
                 mustKeyPress = true,
                 cancelSprintingOnActivation = false,
                 rechargeStock = 1,
-                requiredStock = 1,
-                stockToConsume = 1,
+                requiredStock = 0,
+                stockToConsume = 0,
 
                 keywordTokens = new string[] { "KEYWORD_FLURRYSHATTER", "KEYWORD_SHOCKSHATTER",  "KEYWORD_SHIELDSHATTER" }
             });
@@ -581,8 +584,8 @@ namespace HolomancerMod.Modules.Survivors
                 mustKeyPress = true,
                 cancelSprintingOnActivation = false,
                 rechargeStock = 1,
-                requiredStock = 1,
-                stockToConsume = 1
+                requiredStock = 0,
+                stockToConsume = 0
             });
 
             

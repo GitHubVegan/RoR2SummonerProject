@@ -10,6 +10,7 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <LangVersion>7.3</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <ItemGroup>
@@ -47,6 +48,21 @@
     <Reference Include="MMHOOK_RoR2">
       <HintPath>..\libs\MMHOOK_RoR2.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Animation.Rigging">
+      <HintPath>..\HenryUnityProject3\Library\ScriptAssemblies\Unity.Animation.Rigging.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Animation.Rigging.Editor">
+      <HintPath>..\HenryUnityProject3\Library\ScriptAssemblies\Unity.Animation.Rigging.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst">
+      <HintPath>..\HenryUnityProject3\Library\ScriptAssemblies\Unity.Burst.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>..\HenryUnityProject3\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TestRunner">
+      <HintPath>..\HenryUnityProject3\Library\ScriptAssemblies\UnityEngine.TestRunner.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>
@@ -54,7 +70,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="if &quot;$(Username)&quot; == &quot;MyPCUsername(don't dox yourself)&quot; copy &quot;$(TargetPath)&quot; &quot;C:\[PATH_TO_MY_R2MODMAN_PROFILE]\BepInEx\plugins&quot;" />
+    <Exec Command="copy &quot;C:\Users\nico_\source\repos\RoR2SummonerProject12\HenryMod\bin\Debug\netstandard2.0\HolomancerMod.dll&quot; &quot;C:\Users\nico_\AppData\Roaming\r2modmanPlus-local\RiskOfRain2\profiles\Default\BepInEx\plugins&quot;" />
   </Target>
 
 </Project>

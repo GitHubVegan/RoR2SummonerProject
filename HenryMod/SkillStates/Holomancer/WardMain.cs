@@ -12,7 +12,7 @@ using UnityEngine.Networking;
 
 namespace HolomancerMod.SkillStates
 {
-	internal class WardMain : FlyState
+	internal class WardMain : GenericCharacterMain
 	{
 		private GameObject affixHauntedWard;
 		public List<HurtBox> targetList;
@@ -109,7 +109,7 @@ namespace HolomancerMod.SkillStates
                 }
 			}
 		}
-		
+
 
 		public override InterruptPriority GetMinimumInterruptPriority()
 		{

@@ -76,8 +76,9 @@ namespace HolomancerMod.SkillStates
                 characterMaster.GetBody().attackSpeed = base.characterBody.attackSpeed;
                 characterMaster.inventory.CopyItemsFrom(base.characterBody.inventory);
                 characterMaster.inventory.ResetItem(RoR2Content.Items.ExtraLife.itemIndex);
-                characterMaster.inventory.GiveItem(RoR2Content.Items.Ghost.itemIndex);
                 characterMaster.gameObject.GetComponent<BaseAI>().leader.gameObject = base.characterBody.gameObject;
+                characterMaster.GetBody().sfxLocator.barkSound = "";
+                characterMaster.GetBody().sfxLocator.deathSound = "";
                 characterMaster.GetBody().isPlayerControlled = false;
                 SummonablesList3.Add(characterMaster);
                 this.Fire();
@@ -132,12 +133,12 @@ namespace HolomancerMod.SkillStates
                                     origin = cm.gameObject.GetComponent<BaseAI>().leader.gameObject.transform.position + (cm.GetBody().transform.position - cm.gameObject.GetComponent<BaseAI>().leader.gameObject.transform.position).normalized * 25,
                                     scale = 0.5f
                                 }, true);
-                                cm.GetBody().rigidbody.position = cm.gameObject.GetComponent<BaseAI>().leader.gameObject.transform.position + (cm.GetBody().transform.position - cm.gameObject.GetComponent<BaseAI>().leader.gameObject.transform.position).normalized * 25;
+                                 cm.GetBody().characterMotor.Motor.SetPositionAndRotation(base.characterBody.transform.position + base.GetAimRay().direction * 1 + Vector3.up * 5, base.characterBody.transform.rotation);
 
 
 
                     }
-                    }
+                }
             }
                
                 
@@ -166,7 +167,16 @@ namespace HolomancerMod.SkillStates
 
         private static GameObject CreateBody()
         {
-            GameObject newBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/characterbodies/WispBody"), "UtilityPhantasmBody", true);
+                GameObject newBody = null;
+                foreach (GameObject customCharacterbody in ContentPacks.bodyPrefabs)
+                {
+                    Debug.Log($"bodyPrefabs contains GameObject {customCharacterbody.name}");
+                    if (customCharacterbody.name == "DroneBody")
+                    {
+                        newBody = customCharacterbody;
+
+                    }
+                }
             newBody.GetComponentInChildren<EntityStateMachine>().mainStateType = new SerializableEntityStateType(typeof(WardMain));
             Modules.Content.AddCharacterBodyPrefab(newBody);
             return newBody;
@@ -174,7 +184,7 @@ namespace HolomancerMod.SkillStates
 
         private static GameObject CreateMaster()
         {
-            GameObject newMaster = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/charactermasters/WispMaster"), "UtilityPhantasmMaster", true);
+            GameObject newMaster = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/charactermasters/FlyingVerminMaster"), "UtilityPhantasmMaster", true);
             newMaster.GetComponent<CharacterMaster>().bodyPrefab = UtilityPhantasmBody;
             foreach (AISkillDriver ai in newMaster.GetComponentsInChildren<AISkillDriver>())
             {

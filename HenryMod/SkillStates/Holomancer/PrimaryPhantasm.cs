@@ -66,12 +66,16 @@ namespace HolomancerMod.SkillStates
                     teamIndexOverride = new TeamIndex?(TeamIndex.Player)
                 }.Perform();
                 characterMaster.GetBody().RecalculateStats();
+                //characterMaster.GetBody().transform.localScale.Set(3, 3, 3);
                 characterMaster.GetBody().levelDamage = base.characterBody.levelDamage;
                 characterMaster.inventory.CopyItemsFrom(base.characterBody.inventory);
                 characterMaster.inventory.ResetItem(RoR2Content.Items.ExtraLife.itemIndex);
                 characterMaster.gameObject.GetComponent<BaseAI>().leader.gameObject = base.characterBody.gameObject;
                 characterMaster.GetBody().GetComponent<RoR2.SkillLocator>().primary.SetSkillOverride(2, SkillCatalog.GetSkillDef(SkillCatalog.FindSkillIndexByName("PhantasmRapier")), RoR2.GenericSkill.SkillOverridePriority.Contextual);
                 characterMaster.GetBody().isPlayerControlled = false;
+                characterMaster.GetBody().sfxLocator.barkSound = "";
+                characterMaster.GetBody().sfxLocator.deathSound = "";
+                characterMaster.GetBody().sfxLocator.openSound = "";
                 SummonablesList1.Add(characterMaster);
                 this.Fire();
             }
@@ -127,7 +131,7 @@ namespace HolomancerMod.SkillStates
                         }
                     }
                 }
-                
+
             }
         }
 
@@ -148,11 +152,18 @@ namespace HolomancerMod.SkillStates
         public override void OnExit()
         {
             base.OnExit();
+            foreach(CharacterMaster cm in SummonablesList1)
+            {
+                CharacterModel.RendererInfo[] renderinfos2 = cm.GetBody().modelLocator.modelTransform.GetComponent<CharacterModel>().baseRendererInfos;
+                for (int i = 0; i < renderinfos2.Length; i++)
+                {
+                    renderinfos2[i].defaultMaterial = Modules.Assets.mainAssetBundle.LoadAsset<Material>("PhantasmHologram");
+                }
+            }
         }
 
         private static GameObject CreateBody()
         {
-
 
             GameObject newBody = null;
             foreach (GameObject customCharacterbody in ContentPacks.bodyPrefabs)
@@ -164,14 +175,111 @@ namespace HolomancerMod.SkillStates
 
                 }
             }
+            Modules.Content.AddCharacterBodyPrefab(newBody);
             return newBody;
+            
         }
+
+        public static CharacterModel.RendererInfo[] MaterialSwitchTest(GameObject obj)
+        {
+            SkinnedMeshRenderer[] renderers = obj.GetComponentsInChildren<SkinnedMeshRenderer>(true);
+            CharacterModel.RendererInfo[] renderInfos = new CharacterModel.RendererInfo[renderers.Length];
+
+            for (int i = 0; i < renderers.Length; i++)
+            {
+                renderInfos[i] = new CharacterModel.RendererInfo
+                {
+                    defaultMaterial = Modules.Assets.mainAssetBundle.LoadAsset<Material>("PhantasmHologram"),
+                    renderer = renderers[i],
+                    defaultShadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On,
+                    ignoreOverlays = false
+                };
+            }
+
+            return renderInfos;
+        }
+
+        /*public static CharacterModel.RendererInfo[] SkinRendererDisplaySetup(GameObject obj)
+        {
+            GameObject gameObject = obj.GetComponent<ModelLocator>().modelTransform.gameObject;
+            ModelSkinController modelSkinController = gameObject.GetComponent<ModelSkinController>();
+            Renderer[] controllersInChildren = gameObject.GetComponentsInChildren<Renderer>(true);
+            CharacterModel.RendererInfo[] renderInfos = new CharacterModel.RendererInfo[modelSkinController.skins.Length];
+            SkinDef skin = new SkinDef();
+            for(int i = 0; i < modelSkinController.skins.Length; i++)
+            {
+                renderInfos[i] = new CharacterModel.RendererInfo
+                {
+                    defaultMaterial = Modules.Assets.mainAssetBundle.LoadAsset<Material>("PhantasmHologram"),
+                    renderer = meshes[i],
+                    defaultShadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On,
+                    ignoreOverlays = false //We allow the mesh to be affected by overlays like OnFire or PredatoryInstinctsCritOverlay.
+                };
+            }
+            modelSkinController.skins
+            skin.name = "test";
+            skin.nameToken = "MEFIEZ_SKIN_FEMARTICULTIST_NAME";
+            skin.rootObject = gameObject;
+            skin.baseSkins = new SkinDef[]
+            {
+                    modelSkinController.skins[0].
+            };
+            skin.unlockableDef = BodyCatalog.GetBodySkins(BodyCatalog.FindBodyIndex(str1))[1].unlockableDef;
+            skin.rendererInfos = ArrayHelper<CharacterModel.RendererInfo>();
+
+            skin.meshReplacements = new SkinDef.MeshReplacement[2];
+            skin.meshReplacements[0].mesh = assetBundle.LoadAsset<Mesh>("Assets/Resources/MageAltMeshModified.asset");
+            skin.meshReplacements[0].renderer = controllersInChildren[7];
+            skin.meshReplacements[1].mesh = assetBundle.LoadAsset<Mesh>("Assets/Resources/MageAltCapeMeshModified.asset");
+            skin.meshReplacements[1].renderer = controllersInChildren[6];
+            skin.minionSkinReplacements = ArrayHelper.Empty<SkinDef.MinionSkinReplacement>();
+            skin.projectileGhostReplacements = Array.Empty<SkinDef.ProjectileGhostReplacement>();
+            Array.Resize(ref modelSkinController.skins, modelSkinController.skins.Length + 1);
+            modelSkinController.skins[modelSkinController.skins.Length - 1] = skin;
+            BodyCatalog.skins[(int)BodyCatalog.FindBodyIndex(bodyPrefab)] = modelSkinController.skins;
+            return renderInfos;
+        }
+
+        /*public static CharacterModel.RendererInfo[] SkinDefDisplaySetup(GameObject obj)
+        {
+            SkinDef[] meshes = obj.GetComponentsInChildren<SkinDef>();
+            ModelSkinController modelSkinController = obj.GetComponent<ModelSkinController>();
+            SkinDef skin = new SkinDef();
+            skin.baseSkins = new SkinDef[]
+                {
+                    modelSkinController.skins[0]
+                };
+            skin.baseSkins[1].rendererInfos[1].defaultMaterial
+
+            for (int i = 0; i < meshes.Length; i++)
+            {
+                renderInfos[i] = new SkinDef
+                {
+                    defaultMaterial = Modules.Assets.mainAssetBundle.LoadAsset<Material>("PhantasmHologram"),
+                    renderer = meshes[i],
+                    defaultShadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On,
+                    ignoreOverlays = false //We allow the mesh to be affected by overlays like OnFire or PredatoryInstinctsCritOverlay.
+                };
+            }
+
+            return renderInfos;
+        }*/
 
 
 
         private static GameObject CreateMaster()
         {
-            GameObject newMaster = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/charactermasters/MercMonsterMaster"), "PrimaryPhantasmMaster", true);
+            GameObject newMaster = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/charactermasters/CrocoMonsterMaster"), "PrimaryPhantasmMaster", true);
+            //CharacterModel.RendererInfo[] renderinfos = PrimaryPhantasmBody.GetComponentInChildren<CharacterModel>(true).baseRendererInfos;
+            //PrimaryPhantasmBody.GetComponentInChildren<CharacterModel>().baseRendererInfos = MaterialSwitchTest(PrimaryPhantasmBody);
+            //PrimaryPhantasmBody.GetComponentInChildren<CharacterModel>().UpdateMaterials
+            /*GameObject gameObject = PrimaryPhantasmBody.GetComponent<ModelLocator>().modelTransform.gameObject;
+            ModelSkinController modelSkinController = gameObject.GetComponent<ModelSkinController>();
+            for (int i = 0; i < modelSkinController.skins.Length; i++)
+            {
+                modelSkinController.skins[i].rendererInfos = MaterialSwitchTest(gameObject);
+
+            }*/
             newMaster.GetComponent<CharacterMaster>().bodyPrefab = PrimaryPhantasmBody;
             foreach (AISkillDriver ai in newMaster.GetComponentsInChildren<AISkillDriver>())
             {
@@ -188,7 +296,7 @@ namespace HolomancerMod.SkillStates
             attackDriver.activationRequiresAimConfirmation = true;
             attackDriver.activationRequiresTargetLoS = true;
             attackDriver.selectionRequiresTargetLoS = false;
-            attackDriver.maxDistance = 6.5f;
+            attackDriver.maxDistance = 3f;
             attackDriver.minDistance = 0f;
             attackDriver.requireSkillReady = true;
             attackDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
@@ -211,8 +319,8 @@ namespace HolomancerMod.SkillStates
             shatterDriver.activationRequiresTargetLoS = false;
             shatterDriver.selectionRequiresTargetLoS = false;
             shatterDriver.maxDistance = 100f;
-            shatterDriver.minDistance = 6.5f;
-            shatterDriver.shouldSprint = false;
+            shatterDriver.minDistance = 3f;
+            shatterDriver.shouldSprint = true;
             shatterDriver.requireSkillReady = false;
             shatterDriver.aimType = AISkillDriver.AimType.AtCurrentEnemy;
             shatterDriver.ignoreNodeGraph = false;

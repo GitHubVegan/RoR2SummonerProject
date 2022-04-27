@@ -8,7 +8,7 @@ using System.Security;
 using System.Security.Permissions;
 using UnityEngine;
 using HolomancerMod.Modules.Survivors;
-
+using UnityEngine.AddressableAssets;
 
 [module: UnverifiableCode]
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
@@ -32,7 +32,7 @@ namespace HolomancerMod
         //   this shouldn't even have to be said
         public const string MODUID = "com.LiamonoVFTA.ConjurerHolomancer";
         public const string MODNAME = "ConjurerHolomancer";
-        public const string MODVERSION = "0.1.1";
+        public const string MODVERSION = "0.1.0";
 
         // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
         public const string developerPrefix = "LiamonoVFTA";
@@ -55,6 +55,8 @@ namespace HolomancerMod
             // survivor initialization
             new HoloCharacter().Initialize();
             new PhantasmSword().Initialize();
+            new PhantasmEel().Initialize();
+            new Drone().Initialize();
 
             // now make a content pack and add it- this part will change with the next update
             new Modules.ContentPacks().Initialize();

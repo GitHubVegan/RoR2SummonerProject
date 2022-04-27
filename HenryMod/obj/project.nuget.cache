@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "YB92du7+9ZQHmQbwWtyqZBFq+I0VaY5hKaQetqrY/cXNbsc9yFvokI24pk+ssxkqlOfh9lbqzaJYVVnFjpL5Xw==",
+  "dgSpecHash": "jYViv4RpBvVlKT0yf0OfzltOLVae00sb1Tl+dOH5t2OzOcZw+GpGfUBb8yuOaPu5zMBQZwN/Fm+QYwkv8grw7w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\nico_\\source\\repos\\RoR2SummonerProject12\\HenryMod\\HolomancerMod.csproj",
+  "projectFilePath": "C:\\Users\\nico_\\Source\\Repos\\RoR2SummonerProjectA\\HenryMod\\HolomancerMod.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\nico_\\.nuget\\packages\\bepinex.analyzers\\1.0.8\\bepinex.analyzers.1.0.8.nupkg.sha512",
     "C:\\Users\\nico_\\.nuget\\packages\\bepinex.baselib\\5.4.19\\bepinex.baselib.5.4.19.nupkg.sha512",

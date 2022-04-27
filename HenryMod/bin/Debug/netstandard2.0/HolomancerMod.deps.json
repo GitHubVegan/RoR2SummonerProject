@@ -15,12 +15,7 @@
           "RiskOfRain2.GameLibs": "1.2.1-r.1",
           "UnityEngine.Modules": "2019.4.26",
           "MMHOOK_RoR2": "0.0.0.0",
-          "R2API": "2.0.0.0",
-          "Unity.Animation.Rigging": "0.0.0.0",
-          "Unity.Animation.Rigging.Editor": "0.0.0.0",
-          "Unity.Burst": "0.0.0.0",
-          "UnityEditor.UI": "1.0.0.0",
-          "UnityEngine.TestRunner": "1.0.0.0"
+          "R2API": "2.0.0.0"
         },
         "runtime": {
           "HolomancerMod.dll": {}
@@ -709,46 +704,6 @@
             "fileVersion": "2.0.0.0"
           }
         }
-      },
-      "Unity.Animation.Rigging/0.0.0.0": {
-        "runtime": {
-          "Unity.Animation.Rigging.dll": {
-            "assemblyVersion": "0.0.0.0",
-            "fileVersion": "0.0.0.0"
-          }
-        }
-      },
-      "Unity.Animation.Rigging.Editor/0.0.0.0": {
-        "runtime": {
-          "Unity.Animation.Rigging.Editor.dll": {
-            "assemblyVersion": "0.0.0.0",
-            "fileVersion": "0.0.0.0"
-          }
-        }
-      },
-      "Unity.Burst/0.0.0.0": {
-        "runtime": {
-          "Unity.Burst.dll": {
-            "assemblyVersion": "0.0.0.0",
-            "fileVersion": "0.0.0.0"
-          }
-        }
-      },
-      "UnityEditor.UI/1.0.0.0": {
-        "runtime": {
-          "UnityEditor.UI.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
-        }
-      },
-      "UnityEngine.TestRunner/1.0.0.0": {
-        "runtime": {
-          "UnityEngine.TestRunner.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
-        }
       }
     }
   },
@@ -1037,31 +992,6 @@
       "sha512": ""
     },
     "R2API/2.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Unity.Animation.Rigging/0.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Unity.Animation.Rigging.Editor/0.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Unity.Burst/0.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "UnityEditor.UI/1.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "UnityEngine.TestRunner/1.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""

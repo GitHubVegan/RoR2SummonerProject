@@ -18,7 +18,7 @@ namespace HolomancerMod.Modules.Survivors
     internal class HoloCharacter : SurvivorBase
     {
 
-        public override string bodyName => "Archangel";
+        public override string bodyName => "Holomancer";
 
         public override string survivorTokenPrefix => "Holomancer";
 

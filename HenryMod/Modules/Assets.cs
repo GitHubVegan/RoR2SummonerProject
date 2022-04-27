@@ -34,7 +34,7 @@ namespace HolomancerMod.Modules
         private static string[] assetNames = new string[0];
 
         // CHANGE THIS
-        private const string assetbundleName = "testbundle1";
+        private const string assetbundleName = "mesmerassets";
         //change this to your project's name if/when you've renamed it
         private const string csProjName = "HolomancerMod";
 
